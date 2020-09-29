@@ -1,0 +1,37 @@
+<!--odoo13 not used-->
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+<!--    <data noupdate="0">-->
+<!--    <template id="website.car_repair_feedback" name="car repair feedback">-->
+<!--            <t t-call="website.layout">-->
+<!--                <form action="/car_repair_maintenance_service/invite" method="post" class="form-horizontal mt32">-->
+<!--                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>-->
+<!--                    <group>-->
+<!--                    <div t-attf-class="form-group #{error and 'name' in error and 'has-error' or ''}">-->
+<!--                        <label class="col-md-3 col-sm-4 control-label" for="name">Comment</label>-->
+<!--                        <div class="col-md-7 col-sm-8">-->
+<!--                            <input type="text" class="form-control" name="comment" required="True" t-attf-value=""/>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div t-attf-class="form-group #{error and 'name' in error and 'has-error' or ''}">-->
+<!--                        <label class="col-md-3 col-sm-4 control-label" for="name">Rating</label>-->
+<!--                        <div class="col-md-7 col-sm-8">-->
+<!--                            <select class="form-control" name="rating">-->
+<!--                                <option value="0" selected="selected">Low</option>-->
+<!--                                <option value="1">Middle</option>-->
+<!--                                <option value="2">High</option>-->
+<!--                            </select>-->
+<!--                           -->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">-->
+<!--                            <button class="btn btn-success">Submit</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    </group>-->
+<!--                 </form>-->
+<!--                </t>-->
+<!--        </template>-->
+<!--           </data> -->
+<!--</odoo>-->
