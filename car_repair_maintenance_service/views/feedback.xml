@@ -1,0 +1,46 @@
+<odoo>
+
+    <template id="car_repair_feedback" name="car repair feedback">
+            <t t-call="website.layout">
+                <form action="/car_repari/feedback/" method="post" class="form-horizontal mt32">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <center>
+                        <group>
+                        <div t-attf-class="form-group #{error and 'name' in error and 'has-error' or ''}">
+                            <div class="stars">
+                                <label for="name" widget="priority">Rating :</label>
+                                <input type="radio" name="star" class="star-1" id="star-1" value = "poor" />
+                                <label class="star-1" for="star-1">Poor</label>
+                                <input type="radio" name="star" class="star-2" id="star-2" value = "average" />
+                                <label class="star-2" for="star-2">Average</label>
+                                <input type="radio" name="star" class="star-3" id="star-3" value = "good" />
+                                <label class="star-3" for="star-3">Good</label>
+                                <input type="radio" name="star" class="star-4" id="star-4" value = "very good" />
+                                <label class="star-4" for="star-4">Very Good</label>
+                                <input type="radio" name="star" class="star-5" id="star-5" value = "excellent" />
+                                <label class="star-5" for="star-5">Excellent</label>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div t-attf-class="form-group #{error and 'name' in error and 'has-error' or ''}">
+                            <div class="col-md-7 col-sm-8">
+                                <label for="name" class="control-label pull-left">Comment :</label>
+                                <textarea class="form-control" name="comment" required="True" t-attf-value="#{}" placeholder="Your Comment....."/>
+                            </div>
+                        </div>
+                        
+                         <input type="text" class="form-control o_hidden" name="partner_id" required="True" t-attf-value="#{user_id.partner_id}"/>
+                            <input type="text"  class="form-control o_hidden" name="car_ticket_id"  t-att-value="car_ticket_id and car_ticket_id or False"/>
+          
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">
+                                <button class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                        </group>
+                    </center>
+                 </form>
+            </t>
+        </template>
+    
+</odoo>

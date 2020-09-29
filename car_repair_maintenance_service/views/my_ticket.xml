@@ -1,0 +1,242 @@
+<odoo>
+
+   <!--  <template id="my_car_repair_requests_page" name="my car ticket: project menu entry" inherit_id="portal.portal_breadcrumbs" priority="28">
+       <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'repair_requests'">
+                 <span>Car Repair Requests</span>
+            </li>
+        </xpath>
+    </template> -->
+
+
+<!--     <template id="my_car_repair_requests_page" name="my car ticket: project menu entry" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'repair_requests'" t-attf-class="breadcrumb-item">
+                <a t-if="repair_requests" t-attf-href="/my/repair_requests?{{ keep_query() }}">Car Repair Requests</a>
+                <t t-else="">Car Repair Requests</t>
+            </li>
+        </xpath>
+    </template> -->
+
+
+ <template id="my_car_repair_requests_page" name="my ticket: project menu entry" inherit_id="portal.portal_breadcrumbs" priority="28">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'repair_requests' or repair_request" t-attf-class="breadcrumb-item #{'active ' if not repair_request else ''}">
+                
+                 <a t-if="repair_request" t-attf-href="/my/repair_requests?{{ keep_query() }}">Car Repair Requests</a>
+                 <t t-else="">Car Repair Requests</t>
+                </li>
+                <li t-if="repair_request" class="breadcrumb-item active">
+                    <span t-field="repair_request.name"/>
+                </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_car_repair_request" name="Portal Menu: Car Repair Requests" inherit_id="portal.portal_my_home" priority="28">
+       <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+           <t t-if="repair_request_count" t-call="portal.portal_docs_entry">
+                <t t-set="title">Your Repair / Service Requests</t>
+                <t t-set="url" t-value="'/my/repair_requests'"/>
+                <t t-set="count" t-value="repair_request_count"/>
+            </t>
+        </xpath>
+    </template>
+
+    
+  <!--   <template id="portal_my_car_repair_request" name="Portal Menu: Car Repair Requests" inherit_id="portal.portal_my_home" priority="28">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+        	<li t-if="repair_request_count" class="list-group-item">
+                <span class="badge" t-esc="repair_request_count"/>
+                <a href="/my/repair_requests">Your Repair / Service Requests</a>
+            </li> -->
+            <!-- h3  class="page-header">
+                <a href="/my/tickets">Your Machine Repair Requests
+                    <small class="ml8">
+                      <t t-if="ticket_count">
+                        <span class='badge'><t t-esc="ticket_count"/></span>
+                    </t>
+                    <t t-if =" not ticket_count">
+                        There are currently no Request for your account.
+                    </t>
+                    </small>
+                </a>
+            </h3-->
+   <!--      </xpath>
+    </template> -->
+
+
+    
+    <template id="display_car_repair_requests" name="Display Car Repair Request">
+        <!--t t-call="website_portal.portal_layout"-->
+        <t t-call="portal.portal_layout">
+        <!-- <h3 class="page-header">Your Repair / Service Requests</h3> -->
+<!--            <table class="table table-hover o_my_status_table"> odoo13-->
+            <t t-if="repair_requests" t-call="portal.portal_table">
+                <thead>
+                  <tr class="active">
+                    <th>Request No</th>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Priority</th>
+                    <th>Stage</th>
+                  </tr>
+                </thead>
+                <t t-foreach="repair_requests" t-as="repair_request">
+                    <tr>
+                        <td>
+                            <t t-set="access_token" t-value="repair_request.get_portal_url()"/>
+                            <a t-attf-href="/my/repair_request/#{repair_request.id}?{{ keep_query() }}"><span t-field="repair_request.name"/></a>
+                        </td>
+                        <td>
+                            <span t-field="repair_request.subject"/>
+                        </td>
+                        <td>
+                            <span t-field="repair_request.request_date"/>
+                        </td>
+                        <td>
+                            <span t-field="repair_request.priority"/>
+                        </td>
+                         <td>
+                            <span class="badge badge-pill badge-info" title="Current stage of the task" t-esc="repair_request.state" />
+                        </td>
+                    </tr>
+                </t>
+            </t>
+<!--            </table>-->
+        </t>
+    </template>
+
+    
+    <template id="display_car_repair_request_from" name="display car repair request from">
+        <t t-call="portal.portal_layout">
+            <div id="wrap">
+                <div class="container">
+                <!--     <div class="oe_structure">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb mt8">
+                                    <li><a href="/my/home"><i class="fa fa-home"/></a></li>
+                                    <li><a t-attf-href="/my/repair_requests?#{keep_query()}">Car Repair Requests</a></li>
+                                    <li><span t-field="repair_request.name"/></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div> -->
+                     <t t-call="portal.portal_record_layout">
+                    <t t-set="card_header">
+                        <div class="row no-gutters">
+                            <div class="col-md">
+                                <h5 class="mb-1 mb-md-0">
+                                    <t t-set="access_token" t-value="repair_request.get_portal_url()"/>
+                                    <span t-field="repair_request.name"/>
+                                    <small class="text-muted"> (#<span t-field="repair_request.id"/>)</small>
+                                </h5>
+                            </div>
+                            <div class="col-md text-md-right">
+                                <small class="text-right">Status:</small>
+                                <span t-field="repair_request.state" class=" badge badge-pill badge-info" title="Current stage of this task"/>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-set="card_body">
+                    <div class="container">
+                        <div class="panel panel-default">
+                           <!--  <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>
+                                            <span t-field="repair_request.name"/> - <span t-field="repair_request.subject"/> - <span t-field="repair_request.state"/>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="panel-body">
+                                <div class='row'>
+                                    <div class="col-md-6">
+                                        <div class="mb8">
+                                            <strong>Technician :</strong> <span t-field="repair_request.user_id"/>
+                                        </div>
+                                         <div class="mb8">
+                                            <strong>Email :</strong> <span t-field="repair_request.email"/>
+                                        </div>
+                                        <div class="mb8">
+                                            <strong>Repair Team :</strong> <span t-field="repair_request.team_id"/>
+                                        </div>
+                                        <div class="mb8">
+                                            <strong>Department  :</strong> <span t-field="repair_request.department_id"/>
+                                        </div>
+                                        <div class="mb8">
+                                            <strong>Project:</strong><span t-field="repair_request.project_id"/>
+                                        </div>
+                                        <div class="mb8">
+                                            <strong>Create Date:</strong> <span t-field="repair_request.request_date"/>
+                                        </div>
+                                        <div class="mb8">
+                                            <strong>Problem:</strong> <span t-field="repair_request.problem"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb8">
+                                            <strong>Customer:</strong> <span t-field="repair_request.partner_id"/>
+                                        </div>
+                                        <div class="mb8">
+                                            <strong>Phone :</strong> <span t-field="repair_request.phone"/>
+                                        </div>
+                                        <div class="mb8">
+                                            <strong>Repair Manager:</strong> <span t-field="repair_request.team_leader_id"/>
+                                        </div>
+                                        <div class="mb8">
+                                            <strong>Analytic Account  :</strong> <span t-field="repair_request.analytic_account_id"/>
+                                        </div>
+                                        <div class="mb8">
+                                            <strong>Priority:</strong> <span t-field="repair_request.priority"/>
+                                        </div>
+                                        <div class="mb8">
+                                            <strong>Close Date:</strong> <span t-field="repair_request.close_date"/>
+                                        </div>
+                                        <div class="mb8">
+                                            <strong>Total Hours Spent:</strong> <span t-field="repair_request.sudo().total_spend_hours"/>
+                                        </div>
+                                        <div class="mb8">
+                                            <strong>Nature of Service:</strong> <span t-field="repair_request.nature_of_service_id"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container" t-if="repair_request.description">
+                                    <p t-field="repair_request.description" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+    
+
+                        <div class="row mt32">
+			                <div class="col-md-12">
+			                    <h4><strong>Message and communication history</strong></h4>
+			                </div>
+			                <div class="col-md-10 col-md-offset-1 mt16">
+			                    <t t-call="portal.message_thread">
+			                        <t t-set="object" t-value="repair_request"/>
+			                        <t t-set="token" t-value="repair_request.access_token"/>
+			                    </t>
+			                </div>
+			            </div>
+                        <!--div class="row mt32">
+                            <div class="col-md-12">
+                                <h4><strong>Message and communication history</strong></h4>
+                            </div>
+                            <div class="col-md-10 col-md-offset-1 mt16">
+                                <t t-call="website_mail.message_thread">
+                                    <t t-set="object" t-value="ticket"/>
+                                    <t t-set="chatter_mode" t-value="'json'"/>
+                                </t>
+                            </div>
+                        </div-->
+
+    </div>
+    </div>
+</t>
+</template>
+</odoo>

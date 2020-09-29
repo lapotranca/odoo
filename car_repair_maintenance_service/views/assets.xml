@@ -1,0 +1,12 @@
+<!--odoo13 not used-->
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+
+<!--<odoo>-->
+
+<!--    <template id="assets_frontend_website_portal_templet_car" inherit_id="website.assets_frontend">-->
+<!--        <xpath expr=".">-->
+<!--            <script type="text/javascript" src="/car_repair_maintenance_service/static/src/js/website_portal_templet.js"/>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+<!--</odoo>-->

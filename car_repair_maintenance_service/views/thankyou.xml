@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+<!--    <template id="successful_feedback_car" name="Success Page" > odoo13-->
+<!--            <t t-call="website.layout">-->
+<!--            <div class="row">-->
+<!--                <div class="oe_structure"/>-->
+<!--                <div class="container">-->
+<!--                <div class="col-lg-6">-->
+<!--                <h1 style="color:darkgreen;">-->
+<!--                    Your Feedback have been sent successfully.<br/><br/>-->
+<!--                    Thank you,<br/>-->
+<!--                    Repair Team<br/>-->
+<!--                </h1>-->
+<!--                <p>-->
+<!--                    <a class="btn btn-primary pull-left mb32" onclick="history.go(-1);" ><span class="hidden-xs">Go Back</span><span class="fa fa-long-arrow-left"/></a>-->
+<!--                </p>-->
+<!--                </div>-->
+<!--                <div class="col-md-6">-->
+<!--                    <img width="200" height="200" src="/car_repair_maintenance_service/static/description/success.png" alt="show ticket" class="img-square" />-->
+<!--               </div>-->
+<!--               </div>-->
+<!--            </div>-->
+<!--            </t>-->
+<!--    </template>-->
+    
+    <template id="successful_feedback_car" name="Success Page">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <br/><br/>
+                <div class="oe_structure"/>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="alert alert-info">
+                                <strong> Your Feedback have been sent successfully.<br/>
+                                    Thank you,<br/>
+                                    Repair Team
+                                </strong>
+                            </div>
+                            <a class="btn btn-primary pull-left mb32" 
+                            onclick="history.go(-1);" >
+                                <span class="hidden-xs">Go Back</span>
+                                <span class="fa fa-long-arrow-left"/>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <img width="200" height="200" 
+                            src="/car_repair_maintenance_service/static/description/success.png" 
+                            class="img-square" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    
+</odoo>

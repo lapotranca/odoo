@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   
+  <!--  <template id="website_ticket_attachment_car" inherit_id="car_repair_maintenance_service.display_car_repair_request_from">
+        <xpath expr="//div[@class='panel panel-default']" position="after">
+        <div data-role="header" data-theme="b">
+            <p align="left" style="color:#483D8B"><strong>Send Message and Attachments</strong></p>
+        </div>
+       <form  method="post" enctype="multipart/form-data" >
+           <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/><br/>
+           <textarea rows="4" cols="60" name="cust" class="form-control" placeholder="Add a comment..."/-->
+          <!--  <textarea name = "ticket_comment" value="" cols="120" line="3" type="text" placeholder="Add a comment..."/>
+           <input type="file" class="oe_inline"   multiple="multiple" name="attachment"/><span><input type="submit" value="Send Now" class="btn btn-info" name="send"/></span>
+        </form>
+       </xpath>
+   </template> - -->
+   
+</odoo>
+
+
