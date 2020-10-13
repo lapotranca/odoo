@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="tf_report_wizard_popup_form">
+            <field name="name">Serial Number</field>
+            <field name="model">tf.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Accounting Report">
+                    <sheet>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Submit"
+                            name="create_odoo_report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="tf_report_wizard_popup_action">
+            <field name="name">Accounting Report</field>
+            <field name="res_model">tf.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+    </data>
+</odoo>

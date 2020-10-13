@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="view_invoice_form_account_cost_center" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='partner_id']" position="after">
+                    <field name="cost_center_id"/>
+                    <field name="department_id" />
+                </xpath>
+                <xpath expr="//field[@name='line_ids']//tree//field[@name='credit']" position="after">
+                    <field name="cost_center_id"/>
+                    <field name="department_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_move_line_tax_audit_tree" model="ir.ui.view">
+            <field name="name">account.move.line.tax.audit.tree</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree"/>
+            <field name="arch" type="xml">
+                <field name="credit" position="after">
+                    <field name="cost_center_id"/>
+                    <field name="department_id"/>
+                </field>
+            </field>
+        </record>
+
+
+	     <!-- create new menuitem for buisness intelligence	 -->
+		<menuitem id="account_reports_business_intelligence_menu" name="Business Intelligence" parent="account.menu_finance_reports" sequence="5" groups="account.group_account_invoice"/>
+
+        <record id="view_form_cost_center" model="ir.ui.view">
+            <field name="name">cost.center</field>
+            <field name="model">tf.cost.center</field>
+            <field name="arch" type="xml">
+                <form string="Cost Center">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="department_ids"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tree_cost_center" model="ir.ui.view">
+            <field name="name">cost.center</field>
+            <field name="model">tf.cost.center</field>
+            <field name="arch" type="xml">
+                <tree string="Cost Center">
+                    <field name="name"/>
+                    <!-- <field name="department_ids" widget="many2many_tags"/> -->
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_account_cost_center">
+            <field name="name">Cost Center</field>
+            <field name="res_model">tf.cost.center</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cost_dept_account_invoicing_menu" name="Centros de Costo" parent="account.menu_finance_configuration" action="action_account_cost_center"/>
+
+        <record id="view_form_tf_department" model="ir.ui.view">
+            <field name="name">department</field>
+            <field name="model">tf.department</field>
+            <field name="arch" type="xml">
+                <form string="Department">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="cost_center_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tree_tf_department" model="ir.ui.view">
+            <field name="name">department</field>
+            <field name="model">tf.department</field>
+            <field name="arch" type="xml">
+                <tree string="Department">
+                    <field name="name"/>
+                    <field name="cost_center_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_account_department">
+            <field name="name">Department</field>
+            <field name="res_model">tf.department</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="dept_account_invoicing_menu" name="Departmentos" parent="account.menu_finance_configuration" action="action_account_department"/>
+
+
+
+    </data>
+</odoo>

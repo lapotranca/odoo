@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_balance_sheet,account.balance.sheet.user,model_account_balance_sheet,account.group_account_user,1,0,0,0
+access_account_balance_sheet_manager,account.balance.sheet.manager,model_account_balance_sheet,account.group_account_manager,1,1,1,1
+access_account_profit_loss,account.profit.loss.user,model_account_profit_loss,account.group_account_user,1,0,0,0
+access_account_profit_loss_manager,account.profit.loss.manager,model_account_profit_loss,account.group_account_manager,1,1,1,1
+
+access_tf_cost_center,access_tf_cost_center,model_tf_cost_center,,1,1,1,1
+access_tf_department,access_tf_department,model_tf_department,,1,1,1,1
