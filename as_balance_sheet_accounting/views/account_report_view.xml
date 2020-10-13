@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Account Reports Configuration -->
+        <record id="view_account_financial_report_form" model="ir.ui.view">
+            <field name="name">account.financial.html.report.form</field>
+            <field name="model">account.financial.html.report</field>
+            <field name="inherit_id" ref="account_reports.view_account_financial_report_form"/>
+            <field name="arch" type="xml">
+                <field name="hierarchy_option" position="after">
+                    <field name="v_cost_center"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

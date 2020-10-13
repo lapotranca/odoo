@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="search_template_v_cost_center">
+            <a t-if="options.get('v_cost_center')" type="button" class="dropdown-toggle v_cost_center_filter"
+               data-toggle="dropdown">
+                <span class="fa fa-folder-open"/>
+                Cost Center
+            </a>
+            <ul class="dropdown-menu o_filters_menu" role="menu">
+                <li class="o_account_report_search js_v_cost_center_m2m"/>
+            </ul>
+        </template>
+
+        <template id="search_template_v_department">
+            <a t-if="options.get('v_department')" type="button" class="dropdown-toggle v_department_filter"
+               data-toggle="dropdown">
+                <span class="fa fa-folder-open"/>
+                Department
+            </a>
+            <ul class="dropdown-menu o_filters_menu" role="menu">
+                <li class="o_account_report_search js_v_department_m2m"/>
+            </ul>
+        </template>
+
+        <template inherit_id="account_reports.search_template" id="tf_search_template">
+            <!-- Cost Center -->
+            <xpath expr="." position="inside">
+                <div class="btn-group o_dropdown o_account_reports_filter_v_cost_center"
+                     t-if="options.get('v_cost_centers') != None">
+                    <t t-call="as_balance_sheet_accounting.search_template_v_cost_center"/>
+                </div>
+
+                <div class="btn-group o_dropdown o_account_reports_filter_v_department"
+                     t-if="options.get('v_departments') != None">
+                    <t t-call="as_balance_sheet_accounting.search_template_v_department"/>
+                </div>
+            </xpath>
+            <!-- End Cost Center -->
+        </template>
+
+
+    </data>
+</odoo>

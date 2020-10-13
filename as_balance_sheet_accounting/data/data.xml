@@ -1,0 +1,8 @@
+<odoo>
+    <data>
+        <record id="account_reports.account_financial_report_balancesheet0" model="account.financial.html.report">
+            <field name="v_cost_center" eval="True"/>
+            <field name="v_department" eval="True"/>
+        </record>
+    </data>
+</odoo>
