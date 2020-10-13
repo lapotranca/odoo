@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       <!--  Financial reports  -->
+       <menuitem id="menu_account_reports" name="Financial Reports" parent="account.menu_finance_configuration" sequence="10" groups="account.group_account_manager"/>
+    </data>
+</odoo>
