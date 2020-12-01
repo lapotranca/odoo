@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<data>
+
+		 <record id="view_customer_credit_limit_form" model="ir.ui.view">
+				<field name="name">view.customer.credit.limit.form</field>
+				<field name="model">customer.credit.limit</field>
+				<field name="arch" type="xml">
+					<form string="Credirt Limit Rules">
+						<sheet>
+							<group>
+								<group>
+									<h2>
+									<field name="name"/>
+									</h2>
+								</group>
+							</group>
+							<group>
+								<group>
+									<field name="code"/>
+									<field name="credit_limit_cust"/>
+								</group>
+								<group>
+									<field name="credit_limit_formula" widget="radio"/>
+									<field name="days" required="1" attrs="{'invisible': [('credit_limit_formula', '!=', 'due_date_rule')]}"/>
+								</group>
+								<group string="Product Category"></group>
+								<field name="product_category_ids" widget="many2many_tags"></field>
+								<group string="Product"></group>
+								<field name="product_ids">
+									<tree editable="bottom">
+										<field name="product_id" string="Name"/>
+										<field name="default_code" string="Internal Reference"/>
+										<field name="list_price" string="Sales Price"/>
+										<field name="standard_price" string="Cost Price"/>
+										<field name="categ_id" string="Internal Product Category"/>
+										<field name="type_id" string="Product Type"/>
+										<field name="uom_id" string="Unit of Measure"/>
+									</tree>
+								</field>
+							</group>
+						</sheet>
+					</form>
+				</field>
+			</record>
+
+		<record id="view_customer_credit_limit_tree" model="ir.ui.view">
+			<field name="name">view.customer.credit.limit.tree</field>
+			<field name="model">customer.credit.limit</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="credit_limit_cust"/>
+					<field name="credit_limit_formula"/>
+					<field name="days" attrs="{'invisible': [('credit_limit_formula', '!=', 'due_date_rule')]}"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_credit_limit_tree" model="ir.actions.act_window">
+			<field name="name">=action.credit.limit.view</field>
+			<field name="res_model">customer.credit.limit</field>
+			<field name="view_mode">tree</field>
+			<field name="view_id" eval="view_customer_credit_limit_tree"/>
+
+		</record>
+
+
+		<record id="open_credit_limit_list" model="ir.actions.act_window">
+				<field name="name">Credit Limit Rules</field>
+				<field name="res_model">customer.credit.limit</field>
+				<field name="view_mode">tree,form</field>
+				<field name="view_id" eval="False"/>
+				<field name="help" type="html">
+					<p class="oe_view_nocontent_create">
+							Click to add a new Credit Limit Rule.
+						</p>
+				</field>
+		 </record>
+
+		 <record id="res_partner_inherir_view" model="ir.ui.view">
+			<field name="name">res_partner.inherit.view</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//group[@name='sale']" position="inside">
+					<field name="credit_limit_id"/>
+					<field name="credit_limit"/>
+			   </xpath>
+			</field>
+		</record>
+
+		<menuitem
+				id="menu_credirt_limit_rule"
+				name="Credit Limit Rules"
+				parent="sale.menu_sale_config"
+				action="open_credit_limit_list"
+				sequence="1"/>
+
+	</data>
+</odoo>
