@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+	<!-- Print from pos screen -->
+	<record id="gift_coupon_print" model="ir.actions.report">
+		<field name="name">Gift Coupon</field>
+		<field name="model">pos.gift.coupon</field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">pos_orders_all.report_pos_gift_coupon</field>
+	</record>
+
+	 <record id="view_pos_gift_coupan_tree_view" model="ir.ui.view">
+			<field name="name">pos.gift.coupon.tree.view</field>
+			<field name="model">pos.gift.coupon</field>
+			<field name="arch" type="xml">
+			   <tree string="POS Gift Coupons">													
+						<field name="name"/>				
+						<field name="user_id"/>	
+						<field name="create_date"/>	
+						<field name="issue_date"/>	
+						<field name="expiry_date"/>
+						<field name="amount"/>
+					
+				</tree>
+				</field>
+		</record>
+
+
+
+   <record id="view_pos_gift_coupan_form_view" model="ir.ui.view">
+			<field name="name">pos.gift.coupon.form.view</field>
+			<field name="model">pos.gift.coupon</field>
+			<field name="arch" type="xml">
+			<form string="New Gift Coupon" version="7.0">
+					<header>
+						
+					<button class="oe_highlight" icon="fa-print" name="print_report_coupons" string="Print" type="object"/>
+					</header>
+						<sheet>
+							<group>
+								<group>
+									<field name="name" required="1" placeholder="This will be displayed in the order summary, as well as on the invoice."/>
+									</group>
+								<group>
+									<field name="used" invisible='1'/>
+									<field name="coupon_apply_times"/>
+									<field name="coupon_count" invisible='1'/>
+								</group>
+							</group>
+							<newline/>
+							<group name="newcoupon">
+							<group>
+								<field name="c_barcode" readonly="1" />
+								<field name="issue_date" required="1"/>
+								
+								<field name="exp_dat_show"/>
+								<field name="expiry_date" string="Expiry date of this coupon" attrs="{'invisible': [('exp_dat_show', '!=', True)]}" />
+										
+							</group>
+							
+							<group>
+								<field name="amount_type" widget="radio"/>	
+								<field name="amount"/>	
+							</group>
+
+
+							</group>
+							<group>
+								<group>
+									<field name="partner_true"/>
+									<field name="partner_id" options="{'no_create': True}" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer'}" attrs="{'required':[('partner_true','=', True)], 'invisible':[('partner_true', '=', False)]}"/>
+								</group>
+								<group>
+									<field name="active"/>
+								</group>
+							</group>
+
+							<group>
+								<group>
+									<field name="max_amount"/>
+								</group>
+							</group>
+
+							<separator string="Description"/>
+							<field name="coupon_desc" placeholder="Coupon Description..."/>
+
+							<separator string="Extra Information"/>
+							<field name="description" placeholder="For your eyes only. This will never be displayed to the customer."/>
+							
+							<separator string="Coupon History"/>
+							<field name="order_ids" readonly="1"/>
+
+						</sheet>
+					
+				</form>
+
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_pos_coupan">
+			<field name="name">All Gift Coupons</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">pos.gift.coupon</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+
+		<menuitem name="Gift Coupons" id="menu_gift_coupon" parent="point_of_sale.menu_point_root" sequence="6"/>
+
+		<menuitem parent="menu_gift_coupon" name="All Gift Copons" action="action_pos_coupan" id="menu_pos_gift_act"
+			sequence="1"/>
+
+	</data>
+</odoo>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+	 <record id="view_pos_coupan_setting_tree_view" model="ir.ui.view">
+			<field name="name">pos.coupan.config.tree.view</field>
+			<field name="model">pos.coupons.setting</field>
+			<field name="arch" type="xml">
+			   <tree string="POS Gift Coupons Configuration">
+					<field name="name"/>				
+					<field name="product_id" widget="selction"/>
+					<field name="min_coupan_value"/>	
+					<field name="max_coupan_value"/>
+					<field name="max_exp_date"/>
+				</tree>
+			</field>
+		</record>
+
+
+
+   <record id="pos_coupan_setting_form_view" model="ir.ui.view">
+			<field name="name">pos.coupan.config.form.view</field>
+			<field name="model">pos.coupons.setting</field>
+			<field name="arch" type="xml">
+				<form string="POS Gift Coupon Configuration" >
+						<sheet>
+							<group>
+								<group>
+									<field name="name" required="1"/>
+									<field name="product_id" required="1" widget="selection"/>
+									<field name="min_coupan_value" required="1"/>
+									<field name="max_coupan_value" required="1"/>
+									<field name="max_exp_date"/>
+									
+								</group>
+							<group>
+								<field name="active"/>
+								<field name="default_availability"/>
+							</group>
+							</group>
+						</sheet>
+				</form>
+			
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_pos_coupan_setting">
+			<field name="name">Gift Coupons</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">pos.coupons.setting</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+
+		<menuitem parent="point_of_sale.menu_point_config_product" action="action_pos_coupan_setting" id="menu_pos_copan_setting"
+			sequence="30"/>
+
+	</data>
+</odoo>

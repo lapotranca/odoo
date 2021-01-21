@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	   
+	<record model="ir.ui.view" id="pos_sale_order_discount_type">
+		<field name="name">pos.order.view.discount.form</field>
+		<field name="model">pos.order</field>
+		<field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='partner_id']" position="after">
+				<field name="discount_type">Discount type</field>
+				<field name="return_order_ref"/>
+			</xpath>
+		</field>
+	</record>
+	
+	<record model="ir.ui.view" id="pos_order_line_inherit">
+		<field name="name">pos.order.line.form</field>
+		<field name="model">pos.order</field>
+		<field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//form/sheet/notebook/page/field[@name='lines']//tree/field[@name='discount']" position="attributes">
+				<attribute name="string">Discount</attribute>
+			</xpath>
+			<xpath expr="//form/sheet/notebook/page/field[@name='lines']//form/group/field[@name='discount']" position="attributes">
+				<attribute name="string">Discount</attribute>
+			</xpath>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="pos_order_line_inherit_tree">
+		<field name="name">pos.order.line.tree</field>
+		<field name="model">pos.order</field>
+		<field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//form/sheet/notebook/page/field[@name='lines']//tree/field[@name='discount']" position="before">
+				<field name="discount_line_type" invisible="1">Discount type</field>
+				<field name="original_line_id" invisible="1"/>
+				<field name="return_qty"  invisible="1"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="view_move_form_inherits" model="ir.ui.view">
+			<field name="name">account.move.form.followup</field>
+			<field name="model">account.move</field>
+			<field name="inherit_id" ref="account.view_move_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='discount']" position="after">
+					<field name="pos_order_line_id" invisible="1"/>
+					<field string="Discount Type" name="discount_line_type" attrs="{'invisible': [('pos_order_line_id', '=', False)]}"/>
+				</xpath>
+
+				<xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='discount']" position="replace">
+					<field name="discount" string="Disc" optional="show"/>
+				</xpath>
+			</field>
+	</record>
+
+	<template id="report_invoice_document_inherit_discount" inherit_id="account.report_invoice_document">
+		<xpath expr="//th[@name='th_price_unit']" position="replace">
+			<th name="th_price_unit" t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+				<span>Disc.</span>
+				<t t-set="colspan" t-value="colspan+1"/>
+			</th>
+		</xpath>
+	</template>
+		
+	</data>
+</odoo>
