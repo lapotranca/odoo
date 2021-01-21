@@ -1,0 +1,1821 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pos_orders_all
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-04 13:31+0000\n"
+"PO-Revision-Date: 2020-12-04 13:31+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: pos_orders_all
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_config__pos_session_limit__last5
+msgid " Load last 5 Session's Orders"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "() is Out of Stock."
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.report_pos_gift_coupon
+msgid ""
+"<br/>\n"
+"\t\t\t\t\t\t\t\t\t<strong>Amount:</strong>"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.report_pos_gift_coupon
+msgid ""
+"<br/>\n"
+"\t\t\t\t\t\t\t\t\t<strong>Issue Date:</strong>"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.report_pos_gift_coupon
+msgid "<span style=\"color:#E74C3C; font-weight: bold;\"> Name: </span>"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.report_invoice_document_inherit_discount
+msgid "<span>Disc.</span>"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.report_pos_gift_coupon
+msgid "<strong>Customer:</strong>"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.report_pos_gift_coupon
+msgid "<strong>Expiry Date:</strong>"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "A Customer Name Is Required"
+msgstr "يلزم تحديد اسم عميل"
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_coupons_setting__active
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__active
+msgid "Active"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.ui.menu,name:pos_orders_all.menu_pos_gift_act
+msgid "All Gift Copons"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.actions.act_window,name:pos_orders_all.action_pos_coupan
+msgid "All Gift Coupons"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_config__show_stock_location__all
+msgid "All Warehouse"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_config__allow_bag_charges
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.inherit_view_pos_bag_charges_form
+msgid "Allow Bag Charges"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_config__allow_custom_discount
+msgid "Allow Custom Discount"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_config__pos_allow_order
+msgid "Allow POS Order When Product is Out of Stock"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__partner_true
+msgid "Allow for Specific Customer"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.inherit_view_product_qty_form
+msgid "Allow pos order when product is out of stock stock."
+msgstr ""
+
+#. module: pos_orders_all
+#: code:addons/pos_orders_all/models/pos_coupons_config.py:0
+#, python-format
+msgid "Allows only one activated Configuration of POS"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Already Used !!!"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Amount :"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__amount_type
+msgid "Amount Type"
+msgstr ""
+
+#. module: pos_orders_all
+#: code:addons/pos_orders_all/models/pos_coupon.py:0
+#, python-format
+msgid "Amount is wrong"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Apply"
+msgstr "تطبيق"
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__apply_coupon_on
+msgid "Apply Coupon on"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Apply Coupon/Gift Voucher Code"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_product_product__available_quantity
+msgid "Available Quantity"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_custom_discount__available_pos_ids
+msgid "Available in POS"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Back"
+msgstr "العودة"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Bag"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_config__pos_bag_category_id
+msgid "Bag Charges Category"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.inherit_view_pos_bag_charges_form
+msgid "Bag Charges Configuration in POS"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.pos_order_inherit_barcode
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.report_pos_gift_coupon
+msgid "Barcode"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "CHANGE"
+msgstr "الباقي"
+
+#. module: pos_orders_all
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_config__credit_note__not_create_note
+msgid "Can not Create return order Credit note"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.inherit_view_product_qty_form
+msgid "Check this to display stock in pos screen."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Company"
+msgstr "الشركة"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Company:"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Confirmation"
+msgstr "تأكيد"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: model:ir.actions.report,name:pos_orders_all.action_gift_coupons
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_order__coupon_id
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.pos_sale_order_inherit
+#, python-format
+msgid "Coupon"
+msgstr "القسيمة"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Coupon Already Applied"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__amount
+#, python-format
+msgid "Coupon Amount"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Coupon Amount is greater than order amount"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__c_barcode
+msgid "Coupon Barcode"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__c_barcode_img
+msgid "Coupon Barcode Image"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__coupon_apply_times
+msgid "Coupon Code Apply Limit"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.view_pos_gift_coupan_form_view
+msgid "Coupon Description..."
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.view_pos_gift_coupan_form_view
+msgid "Coupon History"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Coupon Number :"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Coupon Options"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_coupons_setting__default_value
+msgid "Coupon Value"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid ""
+"Coupon maximum amount Should be less than Maximum Amount in Configuration."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Coupon usage limit"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Create"
+msgstr "إنشاء"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Create Coupon"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Create Sales Order"
+msgstr "إنشاء أمر مبيعات"
+
+#. module: pos_orders_all
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_config__credit_note__create_note
+msgid "Create return order Credit note"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__user_id
+msgid "Created By"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_coupons_setting__create_uid
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_create_sales_order__create_uid
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_custom_discount__create_uid
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_coupons_setting__create_date
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_create_sales_order__create_date
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_custom_discount__create_date
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_config__credit_note
+msgid "Credit note configuration"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_config__show_stock_location__specific
+msgid "Current Session Warehouse"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Customer"
+msgstr "العميل"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Customer:"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_coupons_setting__default_name
+msgid "Default Name"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Denied Order"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Deny Order"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Deny Order() is Out of Stock."
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_config__pos_deny_order
+msgid "Deny POS Order When Product Qty is goes down to"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.inherit_view_product_qty_form
+msgid "Deny pos order"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.inherit_view_product_qty_form
+msgid "Deny pos order when product quanity goes down to the entered quantity."
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_custom_discount__description
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__coupon_desc
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.view_pos_gift_coupan_form_view
+msgid "Description"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.view_move_form_inherits
+msgid "Disc"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.pos_order_line_inherit
+#, python-format
+msgid "Discount"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.custom_bi_pos_discount_form_view
+msgid "Discount Configuration in POS"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_account_move_line__discount_line_type
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_config__discount_type
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_order__discount_type
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_order_line__discount_line_type
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.custom_bi_pos_discount_form_view
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.view_move_form_inherits
+msgid "Discount Type"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Discount Type:"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.pos_order_line_inherit_tree
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.pos_sale_order_discount_type
+msgid "Discount type"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_custom_discount__discount
+msgid "Discount(%)"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Discount:"
+msgstr "الخصم:"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_config__custom_discount_ids
+#, python-format
+msgid "Discounts"
+msgstr "الخصومات"
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_coupons_setting__display_name
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_create_sales_order__display_name
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_custom_discount__display_name
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_config__pos_display_stock
+msgid "Display Stock in POS"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Email:"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Empty Order"
+msgstr "أمر فارغ"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Empty Serial/Lot Number"
+msgstr "خانة الرقم المسلسل/رقم اللوط فارغة"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Enter Your Coupon Code Here"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Error"
+msgstr "خطأ"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Error: Could not Save Changes"
+msgstr "خطأ: تعذّر حفظ التغييرات"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Error: Out of Stock"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Expired"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__expiry_date
+#, python-format
+msgid "Expiry Date"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__exp_dat_show
+msgid "Expiry Date."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Expiry date :"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.view_pos_gift_coupan_form_view
+msgid "Expiry date of this coupon"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.view_pos_gift_coupan_form_view
+msgid "Extra Information"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_config__discount_type__fixed
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_gift_coupon__amount_type__fix
+#, python-format
+msgid "Fixed"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.view_pos_gift_coupan_form_view
+msgid "For your eyes only. This will never be displayed to the customer."
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.actions.report,name:pos_orders_all.gift_coupon_print
+msgid "Gift Coupon"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.actions.act_window,name:pos_orders_all.action_pos_coupan_setting
+#: model:ir.ui.menu,name:pos_orders_all.menu_gift_coupon
+#: model:ir.ui.menu,name:pos_orders_all.menu_pos_copan_setting
+msgid "Gift Coupons"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Gift coupon"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Gift coupon is created successfully."
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_coupons_setting__id
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_create_sales_order__id
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_custom_discount__id
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__id
+msgid "ID"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Import Order"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_config__check
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.custom_bi_pos_import_sale_view
+msgid "Import Sale Order"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.custom_bi_pos_import_sale_view
+msgid "Import Sale Order Configuration in POS"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_config__pos_stock_type__incoming
+msgid "Incoming Qty"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Invalid Amount !!!"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Invalid Barcode"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Invalid Code !!!"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Invalid Customer !!!"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_config__auto_check_invoice
+msgid "Invoice Auto Check"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__issue_date
+#, python-format
+msgid "Issue Date"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Issue date :"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model,name:pos_orders_all.model_account_move
+msgid "Journal Entries"
+msgstr "القيود اليومية"
+
+#. module: pos_orders_all
+#: model:ir.model,name:pos_orders_all.model_account_move_line
+msgid "Journal Item"
+msgstr "عنصر اليومية"
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_coupons_setting____last_update
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_create_sales_order____last_update
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_custom_discount____last_update
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_coupons_setting__write_uid
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_create_sales_order__write_uid
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_custom_discount__write_uid
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_coupons_setting__write_date
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_create_sales_order__write_date
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_custom_discount__write_date
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "List of Bag Charges"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_config__pos_session_limit__all
+msgid "Load all Session's Orders"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_config__pos_session_limit__last3
+msgid "Load last 3 Session's Orders"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_order__location_id
+msgid "Location"
+msgstr "المكان"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Logo"
+msgstr "الشعار"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Max Amount"
+msgstr ""
+
+#. module: pos_orders_all
+#: code:addons/pos_orders_all/models/pos_coupon.py:0
+#, python-format
+msgid "Maximum Amount is greater than maximum amount of coupon configuration"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_coupons_setting__max_coupan_value
+msgid "Maximum Coupon Value"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_coupons_setting__max_exp_date
+msgid "Maximum Expiry Date"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Maximum Limit Exceeded !!!"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__max_amount
+msgid "Maximum amount"
+msgstr ""
+
+#. module: pos_orders_all
+#: code:addons/pos_orders_all/models/pos_coupons_config.py:0
+#, python-format
+msgid "Maximum amount must be greater than minimum amount"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_coupons_setting__min_coupan_value
+msgid "Minimum Coupon Value"
+msgstr ""
+
+#. module: pos_orders_all
+#: code:addons/pos_orders_all/models/pos_coupons_config.py:0
+#, python-format
+msgid "Minimum amount must be less than maximum amount"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_coupons_setting__name
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_custom_discount__name
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__name
+#, python-format
+msgid "Name"
+msgstr "الاسم"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Name :"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.view_pos_gift_coupan_form_view
+msgid "New Gift Coupon"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "No gift coupon configuration"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__description
+msgid "Note"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Ok"
+msgstr "موافق"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "One or more product(s) required serial/lot number."
+msgstr "تتطلب بعض المنتجات رقم مسلسل/رقم لوط."
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__order_ids
+msgid "Order"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_order__barcode
+msgid "Order Barcode"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_order__barcode_img
+msgid "Order Barcode Image"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Order Date"
+msgstr "تاريخ الأمر"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Order Date:"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Order Details"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Order Number"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Order Qty"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Order Ref"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Order Ref:"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Ordered qty of One or more product(s) is more than available qty."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Orders"
+msgstr "أوامر"
+
+#. module: pos_orders_all
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_config__pos_stock_type__outgoing
+msgid "Outgoing Qty"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.inherit_view_pos_invoice_auto_check_form
+msgid "POS Auto Check Invoice"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:pos.category,name:pos_orders_all.pos_bag_category_1
+msgid "POS Bag"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model,name:pos_orders_all.model_pos_create_sales_order
+msgid "POS Create Sale Order"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model,name:pos_orders_all.model_pos_custom_discount
+msgid "POS Custom Discount"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model,name:pos_orders_all.model_pos_gift_coupon
+msgid "POS Gift Coupon"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model,name:pos_orders_all.model_pos_coupons_setting
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.pos_coupan_setting_form_view
+msgid "POS Gift Coupon Configuration"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.view_pos_gift_coupan_tree_view
+msgid "POS Gift Coupons"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.view_pos_coupan_setting_tree_view
+msgid "POS Gift Coupons Configuration"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_account_move__pos_order_id
+#: model:ir.model.fields,field_description:pos_orders_all.field_account_move_line__pos_order_id
+msgid "POS order"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_account_move_line__pos_order_line_id
+msgid "POS order Line"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_config__discount_type__percentage
+#, python-format
+msgid "Percentage"
+msgstr "النسبة"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Phone:"
+msgstr ""
+
+#. module: pos_orders_all
+#: code:addons/pos_orders_all/models/pos_coupon.py:0
+#, python-format
+msgid ""
+"Please Enter Valid Date.Expiry Date Should not be greater than Issue Date."
+msgstr ""
+
+#. module: pos_orders_all
+#: code:addons/pos_orders_all/models/pos_coupon.py:0
+#, python-format
+msgid ""
+"Please Enter Valid Date.Expiry Date is greater than maximum expiry date of "
+"coupon configuration"
+msgstr ""
+
+#. module: pos_orders_all
+#: code:addons/pos_orders_all/models/pos_coupon.py:0
+#, python-format
+msgid ""
+"Please Enter Valid Date.Issue Date is greater than maximum expiry date of "
+"coupon configuration."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Please Enter Valid Issue Date and Expiry Date."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Please Fill Amount Between Minimum Amount And Maximum Amount."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Please Fill Coupon Amount."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Please Fill Require Field."
+msgstr ""
+
+#. module: pos_orders_all
+#: code:addons/pos_orders_all/models/pos_coupon.py:0
+#, python-format
+msgid "Please add expiry date in coupon configuration"
+msgstr ""
+
+#. module: pos_orders_all
+#: code:addons/pos_orders_all/models/pos_coupon.py:0
+#: code:addons/pos_orders_all/models/pos_coupon.py:0
+#, python-format
+msgid "Please configure gift coupons"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Please configure product gift coupons ."
+msgstr ""
+
+#. module: pos_orders_all
+#: code:addons/pos_orders_all/models/pos_custom_discount.py:0
+#, python-format
+msgid "Please define income account for this product: \"%s\" (id:%d)."
+msgstr "برجاء تحديد حساب الدخل لهذا المنتج:\"%s\" (id:%d)."
+
+#. module: pos_orders_all
+#: model:ir.model,name:pos_orders_all.model_pos_config
+msgid "Point of Sale Configuration"
+msgstr "إعدادات نقطة البيع"
+
+#. module: pos_orders_all
+#: model:ir.model,name:pos_orders_all.model_pos_order_line
+msgid "Point of Sale Order Lines"
+msgstr "بنود أمر نقطة البيع"
+
+#. module: pos_orders_all
+#: model:ir.model,name:pos_orders_all.model_pos_order
+msgid "Point of Sale Orders"
+msgstr "أوامر نقطة البيع"
+
+#. module: pos_orders_all
+#: model:ir.model,name:pos_orders_all.model_report_pos_order
+msgid "Point of Sale Orders Report"
+msgstr "تقرير أوامر نقطة البيع"
+
+#. module: pos_orders_all
+#: model:ir.model,name:pos_orders_all.model_pos_session
+msgid "Point of Sale Session"
+msgstr "جلسة نقطة البيع"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Price"
+msgstr "السعر"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.view_pos_gift_coupan_form_view
+#, python-format
+msgid "Print"
+msgstr "طباعة"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Print Coupon"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Print Receipt"
+msgstr "طباعة الإيصال"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: model:ir.model,name:pos_orders_all.model_product_product
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_coupons_setting__product_id
+#, python-format
+msgid "Product"
+msgstr "المنتج"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Product image"
+msgstr "صورة المنتج"
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.inherit_view_product_qty_form
+msgid "Product stock location type"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_config__pos_stock_type__available
+msgid "Qty Available"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_config__pos_stock_type__onhand
+msgid "Qty on Hand"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Quantity"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model,name:pos_orders_all.model_stock_quant
+msgid "Quants"
+msgstr "الدفعات"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Re-Order"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Receipt Ref"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Receipt Ref:"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Receipt Reprint"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Reorder Products"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Reorder Qty"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Return Order"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Return Order Barcode"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_order__return_order_ref
+msgid "Return Order Ref"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Return Products"
+msgstr "إعادة منتجات"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_order_line__return_qty
+#, python-format
+msgid "Return Qty"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.inherit_view_pos_invoice_auto_check_form
+msgid "Return order Credit note configuration"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Return with Barcode"
+msgstr "العودة بالباركود"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Sale Orders"
+msgstr "أوامر البيع"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Sale order Products"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Saleperson"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Saleperson:"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Search Orders"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Select Coupon"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,help:pos_orders_all.field_pos_config__discount_type
+msgid "Seller can apply different Discount Type in POS."
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,help:pos_orders_all.field_pos_config__pos_stock_type
+msgid "Seller can display Different stock type in POS."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Served by"
+msgstr "خدم بواسطة"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Session"
+msgstr "الجلسة"
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.custom_pos_config_extended_form_view
+msgid "Session Configuration in POS"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.custom_pos_config_extended_form_view
+msgid "Session Limit Configuration"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_config__pos_session_limit
+msgid "Session limit"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Session:"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.custom_bi_pos_discount_form_view
+msgid "Set discount type (Fixed/Percentage) for pos orders."
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.custom_pos_config_extended_form_view
+msgid ""
+"Set session limit to load pos orders.If you have more than 1000 orders, then"
+" we recommend not to use \"Load all\" option."
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_config__show_stock_location
+msgid "Show Stock Of"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Specific Customer"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Status"
+msgstr "الحالة"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Status:"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.inherit_view_product_qty_form
+msgid "Stock Configuration in POS"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_config__stock_location_id
+msgid "Stock Location"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.inherit_view_product_qty_form
+msgid "Stock Location Configuration"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_config__pos_stock_type
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.inherit_view_product_qty_form
+msgid "Stock Type"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.inherit_view_product_qty_form
+msgid "Stock location used for inventory"
+msgstr ""
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.inherit_view_product_qty_form
+msgid "Stock type show up in POS screen."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Subtotal"
+msgstr "الإجمالي الفرعي"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Sync"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "TOTAL"
+msgstr "الإجمالي"
+
+#. module: pos_orders_all
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_gift_coupon__apply_coupon_on__taxed
+msgid "Taxed Amount"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Tel:"
+msgstr "هاتف:"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "The Barcode You are Entering is Invalid"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "The Coupon You are trying to apply is Expired"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid ""
+"The Coupon You are trying to apply is already applied in the OrderLines"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "There is no gift coupon."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid ""
+"There must be at least one product in your order before Create Sales Order."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid ""
+"There must be at least one product in your order before it can be apply for "
+"voucher code."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "This Gift Coupon is not applicable for this Customer"
+msgstr ""
+
+#. module: pos_orders_all
+#: code:addons/pos_orders_all/models/pos.py:0
+#, python-format
+msgid ""
+"This transfer has been created from the point of sale session: <a href=# "
+"data-oe-model=pos.order data-oe-id=%d>%s</a>"
+msgstr ""
+"أنشأت عملية النقل هذه من جلسة نقطة البيع: <a href=# data-oe-model=pos.order "
+"data-oe-id=%d>%s</a>"
+
+#. module: pos_orders_all
+#: model_terms:ir.ui.view,arch_db:pos_orders_all.view_pos_gift_coupan_form_view
+msgid ""
+"This will be displayed in the order summary, as well as on the invoice."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Total"
+msgstr "الإجمالي"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Total Amount:"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_coupons_setting__default_availability
+msgid "Total Available"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Total Items"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Total Items:"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "Total Taxes"
+msgstr "إجمالي الضرائب"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Unknown customer"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_gift_coupon__apply_coupon_on__untaxed
+msgid "Untaxed Amount"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__used
+msgid "Used"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "User:"
+msgstr "المستخدم:"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "VAT:"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "View Orders"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Voucher Code Entered by you is Invalid. Enter Valid Code..."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "With a"
+msgstr "بـ"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "You already exceed the maximum limit for this Coupon code."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "You already exceed the maximum number of limit for this Coupon code"
+msgstr ""
+
+#. module: pos_orders_all
+#: code:addons/pos_orders_all/models/pos_coupon.py:0
+#, python-format
+msgid "You can only create %d coupons  "
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "You cannot Create Sales Order. Select customer first."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "You cannot use Coupons/Gift Voucher. Select customer first."
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid ""
+"You have already use this Coupon code, at a time you can use one coupon in a"
+" Single Order"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/js/pos_orders_all.js:0
+#, python-format
+msgid "Your Internet connection is probably down."
+msgstr "على الأرجح انقطع اتصالك بالإنترنت."
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "at"
+msgstr "في"
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "back"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_gift_coupon__coupon_count
+msgid "coupon count"
+msgstr ""
+
+#. module: pos_orders_all
+#. openerp-web
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#: code:addons/pos_orders_all/static/src/xml/pos_orders_all.xml:0
+#, python-format
+msgid "discount"
+msgstr "خصم"
+
+#. module: pos_orders_all
+#: model:ir.model.fields,field_description:pos_orders_all.field_pos_order_line__original_line_id
+msgid "original Line"
+msgstr ""
+
+#. module: pos_orders_all
+#: model:ir.model.fields.selection,name:pos_orders_all.selection__pos_gift_coupon__amount_type__per
+msgid "percentage(%)"
+msgstr ""

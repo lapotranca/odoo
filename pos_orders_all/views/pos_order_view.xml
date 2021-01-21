@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+		
+    <record model="ir.ui.view" id="pos_sale_order_inherit">
+        <field name="name">pos.order.view.form</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+                    <field name="partner_id" position="after">
+						<field string="Coupon" name="coupon_id" readonly="True"/>
+		
+					</field>
+        </field>
+    </record>
+
+</data>
+</odoo>

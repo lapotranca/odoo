@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<template id="report_pos_gift_coupon">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="web.internal_layout">
+						<div class="page">
+
+							<div class="row">
+							<div class="col-xs-6">
+								<!-- <img t-att-src="'data:image/png;base64,%s' % o.user_id.company_id.logo"/> -->
+								<img t-att-src="'data:image/png;base64,%s' % to_text(o.user_id.company_id.logo)" style="max-height:45pt;max-width:90%"/>
+								<br/>
+								<span t-field="o.user_id.company_id.name" />
+								<br/>
+								<span t-field="o.user_id.company_id.street" /><span t-field="o.user_id.company_id.street2" />
+								<br/><span t-field="o.user_id.company_id.city" />
+							</div>
+						</div>
+							<br/>
+							<div class="row">
+								<div class="col-xs-3" style="width:50%;font-size:25px; text-align:left; font-color:#E74C3C;">
+									<span style="color:#E74C3C; font-weight: bold;"> Name: </span><span t-field="o.name" />
+									<br/>
+									<t t-if="o.partner_true == True"><strong>Customer:</strong><span t-field="o.partner_id" />
+										<br/>
+									</t>
+									<strong>Expiry Date:</strong><span t-field="o.expiry_date" t-options='{"widget": "date"}' />
+									<br/>
+									<strong>Amount:</strong><span t-field="o.amount" />
+									<br/>
+									<strong>Issue Date:</strong><span t-field="o.issue_date" t-options='{"widget": "date"}' />
+									<br/>
+									<br/>
+									<img alt="Barcode" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.c_barcode, 600, 150)" style="width:60%;height::4rem;"/><br/>
+									<span t-field="o.c_barcode" style="margin-left:15%;"/>
+								</div>
+
+								<div class="col-xs-3" style="position:absolute;opacity:1.0;width:50%;z-index:1000;">
+									<img src="pos_orders_all/static/description/gift_coupon_report.jpg" />
+								</div>
+								<div class="col-xs-3">
+								</div>
+								<div class="col-xs-3">
+								</div>
+
+							</div>
+							<br/>
+							<br/>
+							<br/>
+
+						</div>
+					</t>
+				</t>
+			</t>
+		</template>
+
+		<record id="paper_format" model="report.paperformat">
+			<field name="name">Indian</field>
+			<field name="default" eval="True" />
+			<field name="format">custom</field>
+			<field name="page_height">170</field>
+			<field name="page_width">300</field>
+			<field name="margin_top">5</field>
+			<field name="margin_bottom">5</field>
+			<field name="margin_left">7</field>
+			<field name="margin_right">7</field>
+			<field name="header_line" eval="False" />
+			<field name="orientation">Portrait</field>
+			<field name="header_spacing">20</field>
+			<field name="dpi">80</field>
+		</record>
+		
+		<record id="pos_orders_all.action_gift_coupons" model="ir.actions.report">
+			<field name="name">Coupon</field>
+			<field name="model">pos.gift.coupon</field>
+			<field name="report_name">pos_orders_all.report_pos_gift_coupon</field>
+			<field name="paperformat_id" ref="pos_orders_all.paper_format"/>
+		</record>
+
+	</data>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<report 
+            string="Gift Coupons and Vouchers" 
+            id="action_gift_coupons" 
+            model="pos.gift.coupon" 
+            report_type="qweb-pdf"
+            name="pos_orders_all.report_pos_gift_coupon" 
+            file="pos_orders_all.report_pos_gift_coupon" 
+			menu="False"
+        />
+    </data>
+</odoo>

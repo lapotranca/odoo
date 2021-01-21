@@ -1,0 +1,119 @@
+
+Version 13.0.0.1:
+		- Change path of barcode image.
+
+
+Version 13.0.0.2: (26/12/19)
+		- Update invoice auto check and coupon configuration validation check. 
+
+Version 13.0.1.2: (06/01/20)
+		- Generate barcode from js ,remove all python dependencies.
+
+Version 13.0.1.3: (10/04/20)
+		- update _recompute_tax_lines() according to base changes.
+
+Version 13.0.1.4 : (12/05/20)
+		- Solve issue of return product multiple time.
+		- Clear cart after creation of sale order from pos.
+
+Version 13.0.1.5 : (27/05/20)
+		- Made compatible with bi_loyalty_generic
+
+Version 13.0.1.6 : (24/06/20)
+		- Add _description and remove warnings
+		- Change _get_price_total_and_subtotal_model() and _recompute_tax_lines() methods according to base.
+		- Remove action_pos_order_invoice() method and use _prepare_invoice_vals() method.
+		- Update pivot report of pos orders.
+
+
+
+Date 29th july 2020
+version 13.0.1.7
+improvement :-
+	- sale order sync , added sync button , when clicked create new so show in pos.
+issue solve :-
+	- when import sale order from pos , and validate order , given traceback.
+
+
+Date 31st july 2020
+version 13.0.1.8
+issue solve:-
+	- If we create coupon configuration and create coupon then delete coupon configuration , and applied coupon in pos , its getting error.
+	- coupon report not printed properly.
+
+
+Version 13.0.1.9 : (20/08/20)
+		- Pass user in coupon create from pos.
+		- Moved barcode to last.
+
+Date 11/09/2020
+version 13.0.2.0
+	- Credit note issue solve.
+	- added configuration for credit note.
+	- if select create credit note for return order , then work according default odoo flow ,otherwise restrict that.
+
+Date  18th sept 2020
+version 13.0.2.1
+issue solve:-
+	- when some product have tax and we given fixed discount then session close time given error like unbalance journal entry.
+
+Date  22nd sept 2020
+version 13.0.2.2
+issue solve:-
+	- coupon creation when select partner selection issue solve
+
+Date 08/10/2020
+version 13.0.2.3
+issue solve:-
+	- gift coupon total number we are given 5 , so generally user want 5 coupon for this coupon config , but insted of 5 there only 4 coupon create then we getting validation.
+
+
+Version 13.0.2.4 : (13/10/20)
+		- Update _compute_amount_line_all() as per latest update.
+
+
+Version 13.0.2.5 : (14/10/20)
+		- add changes in code for loading issues in stock base on current session warehouse.
+		- Delete current order after sale order creation.
+	
+Version 13.0.2.6 : (29/10/20)
+		- Solved price change issue when customer is set.
+		- Solved issue of duplicate journal entry in invoice when Inventory valuation is set as Automated In Product Category .
+
+Version 13.0.2.7 : (20/11/20)
+		- Removed unwanted code.
+
+Date 25th nov 2020
+Version 13.0.3.8:
+	- session not closing issue solve
+
+Version 13.0.2.9 : (03/12/20)
+		- Fixed bug of rounding in total items.
+		- Update validation for "Deny pos order" .
+		- Fixed bug of displaying stock quantity when stock location is configured as 'specific'.
+		
+date 4th dec 2020
+version 13.0.3.0
+improvement :- 
+        - po file added for pos orders all module 
+
+
+Date 9th dec 2020
+version 13.0.4.0
+issue solve:-
+	- reprint receipt not work well
+
+
+date 17th dec 2020
+version 13.0.5.0
+issue solve:-
+	- with Restaurant module give error
+
+Version 13.0.5.1 : (24/12/20)
+		- Display minimum and maximum amount in coupon setting.
+
+
+date 6th jan 2021
+version 13.0.5.2
+issue solve:-
+	- reprint receipt date show wrong issue solve

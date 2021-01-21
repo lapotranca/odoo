@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<!-- Add custom js for pos_orders_all -->
+		<template id="assets_for_pos_orders_all" inherit_id="point_of_sale.assets">
+			<xpath expr="." position="inside">
+				<link rel="stylesheet" href="/pos_orders_all/static/src/css/custom.css" />
+				<script type="text/javascript" src="/pos_orders_all/static/src/js/pos_orders_all.js"/>
+				<script type="text/javascript" src="/pos_orders_all/static/src/js/jquery-barcode.js"/>
+				<!-- <script type="text/javascript" src="/pos_orders_all/static/src/js/jquery-barcode.min.js"/> -->
+			</xpath>
+		</template>
+
+		<record model="ir.ui.view" id="custom_pos_config_extended_form_view">
+			<field name="name">pos.config.form.extended.view</field>
+			<field name="model">pos.config</field>
+			<field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//h2[@name='order']" position="before">
+					<br/>
+					<h2>Session Configuration in POS</h2>
+					<div class="row mt16 o_settings_container" id="session_config">
+						<div class="col-xs-12 col-md-6 o_setting_box">
+							<div class="o_setting_right_pane">
+								<label for="pos_session_limit" string="Session Limit Configuration "/>
+								<div class="text-muted">
+									Set session limit to load pos orders.If you have more than 1000 orders, then we recommend not to use "Load all" option.
+								</div>
+								<div class="content-group mt16">
+									<field name="pos_session_limit"/>
+								</div>
+							</div>
+						</div>	
+					</div>
+					<br/>
+				</xpath>  	
+			</field>
+	   </record>
+
+	   <!-- Add Custom Fields in pos.config -->
+		<record model="ir.ui.view" id="custom_bi_pos_discount_form_view">
+			<field name="name">pos.config.form.extended.view</field>
+			<field name="model">pos.config</field>
+			<field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//h2[@name='order']" position="before">
+					<h2 name="order">Discount Configuration in POS</h2>
+					<div class="row mt16 o_settings_container">
+						<div id="discount_type" class="col-xs-12 col-md-6 o_setting_box">
+							<div class="o_setting_right_pane">
+								<label for="discount_type" string='Discount Type'/>
+								<div class="text-muted">
+									Set discount type (Fixed/Percentage) for pos orders.
+								</div>
+								<div class="content-group mt16">
+									<field name="discount_type"/>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</xpath>
+				
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="custom_bi_pos_import_sale_view">
+			<field name="name">pos.config.form.extended.view</field>
+			<field name="model">pos.config</field>
+			<field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//h2[@name='order']" position="before">
+					<h2>Import Sale Order Configuration in POS</h2>
+					<div class="row mt16 o_settings_container">
+						<div id="check" class="col-xs-12 col-md-6 o_setting_box">
+							<div class="o_setting_left_pane">
+								<field name="check"/>
+							</div>
+							<div class="o_setting_right_pane">
+								<label for="check" string='Import Sale Order'/>
+							</div>
+						</div>
+					</div>
+				</xpath>
+				
+			</field>
+		</record>
+
+		<!-- Bag Charges Configuration in POS -->
+		<record model="ir.ui.view" id="inherit_view_pos_bag_charges_form">
+			<field name="name">inherit_pos_bag_charges_form</field>
+			<field name="model">pos.config</field>
+			<field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//h2[@name='order']" position="before">
+					<br/>
+					<h2>Bag Charges Configuration in POS</h2>
+					<div class="row mt16 o_settings_container">
+						<div class="col-xs-12 col-md-6 o_setting_box">
+							<div class="o_setting_left_pane">
+								<field name="allow_bag_charges"/>
+							</div>
+							<div class="o_setting_right_pane">
+								<label for="allow_bag_charges" string='Allow Bag Charges'/>
+							</div>
+							<div class="o_setting_right_pane">
+								<group><field name="pos_bag_category_id" attrs="{'invisible': [('allow_bag_charges' ,'=', False)],'required': [('allow_bag_charges', '!=', False)]}" /></group>
+							</div>   
+						</div>
+												
+					</div>
+				</xpath>
+				
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="inherit_view_product_qty_form">
+			<field name="name">inherit_view_product_qty_form</field>
+			<field name="model">pos.config</field>
+			<field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//h2[@name='order']" position="before">
+					<br/>
+					<h2>Stock Configuration in POS</h2>
+					<div class="row mt16 o_settings_container">
+						<div class="col-xs-12 col-md-6 o_setting_box">
+							<div class="o_setting_left_pane">
+								<field name="pos_display_stock"/>
+							</div>
+							<div class="o_setting_right_pane">
+								<label for="pos_display_stock"/>
+								<div class="text-muted">
+									Check this to display stock in pos screen.
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-6 o_setting_box">
+							<div class="o_setting_right_pane">
+								<label for="pos_stock_type" string="Stock Type"/>
+								<div class="text-muted">
+									Stock type show up in POS screen.
+								</div>
+								<div class="content-group mt16">
+									<field name="pos_stock_type"/>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-6 o_setting_box">
+							<div class="o_setting_left_pane">
+								<field name="pos_allow_order"/>
+							</div>
+							<div class="o_setting_right_pane">
+								<label for="pos_allow_order"/>
+								<div class="text-muted">
+									Allow pos order when product is out of stock stock.
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-6 o_setting_box">
+							<div class="o_setting_right_pane">
+								<label for="pos_deny_order" string="Deny pos order"/>
+								<div class="text-muted">
+									Deny pos order when product quanity goes down to the entered quantity.
+								</div>
+								<div class="content-group mt16">
+									<field name="pos_deny_order"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br/>
+				
+					<h2>Stock Location Configuration</h2>
+					<div class="row mt16 o_settings_container">
+						<div class="col-xs-12 col-md-6 o_setting_box" id="stock_location">
+							<div class="o_setting_right_pane">
+								<label for="show_stock_location"/>
+								<div class="text-muted">
+									Product stock location type
+								</div>
+								<div class="content-group">
+									<div class="mt16">
+										<field name="show_stock_location" class="o_light_label" widget="radio"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-6 o_setting_box">
+							<div class="o_setting_right_pane">
+								<label for="stock_location_id"/>
+								<div class="text-muted">
+									Stock location used for inventory
+								</div>
+								<div class="content-group mt16">
+									<field name="stock_location_id"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</xpath>
+				
+			</field>
+		</record>
+
+		
+		
+		
+		<!-- Add Boolean Field in POS Config pos_invoice_auto_check-->
+		<record id="inherit_view_pos_invoice_auto_check_form" model="ir.ui.view">
+			<field name="name">inherit_bi_pos_invoice_auto_check</field>
+			<field name="model">pos.config</field>
+			<field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//div[@id='iface_invoicing']" position="after">
+					<div class="col-xs-12 col-md-6 o_setting_box" attrs="{'invisible': [('module_account' ,'=', False)]}">
+						<div class="o_setting_left_pane">
+							<field name="auto_check_invoice"/>
+						</div>
+						<div class="o_setting_right_pane">
+							<label for="auto_check_invoice"/>
+							<div class="text-muted">
+								POS Auto Check Invoice
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-6 o_setting_box" attrs="{'invisible': [('module_account' ,'=', False)]}">
+						<div class="o_setting_left_pane">
+							
+						</div>
+						<div class="o_setting_right_pane">
+							<label for="credit_note"/>
+							<div class="text-muted">
+								Return order Credit note configuration
+							</div>
+							<div class="content-group mt16">
+								<field name="credit_note" attrs="{'required': [('module_account' ,'=', True)]}"/>
+							</div>
+						</div>
+					</div>						
+				</xpath>
+			</field>
+		</record>
+
+
+
+		<!-- Stock Location Configuration in POS -->
+	<!-- 	<record model="ir.ui.view" id="inherit_view_bi_pos_stock_locations_form">
+			<field name="name">inherit.bi.pos.stock.locations.form</field>
+			<field name="model">pos.config</field>
+			<field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//div[@id='inventory_location']" position="after">
+					<h2 name="order">Stock Location Configuration</h2>
+					<div class="row mt16 o_settings_container">
+						<div id="show_stock_location" class="col-xs-12 col-md-6 o_setting_box">
+							<div class="o_setting_right_pane">
+								<label for="show_stock_location" string='Show Stock Of'/>
+								<div class="content-group mt16">
+									<field name="show_stock_location" widget="radio"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</xpath>
+			
+			</field>
+		</record> -->
+	   
+						
+
+	  
+	   
+				
+
+	</data>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+		<record id="pos_bag_category_1" model="pos.category">
+			<field name="name">POS Bag</field>
+		</record>
+
+    </data>
+</odoo>
