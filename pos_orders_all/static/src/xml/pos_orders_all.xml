@@ -1,0 +1,1243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<templates id="pos_orders_reprint_template" inherit_id="point_of_sale.template" xml:space="preserve">
+
+	<t t-name="CustomErrorPopupWidget">
+		<div role="dialog" class="modal-dialog custom">
+			<div class="popup popup-error">
+				<p class="title"><t t-esc=" widget.options.title || 'Error' " /></p>
+				<p class="body"><t t-esc=" widget.options.body || '' "/></p>
+				<div class="footer">
+					<div class="button cancel">
+						Ok
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+
+    <!-- SeeAllOrdersButtonWidget -->
+
+	<t t-name="SeeAllOrdersButtonWidget" name="See All Orders Button Widget">
+		<div class="control-button button confirm" id="create_sales_order" style="background-color: #7f82ac; color: #fff;font-size: 14px;">
+		   <i class="fa fa-university"></i> Orders
+		</div>
+	 </t>
+
+	<!-- CreateSalesOrderButtonWidget -->
+	<t t-name="CreateSalesOrderButtonWidget" name="Create Sales Order Button Widget">
+		<div class="control-button button confirm" id="create_sales_order" style="background-color: #7f82ac; color: #fff;font-size: 14px;">
+			<i class="fa fa-shopping-cart"></i> Create Sales Order 
+		</div>
+	</t>
+
+	<t t-name="SaleOrderButtonWidget" name="Sale Orders">
+		<t t-if="widget.pos.config.check">
+			<div class="control-button button confirm" id="import_sales_order" style="background-color: #7f82ac;color: #fff; font-size: 14px;">
+				<i class="fa fa-university"></i> Sale Orders
+			</div>
+		</t>
+	</t>
+
+	<!-- PosBagWidget -->
+	<t t-name="PosBagWidget" name="Pos Bag Widget">
+		<t t-if="widget.pos.config.allow_bag_charges">
+			<div class="control-button button confirm" id="pos_bag" style="background-color: #7f82ac; color: #fff;font-size: 14px;">
+				<i class="fa fa-shopping-bag"></i> Bag 
+			</div>
+		</t>
+	</t>
+
+	<t t-name="GiftButtonWidget" name="POS Coupens Gift Voucher">
+		 <div class="control-button button confirm" style="background-color: #7f82ac;color: #fff; font-size: 14px;">
+				<i class="fa fa-gift"></i>Coupon
+		  </div>
+	</t>
+
+	<!-- POSBarcodeReturnWidget -->
+	<t t-name="POSBarcodeReturnWidget" name="POS Return Order with Barcode">
+		<div class="control-button button confirm" id="create_barcode_return" style="background-color: #7f82ac; color: #fff;font-size: 14px;">
+			<i class="fa fa-barcode"></i> Return with Barcode
+		</div>
+	</t>
+
+
+	<!-- PosBarcodePopupWidget -->
+	<t t-name="PosBarcodePopupWidget">
+		<div class="modal-dialog">
+			<div class="popup popup-confirm">
+				<p class="title" style="background-color: rgb(110,200,155); color: #fff;">Return Order Barcode</p>
+
+						<div class="body">
+							<div class='div-container'>
+								<input id ="entered_item_barcode" type="text" class="input-field" name="code" style='margin-top: 15px;'></input>
+								
+							</div>
+						 </div>
+
+				<div class="footer" style="background-color: rgb(110,200,155); color: #fff;">
+					<div class="button cancel" style="background-color: #0075AC; color: #fff;">
+						Cancel
+					</div>
+					<div class="button confirm_return" id="apply_barcode_return_order" style="background-color: #0075AC; color: #fff;">
+						Apply
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+	
+
+	<!-- SeeAllOrdersScreenWidget -->
+	<t t-name="SeeAllOrdersScreenWidget">
+		<div class="clientlist-screen screen">
+			<div class="screen-content">
+				<section class="top-content">
+					<span class='button back'>
+						<i class='fa fa-angle-double-left'></i>
+						Cancel
+					</span>
+					<span class='searchbox search-order'>
+						<input placeholder='Search Orders' />
+						<span class='search-clear'></span>
+					</span>
+					<span class='searchbox'></span>
+				</section>
+				<section class="full-content">
+					<div class='window touch-scrollable scrollable-y'>
+						<section class='subwindow collapsed'>
+							<div class='subwindow-container'>
+								<div class='subwindow-container-fix client-details-contents'>
+								</div>
+							</div>
+						</section>
+						<section class='subwindow'>
+							<div class='subwindow-container'>
+								<div class='subwindow-container-fix touch-scrollable scrollable-y'>
+									<table class='client-list'>
+										<thead>
+											<tr style="background-color: #7f82ac; color: #fff;">
+												<th>Order Ref</th>
+												<th>Receipt Ref</th>
+												<th>Customer</th>
+												<th>Order Date</th>
+												<th>Total</th>
+												<th>Re-Order</th>
+												<th>Return Order</th>
+												<th>Receipt Reprint</th>
+												
+											</tr>
+										</thead>
+										<tbody class='orders-list-contents'>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+				
+			</div>
+		</div>
+	</t>
+
+	<!-- OrdersLine -->
+	<t t-name="OrdersLine">
+		<tr>
+			<td class='orders-line-name' t-att-data-id='order.id' style="cursor: pointer;"><t t-esc='order.name' /></td>
+			<td class='orders-line-ref' t-att-data-id='order.id' style="cursor: pointer;"><t t-esc='order.pos_reference' /></td>
+			<td class='orders-line-partner' t-att-data-id='order.id' style="cursor: pointer;"><t t-esc='order.partner_id[1] or ""' /></td>
+			<td class='orders-line-date' t-att-data-id='order.id' style="cursor: pointer;"><t t-esc='order.date_order' /></td>
+			<td class='orders-line-tot' t-att-data-id='order.id' style="cursor: pointer;"><t t-esc='widget.format_currency(order.amount_total)' /></td>
+			<td>
+				<button class="re-order" t-att-id='order.id' style="cursor: pointer; color: #fff; background-color: #7F82AC;"><i class="fa fa-refresh"></i> Re-Order </button>
+			</td>
+			<td>
+				<button class="return-order" t-att-id='order.id' style="cursor: pointer; color: #fff; background-color: #7F82AC;"><i class='fa fa-sign-in'></i> Return Order </button>
+			</td>
+			<td>
+				<button class="print-order" t-att-id='order.id' style="cursor: pointer;color: #fff;margin-top: 10px;background-color: #7F82AC;"><i class="fa fa-print"></i> Print</button>
+			</td>
+		</tr>
+	</t>
+
+	<!-- ClientListScreenWidget -->
+	<t t-extend="ClientListScreenWidget">
+
+		<!-- -->
+		<t t-jquery=".button.next" t-operation="after">
+			<span class='button view-orders' id="view_orders" style="background-color: #7f82ac; color: #fff; right: 0px; margin-right:165px;">
+				View Orders
+				<i class='fa fa-angle-double-right'></i>
+			</span>
+		</t>
+
+		<!-- -->
+		<t t-jquery="tr" t-operation="append">
+			<th>Orders</th>
+		</t>
+
+	</t>
+
+	<!-- ClientLineWidget -->
+	<t t-extend="ClientLine">
+		<t t-jquery="tr.client-line" t-operation="append">
+			<td>
+				<button class="selected-client-orders" t-att-id='partner.id'> <i class="fa fa-university"></i> View Orders </button>
+			</td>
+		</t>
+	</t>
+
+
+	<!-- OrderDetails -->
+	<t t-name="OrderDetails">
+		<section class='client-details'>
+			<div class='client-name'>
+				<t t-esc='order.name'/>
+			</div>
+
+			<div class='edit-buttons'>
+				<div class='button edit'><i class='fa fa-pencil-square' /></div>
+			</div>
+
+			<div style="width: 100%;height: 220px;overflow: scroll;">
+			<div class='client-details-box clearfix'>
+				<div class='client-details-left'>
+					<div class='client-detail'>
+						<span class='label' style="width:105px;">Order Ref</span>
+						<span class='detail client-order_id'>
+							<t t-esc='order.name' />
+						</span>
+					</div>
+					<div class='client-detail'>
+						<span class='label' style="width:105px;">Receipt Ref</span>
+						<span class='client-type'>
+							<t t-esc='order.pos_reference' />
+						</span>
+					</div>
+					<div class='client-detail'>
+						<span class='label' style="width:105px;">Customer</span>
+						<t>
+							<span class='detail client-label'>
+								<t t-esc='order.partner_id[1]' />
+							</span>
+						</t>
+					</div>
+					<div class='client-detail'>
+						<span class='label' style="width:105px;">Order Date</span>
+						<t>
+							<span class='detail client-label'>
+								<t t-esc='order.date_order' />
+							</span>
+						</t>
+					</div>
+				</div>
+				<div class='client-details-right'>
+					<div class='client-detail'>
+						<span class='label' style="width:105px;">Total</span>
+						<t>
+							<span class='detail client-label'>
+								<t t-esc='order.amount_total' />
+							</span>
+						</t>
+					</div>
+					<div class='client-detail'>
+						<span class='label' style="width:105px;">Company</span>
+						<t>
+							<span class='detail client-label'>
+								<t t-esc='order.company_id' />
+							</span>
+						</t>
+					</div>
+					<div class='client-detail'>
+						<span class='label' style="width:105px;">Status</span>
+						<t>
+							<span class='detail client-label'>
+								<t t-esc='order.state' />
+							</span>
+						</t>
+					</div>
+					<div class='client-detail'>
+						<span class='label' style="width:105px;">Session</span>
+						<t>
+							<span class='detail client-label'>
+								<t t-esc='order.session_id[1]' />
+							</span>
+						</t>
+					</div>
+				</div>
+				</div>
+			</div>
+		</section>
+	</t>
+	
+	<!-- ######################################################################################################-->
+	
+	<t t-name="SeeOrderDetailsPopupWidget">
+		<div class="modal-dialog">
+			<div class="popup popup-confirm" style="height: 450px; width:700px">
+				<p class="title" style="background-color: #7f82ac; color: #fff;height: 10px;">Order Details</p>
+
+				<div class="body" style="height: 300px;">
+					
+					
+					<t t-foreach="widget.options.order || []" t-as="item" t-att-id="item.id">
+						<table style='width:100%'>
+							<tr style='line-height:30px; font-size:15px'>
+								<td style='width:20%; text-align:left'><strong>Order Ref:</strong>
+								</td>
+								<td style='width:30%; text-align:left'>
+									<span t-esc="item['name']"/>
+								</td>
+								<td style='width:20%; text-align:left'><strong>Order Date:</strong>
+								</td>
+								<td style='width:30%; text-align:left'>    
+									<span t-esc="item['date_order']" />
+								</td>
+							</tr>
+							
+							<tr style='line-height:30px; font-size:15px'>
+								<td style='width:20%; text-align:left'><strong>Customer:</strong>
+								</td>
+								<td style='width:30%; text-align:left'>
+									<span t-esc="item['partner_id'][1] or ''"/>
+								</td>
+								<td style='width:20%; text-align:left'><strong>Total Amount:</strong>
+								</td>
+								<td style='width:30%; text-align:left'>    
+									<span t-esc="item['amount_total']" />
+								</td>
+							</tr>
+							
+							<tr style='line-height:30px; font-size:15px'>
+								<td style='width:20%; text-align:left'><strong>Receipt Ref:</strong>
+								</td>
+								<td style='width:30%; text-align:left'>
+									<span t-esc="item['pos_reference']"/>
+								</td>
+								<td style='width:20%; text-align:left'><strong>Status:</strong>
+								</td>
+								<td style='width:30%; text-align:left'>    
+									<span t-esc="item['state']" />
+								</td>
+							</tr>
+							<tr style='line-height:30px; font-size:15px'>
+								<td style='width:20%; text-align:left'><strong>Company:</strong>
+								</td>
+								<td style='width:30%; text-align:left'>
+									<span t-esc="item['company_id'][1]"/>
+								</td>
+								<td style='width:20%; text-align:left'><strong>Session:</strong>
+								</td>
+								<td style='width:30%; text-align:left'>    
+									<span t-esc="item['session_id'][1]" />
+								</td>
+							</tr>
+							<tr style='line-height:30px; font-size:15px'>
+								<td style='width:20%; text-align:left'><strong>Discount Type:</strong>
+								</td>
+								<td style='width:30%; text-align:left'>
+									<span t-esc="item['discount_type'] || []"/>
+								</td>
+							</tr>
+						</table>
+					</t>
+					<br/>
+					<table style='width:100%'>
+						<thead>
+							<tr style="border:1px solid black; line-height:30px;">
+								<th style='width:25%; padding-left: 10px; text-align:left'>Product</th>
+								<th style='width:25%; padding-left: 10px; text-align:left'>Discount</th>
+								<th style='width:25%; padding-left: 10px; text-align:left'>Quantity</th>
+								<th style='width:25%; padding-left: 10px; text-align:left'>Price</th> 
+							</tr>
+						</thead>
+						<tbody>
+							<tr style="border:1px solid black; line-height:30px; font-size:15px;" t-foreach="widget.options.orderline || []" t-as="line1">
+								<td style='width:25%; padding-left: 10px; text-align:left'><t t-esc='line1.product_id[1]' /></td>
+								<td style='width:25%; padding-left: 10px; text-align:left'><t t-esc='line1.discount' /></td>
+								<td style='width:25%; padding-left: 10px; text-align:left'><t t-esc='line1.qty' /></td>
+								<td style='width:25%; padding-left: 10px; text-align:left'><t t-esc='line1.price_unit' /></td>
+							</tr>
+						</tbody>
+					</table>
+					
+				</div>
+
+				<div class="footer" style="background-color: #7f82ac; color: #fff;">
+
+					<div class="button cancel" style="background-color: #E0E0E0; color: black;">
+						Cancel
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+
+	<!-- PosReOrderPopupWidget -->
+	<t t-name="PosReOrderPopupWidget">
+		<div class="modal-dialog">
+			<div class="popup popup-confirm" style="height: 330px;">
+				<p class="title" style="background-color: rgb(110,200,155); color: #fff;">Reorder Products</p>
+
+						<div class="body" style="height: 250px;">
+							<div class='div-container'>
+								<table class='reorder-product-list'>
+									<thead>
+										<tr class="reorder_product_header">
+											<th>Product</th>
+											<th>Reorder Qty</th>
+										</tr>
+									</thead>
+									<tbody class='reorder-product-list-contents'>
+										<!--<t t-foreach="orderlines" t-as="orderline">-->
+										<tr class="reorder_product_body" t-foreach="widget.options.orderlines || []" t-as="item">
+											<td><t t-esc='item.product_id[1]' /></td>
+											<!--<td><t t-esc=" widget.options.orderlines" /></td>-->
+											 <td class="entered_item_qty">
+												<input id ="entered_item_qty" t-att-line-id='item.id' t-att-qty-id='item.qty' type="text" class="input-field" name="code"></input>
+											 </td>
+
+
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						 </div>
+
+				<div class="footer" style="background-color: rgb(110,200,155); color: #fff;">
+					<div class="button cancel" style="background-color: #0075AC; color: #fff;">
+						Cancel
+					</div>
+					<div class="button confirm" id="apply_reorder" style="background-color: #0075AC; color: #fff;">
+						Apply
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+ 
+	<!-- PosReturnOrderPopupWidget -->
+	<t t-name="PosReturnOrderPopupWidget">
+		<div class="modal-dialog">
+			<div class="popup popup-confirm" style="height: 350px;">
+				<p class="title" style="background-color: rgb(110,200,155); color: #fff;">Return Products</p>
+
+						<div class="body" style="height: 205px;">
+							<div class='div-container' style="overflow-y: auto;">
+								<table class='return-product-list'>
+									<thead>
+										<tr class="return_product_header">
+											<th>Product</th>
+											<th>Return Qty</th>
+										</tr>
+									</thead>
+									<tbody style="display: contents;" class='return-product-list-contents'>
+										<tr class="return_product_body" t-foreach="widget.options.orderlines || []" t-as="item">
+											<td><t t-esc='item.product_id[1]' /></td>
+											 <td class="entered_item_qty">
+												<input id ="entered_item_qty" t-att-line-id='item.id' t-att-qty-id='item.qty' t-att-return-qty='item.return_qty' type="text" class="input-field" name="code"></input>
+											 </td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						 </div>
+
+				<div class="footer" style="background-color: rgb(110,200,155); color: #fff;">
+					<div class="button cancel" style="background-color: #0075AC; color: #fff;">
+						Cancel
+					</div>
+					<div class="button confirm" id="apply_return_order" style="background-color: #0075AC; color: #fff;">
+						Apply
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+
+	<!-- ReceiptScreenWidget-->
+	<t t-name="ReceiptScreenWidgetNew">
+		<div class='receipt-screen screen'>
+			<div class='screen-content'>
+				<div class='top-content'>
+					<span class='button back'>
+						<i class='fa fa-angle-double-left'></i>
+						back
+					</span>
+				</div>
+				<div class="centered-content">
+					<div class="button print ayaz">
+						<i class='fa fa-print'></i> Print Receipt
+					</div>
+					<div class="pos-receipt-container">
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+
+
+	<t t-extend="OrderSelectorWidget">
+		<t t-jquery=".order-selector" t-operation="after">
+			<div class="oe_status">
+				<span class="pos-stock-sync" style="padding-right: 30px;">
+					Sync
+					<i class="fa fa-refresh " style='font-size: 28px;position: absolute;margin-left: 1%;color: #5db937;'/>
+				</span>
+			</div>
+		</t>
+	</t>
+	
+	<!-- Product Widget -->
+	<t t-extend="Product">
+		<t t-jquery=".product-img" t-operation="append">
+			
+			<!-- Display Stock in POS -->
+			<t t-if="widget.pos.config.pos_display_stock">
+				
+				<!-- If Stock Type is Qty on hand -->
+				<t t-if="widget.pos.config.pos_stock_type == 'onhand'">
+					<span class="price-tag" id="stockqty" style="right: 90px;">
+						<t t-esc="product.qty_available"/>
+					</span>
+				</t>
+				
+				<!-- If Stock Type is Incoming Qty -->
+				<t t-if="widget.pos.config.pos_stock_type == 'incoming'">
+					<span class="price-tag" style="right: 90px;">
+						<t t-esc="product.incoming_qty"/>
+					</span>
+				</t>
+				
+				<!-- If Stock Type is Outgoing Qty -->
+				<t t-if="widget.pos.config.pos_stock_type == 'outgoing'">
+					<span class="price-tag" style="right: 90px;">
+						<t t-esc="product.outgoing_qty"/>
+					</span>
+				</t>
+				
+				<!-- If Stock Type is Qty Available -->
+				<t t-if="widget.pos.config.pos_stock_type == 'available'">
+					<span class="price-tag" id="availqty" style="right: 90px;">
+						<t t-if="widget.pos.config.show_stock_location == 'specific'">
+							<t t-esc="product.available_quantity"/>
+						</t>
+						<t t-if="widget.pos.config.show_stock_location == 'all'">
+							<t t-esc="product.virtual_available"/>
+						</t>
+					</span>
+				</t>
+				
+			</t>
+		</t>
+	</t>  
+
+	<!-- ValidQtyPopupWidget -->     
+	<t t-name="ValidQtyPopupWidget">
+		<div class="modal-dialog">
+			<div class="popup popup-textinput" style="height: 250px !important;">
+				<p class="title" style="background-color: rgb(110,200,155); color: #fff;">Denied Order</p>
+				<p class="body" style="color: #0075AC;">Ordered qty of One or more product(s) is more than available qty.</p>
+				<div class="footer" style="background-color: rgb(110,200,155); color: #fff;">
+					<div class="button confirm" id="back_to_products" style="background-color: #0075AC; color: #fff;">
+						Ok 
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+
+
+	<!-- PosBagPopupWidget -->
+	<t t-name="PosBagPopupWidget">
+		<div class="modal-dialog">
+			<div class="popup popup-confirm" style="height: 350px;">
+				<p class="title" style="background-color: rgb(110,200,155); color: #fff;">List of Bag Charges</p>
+				<div class="body">
+							   <div class='div-container' style="height: 100px;">
+							<span class='product bag-category' t-foreach="widget.options.orderlines || []" t-as="item" t-att-data-product-id="item.id">
+										   <div class="product-img">
+												<img t-att-src='item.image_url'  alt="Product image"/>
+												  <span class="price-tag">
+													<t t-esc="widget.format_currency(item.lst_price,'Product Price')"/>
+												 </span>
+											 </div>
+											<div class="product-name">
+												<t t-esc="item.display_name"/>
+											</div>
+										</span>
+							
+						</div>
+					</div>
+
+				<div class="footer" style="background-color: rgb(110,200,155); color: #fff;">
+					<div class="button cancel" style="background-color: #0075AC; color: #fff;">
+						Cancel
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+
+	<t t-name="CouponConfigPopupWidget">
+		<div class="modal-dialog">
+			<div class="popup popup-textinput" style="">
+				<p class="title" style="background-color: rgb(110,200,155); color: #fff;">Coupon Options</p>
+				<div class="body" style="color: #0075AC;">
+					<div class="creat_coupon left">
+						<div class="left_wrapper" style="max-width: 43%;float:left;margin: 0px 10px;">
+							<div class="left_img" style="opacity: 0.5;">
+								<img src="/pos_orders_all/static/src/img/create_coupon.png" style="max-width: 100%;"/>
+							</div>
+							<span class="text-center">Create Coupon</span>
+						</div>
+					</div>
+					<div class="select_coupon right" >
+						<div class="right_wrapper" style="max-width: 43%;float:left;margin: 0px 10px;">
+							<div class="right_img" style="opacity: 0.5;">
+								<img src="/pos_orders_all/static/src/img/apply_coupon.png" style="max-width: 100%;"/>
+							</div>
+							<span class="text-center">Select Coupon</span>
+						</div>
+					</div>
+				</div>
+				<div class="footer" style="background-color: rgb(110,200,155); color: #fff;">
+						<div class="button cancel text-center" style="background-color: #0075AC; color: #fff;">
+								Cancel 
+						</div>
+				</div>
+			</div>
+		</div>
+	</t>
+
+	<t t-name="CreateCouponPopupWidget">
+		<div class="modal-dialog">
+			<div class="popup popup-textinput" style="text-align:left;max-height:750px !important;height: 100% !important;">
+				<p class="title" style="background-color: rgb(110,200,155); color: #fff;">Create Coupon</p>
+				<div id="alertcustomer" class="alert" style="color: #ec1010; font-size: inherit; margin: 5px; text-align: center;">
+					<span class="closebtn"></span>  
+					Please Fill Require Field.
+				</div>
+				<div id="alertamt" class="alert" style="color: #ec1010; font-size: inherit; margin: 5px; text-align: center;">
+					<span class="closebtn"></span>  
+					Please Fill Coupon Amount.
+				</div>
+				<div id="alertamtmax" class="alert" style="color: #ec1010; font-size: inherit; margin: 5px; text-align: center;">
+					<span class="closebtn"></span>  
+					Coupon maximum amount Should be less than Maximum Amount in Configuration.
+				</div>
+				<div id="alertamount" class="alert" style="color: #ec1010; font-size: inherit; margin: 5px; text-align: center;">
+					<span class="closebtn"></span>  
+					Please Fill Amount Between Minimum Amount And Maximum Amount.
+				</div>
+				<div id="alertdate" class="alert" style="color: #ec1010; font-size: inherit; margin: 5px; text-align: center;">
+					<span class="closebtn"></span>  
+					Please Enter Valid Issue Date and Expiry Date.
+				</div>
+				<div class="body" style="margin: 80px 40px;">
+					<div class="create_wrapper">
+						<table id="create_coupon_table" class="table">
+							<tr>
+								<td>
+									<span>Name </span><sup style="color:red;">*</sup>
+									<span>
+										<input id="coupon_name" type="text" class="input-field" name="c_name" style="margin:8px auto"/>
+									</span>
+								</td>
+								<td>
+									<span>Coupon usage limit</span>
+									<span>
+										<input id="coupon_limit" type="number" min="0" class="input-field" name="c_limit" style="margin:8px auto"/>
+									</span>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span>Coupon Amount </span>
+									<span>
+										<input id="coupon_amount" type="text" class="input-field" name="c_amount" style="margin:8px auto"/>
+									</span>
+								</td>
+								<td>
+									<select id="coup_amount_type" style="margin:8px auto">
+										<option value="Percentage">Percentage</option>
+										<option value="Fixed">Fixed</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span>Specific Customer </span>
+									<span style="display: inline-block;vertical-align: sub;">
+										<input id="coupon_cust_box" type="checkbox" name="c_cust_box" style="min-height: auto;margin:8px;"/>
+									</span>
+									<span>
+										<select id="coupon_customer" style="margin:8px auto;max-width: 160px;">
+											<t t-foreach="widget.pos.partners" t-as="d">
+												<option><t t-esc='d.name'/></option>
+											</t>
+										</select>
+									</span>
+								</td>
+								<td>
+									<span>Max Amount </span>
+									<span>
+										<input id="coupon_max_amount" type="text" class="input-field" name="c_max_amount" style="margin:8px auto"/>
+									</span>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span>Issue Date </span><sup style="color:red;">*</sup>
+									<span>
+										<input id="coupon_issue_dt" type="date" class="input-field" name="c_issue_dt" style="margin:8px auto;
+											font-size:15px;"/>
+									</span>
+								</td>
+								<td>
+									<span>Expiry Date </span>
+									<span style="display: inline-block;vertical-align: sub;">
+										<input id="coupon_expdt_box" type="checkbox" name="c_expdt_box" style="min-height: auto;margin:8px;font-size:15px;"/>
+									</span>
+									<span>
+										<input id="coupon_exp_dt" type="date" class="input-field" name="c_exp_dt" style="margin:8px auto"/>
+									</span>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="footer" style="background-color: rgb(110,200,155); color: #fff;">
+						<div class="button cancel" style="background-color: #0075AC; color: #fff;">
+								Cancel 
+						</div>
+						<div class="button confirm" id="create_coupon" style="background-color: #0075AC; color: #fff;">
+								Create 
+						</div>
+				</div>
+			</div>
+		</div>
+	</t>
+
+	<!-- After Created the Coupon -->
+	<t t-name="AfterCreateCouponPopup">
+		<div class="modal-dialog">
+			<div class="popup popup-textinput" style="max-height:250px;">
+				<p class="title" style="background-color: rgb(110,200,155); color: #fff;">Confirmation</p>
+				<div class="body" style="color: #0075AC;">
+					<div class="coupon_created left">
+						<div class="msg_wrapper" style="margin: 30px auto;">
+							<p>Gift coupon is created successfully.</p>
+						</div>
+					</div>
+				</div>
+				<div class="footer" style="background-color: rgb(110,200,155); color: #fff;">
+						<div class="button close text-center" style="background-color: #0075AC; color: #fff;">
+								Cancel 
+						</div>
+						<div class="button confirm print_coupon" id="print_coupon" style="background-color: #0075AC; color: #fff;">
+								<span class="fa fa-print"/> Print 
+						</div>
+				</div>
+			</div>
+		</div>
+	</t>
+
+	<!-- After Created Coupon Print Buttton -->
+	<t t-name="PrintCouponButtonScreen">
+	  <div class='receipt-screen screen'>
+		  <div class='screen-content'>
+			  <div class='top-content'>
+				  <span class='button next' style="background-color:#6EC89B; color:white">
+					  Back
+					  <i class='fa fa-angle-double-right' style="margin-left:5px;"></i>
+				  </span>
+			  </div>
+			  <div class="centered-content touch-scrollable">
+				  <div class="button print-coupon">
+					  <i class='fa fa-print'></i> Print Coupon
+				  </div>
+				  <div class="pos-receipt-container print-coupon-receipt" style="text-align: center;">
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+	</t>
+
+	<t t-name="CouponPrint">
+		<div class="pos-receipt">
+			<div class="pos-center-align" style="text-align: center;">
+				<p>Gift coupon</p>
+				<div class="pos-center-align" style="text-align: center;">
+				
+						<t t-esc="date_o"/> <br/>
+						<t t-esc="widget.pos.company.name"/><br />
+						<div class="receipt-phone">
+								Phone: <t t-esc="widget.pos.company.phone || ''"/><br />
+						</div>
+						<div class="receipt-user">
+								User: <t t-esc="widget.pos.get_cashier().name"/><br />
+						</div>
+						<div class="receipt-user">
+								Email: <t t-esc="widget.pos.company.email || ''"/><br />
+						</div>
+						<br />
+				</div>
+
+				<img class="img img-responsive" src="/pos_orders_all/static/src/img/gift-card2.png" style="max-width:100%;"/>
+
+				<div class="coup_details" style="margin:16px auto">
+
+					<p><strong>Name : </strong><span t-esc="summery.coup_name"/></p>
+					
+					<p><strong>Issue date : </strong><span t-esc="summery.coup_issue_dt"/></p>
+					<t t-if="summery.coup_exp_dt">
+						<p><strong>Expiry date : </strong><span t-esc="summery.coup_exp_dt"/></p>
+					</t>
+					<p>
+						<strong>Amount : </strong>
+						<span t-esc="summery.coup_amount"/>
+						<t t-if="summery.am_type == 'per'">
+							<span style="margin-left:5px;">%</span>
+						</t>
+						<t t-if="summery.am_type == 'fix'">
+							<span style="margin-left:5px;">Fixed</span>
+						</t>
+					</p>
+					<span id="coup_barcode"/>
+					<p><strong>Coupon Number : </strong><span t-esc="summery.coup_code"/></p>
+				</div>
+			</div>
+		</div>
+	</t>
+
+	<!-- SelectExistingPopupWidget -->     
+	<t t-name="SelectExistingPopupWidget">
+		<div class="modal-dialog">
+			<div class="popup popup-textinput" style="height: 270px !important;">
+				<p class="title" style="background-color: rgb(110,200,155); color: #fff;">Apply Coupon/Gift Voucher Code</p>
+				<p class="body" style="color: #0075AC;height">Enter Your Coupon Code Here</p>
+				 <input id ="existing_coupon_code" style="margin:0px auto;" type="text" class="input-field" name="code"></input>
+				<div class="footer" style="background-color: rgb(110,200,155); color: #fff;">
+					<div class="button cancel" style="background-color: #0075AC; color: #fff;">
+						Cancel 
+					</div>
+					<div class="button confirm" id="apply_coupon_code" style="background-color: #0075AC; color: #fff;">
+						Apply 
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+	
+	
+	 <!-- Total Items in OrderWidget -->
+	<t t-extend="OrderWidget">
+		
+		<t t-jquery=".summary" t-operation="after">
+			<div class='item_count' style="padding-bottom: 10px; padding-left: 15px;padding-right: 15px;"><i><b style="font-weight: bold; color: #0075AC;font-size: 20px;">Total Items: <span class="val">0</span></b></i></div>
+		</t>
+	</t>
+	
+
+
+
+    <!-- Orderline WIdget -->
+	 
+	<t t-extend="Orderline">
+		<t t-jquery=".info-list" t-operation="replace">
+
+			<ul class="info-list">
+				<t t-if="line.get_quantity_str() !== '1' || line.selected ">
+					<li class="info">
+						<em>
+							<t t-esc="line.get_quantity_str()" />
+						</em>
+						<t t-esc="line.get_unit().name" />
+						at
+						<t t-esc="widget.format_currency(line.get_unit_display_price(),'Product Price')" />
+						/
+						<t t-esc="line.get_unit().name" />
+					</li>
+				</t>
+				<t t-if="line.get_discount_str() !== '0'">
+					
+					<t t-if="widget.pos.config.discount_type == 'percentage'">
+						<li class="info">
+							With a
+							<em>
+								<t t-esc="line.get_discount_str()" />%
+							</em>
+							discount
+						</li>
+					</t>
+					
+					<t t-if="widget.pos.config.discount_type == 'fixed'">
+						<li class="info">
+							With a
+							<em>
+								<t t-esc="widget.format_currency(line.get_discount_str())"/>
+							</em>
+							discount
+						</li>
+					</t>
+					
+				</t>
+			</ul>
+			
+		</t>
+	</t>
+	<!-- Add discount_type in PosTicket -->
+	<t t-extend="OrderReceipt">
+		<t t-jquery="t[t-if='line.discount !== 0']" t-operation="replace">
+			<t t-if='line.discount !== 0'>
+				<t t-if="widget.pos.config.discount_type == 'percentage'">
+					<div class="pos-receipt-left-padding">
+						Discount: <t t-esc='line.discount' />%
+					</div>
+				</t>
+				<t t-if="widget.pos.config.discount_type == 'fixed'">
+					<div class="pos-receipt-left-padding">
+						Discount: <t t-esc="widget.format_currency(line.discount)"/>
+					</div>
+				</t>
+			</t>
+		</t>
+		<t t-jquery="t[t-if='receipt.total_discount']" t-operation="replace">
+			<t t-if='receipt.total_discount'>
+				<div>
+					Discounts
+					<t t-if="widget.pos.config.discount_type == 'percentage'">
+						<span t-esc='widget.format_currency(receipt.total_discount)' class="pos-receipt-right-align"/>
+					</t>
+					<t t-if="widget.pos.config.discount_type == 'fixed'">
+						<span t-esc="widget.format_currency(order.get_fixed_discount())" class="pos-receipt-right-align"/>
+					</t>
+				</div>
+			</t>
+		</t>
+
+		<t t-jquery="t[t-if='taxincluded']" t-operation="after">
+			<br />
+			<div>
+				Total Items
+				<span t-esc="order.get_total_items()" class="pos-receipt-right-align"/>
+			</div>
+		</t>	 
+
+		<t t-jquery=".pos-receipt-order-data" t-operation="after">
+			<div style="margin:auto;margin-top:10px;" id="barcode_print"></div>
+		</t>
+  
+	</t>  	
+
+	<!-- Reprint POSTicket-->
+
+	<t t-name="OrderReceipt1">
+		<div class="pos-receipt">
+			<img class="pos-receipt-logo" t-att-src='widget.pos.company_logo_base64' alt="Logo"/>
+			<br/>
+			<div class="pos-receipt-contact">
+				<t t-if='widget.pos.company.contact_address'>
+					<div><t t-esc='widget.pos.company.contact_address' /></div>
+				</t>
+				<t t-if='widget.pos.company.phone'>
+					<div>Tel:<t t-esc='widget.pos.company.phone' /></div>
+				</t>
+				<t t-if='widget.pos.company.vat'>
+					<div>VAT:<t t-esc='widget.pos.company.vat' /></div>
+				</t>
+				<t t-if='widget.pos.company.email'>
+					<div><t t-esc='widget.pos.company.email' /></div>
+				</t>
+				<t t-if='widget.pos.company.website'>
+					<div><t t-esc='widget.pos.company.website' /></div>
+				</t>
+				<br/>
+				
+				<t t-if='widget.pos.get_cashier()'>
+					<div class='cashier'>
+						<div>--------------------------------</div>
+						<div>Served by <t t-esc='widget.pos.get_cashier().name' /></div>
+					</div>
+				</t>
+			</div>
+			<br /><br />
+			<div class='orderlines'>
+				<t t-foreach='orderlines' t-as='line'>
+					<t t-set='simple' t-value='(line.discount === 0 and line.qty === 1)' />
+					<div t-if='simple'>
+						<t t-esc="line.product_id"/>
+						<span t-esc='widget.format_currency_no_symbol(line.total_price)' class="price_display pos-receipt-right-align"/>
+					</div>
+					<t t-if='!simple'>
+						<div t-esc='line.product_id'/>
+						<t t-if='line.discount !== 0'>
+							<t t-if="widget.pos.config.discount_type == 'percentage'">
+								<div class="pos-receipt-left-padding">
+									Discount: <t t-esc='line.discount' />%
+								</div>
+							</t>
+							<t t-if="widget.pos.config.discount_type == 'fixed'">
+								<div class="pos-receipt-left-padding">
+									Discount: <t t-esc="widget.format_currency(line.discount)"/>
+								</div>
+							</t>
+						</t>
+						<div class="pos-receipt-left-padding">
+							<t t-esc="Math.round(line.qty)"/>
+							x
+							<t t-esc='widget.format_currency_no_symbol(line.total_price/line.qty)' />
+							<span class="price_display pos-receipt-right-align">
+								<t t-esc='widget.format_currency_no_symbol(line.total_price)'/>
+							</span>
+						</div>
+					</t>
+				</t>
+			</div>
+
+			<div class="pos-receipt-right-align">--------</div>
+			
+			<br/>
+			<div class="pos-receipt-amount">
+				TOTAL
+				<span t-esc='widget.format_currency(order.amount_total)' class="pos-receipt-right-align"/>
+			</div>
+			<br/><br/>
+			<t t-foreach='paymentlines' t-as='line'>
+				<div>
+					<t t-esc='line.name' />
+					<span t-esc='widget.format_currency_no_symbol(line.amount)' class="pos-receipt-right-align"/>
+				</div>
+			</t>
+			<br/>
+			<div class="pos-receipt-amount receipt-change">
+				CHANGE
+				<span t-esc='widget.format_currency(-change)' class="pos-receipt-right-align"/>
+			</div>
+			<br/>
+			<t t-if='discount_total'>
+				<div>
+					Discounts
+					<span t-esc='widget.format_currency(discount_total)' class="pos-receipt-right-align"/>
+				</div>
+			</t>
+			
+			<div>
+				Total Taxes
+				<span t-esc='widget.format_currency(tax)' class="pos-receipt-right-align"/>
+			</div>
+			<br />
+			<div class='before-footer' />
+			<br/>
+			<div class="pos-receipt-order-data">
+				<div><t t-esc='order.pos_reference' /></div>
+				<div><t t-esc='date_order' /></div>
+			</div>
+			<div>
+				<div style="margin:auto;margin-top:10px;" id="barcode_print1"></div>
+			</div>
+		</div>
+	</t>
+	
+	
+
+	<!-- SeeAllSaleOrdersScreenWidget -->
+
+	<t t-name="SeeAllSaleOrdersScreenWidget">
+		<div class="clientlist-screen screen">
+			<div class="screen-content">
+				<section class="top-content">
+					<span class='button back'>
+						<i class='fa fa-angle-double-left'></i>
+						Cancel
+					</span>
+					<span class='refresh-order button' style="margin-left: 230px;"  id='refresh'>
+						<i class='fa fa-refresh'></i>
+					</span>
+					<span class='searchbox search-order'>
+						<input placeholder='Search Orders' />
+						<span class='search-clear'></span>
+					</span>
+					<span class='searchbox'></span>
+					
+				</section>
+				<section class="full-content">
+					<div class='window touch-scrollable scrollable-y'>
+						<section class='subwindow collapsed'>
+							<div class='subwindow-container'>
+								<div class='subwindow-container-fix client-details-contents'>
+								</div>
+							</div>
+						</section>
+						<section class='subwindow'>
+							<div class='subwindow-container'>
+								<div class='subwindow-container-fix touch-scrollable scrollable-y'>
+									<table class='client-list'>
+										<thead>
+											<tr style="background-color: #7f82ac; color: #fff;">
+												<th>Order Number</th>
+												<th>Order Date</th>
+												<th>Customer</th>
+												<th>Saleperson</th>
+												<th>Subtotal</th>
+												<th>Total</th>
+												<th>Import Order </th>
+												
+											</tr>
+										</thead>
+										<tbody class='client-list-contents'>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+				
+			</div>
+		</div>
+	</t>
+	<!-- SaleOrdersLine -->
+	<t t-name="SaleOrdersLine">
+		<tr class='order-line-sale' t-att-data-id='order.id'>
+			<td class='orders-line-name' t-att-data-id='order.id' style="cursor: pointer;"><t t-esc='order.name' /></td>
+			<td class='orders-line-date' t-att-data-id='order.id' style="cursor: pointer;"><t t-esc='order.date_order' /></td>
+			<td class='orders-line-partner' t-att-data-id='order.id' style="cursor: pointer;"><t t-esc='order.partner_id[1] or ""' /></td>
+			<td class='orders-line-saleperson' t-att-data-id='order.id' style="cursor: pointer;"><t t-esc='order.user_id[1]' /></td>
+			<td class='orders-line-subtotal' t-att-data-id='order.id' style="cursor: pointer;"><t t-esc='order.amount_untaxed' /></td>
+			<td class='orders-line-tot' t-att-data-id='order.id' style="cursor: pointer;"><t t-esc='widget.format_currency(order.amount_total)' /></td>
+			<td t-att-data-id='order.id'>
+				<button class="sale-order" t-att-data-id='order.id' style="background-color: #7f82ac;cursor: pointer; color: #fff;font-size: 14px;"><i class="fa fa-refresh"></i> Import Order</button>
+			</td>
+		</tr>
+	</t>
+
+	<t t-name="SeeSaleOrderDetailsPopupWidget">
+		<div class="modal-dialog">
+		<div class='window touch-scrollable scrollable-y'>
+			<div class="popup popup-confirm" style="height: 450px; width:700px">
+				<p class="title" style="background-color: #7f82ac; color: #fff;height: 10px;">Order Details</p>
+
+				<div class="body" style="height: 300px;">
+					
+					
+					<t t-foreach="widget.options.order || []" t-as="item" t-att-id="item.id">
+						<table style='width:100%'>
+							<tr style='line-height:30px; font-size:15px'>
+								<td style='width:20%; text-align:left'><strong>Order Ref:</strong>
+								</td>
+								<td style='width:30%; text-align:left'>
+									<span t-esc="item['name']"/>
+								</td>
+								<td style='width:20%; text-align:left'><strong>Order Date:</strong>
+								</td>
+								<td style='width:30%; text-align:left'>    
+									<span t-esc="item['date_order']" />
+								</td>
+							</tr>
+							
+							<tr style='line-height:30px; font-size:15px'>
+								<td style='width:20%; text-align:left'><strong>Customer:</strong>
+								</td>
+								<td style='width:30%; text-align:left'>
+									<span t-esc="item['partner_id'][1]"/>
+								</td>
+								<td style='width:20%; text-align:left'><strong>Total Amount:</strong>
+								</td>
+								<td style='width:30%; text-align:left'>    
+									<span t-esc="item['amount_total']" />
+								</td>
+							</tr>
+							
+							<tr style='line-height:30px; font-size:15px'>
+								<td style='width:20%; text-align:left'><strong>Company:</strong>
+								</td>
+								<td style='width:30%; text-align:left'>
+									<span t-esc="item['company_id'][1]"/>
+								</td>
+								<td style='width:20%; text-align:left'><strong>Saleperson:</strong>
+								</td>
+								<td style='width:30%; text-align:left'>    
+									<span t-esc="item['user_id'][1]" />
+								</td>
+							</tr>
+						</table>
+					</t>
+					<br/>
+					<table style='width:100%'>
+						<thead>
+							<tr style="border:1px solid black; line-height:30px;">
+								<th style='width:25%; padding-left: 10px; text-align:left'>Product</th>
+								<th style='width:25%; padding-left: 10px; text-align:left'>Quantity</th>
+								<th style='width:25%; padding-left: 10px; text-align:left'>Price</th> 
+								<th style='width:25%; padding-left: 10px; text-align:left'>Subtotal</th> 
+							</tr>
+						</thead>
+						<tbody>
+							<tr style="border:1px solid black; line-height:30px; font-size:15px;" t-foreach="widget.options.orderline || []" t-as="line1">
+								<td style='width:25%; padding-left: 10px; text-align:left'><t t-esc='line1.product_id[1]' /></td>
+								<td style='width:25%; padding-left: 10px; text-align:left'><t t-esc='line1.product_uom_qty' /></td>
+								<td style='width:25%; padding-left: 10px; text-align:left'><t t-esc='line1.price_unit' /></td>
+								<td style='width:25%; padding-left: 10px; text-align:left'><t t-esc='line1.price_subtotal' /></td>
+							</tr>
+						</tbody>
+					</table>
+					
+				</div>
+
+				<div class="footer" style="background-color: #7f82ac; color: #fff;">
+
+					<div class="button cancel" style="background-color: #E0E0E0; color: black;">
+						Cancel
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</t>
+
+	<t t-name="SaleOrderPopupWidget">
+		<div class="modal-dialog">
+			<div class="popup popup-confirm" style="height: 350px !important;">
+				<p class="title" style="background-color: rgb(110,200,155); color: #fff;">Sale order Products</p>
+
+						<div class="body" style="height: 200px !important;">
+							<div class='div-container'>
+								<table class='reorder-product-list'>
+									<thead>
+										<tr class="reorder_product_header">
+											<th>Product</th>
+											<th>Order Qty</th>
+										</tr>
+									</thead>
+									<tbody class='reorder-product-list-contents'>
+										<tr class="reorder_product_body" t-foreach="widget.options.orderlines || []" t-as="item">
+											<td><t t-esc='item.product_id[1]' /></td>
+											<td class="entered_item_qty">
+												<input id ="entered_item_qty" t-att-line-id='item.id' t-att-qty-id='item.product_uom_qty' type="text" class="input-field" name="code"></input>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						 </div>
+
+				<div class="footer" style="background-color: rgb(110,200,155); color: #fff;">
+					<div class="button cancel" style="background-color: #0075AC; color: #fff;">
+						Cancel
+					</div>
+					<div class="button confirm" id="apply_saleorder" style="background-color: #0075AC; color: #fff;">
+						Apply
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+	
+		
+		  
+
+	</templates>
+
+
