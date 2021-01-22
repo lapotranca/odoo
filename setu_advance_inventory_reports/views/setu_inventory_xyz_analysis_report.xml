@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="setu_inventory_xyz_analysis_report_form" model="ir.ui.view">
+            <field name="name">setu.inventory.xyz.analysis.report.form</field>
+            <field name="model">setu.inventory.xyz.analysis.report</field>
+            <field name="arch" type="xml">
+                <form string="Inventory XYZ Analysis Report">
+                    <sheet string="Inventory XYZ Analysis">
+                        <group expand="0" string="Filters">
+                            <group expand="0" string="Choose stock value category">
+                                <field name="inventory_analysis_type" required="True" />
+                            </group>
+                            <group expand="0" string=""></group>
+                        </group>
+                        <group expand="0" >
+                            <group expand="0" string="Products &#038; Categories">
+                                <field name="product_category_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                                <field name="product_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                            </group>
+                            <group expand="0" string="Companies">
+                                <field name="company_ids" widget="many2many_tags"
+                                       domain="[('id', 'in', allowed_company_ids)]" options="{'no_create_edit': True}"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                    <footer>
+                        <button name="download_report" string="Excel Report" type="object"
+                                class="oe_highlight"/>
+                        <button name="download_report_in_listview" string="View Data" type="object"
+                                class="oe_highlight"/>
+                        <button name="download_report_in_listview" string="View Graph" type="object"
+                                class="oe_highlight" context="{'graph_report':True}"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_xyz_analysis_report_action" model="ir.actions.act_window">
+            <field name="name">Inventory XYZ Analysis</field>
+            <field name="res_model">setu.inventory.xyz.analysis.report</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="setu_xyz_analysis_report_menu" action="setu_xyz_analysis_report_action"
+                  parent="setu_advance_inventory_reports.setu_advance_inventory_reports_menu"
+                  sequence="13" />
+
+        <record id="setu_inventory_xyz_analysis_bi_report_tree" model="ir.ui.view">
+            <field name="name">setu.inventory.xyz.analysis.bi.report.tree</field>
+            <field name="model">setu.inventory.xyz.analysis.bi.report</field>
+            <field name="arch" type="xml">
+                <tree string="Inventory XYZ Analysis" create="false" >
+                    <field name="company_id" />
+                    <field name="product_id" />
+                    <field name="product_category_id" />
+                    <field name="current_stock" />
+                    <field name="stock_value" />
+                    <field name="stock_value_per" />
+                    <field name="cum_stock_value_per" />
+                    <field name="analysis_category" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="setu_inventory_xyz_analysis_bi_report_search" model="ir.ui.view">
+            <field name="name">setu.inventory.xyz.analysis.bi.report.search</field>
+            <field name="model">setu.inventory.xyz.analysis.bi.report</field>
+            <field name="arch" type="xml">
+                <search string="XYZ Analysis">
+                    <field name="company_id" />
+                    <field name="product_id" />
+                    <field name="product_category_id" />
+                    <field name="analysis_category"/>
+
+                    <separator/>
+                    <filter string="Classification X " name="x_analysis_category" domain="[('analysis_category', '=', 'X')]"/>
+                    <filter string="Classification Y" name="y_analysis_category" domain="[('analysis_category', '=', 'Y')]"/>
+                    <filter string="Classification Z" name="z_analysis_category" domain="[('analysis_category', '=', 'Z')]"/>
+                    <separator/>
+
+                    <filter string="XYZ Classification" context="{'group_by':'analysis_category'}" name="analysis_category_groupby"/>
+                    <filter string="Product" context="{'group_by':'product_id'}" name="product_id_groupby"/>
+                    <filter string="Product Category" context="{'group_by':'product_category_id'}" name="product_category_id_groupby"/>
+                    <filter string="Company" context="{'group_by':'company_id'}" name="company_id_groupby"/>
+                    <separator/>
+                </search>
+            </field>
+        </record>
+
+        <record id="setu_inventory_xyz_analysis_bi_report_graph" model="ir.ui.view">
+            <field name="name">setu.inventory.xyz.analysis.bi.report.graph</field>
+            <field name="model">setu.inventory.xyz.analysis.bi.report</field>
+            <field name="arch" type="xml">
+                <graph string="Inventory XYZ Analysis" type="bar" stacked="False">
+                    <field name="company_id" type="col"/>
+                    <field name="analysis_category" type="row"/>
+                    <field name="stock_value_per" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+    </data>
+</odoo>
