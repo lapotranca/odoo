@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_setu_inventory_turnover_analysis_report,setu.inventory.turnover.analysis.report,model_setu_inventory_turnover_analysis_report,,1,1,1,1
+access_setu_inventory_turnover_analysis_bi_report,setu.inventory.turnover.analysis.bi.report,model_setu_inventory_turnover_analysis_bi_report,,1,1,1,1
+access_setu_inventory_fsn_analysis_report,setu.inventory.fsn.analysis.report,model_setu_inventory_fsn_analysis_report,,1,1,1,1
+access_setu_inventory_fsn_analysis_bi_report,setu.inventory.fsn.analysis.bi.report,model_setu_inventory_fsn_analysis_bi_report,,1,1,1,1
+access_setu_inventory_xyz_analysis_report,setu.inventory.xyz.analysis.report,model_setu_inventory_xyz_analysis_report,,1,1,1,1
+access_setu_inventory_xyz_analysis_bi_report,setu.inventory.xyz.analysis.bi.report,model_setu_inventory_xyz_analysis_bi_report,,1,1,1,1
+access_setu_inventory_fsn_xyz_analysis_report,setu.inventory.fsn.xyz.analysis.report,model_setu_inventory_fsn_xyz_analysis_report,,1,1,1,1
+access_setu_inventory_fsn_xyz_analysis_bi_report,setu.inventory.fsn.xyz.analysis.bi.report,model_setu_inventory_fsn_xyz_analysis_bi_report,,1,1,1,1
+access_setu_inventory_overstock_report,setu.inventory.overstock.report,model_setu_inventory_overstock_report,,1,1,1,1
+access_setu_inventory_overstock_bi_report,setu.inventory.overstock.bi.report,model_setu_inventory_overstock_bi_report,,1,1,1,1
+access_setu_stock_movement_report,setu.stock.movement.report,model_setu_stock_movement_report,,1,1,1,1
+access_setu_inventory_outofstock_report,setu.inventory.outofstock.report,model_setu_inventory_outofstock_report,,1,1,1,1
+access_setu_inventory_outofstock_bi_report,setu.inventory.outofstock.bi.report,model_setu_inventory_outofstock_bi_report,,1,1,1,1
+access_setu_inventory_age_report,setu.inventory.age.report,model_setu_inventory_age_report,,1,1,1,1
+access_setu_inventory_age_bi_report,setu.inventory.age.bi.report,model_setu_inventory_age_bi_report,,1,1,1,1
+access_setu_inventory_age_breakdown_report,setu.inventory.age.breakdown.report,model_setu_inventory_age_breakdown_report,,1,1,1,1

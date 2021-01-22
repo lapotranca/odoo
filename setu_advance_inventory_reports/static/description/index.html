@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Odoo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://www.setuconsulting.com/css/fonts.css" rel="stylesheet">
+    <link href="https://www.setuconsulting.com/css/plugins.css" rel="stylesheet">
+    <!-- <link href="https://www.setuconsulting.com/css/style.css" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+</head>
+<!-- odoo description page css -->
+<style>
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6 {
+        font-weight: 400;
+        line-height: 1.1;
+        color: #21272b;
+    }
+    
+    ul {
+        color: #222020;
+    }
+</style>
+
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="row justify-content-md-between justify-content-center border-bottom align-items-center py-2 mx-0">
+        <div id="logo">
+            <img src="images/odoo_images/setu.png" width="150px" class="logo-default" data-toggle="tooltip" data-placement="right" title="Setu Consulting" alt="Setu Consulting">
+        </div>
+        <!-- <div class="ml-sm-center">
+            <a href="#" target="_blank" class="btn btn-success mx-2 pr-sm-4 mb-2 mb-lg-0" style="text-transform: uppercase; font-size: 14px;"><i class="fa fa-user mr-sm-2" style="font-size: 20px;vertical-align: middle;"></i> <span class="d-none d-sm-inline">Live Preview</span></a>
+        </div> -->
+        <div class="mt-md-0 mt-3 mr-3">
+            <a class="btn btn-outline-info btn-sm mb-2 mb-lg-0" style="font-size: 13px;border-radius: 4px !important;position: relative;overflow: hidden;color: #585e64;padding: 10px 4px;line-height: 0px;"><i class="fa fa-check"></i> Username : demo@setuconsulting.com </a>
+            <a class="btn btn-outline-info btn-sm mb-2 mb-lg-0" style="font-size: 13px;border-radius: 4px !important;position: relative;overflow: hidden;color: #585e64;padding: 10px 4px;line-height: 0px;"><i class="fa fa-check"></i> Password  : demo</a>
+            <!--             <a class="btn btn-outline-success btn-sm mb-2 mb-lg-0" style="font-size: 13px;border-radius: 4px !important;position: relative;overflow: hidden;color: #585e64;padding: 10px 4px;line-height: 0px;"><i class="fa fa-check"></i> Odoo.sh</a>-->
+        </div>
+        <div class="text-center">
+            <a href="mailto:info@setuconsulting.com?subject=Advance Inventory Reports - Demo Request" target="_blank" class="btn btn-primary mx-2 pr-sm-4 mb-2 mb-lg-0" style="text-transform: uppercase; font-size: 14px;"><i class="fa fa-envelope-square mr-sm-2" style="font-size: 20px;vertical-align: middle;"></i> <span class="d-none d-sm-inline">Request a demo</span></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="text-center py-4">
+                <h1><span style="color: #0000FF;">Advance Inventory Analysis Reports</span></h1>
+            </div>
+            <!-- <h1 class="text-center">Advance Inventory Reports</h1> -->
+            <p class="text-justify text-muted" data-animate="fadeIn" data-animate-delay="400"><!-- <span class="dropcap dropcap-colored"> B </span> --> 
+                <font size="4">In any industry today inventory optimization is a vital function. Inventory excess or shortage at any level of the supply chain can affect the availability of products and/or services to consumers. It is critical to check inventory imbalance between supply and demand dynamics.<br><br>
+                We have developed inventory reports to help you to manage your inventory properly. With our inventory reports, users can track Turnover ratio, FSN classification (inventory movement frequency classification), XYZ classification (inventory classification based on stock value), FSN-XYZ combined classification to define sales strategies for the existing inventories. Overstock analysis, Out of Stock analysis and Stock movements (inventory rotation).</font>
+            </p><br>
+            <h2 class="text-left">Key Features</h2><br>
+            <div class="row">
+                <div class="col-md-6 text-muted" style="height: 200px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <!-- <div class="icon-holder"><i class="fa fa-arrow-right"></i></div> -->
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600">Inventory Turnover Analysis Report</div></li>
+                    <li class="list-group-item p-b-20 text-justify" style="height: 140px;">Inventory turnover is a ratio showing how many times a company has sold and replaced inventory during a given period.  Calculating inventory turnover can help businesses make better decisions.</li></font>
+                </div>
+                <div class="col-md-6 text-muted" style="height: 200px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <!-- <div class="icon-holder"><i class="fa fa-arrow-circle-right"></i></div> -->
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600">Inventory FSN Analysis Report</div></li>
+                    <li class="list-group-item p-b-20 text-justify" style="height: 140px;">Helps users identify products movement frequency based on FSN classification. Classify all inventory movements into three categories: Fast moving, Slow moving, Non moving.</li></font>
+                </div>
+                <div class="col-md-6 text-muted" style="height: 170px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <!-- <div class="icon-holder"><i class="fa fa-arrow-circle-right"></i></div> -->
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600">Inventory XYZ Analysis Report</div></li>
+                    <li class="list-group-item p-b-20 text-justify" style="height: 120px;">Helps classify inventory items according to variability of their demand based on stock value and helps minimize the inventory carrying cost.</li></font>
+                </div>
+                <div class="col-md-6 text-muted" style="height: 180px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <!-- <div class="icon-holder"><i class="fa fa-arrow-circle-right"></i></div> -->
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600">Inventory FSN-XYZ Combine Analysis Report</div></li>
+                    <li class="list-group-item p-b-20 text-justify" style="height: 120px;">This two dimensional combined FSN and XYZ classification scheme helps in planning the sales strategies to dispose of blocked inventories by selling them off.</li></font>
+                </div>
+                <div class="col-md-6 text-muted" style="height: 220px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <!-- <div class="icon-holder"><i class="fa fa-arrow-circle-right"></i></div> -->
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600">Inventory Age & Age Breakdown Analysis Report</div></li>
+                    <li class="list-group-item p-b-20 text-justify" style="height: 160px;">Inventory ageing reports tell you the number of days an item has been sitting in inventory based on the receipt date. Having access to this kind of information allows you to make informed decisions when it comes to what and how many products to purchase.</li></font>
+                </div>
+                <div class="col-md-6 text-muted" style="height: 220px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <!-- <div class="icon-holder"><i class="fa fa-arrow-circle-right"></i></div> -->
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600">Inventory Out of Stock Report</div></li>
+                    <li class="list-group-item p-b-60 text-justify" style="height: 160px;">Tracks any product that will be out of stock in the next upcoming days based on the product inventory movement frequency. It helps identify how many days of available inventory you have to fulfill sales demand.</li></font>
+                </div>
+                <div class="col-md-6 text-muted" style="height: 200px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <!-- <div class="icon-holder"><i class="fa fa-arrow-circle-right"></i></div> -->
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600">Inventory Overstock Report</div></li>
+                    <li class="list-group-item p-b-40 text-justify" style="height: 140px;">Helps eliminate the ordering of overstocked products which can lead to excess carrying inventory costs and potential major losses. Also helps categorize existing products in XYZ classification and FSN classification.</li></font>
+                </div>
+                <div class="col-md-6 text-muted" style="height: 200px">
+                    <font size="4">
+                    <li class="list-group-item list-group-item-primary">
+                    <!-- <div class="icon-holder"><i class="fa fa-arrow-circle-right"></i></div> -->
+                    <div class="icon-class m-l-10" data-animate="bounceIn" data-animate-delay="600">Inventory Stock Movement Report</div></li>
+                    <li class="list-group-item p-b-20 text-justify" style="height: 140px;">Provides the ability to track all inventory movements for all warehouses and for all companies. Users can track inventory movements between specific dates or up to a certain date.</li></font>
+                </div>
+            </div>
+        </div>
+        <div class="line"></div>
+    </div>
+
+    <div class="suggested-app">
+        <div class="text-center">
+            <h2 class="pt-4 display-4" style="font-size: 2.6rem; ">
+            <span style="color: #0000FF;">Advance Inventory Analysis Reports</span></h2>
+        </div>
+        <div class="row pt-4 px-3">
+            <div class="w-100">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs mb-4 justify-content-center bg-transparent">
+                    <li class="nav-item ml-4">
+                        <a class="nav-link active" style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;color: #C70039 ;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#pills-turnover">Turnover Analysis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;color: #C70039 ;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#pills-fsn">FSN Analysis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;color: #C70039 ;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#pills-xyz">XYZ Analysis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;color: #C70039 ;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#pills-fsnxyz">FSN-XYZ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;color: #C70039 ;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#pills-ageing">Inventory Ageing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;color: #C70039 ;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#pills-outofstock">Out of stock</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;color: #C70039 ;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#pills-overstock">Overstock</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;color: #C70039 ;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#pills-stockrotation">Stock Rotation</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+
+                    <!-- Turnover Analysis Tab Start -->
+                    <div class="tab-pane fade show active" id="pills-turnover">
+                        <div class="card p-4 p-lg-5 mb-4 border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                            <div class="row">
+                                <div class="col-12 col-lg-12">
+                                    <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                    <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                        <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                            <!-- Title start-->
+                                            <div class="text-center" style="width:100%">
+                                                <h1 style="font-family: San Francisco;">Inventory Turnover Analysis Report
+                                                </h1>
+                                            </div>
+                                             <p class="px-sm-4 p-2 text-left" style="color: black;font-size: 18px;">
+                                                    <br/>
+                                                  Inventory turnover is a ratio showing how many times a company has sold and replaced inventory during a given period.  Calculating inventory turnover can help businesses make better purchasing decisions.
+                                             </p>
+                                             <!-- Title over -->
+
+                                             <!-- Importance of turnover analysis start -->
+                                             <div class="text-center" style="width:100%">
+                                                <h3 style="font-family: San Francisco;">Importance of Turnover Analysis
+                                                </h3>
+                                            </div>
+                                             <font size="4">
+                                                <li class="list-group-item list-group-item-success">
+                                                <div class="icon-class m-l-10">Turning inventory into Cash</div></li>
+                                                <li class="list-group-item p-b-20 text-justify" style="height: 120px;">Inventory ties up critical cash that could be otherwise used to generate profits.  It is critical for a company to analyze inventory turnover by product and determine how to move the inventory faster.</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="list-group-item list-group-item-success">
+                                                <div class="icon-class m-l-10">Identify demand uncertainty</div></li>
+                                                <li class="list-group-item p-b-20 text-justify" style="height: 120px;">Changes in demand drastically affect the ability of a company to make money.  If demand drastically decreases, cash will be tied up in unnecessary inventory and warehouse efficiencies will be negatively affected; if demand increases, the lack of inventory will prevent the company to generate additional profits.  It is critical for a company to manage demand uncertainty to maximize inventory utilization and maximize profits.</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="list-group-item list-group-item-success">
+                                                <div class="icon-class m-l-10">Identify risk of holding inventory</div></li>
+                                                <li class="list-group-item p-b-20 text-justify" style="height: 120px;">Based on the inventory turnover ratio, users can identify whether the money is invested in the right products or not. To monitor and manage risk turnover ratio analysis is critical.</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="list-group-item list-group-item-success">
+                                                <div class="icon-class m-l-10">Prevent overstocking</div></li>
+                                                <li class="list-group-item p-b-20 text-justify" style="height: 120px;">Overstocking is a nightmare for any business.  Cash must be put to work where it can generate the most profit and excessive inventory kills the ability to use the cash anywhere else in the business.  Preventing overstock situation is critical to business health.</li>
+                                            </font><br><br>
+                                            <!-- Importance of turnover analysis over -->
+
+                                            <!-- Advantage of Turnover Analysis start -->
+                                             <div class="text-center" style="width:100%">
+                                                <h3 style="font-family: San Francisco;">Advantage of Turnover Analysis
+                                                </h3>
+                                            </div><br>
+                                             <font size="4">
+                                                <li class="list-group-item list-group-item-success">
+                                                <div class="icon-class m-l-10">Price stability</div></li>
+                                                <li class="list-group-item p-b-20 text-justify" style="height: 90px;">Turning over inventory quickly helps you maintain price stability.</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="list-group-item list-group-item-success">
+                                                <div class="icon-class m-l-10">Fresh products</div></li>
+                                                <li class="list-group-item p-b-20 text-justify" style="height: 90px;">
+                                                    By selling efficiently, you can keep fresh new products coming in and regularly rotate items in different display areas to get the attention of regular customers.
+                                                </li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="list-group-item list-group-item-success">
+                                                <div class="icon-class m-l-10">Buying power</div></li>
+                                                <li class="list-group-item p-b-20 text-justify" style="height: 90px;">If you consistently sell products in high volumes, you can order more on each purchase and get better rates. This improves your inventory costs.</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="list-group-item list-group-item-success">
+                                                <div class="icon-class m-l-10">Less waste</div></li>
+                                                <li class="list-group-item p-b-20 text-justify" style="height: 90px;">High turnover also helps you protect against waste from perishable or expired items.</li>
+                                            </font><br><br>
+                                            <!-- Advantage of Turnover Analysis over -->
+
+                                            <!-- Screenshots start -->
+                                            <div class="row pb-sm-5">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">Screenshots
+                                                    </h3>
+                                                </div>
+                                                <div id="demo" class="carousel slide pb-5 col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <!-- The slideshow -->
+                                                    <div class="carousel-inner pt-4 pt-lg-5" >
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/turnover/wizard.jpg" alt="" width="1000" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/turnover/dataview.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/turnover/groupby.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/turnover/piechart.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/turnover/barchart.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/turnover/excelReport.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Screenshots over -->
+
+                                                    <!-- Left and right controls -->
+                                                    <a class="carousel-control-prev" href="#demo" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-angle-left" style="font-size: 5vw;color: #333;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#demo" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-angle-right" style="font-size: 5vw;color: #333;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Turnover Analysis Tab over -->
+
+                    <!-- FSN Analysis Tab Start -->
+                    <div class="tab-pane fade" id="pills-fsn">
+                        <div class="card p-4 p-lg-5 mb-4 border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                            <div class="row">
+                                <div class="col-12 col-lg-12">
+                                    <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                        <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                            <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                                <!-- Title start-->
+                                            <div class="text-center" style="width:100%">
+                                                <h1 style="font-family: San Francisco;">Inventory FSN Analysis Report
+                                                </h1>
+                                            </div>
+                                             <p class="px-sm-4 p-2 text-left" style="color: black;font-size: 18px;">
+                                                    <br/>
+                                                  FSN stands for fast-moving, slow-moving and non-moving items. It looks at quantity, consumption rate and how often the item is issued and used. It helps in arrangement of stocks in stores and their distribution and handling methods. The main aim of this analysis is to control obsolescence of the inventories. If there is a rapid change in technology then this classification will have to be updated more often.
+                                                <br> <br>
+                                                  FSN analysis is stock turnover ratio based analysis. Stock turnover ratio is defined as the ratio of annual consumption of a material divided by its average inventory.  The items can be classified into three categories:
+                                                    <font size="4">
+                                                        <li class="mb-4">
+                                                        <img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Fast moving (F): items with a stock turnover ratio  greater than 3.</li>
+                                                    </font>
+                                                    <font size="4">
+                                                        <li class="mb-4"><img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Slow moving (S): items with a stock turnover ratio between 1 and 3.</li>
+                                                    </font>
+                                                    <font size="4">
+                                                        <li class="mb-4"><img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Non moving (N): items with a stock turnover ratio below 1.</li>
+                                                    </font>
+                                             </p><br><br>
+                                             <!-- Title over -->
+
+                                             <!-- Advantage of FSN Analysis start -->
+                                             <div class="text-center" style="width:100%">
+                                                <h3 style="font-family: San Francisco;">Advantages of FSN Analysis
+                                                </h3>
+                                            </div><br>
+                                             <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">FSN Classification helps identify dead stock, fast moving inventories.</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">FSN analysis shows the items that are active in your inventory.</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">FSN analysis helps you make smarter buying decisions with suppliers and keep inventory relevant to demand</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">The non-moving items are surplus to requirements and could be taking up precious real estate in the warehouse</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Separate reporting by warehouse</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">User can filter by companies, categories, warehouses and products</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Reports can be downloaded in excel formats</li>
+                                            </font> 
+                                            <br><br>
+                                            <!-- Advantage of FSN Analysis over -->
+
+                                            <!-- Screenshots start -->
+                                            <div class="row pb-sm-5">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">Screenshots
+                                                    </h3>
+                                                </div>
+                                                <div id="demo1" class="carousel slide pb-5 col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <!-- The slideshow -->
+                                                    <div class="carousel-inner pt-4 pt-lg-5" >
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/FSN/wizard.jpg" alt="" width="1000" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/FSN/dataview.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/FSN/groupby.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/FSN/piechart.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/FSN/barchart.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/FSN/excelReport.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Screenshots over -->
+
+                                                    <!-- Left and right controls -->
+                                                    <a class="carousel-control-prev" href="#demo1" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-angle-left" style="font-size: 5vw;color: #333;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#demo1" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-angle-right" style="font-size: 5vw;color: #333;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FSN Analysis Tab Over -->
+
+                    <!-- XYZ Analysis Tab Start -->
+                    <div class="tab-pane fade" id="pills-xyz">
+                        <div class="card p-4 p-lg-5 mb-4 border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                            <div class="row">
+                                <div class="col-12 col-lg-12">
+                                    <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                        <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                            <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                                <!-- Title start-->
+                                            <div class="text-center" style="width:100%">
+                                                <h1 style="font-family: San Francisco;">Inventory XYZ Analysis Report
+                                                </h1>
+                                            </div>
+                                             <p class="px-sm-4 p-2 text-left" style="color: black;font-size: 18px;">
+                                                    <br/>
+                                                  XYZ Analysis is always done for the current Stock in Inventory and aims at classifying the items into three classes based on their Inventory values. 
+                                                  The current value of the items / variants in the Inventory alone is taken into consideration for the Analysis and it is not possible to do this analysis for any other dates.
+                                                    <font size="4">
+                                                        <li class="mb-4"><img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">First 70% of the total Inventory value corresponds to X Class</li>
+                                                    </font>
+                                                    <font size="4">
+                                                        <li class="mb-4"><img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Next 20% of the total Inventory value corresponds to Y Class</li>
+                                                    </font>
+                                                    <font size="4">
+                                                        <li class="mb-4"><img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Last 10% of the total Inventory value corresponds to  Z Class.</li>
+                                                    </font>
+                                             </p><br><br>
+                                             <!-- Title over -->
+
+                                             <!-- Advantage of XYZ Analysis start -->
+                                             <div class="text-center" style="width:100%">
+                                                <h3 style="font-family: San Francisco;">Advantage of XYZ Analysis
+                                                </h3>
+                                            </div><br>
+                                             <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Helps identify inventories investment status.</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Helps determine if certain inventories require a strategic sales plan.</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Helps evaluate how each inventory item should be monitored and controlled.
+                                                        <li class="mb-4 ml-4"><img src="images/correct.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Some inventories are critically important and require close monitoring and tight control.</li>
+                                                        <li class="mb-4 ml-4"><img src="images/correct.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Some inventories are of lower criticality requiring standard controls and periodic reviews of usage.</li>
+                                                        <li class="mb-4 ml-4"><img src="images/correct.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Some inventories require the least amount of control and are sometimes issued as “free stock” or forward holding.</li>
+                                                </li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Reporting for each Company</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">User can filter by companies, categories and products</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Report can be downloaded in excel format</li>
+                                            </font> 
+                                            <br><br>
+                                            <!-- Advantage of XYZ Analysis over -->
+
+                                            <!-- Screenshots start -->
+                                            <div class="row pb-sm-5">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">Screenshots
+                                                    </h3>
+                                                </div>
+                                                <div id="demo2" class="carousel slide pb-5 col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <!-- The slideshow -->
+                                                    <div class="carousel-inner pt-4 pt-lg-5" >
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/XYZ/wizard.jpg" alt="" width="1000" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/XYZ/dataview.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/XYZ/groupby.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/XYZ/piechart.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/XYZ/barchart.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/XYZ/excelReport.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Screenshots over -->
+
+                                                    <!-- Left and right controls -->
+                                                    <a class="carousel-control-prev" href="#demo2" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-angle-left" style="font-size: 5vw;color: #333;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#demo2" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-angle-right" style="font-size: 5vw;color: #333;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- XYZ Analysis Tab Over -->
+
+                    <!-- FSN-XYZ Analysis Tab Start -->
+                    <div class="tab-pane fade" id="pills-fsnxyz">
+                        <div class="card p-4 p-lg-5 mb-4 border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                            <div class="row">
+                                <div class="col-12 col-lg-12">
+                                    <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                        <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                            <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                                <!-- Title start-->
+                                            <div class="text-center" style="width:100%">
+                                                <h1 style="font-family: San Francisco;">Inventory FSN-XYZ Combined Analysis Report
+                                                </h1>
+                                            </div>
+                                             <p class="px-sm-4 p-2 text-left" style="color: black;font-size: 18px;">
+                                                    <br/>
+                                                    In any industry, not all items are required with the same frequency. Some materials are needed regularly, other items are needed occasionally and some other items may have become obsolete and might not have been demanded for years.<br><br>
+                                                    The XYZ analysis when combined with FSN analysis helps formulate more specific strategies. It provides more focused direction on the disposal of specific stock and therefore improve the company’s capital position.
+                                                    <br><br>
+                                                    A closing stock theory applied to a combination of XYZ with FSN indicates: if a non-moving (N) item is found in X category (i.e. NX category), the decision is to dispose of the N items by selling them off. It will free up space and increase capital.
+                                             </p>
+                                             <!-- Title over -->
+
+                                             <!-- Advantage of FSN-XYZ Analysis start -->
+                                             <div class="text-center" style="width:100%">
+                                                <h3 style="font-family: San Francisco;">Advantage of FSN-XYZ Combined Analysis
+                                                </h3>
+                                            </div>
+                                             <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">XYZ analysis when combined with FSN analysis helps formulate more specific s0trategies</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">FSN-XYZ combined analysis helps identify dead stock or dead investment</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">FSN-XYZ combined analysis clarifies service levels for items with volatile demand</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Helps reduce stock obsolescence</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Helps improve accuracy of forecasting</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Reduces stock-outs, which:
+                                                        <li class="mb-4 ml-4"><img src="images/correct.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Improves production stability and efficiency</li>
+                                                        <li class="mb-4 ml-4"><img src="images/correct.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Improves customer satisfaction</li>
+                                                </li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Separate reporting by company</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">User can filter by companies, categories and products</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Report can be downloaded in excel format</li>
+                                            </font> 
+                                            <br><br>
+                                            <!-- Advantage of FSN-XYZ Analysis over -->
+
+                                            <!-- Screenshots start -->
+                                            <div class="row pb-sm-5">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">Screenshots
+                                                    </h3>
+                                                </div>
+                                                <div id="demo3" class="carousel slide pb-5 col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <!-- The slideshow -->
+                                                    <div class="carousel-inner pt-4 pt-lg-5" >
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/FSN-XYZ/wizard.jpeg" alt="" width="1000" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/FSN-XYZ/dataview.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/FSN-XYZ/groupby.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/FSN-XYZ/piechart.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/FSN-XYZ/barchart.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/FSN-XYZ/excelReport.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Screenshots over -->
+
+                                                    <!-- Left and right controls -->
+                                                    <a class="carousel-control-prev" href="#demo3" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-angle-left" style="font-size: 5vw;color: #333;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#demo3" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-angle-right" style="font-size: 5vw;color: #333;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FSN-XYZ Analysis Tab Over -->
+                    
+
+                    <!-- Inventory Age & Age Breakdown Analysis Tab Start -->
+                    <div class="tab-pane fade" id="pills-ageing">
+                        <div class="card p-4 p-lg-5 mb-4 border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                            <div class="row">
+                                <div class="col-12 col-lg-12">
+                                    <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                        <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                            <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                                <!-- Title start-->
+                                            <div class="text-center" style="width:100%">
+                                                <h1 style="font-family: San Francisco;">Inventory Age & Age Breakdown Analysis Report
+                                                </h1>
+                                            </div>
+                                             <p class="px-sm-4 p-2 text-left" style="color: black;font-size: 18px;">
+                                                    <br/>
+                                                    Inventory ageing reports tell you the number of days an item has been sitting in inventory based on the receipt date. Having access to this kind of information allows you to make informed decisions when it comes to what and how many products to purchase. <br><br>
+                                                    It is critical to identify the stock level and stock age in order to improve purchasing decisions and developing sales strategies. An inventory ageing report is a list of the items on hand grouped by the length of time in inventory. It is used to identify slow moving inventory and understand the additional costs to store/maintain these products until they are sold.
+                                             </p>
+                                             <!-- Title over -->
+
+                                             <!-- Advantage of Age & Age Breakdown Analysis start -->
+                                             <div class="text-center" style="width:100%">
+                                                <h3 style="font-family: San Francisco;">Advantages of Age & Age Breakdown Analysis
+                                                </h3>
+                                            </div>
+                                             <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Allows you to focus your attention on the slowest moving items</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Improves decision making on the timing and quantity of inventory purchases or production</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Helps improve the costs incurred during storage to maintain the quality of the goods .</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Understand how long your products spend in inventory and compare performance against industry benchmarks</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">How the inventory control system compares to either their own company or competitors</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Stock age can be analyzed in graphical form (Charts)</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Stock age data is available in list view to give grouping and searching flexibility</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Separate report by company</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Companies wise separate reporting</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">User can filter by companies, categories & products</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Report can be downloaded in excel format</li>
+                                            </font> 
+                                            <br><br>
+                                            <!-- Advantage of Age & Age Breakdown Analysis over -->
+
+                                            <!-- Screenshots start -->
+                                            <div class="row pb-sm-5">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">Screenshots
+                                                    </h3>
+                                                </div>
+                                                <div id="demo4" class="carousel slide pb-5 col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <!-- The slideshow -->
+                                                    <div class="carousel-inner pt-4 pt-lg-5" >
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/AgeBreakdown/ageWizard.jpg" alt="" width="1000" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/AgeBreakdown/dataview.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/AgeBreakdown/groupby.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/AgeBreakdown/piechart.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/AgeBreakdown/ageExcelReport.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/AgeBreakdown/ageBreakdownWizard.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/AgeBreakdown/ageBreakdownExcelReport.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!-- Screenshots over -->
+
+                                                    <!-- Left and right controls -->
+                                                    <a class="carousel-control-prev" href="#demo4" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-angle-left" style="font-size: 5vw;color: #333;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#demo4" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-angle-right" style="font-size: 5vw;color: #333;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Inventory Age & Age Breakdown Analysis Tab Over -->
+
+                    <!-- Out Of Stock Analysis Tab Start -->
+                    <div class="tab-pane fade" id="pills-outofstock">
+                        <div class="card p-4 p-lg-5 mb-4 border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                            <div class="row">
+                                <div class="col-12 col-lg-12">
+                                    <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                        <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                            <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                                <!-- Title start-->
+                                            <div class="text-center" style="width:100%">
+                                                <h1 style="font-family: San Francisco;">Inventory Out Of Stock Analysis Report
+                                                </h1>
+                                            </div>
+                                             <p class="px-sm-4 p-2 text-left" style="color: black;font-size: 18px;">
+                                                    <br/>
+                                                  Stockouts almost always make it to the “worst nightmare” lists of retailers, and for good reason. Not only do they lead to lost sales, they also result in reduced customer satisfaction and lower loyalty levels.
+                                                <br> <br>
+                                                  To overcome Out of Stock issues, this report will help you analyze the number of products that will be out of stock and the quantities you need to have in stock.<br><br>
+                                                  This report also helps you identify FSN classification for out of stock products which helps you determine if keeping the stock will be in benefits to you or not.
+                                             </p>
+                                             <!-- Title over -->
+
+                                             <!-- Advantage of OutOfStock Analysis start -->
+                                             <div class="text-center" style="width:100%">
+                                                <h3 style="font-family: San Francisco;">Advantages of Out Of Stock Analysis
+                                                </h3>
+                                            </div>
+                                             <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Helps measure inventory coverage days</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Helps improve the reordering process</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Helps identify future sales figure for which there are no stock</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Helps identify required cash flow to restock out of stock products</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Helps identify which products are necessary to restock from the FSN classification</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Helps identify which products should be restocked using FSN classification</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Helps forecast your inventory properly</li>
+                                            </font> 
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Separate report by Warehouse</li>
+                                            </font> 
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">User can filter by companies, categories, warehouses & products</li>
+                                            </font> 
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Report can be downloaded in EXCEL format</li>
+                                            </font> <br><br>
+                                            <!-- Advantage of OutOfStock Analysis over -->
+
+                                            <!-- Screenshots start -->
+                                            <div class="row pb-sm-5">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">Screenshots
+                                                    </h3>
+                                                </div>
+                                                <div id="demo5" class="carousel slide pb-5 col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <!-- The slideshow -->
+                                                    <div class="carousel-inner pt-4 pt-lg-5" >
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/OutOfStock/wizard.jpg" alt="" width="1000" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/OutOfStock/dataview.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/OutOfStock/columnOption.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/OutOfStock/groupby.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/OutOfStock/piechart.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/OutOfStock/barchart.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/OutOfStock/excelReport.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Screenshots over -->
+
+                                                    <!-- Left and right controls -->
+                                                    <a class="carousel-control-prev" href="#demo5" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-angle-left" style="font-size: 5vw;color: #333;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#demo5" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-angle-right" style="font-size: 5vw;color: #333;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Out Of Stock Analysis Tab Over -->
+
+                    <!-- Overstock Analysis Tab Start -->
+                    <div class="tab-pane fade" id="pills-overstock">
+                        <div class="card p-4 p-lg-5 mb-4 border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                            <div class="row">
+                                <div class="col-12 col-lg-12">
+                                    <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                        <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                            <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                                <!-- Title start-->
+                                            <div class="text-center" style="width:100%">
+                                                <h1 style="font-family: San Francisco;">Inventory Overstock Analysis Report
+                                                </h1>
+                                            </div>
+                                             <p class="px-sm-4 p-2 text-left" style="color: black;font-size: 18px;">
+                                                    <br/>
+                                                  Excess inventory is another nightmare for businesses; it locks cash and  can lead to major losses. Excess inventories for items that are not active can ruin successful businesses.
+                                                <br> <br>
+                                                  This report helps you stop ordering too much inventory which can lead to major losses. It also helps categorize existing inventories in XYZ classification and FSN classification.
+                                             </p>
+                                             <!-- Title over -->
+
+                                             <!-- Advantage of Overstock Analysis start -->
+                                             <div class="text-center" style="width:100%">
+                                                <h3 style="font-family: San Francisco;">Advantages of Inventory Overstock Analysis
+                                                </h3>
+                                            </div>
+                                             <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Combined FSN-XYZ with overstock report helps identify dead investment</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Excess inventory report helps determine stock forecasting accuracy</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">It gives you product specific inventory value and the percentage of the total inventory value</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">The excess inventory report helps identify inventories which need close monitoring and tight control</li>
+                                            </font>
+                                             <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">It helps improve reordering planning</li>
+                                            </font>
+
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Separate report by Warehouse</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">User can filter by companies, categories, warehouses & products</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Report can be downloaded in EXCEL format</li>
+                                            </font> 
+                                            <br><br>
+                                            <!-- Advantage of Overstock Analysis over -->
+
+                                            <!-- Screenshots start -->
+                                            <div class="row pb-sm-5">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">Screenshots
+                                                    </h3>
+                                                </div>
+                                                <div id="demo6" class="carousel slide pb-5 col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <!-- The slideshow -->
+                                                    <div class="carousel-inner pt-4 pt-lg-5" >
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/Overstock/wizard.jpg" alt="" width="1000" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/Overstock/dataview.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-Overstock4 no-gutters">
+                                                                <img src="images/Overstock/groupby.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/Overstock/piechart.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/Overstock/barchart.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/Overstock/excelReport.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Screenshots over -->
+
+                                                    <!-- Left and right controls -->
+                                                    <a class="carousel-control-prev" href="#demo6" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-angle-left" style="font-size: 5vw;color: #333;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#demo6" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-angle-right" style="font-size: 5vw;color: #333;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Overstock Analysis Tab Over -->
+
+                    <!-- Stock Rotation Tab Start -->
+                    <div class="tab-pane fade" id="pills-stockrotation">
+                        <div class="card p-4 p-lg-5 mb-4 border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                            <div class="row">
+                                <div class="col-12 col-lg-12">
+                                    <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                        <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                            <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                                <!-- Title start-->
+                                            <div class="text-center" style="width:100%">
+                                                <h1 style="font-family: San Francisco;">Inventory Movement Analysis Report
+                                                </h1>
+                                            </div>
+                                             <p class="px-sm-4 p-2 text-left" style="color: black;font-size: 18px;">
+                                                    <br/>
+                                                  It’s always painful for most of the business to track the inventory movements, especially when you have a large product catalogue or high frequent inventory transactions.
+
+                                                    This app helps you to track the inventory for specific periods or up to a certain date for all products for all warehouses. Users can filter reports by products category, products, companies and warehouses.
+                                             </p>
+                                             <!-- Title over -->
+
+                                             <!-- Highlights start -->
+                                             <div class="text-center" style="width:100%">
+                                                <h3 style="font-family: San Francisco;">Highlights
+                                                </h3>
+                                            </div>
+                                            <font size="4">
+                                                <li class="list-group-item list-group-item-success">
+                                                    <div class="icon-class m-l-10">Opening Stock</div>
+                                                    <li class="list-group-item">Gives you products beginning period calculated stock</li>
+                                                </li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="list-group-item list-group-item-success">
+                                                    <div class="icon-class m-l-10">Purchase & Purchase Return</div>
+                                                    <li class="list-group-item">Gives the total purchase qty & purchase return qty of the products between specific period or up to a certain period</li>
+                                                </li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="list-group-item list-group-item-success">
+                                                    <div class="icon-class m-l-10">Sales & Sales Return</div>
+                                                    <li class="list-group-item">Gives the total sale qty & sales return of the products between specific period or up to a certain period</li>
+                                                </li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="list-group-item list-group-item-success">
+                                                    <div class="icon-class m-l-10">Internal Transaction Tracking (In / Out)</div>
+                                                    <li class="list-group-item">Gives the total internal IN qty & internal OUT qty of the products between specific period or up to a certain period</li>
+                                                </li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="list-group-item list-group-item-success">
+                                                    <div class="icon-class m-l-10">Inventory Adjustment Tracking (In / Out)</div>
+                                                    <li class="list-group-item">Gives the total stock adjustment IN qty & stock adjustment OUT qty of the products between specific period or up to a certain period</li>
+                                                </li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="list-group-item list-group-item-success">
+                                                    <div class="icon-class m-l-10">Transit Transaction Tracking (In / Out)</div>
+                                                    <li class="list-group-item">Gives the total transit IN qty & transit OUT qty of the products between specific period or up to a certain period</li>
+                                                </li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="list-group-item list-group-item-success">
+                                                    <div class="icon-class m-l-10">Production Tracking (In / Out)</div>
+                                                    <li class="list-group-item">Gives the total production qty & consumption qty of the products between specific period or up to a certain period</li>
+                                                </li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="list-group-item list-group-item-success">
+                                                    <div class="icon-class m-l-10">Closing Stock</div>
+                                                    <li class="list-group-item">Gives the ending period calculated stock (closing stock)</li>
+                                                </li>
+                                            </font>
+                                            <br><br>
+                                             <!-- Highlights over -->
+
+                                             <!-- FEatures of Inventory Movement Analysis start -->
+                                             <div class="text-center" style="width:100%">
+                                                <h3 style="font-family: San Francisco;">Features
+                                                </h3>
+                                            </div><br>
+                                             <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Users can generate report between specific dates or up to a certain date</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Each of the transactions will be captured and give you opening and closing for a defined criteria</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Always gives you calculated real opening balance and calculated real closing</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Capture all possible inventory movements and separately visible all IN transactions and OUT transactions in report.</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Warehouse wise separate reporting</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">User can filter by companies, categories, warehouses & products</li>
+                                            </font>
+                                            <font size="4">
+                                                <li class="mb-4"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Report can be downloaded in well format excel file</li>
+                                            </font>
+                                            <br><br>
+                                            <!-- Advantage of inventory movement Analysis over -->
+
+                                            <!-- Screenshots start -->
+                                            <div class="row pb-sm-5">
+                                                <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">Screenshots
+                                                    </h3>
+                                                </div>
+                                                <div id="demo7" class="carousel slide pb-5 col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <!-- The slideshow -->
+                                                    <div class="carousel-inner pt-4 pt-lg-5" >
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/StockMovement/wizard1.jpg" alt="" width="1000" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/StockMovement/wizard2.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/StockMovement/excelReport1.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/StockMovement/excelReport2.jpg" alt="" width="990" height="500px">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Screenshots over -->
+
+                                                    <!-- Left and right controls -->
+                                                    <a class="carousel-control-prev" href="#demo7" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-angle-left" style="font-size: 5vw;color: #333;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#demo7" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-angle-right" style="font-size: 5vw;color: #333;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Stock Rotation Tab Over -->
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="width: 100%; margin-top: 20px">
+            <div class="card p-4 p-lg-5 mb-4 border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                <!-- START: RELEATED APPS -->
+                <div class="row pb-sm-5">
+                    <h2 class="w-100 text-center mb-3" style="font-weight: 400;">Suggested Apps</h2>
+                    <div id="demo11" class="carousel slide col-12 col-lg-12 mx-auto" data-ride="carousel">
+                        <!-- The slideshow -->
+                        <div class="carousel-inner pt-4 pt-lg-5">
+                            <div class="carousel-item px-4 active">
+                                <div class="row pb-sm-4 no-lg-gutters">
+                                    <a href="https://apps.odoo.com/apps/modules/13.0/setu_abc_analysis_reports/" target="_blank">
+                                    <img src="images/odoo_images/ABCAnalysisV13.jpg"alt="ABC Analysis Reports" width=450px class="ml-4 mr-3"></a>
+
+                                    <a href="https://apps.odoo.com/apps/modules/13.0/setu_intercompany_transaction/" target="_blank">
+                                    <img src="https://www.setuconsulting.com/solutions_banner/ICTbanner.gif" alt="Inter Company Transfer" width="450px"></a>
+                                </div>
+                            </div>
+                            <div class="carousel-item px-4 text-center">
+                                <div class="row pb-sm-4 no-gutters">
+                                    <a href="https://apps.odoo.com/apps/modules/13.0/setu_rfm_analysis/" target="_blank">
+                                    <img src="images/odoo_images/RFMbannerV13.jpg" alt="RFM Analysis" width="450px"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Left and right controls -->
+                        <a class="carousel-control-prev" href="#demo11" data-slide="prev" style="left: -5%; width: 60px;">
+                            <i class="fa fa-angle-left" style="font-size: 5vw;color: #333;"></i>
+                        </a>
+                        <a class="carousel-control-next" href="#demo11" data-slide="next" style="right: -5%; width: 60px;">
+                            <i class="fa fa-angle-right" style="font-size: 5vw;color: #333;"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- END: RELEATED APPS -->
+            </div>
+        </div>
+
+        <div class="text-center p-3 mb-3">
+			<div role="alert" class="alert alert-info">
+                <h3 class="font-weight-bold">USER GUIDE</h3>
+                <a href="https://www.setuconsulting.com/userguide/advance_inventory_reports/" target="_blank" title="copy link in browser">
+                <h5 class="m-auto w-75" style="line-height: 1.5;font-weight: 100;">
+                    www.setuconsulting.com/userguide/advance_inventory_reports/
+                </h5></a>
+            </div>
+            <div role="alert" class="alert alert-info">
+                <h3 class="font-weight-bold">FREE SUPPORT</h3>
+                <a href="mailto:support@setuconsulting.com?subject=Advance Inventory Reports - Support Request" target="_blank" class="btn btn-primary mx-2 pr-sm-4 mb-2 mb-lg-0" style="text-transform: uppercase; font-size: 14px;"><i class="fa fa-envelope-square mr-sm-2" style="font-size: 20px;vertical-align: middle;"></i> <span class="d-none d-sm-inline">Request free support</span></a>
+                <h5 class="m-auto w-75" style="line-height: 1.5;font-weight: 100;">We will provide free support for any issues, queries, and bug fixing upto 90 days from the date of purchase of this application. 
+                </h5>
+            </div>
+        </div>
+        <!-- container End -->
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
