@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="setu_turnover_analysis_report_form" model="ir.ui.view">
+            <field name="name">setu.inventory.turnover.analysis.report.form</field>
+            <field name="model">setu.inventory.turnover.analysis.report</field>
+            <field name="arch" type="xml">
+                <form string="Inventory Turnover Analysis Report">
+                    <sheet string="Inventory Turnover Analysis">
+                        <group expand="0" string="Filters">
+
+                            <group expand="0" string="Choose dates to calculate sales">
+                                <field name="start_date" required="True" />
+                                <field name="end_date" required="True" />
+                            </group>
+                            <group expand="0"></group>
+                        </group>
+                        <group expand="0" >
+                            <group expand="0" string="Products &#038; Categories">
+                                <field name="product_category_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                                <field name="product_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                            </group>
+                            <group expand="0" string="Companies &#038; Warehouses">
+                                <field name="company_ids" widget="many2many_tags"
+                                       domain="[('id', 'in', allowed_company_ids)]" options="{'no_create_edit': True}"/>
+                                <field name="warehouse_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                    <footer>
+                        <button name="download_report" string="Excel Report" type="object"
+                                class="oe_highlight"/>
+                        <button name="download_report_in_listview" string="View Data" type="object"
+                                class="oe_highlight"/>
+                        <button name="download_report_in_listview" string="View Graph" type="object"
+                                class="oe_highlight" context="{'graph_report':True}"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+
+        <record id="setu_turnover_analysis_report_action" model="ir.actions.act_window">
+            <field name="name">Inventory Turnover Analysis</field>
+            <field name="res_model">setu.inventory.turnover.analysis.report</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="setu_turnover_analysis_report_menu" action="setu_turnover_analysis_report_action"
+                  parent="setu_advance_inventory_reports.setu_advance_inventory_reports_menu"
+                  sequence="11" />
+
+        <record id="setu_inventory_turnover_ratio_analysis_bi_report_tree" model="ir.ui.view">
+            <field name="name">setu.inventory.turnover.analysis.bi.report.tree</field>
+            <field name="model">setu.inventory.turnover.analysis.bi.report</field>
+            <field name="arch" type="xml">
+                <tree string="Inventory Turnover Ratio Analysis"  create="false">
+                    <field name="company_id" />
+                    <field name="warehouse_id" />
+                    <field name="product_id" />
+                    <field name="product_category_id" />
+                    <field name="opening_stock" />
+                    <field name="closing_stock" />
+                    <field name="average_stock" />
+                    <field name="sales" />
+                    <field name="turnover_ratio" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="setu_inventory_turnover_ratio_analysis_bi_report_search" model="ir.ui.view">
+            <field name="name">setu.inventory.turnover.analysis.bi.report.search</field>
+            <field name="model">setu.inventory.turnover.analysis.bi.report</field>
+            <field name="arch" type="xml">
+                <search string="Inventory Turnover Ratio Analysis">
+                    <field name="company_id" />
+                    <field name="warehouse_id" />
+                    <field name="product_id" />
+                    <field name="product_category_id" />
+
+                    <separator/>
+
+                    <filter string="Product" context="{'group_by':'product_id'}" name="product_id_groupby"/>
+                    <filter string="Warehouse" context="{'group_by':'warehouse_id'}" name="warehouse_id_groupby"/>
+                    <filter string="Product Category" context="{'group_by':'product_category_id'}" name="product_category_id_groupby"/>
+                    <filter string="Company" context="{'group_by':'company_id'}" name="company_id_groupby"/>
+                    <separator/>
+                </search>
+            </field>
+        </record>
+
+        <record id="setu_inventory_turnover_analysis_bi_report_graph" model="ir.ui.view">
+            <field name="name">setu.inventory.turnover.analysis.bi.report.graph</field>
+            <field name="model">setu.inventory.turnover.analysis.bi.report</field>
+            <field name="arch" type="xml">
+                <graph string="Inventory Turnover Ratio Analysis" type="bar" stacked="False">
+                    <field name="warehouse_id" type="col"/>
+                    <field name="product_category_id" type="row"/>
+                    <field name="turnover_ratio" type="measure"/>
+                </graph>
+            </field>
+        </record>
+    </data>
+</odoo>
