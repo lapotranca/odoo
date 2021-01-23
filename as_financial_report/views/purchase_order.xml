@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="view_invoice_form_account_purchase_order1" model="ir.ui.view">
+            <field name="name">purchase.order.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']//tree//field[@name='product_qty']" position="after">
+                    <field name="analytic_tag_ids" widget="many2many_tags" groups="analytic.group_analytic_tags" string="Tags"/>
+                    <field name="regiones_id"/>
+                    <field name="cost_center_id"/>
+                    <field name="department_id"/>
+                </xpath>
+             
+            </field>
+        </record>
+
+            </data>
+</odoo>
