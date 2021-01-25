@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="product_consume_part_car_form_view">
+            <field name="name">Product Consume Part form</field>
+            <field name="model">car.product.consume.part</field>
+            <field name="arch" type="xml">
+                <form> 
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="product_id"/>
+                                <field name="qty"/>
+                            </group>
+                            <group>
+                                <field name="product_uom"/>
+                            </group>
+                         </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="product_consume_part_car_tree_view">
+            <field name="name">Product Consume Part tree</field>
+            <field name="model">car.product.consume.part</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_id"/>
+                    <field name="qty"/>
+                    <field name="product_uom"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_product_consume_part_car" model="ir.actions.act_window">
+            <field name="name">Product Consume Part</field>
+            <field name="res_model">car.product.consume.part</field>
+<!--            <field name="view_type">form</field> odoo13-->
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+    </data>
+</odoo>

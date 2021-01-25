@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <template id="successful_car_ticket_send" name="Success Ticket">
+        <t t-call="website.layout">
+        <div class="row">
+            <div class="oe_structure"/>
+                <div class="container">
+                <div class="col-md-6">
+                <h1>
+                    Your Message/Attachments have been sent successfully.<br/><br/>
+                    Thank you,<br/><br/>
+                </h1>
+                <p>
+                    <a class="btn btn-primary pull-left mb32" onclick="history.go(-2);" ><span class="hidden-xs">Go Back</span><span class="fa fa-long-arrow-left"/></a>
+                </p>
+                </div>
+                <div class="col-md-6">
+                    <img width="400" height="400" src="/car_repair_maintenance_service/static/description/success.png" alt="show ticket" class="img-square" />
+               </div>
+            </div>
+         </div>
+        </t>
+    </template>
+    
+</odoo>
