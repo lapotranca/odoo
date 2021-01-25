@@ -2,7 +2,7 @@
 
 {
     'name': 'TI AMERICAS Reporte Financiero Localizacion Mexicana l10n_mx_reports',
-    'version': '1.0',
+    'version': '1.0.1',
     'summary': 'Reporte Financiero Localizacion Mexicana',
     'category': 'Accounting/Accounting',
     'author': 'TI AMERICAS',
