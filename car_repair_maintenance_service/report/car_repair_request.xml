@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <report
+            id="print_support_request_car" 
+            model="car.repair.support"
+            report_type="qweb-pdf"
+            string="Print Car Repair Request"
+            name="car_repair_maintenance_service.support_report_car"
+            file="car_repair_maintenance_service.support_report_car"
+         />
+         
+        <template id="support_report_car">
+             <t t-foreach="docs" t-as="doc">
+              <t t-call="web.html_container">
+               <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="text-left">
+                         <h3>
+                            <strong><span t-field="doc.name"/> - <span t-field="doc.subject"/> [<span t-field="doc.state"/>]</strong>
+                         </h3>
+                    </div>
+                    <h4 style="margin-top:20px;"><b>Client Information</b></h4>
+                    <table class="table" style="border:1px solid #e1e1e1;">
+                       <tr style="border-bottom:hidden;">
+                           <td><strong>Techniseal</strong></td><td><span t-field="doc.user_id"/></td>
+                           <td><strong>Client</strong></td><td><span t-field="doc.partner_id"/></td>
+                           
+                       </tr>
+                       <tr style="border-bottom:hidden;">
+                           <td><strong>Email</strong></td><td><span t-field="doc.email"/></td>
+                           <td><strong>Phone</strong></td><td><span t-field="doc.phone"/></td>
+                       </tr>
+                       <tr>
+                           <td><strong>Company</strong></td><td><span t-field="doc.company_id"/></td>
+                           <td><strong></strong></td><td></td>
+                       </tr>
+                    </table>
+                    <h4 style="margin-top:20px;"><b>Car Information</b></h4>
+                    <table class="table" style="border:1px solid #e1e1e1;">
+                       <tr style="border-bottom:hidden;">
+                           <td><strong>Car Category</strong></td><td><span t-field="doc.product_category.name"/></td>
+                           <td><strong>Car</strong></td><td><span t-field="doc.product_id.name"/></td>
+                       </tr>
+                       <tr style="border-bottom:hidden;">
+                           <t t-if="not doc.website_brand"><td><strong>Brand</strong></td><td><span t-field="doc.brand"/></td></t>
+                           <t t-if="not doc.website_model"><td><strong>Model</strong></td><td><span t-field="doc.model"/></td></t>
+                           <t t-if="doc.website_brand"><td><strong>Brand</strong></td><td><span t-field="doc.website_brand"/></td></t>
+                           <t t-if="doc.website_model"><td><strong>Model</strong></td><td><span t-field="doc.website_model"/></td></t>
+                       </tr>
+                       <tr style="border-bottom:hidden;">
+                           <td><strong>Color</strong></td><td><span t-field="doc.color"/></td>
+                           <t t-if="not doc.website_year"><td><strong>Year</strong></td><td><span t-field="doc.year"/></td></t>
+                           <t t-if="doc.website_year"><td><strong>Year</strong></td><td><span t-field="doc.website_year"/></td></t>
+                       </tr>
+                       <tr>
+                           <td><strong>Accompanying Items</strong></td><td><span t-field="doc.accompanying_items"/></td>
+                           <td><strong>Warranty</strong></td><td><t t-if="doc.warranty">Yes</t><t t-if="not doc.warranty">No</t></td>
+                       </tr>
+                    </table>
+                    <!--<h4 style="margin-top:20px;"><b>Team Information</b></h4>
+                    <table class="table table-responsive">
+                       <tr style="border-bottom:hidden;">
+                           <td><strong>Department</strong></td><td><span t-field="doc.department_id.name"/></td>
+                           <td><strong>Priority</strong></td><td><span t-field="doc.priority"/></td>
+                       </tr>
+                       <tr style="border-bottom:hidden;">
+                           <td><strong>Machine Repair Team</strong></td><td><span t-field="doc.team_id.name"/></td>
+                           <td><strong>Team Leader</strong></td><td><span t-field="doc.team_leader_id.name"/></td>
+                       </tr>
+                       <tr>
+                           <td><strong>Project</strong></td><td><span t-field="doc.project_id.name"/></td>
+                           <td><strong>Analytic Account</strong></td><td><span t-field="doc.analytic_account_id.name"/></td>
+                       </tr>
+                    </table>-->
+                    
+                    <h4 style="margin-top:20px;"><b>Other Information</b></h4>
+                    <table class="table"  style="border:1px solid #e1e1e1;">
+                       <tr style="border: 2px ">
+                           <td><strong>Request Date</strong></td><td><span t-field="doc.request_date"/></td>
+                           <td><strong>Repair Date</strong></td><td><span t-field="doc.close_date"/></td>
+                       </tr>
+                       <tr style="border: 2px ">
+                           <td><strong>Is Repaied ?</strong></td><td><span t-field="doc.is_close"/></td>
+                           <td><strong>Total Hours Spent Repair</strong></td><td><span t-esc="doc.total_spend_hours"/></td>
+                       </tr>
+                    </table>
+                    <div  style="page-break-after:always">
+                        <p><h4>Description</h4><span t-field="doc.description"/></p>
+                        <t t-if="doc.timesheet_line_ids"/>
+                    </div>
+                    <p><h4>Timesheets</h4></p>
+                    <table class="table"  style="border:1px solid #e1e1e1;">
+                    <tbody>
+                        <t t-if="doc.timesheet_line_ids">
+                            <tr>
+                                <th>Name</th>
+                                <th>Analytic Account</th> 
+                                <th>Car Repair Support</th>
+                                <th>Billable</th>
+                                <th>Description</th>
+                                <th>Hours</th>
+                            </tr>
+                        </t>
+                        <tr t-foreach ="doc.timesheet_line_ids" t-as="li">
+                                <td><span t-field="li.date"/></td>
+                                <td><span t-field="li.account_id"/></td>
+                                <td><span t-field="li.car_repair_request_id"/></td>
+                                <td><span t-field="li.billable"/></td>
+                                <td><span t-field="li.name"/></td>
+                                <td><span t-esc="time.strftime('%H:%M', time.gmtime(li.unit_amount*60*60))"/></td>
+                          </tr>
+                       </tbody>
+                    </table>
+                </div>
+              </t>
+            </t>
+            </t>
+        </template>
+        
+    </data>
+</odoo>
