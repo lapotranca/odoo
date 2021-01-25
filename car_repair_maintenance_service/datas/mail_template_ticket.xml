@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data noupdate="1">
+   
+        <record id="email_template_car_ticket1" model="mail.template">
+           <field name="name">Car Repair Ticket - Send by Email</field>
+           <field name="email_from">${object.company_id.email}</field>
+           <field name="subject">${object.name} - ${object.subject} (Closed)</field>
+           <field name="email_to">${object.partner_id.email}</field>
+           <field name="model_id" ref="car_repair_maintenance_service.model_car_repair_support"/>
+           <field name="auto_delete" eval="True"/>
+           <field name="report_template" ref="car_repair_maintenance_service.print_support_request_car"/>
+           <field name="report_name">Car Repair Report</field>
+            <field name="body_html"><![CDATA[
+            
+<p>Dear ${object.partner_id.name},
+
+% set access_action = object.get_access_action()
+% set access_url = access_action['type'] == 'ir.actions.act_url' and access_action['url'] or '/car_repair_email/feedback/'+str(object.id)
+% set is_online = access_action and access_action['type'] == 'ir.actions.act_url'
+
+<p>We have closed your ticket for now, if you want to reopen please do not hesitate contact us.
+
+<p><a style="padding: 8px 30px 8px 30px;border-radius: 6px;border: 1px solid #CCCCCC;background:#008080;margin-left: 2px;text-decoration: none;color:#FFFFFF;" href="${access_url}">Please give your feedback</a>
+<p>Thanks for your participation!     
+<p>Thank you for choosing ${object.company_id.name or 'us'}!</p>
+           <br/>
+           <div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+       <h3 style="margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;">
+           <strong style="text-transform:uppercase;">${object.company_id.name}</strong></h3>
+   </div>
+   <div style="width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;">
+       <span style="color: #222; margin-bottom: 5px; display: block; ">
+           ${object.company_id.partner_id.sudo().with_context(show_address=True, html_format=True).name_get()[0][1] | safe}
+       </span>
+       % if object.company_id.phone:
+           <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+               Phone:&nbsp; ${object.company_id.phone}
+           </div>
+       % endif
+       % if object.company_id.website:
+           <div>
+               Web :&nbsp;<a href="${object.company_id.website}">${object.company_id.website}</a>
+           </div>
+       %endif
+       <p></p>
+   </div>
+            ]]></field>
+        </record>
+        
+    </data>
+</odoo>
+
