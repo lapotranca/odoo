@@ -1,0 +1,294 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="car_repair_support_form_view">
+            <field name="name">Car Repair form</field>
+            <field name="model">car.repair.support</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" clickable="1"
+                            options="{'fold_field': 'fold'}"/>
+                        <button name="set_to_close" string="Set To Close" attrs="{'invisible':[('is_close','=',True)]}" groups="car_repair_maintenance_service.group_car_repair_manager" type="object" class="oe_highlight"/>
+                        <button name="set_to_reopen" string="Re Open" attrs="{'invisible':[('is_close','=',False)]}" groups="car_repair_maintenance_service.group_car_repair_manager" type="object" class="oe_highlight"/>
+                        <button name="create_car_diagnosys" string="Create Car Diagnosys" attrs="{'invisible':[('is_close','=',True)]}" groups="car_repair_maintenance_service.group_car_repair_user" type="object" class="oe_highlight"/>
+                        <button name="create_work_order" string="Create Work Order" attrs="{'invisible':[('is_close','=',True)]}" groups="car_repair_maintenance_service.group_car_repair_manager" type="object" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                    <div class="oe_button_box" name="button_box">
+                         <button class="oe_stat_button" type="object" 
+                                name="show_car_diagnosys_task" string="Car Diagnosys" icon="fa-pencil-square" />
+                         <button class="oe_stat_button" type="object"
+                                name="show_work_order_task" string="Car Work Orders" icon="fa-pencil-square" />
+                    </div>
+                    <div class="oe_title">
+                        <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/><br/>
+                            <field name="subject" readonly="0"  attrs="{'readonly': [('state', '=', 'closed')]}"  placeholder="Car Repair Support Subject"/>
+                            <field name="is_task_created" invisible="1"/>
+                        </h1>
+                    </div>
+                    </div>
+                            <group>
+                                <group>
+                                    <field name="user_id" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="email" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="custome_client_user_id" invisible="1"/>
+                                    <field name="company_id" groups="base.group_multi_company"/>
+                                </group>
+                                <group>
+                                    <field name="partner_id" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="phone" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                </group>
+                             </group>
+                             <group>
+                                <group>
+                                    <field name="project_id" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="team_id" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="department_id" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                </group>
+                                <group>
+                                    <field name="analytic_account_id" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="team_leader_id" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="priority" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                        <field name="request_date"  string="Repair Request Date" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                        <field name="is_close" string="Repaired?" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                </group> 
+                                <group>
+                                        <field name="close_date" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                        <field name="total_spend_hours"  string="Repairing Duration" widget="float_time" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                 </group>
+                            </group>  
+                             <group string="Car Information">
+                                <group>
+                                    <field name="product_category" string="Car Category" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="product_id" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="brand" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="model" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="color" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="year" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="damage" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                </group>
+                                <group>
+                                    <field name="warranty" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="accompanying_items" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="website_brand" string="Car Brand" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="website_model" string="Car Model" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="website_year" string="Car Manufacturing Year" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                </group>
+                             </group>
+                        <notebook>
+                        <page string="Timesheets" groups="base.group_user">
+                            <field name="timesheet_line_ids" attrs="{'readonly': [('state', '=', 'closed')]}" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="date"/>
+                                    <field name="user_id" />
+                                    <field name="car_repair_request_id"  invisible="1"/>
+                                    <field name="project_id"/>
+                                    <field name="account_id"/>
+                                    <field name="name"/>
+                                    <field name="billable" invisible="1"/>
+                                    <field name="unit_amount" widget="float_time" string="Hours" sum="Hours"/>
+<!--                                    <field invisible="1" name="user_id" required="1"/-->
+                                    <!--odoo13-->
+                                    <field name="company_id" invisible="1" groups="base.group_multi_company"/>
+                                </tree>
+                            </field>
+                        </page> 
+                        <page string="General Information">
+                            <group>
+                                <group>
+<!--                                    <field name="journal_id" attrs="{'readonly': ['|' ,('state', '=', 'closed')]}"/>-->
+<!--                                    <field name="task_id"/>-->
+                                    <field name="nature_of_service_id" string="Nature of Service" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                    <field name="repair_types_ids" widget="many2many_tags"/>
+                                </group>
+                                <group>
+                                    <field name="problem" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+<!--                                    <field name="lot_id" attrs="{'readonly': [('state', '=', 'closed')]}"/-->
+                                </group>
+                             </group>
+                        </page>
+                        <page string="Customer Rating">
+                            <group>
+                                <group>
+                                    <field name="rating" widget="radio"/>
+                                    <field name="comment"/>
+                                </group>
+                             </group>
+                        </page>
+                        <page string="Product Consume Part" >
+                            <field name="cosume_part_ids" attrs="{'readonly': [('state', '=', 'closed')]}" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="qty"/>
+                                    <field name="product_uom"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Car Images">
+                            <group>
+                                <group>
+                                    <field name="img1" string="Image 1" widget="image" class="oe_avatar"/>
+                                    <field name="img3" string="Image 3" widget="image" class="oe_avatar"/>
+                                    <field name="img5" string="Image 5" widget="image" class="oe_avatar"/>
+                                </group>
+                                <group>
+                                    <field name="img2" string="Image 2" widget="image" class="oe_avatar"/>
+                                    <field name="img4" string="Image 4" widget="image" class="oe_avatar"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                    <field name="description" placeholder="Add an internal note..." attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="car_repair_support_tree_view">
+            <field name="name">Car Repair tree</field>
+            <field name="model">car.repair.support</field>
+            <field name="arch" type="xml">
+                <tree>
+                     <field name="name"/>
+                     <field name="subject"/>
+                     <field name="user_id"/>
+                     <field name="partner_id"/>
+                     <field name="email"/>
+                     <field name="phone"/>
+                     <field name="category"/>
+                     <field name="priority"/>
+                     <field name="state"/>
+                     <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="car_repair_support_search_view">
+            <field name="name">Car Repair search</field>
+            <field name="model">car.repair.support</field>
+            <field name="arch" type="xml">
+                <search>
+                     <field name="name"/>
+                     <field name="subject"/>
+                     <field name="partner_id"/>
+                     <field name="email"/>
+                     <field name="phone"/>
+                     <field name="category"/>
+                     <field name="priority"/>
+                     <group expand="0" string="Group By">
+                        <filter name="Assigned To" context="{'group_by':'user_id'}"/>
+                        <filter name="Customer" context="{'group_by':'partner_id'}"/>
+                        <filter name="Company" context="{'group_by':'company_id'}"/>
+                        <filter name="Category" context="{'group_by':'category'}"/>
+                        <filter name="Ticket" context="{'group_by':'name'}"/>
+                        <filter name="Subject" context="{'group_by':'subject'}"/>
+                        <filter name="Car Repair Team" context="{'group_by':'team_id'}"/>
+                        <filter name="Team Leader" context="{'group_by':'team_leader_id'}"/>
+                        <filter name="State" context="{'group_by':'state'}"/>
+                        <filter name="Create Date" context="{'group_by':'request_date'}"/>
+                        <filter name="Close Date" context="{'group_by':'close_date'}"/>
+                        <filter name="Priority" context="{'group_by':'priority'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <record id='car_repair_view_kanban' model='ir.ui.view'>
+            <field name="name">helpesk kanban</field>
+            <field name="model">car.repair.support</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name" />
+                    <field name="subject"/>
+                     <field name="partner_id"/>
+                     <field name="email"/>
+                     <field name="phone"/>
+                     <field name="category"/>
+                     <field name="priority"/>
+                     <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_tags_section">
+                                    <strong><field name="name"/></strong>
+                                </div>
+                                <div class="o_kanban_tags_section">
+                                    <field name="subject"/>
+                                </div>
+                                <div class="o_kanban_tags_section">
+                                    <field name="user_id"/>
+                                </div>
+                                <div class="o_kanban_tags_section">
+                                    <field name="request_date"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong>
+                                        <field name="state"/> : <field name="priority"/>
+                                    </strong>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        
+        <record id="view_car_repair_pivot" model="ir.ui.view">
+            <field name="name">car.repair.support.pivot</field>
+            <field name="model">car.repair.support</field>
+            <field name="arch" type="xml">
+                <pivot string="Project Tasks">
+                    <field name="name" type="row"/>
+                    <field name="state" type="col"/>
+                </pivot>
+            </field>
+        </record>
+        
+        <record id="view_car_repair_graph" model="ir.ui.view">
+            <field name="name">car.repair.support.graph</field>
+            <field name="model">car.repair.support</field>
+            <field name="arch" type="xml">
+                <graph string="Project Tasks">
+                    <field name="name"/>
+                    <field name="state"/>
+                </graph>
+            </field>
+        </record>
+        
+        <record id="car_repair_calendar" model="ir.ui.view">
+            <field name="name">Car Repair Calendar</field>
+            <field name="model">car.repair.support</field>
+            <field name="arch" type="xml">
+                <calendar string="Car Repair" color="journal_id" date_start="request_date">
+                    <field name="partner_id"/>
+                </calendar>
+            </field>
+        </record>
+        
+        <record id="action_car_repair_support" model="ir.actions.act_window">
+            <field name="name">Car Repair</field>
+            <field name="res_model">car.repair.support</field>
+<!--            <field name="view_type">form</field> odoo13-->
+            <field name="view_mode">kanban,tree,calendar,form,pivot,graph</field>
+            <field name="help">Car Repair Support Tree.</field>
+        </record>
+
+        <record id="action_car_repair_support_requests" model="ir.actions.act_window">
+            <field name="name">Car Repair</field>
+            <field name="res_model">car.repair.support</field>
+<!--            <field name="view_type">form</field> odoo13-->
+            <field name="view_mode">pivot,graph</field>
+        </record>
+    </data>
+</odoo>

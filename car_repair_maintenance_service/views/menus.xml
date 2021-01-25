@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem name="Car Repair" id="main_car_repair_support_main" groups="car_repair_maintenance_service.group_car_repair_user"
+        web_icon="car_repair_maintenance_service,static/description/icon.png"/>
+        <menuitem name="Car Repair / Service" id="menu_car_repair_support" parent="main_car_repair_support_main" sequence="1"/>
+
+        <menuitem name="Cars" id="menu_car_product_main" parent="main_car_repair_support_main" sequence="2"/>
+        <menuitem name="Cars" id="menu_car_product_action" parent="menu_car_product_main" sequence="2" action="action_product_car"/>
+        <menuitem name="Car Parts" id="menu_car_part_product_action" parent="menu_car_product_main" sequence="2" action="action_product_car_parts"/>
+        <menuitem name="Car Diagnosys" id="menu_diagnosys_action" parent="menu_car_repair_support" sequence="10" action="action_view_task_diagnosis_car"/>
+        <menuitem name="Car WorkOrders" id="menu_workorder_action" parent="menu_car_repair_support" sequence="12" action="action_view_task_workorder"/>
+
+            
+        <menuitem name="Configuration" id="menu_car_repair_configuration" parent="main_car_repair_support_main" sequence="100" groups="car_repair_maintenance_service.group_car_repair_manager"/>
+        <menuitem name="Services" id="menu_item_nature_of_service" parent="menu_car_repair_configuration" action="action_nature_of_car_service"/>
+<!--        <menuitem name="Product Consume Part" id="menu_item_product_consume_part" parent="menu_machine_repair_configuration" action="action_product_consume_part"/-->
+        
+        <menuitem name="Car Repair / Services" id="menu_item_car_repair_support" sequence="1" parent="menu_car_repair_support" action="action_car_repair_support"/>
+        <menuitem name="Reports" id="menu_car_repair_report" parent="main_car_repair_support_main" groups="car_repair_maintenance_service.group_car_repair_manager"/>
+
+        <menuitem name="Car Repair Requests" id="menu_car_repair_report_requests" parent="menu_car_repair_report" action='action_car_repair_support_requests'/>
+
+
+<!--        <menuitem name="Repair Estimation Lines" id="menu_item_repair_estimation_lines" parent="menu_machine_repair_configuration" action="action_repair_estimation_lines"/-->
+        <menuitem name="Service Types" id="menu_item_repair_type" parent="menu_car_repair_configuration" action="action_repair_type_car"/>
+
+        <menuitem name="Car Repair Teams" id="menu_item_car_support_team" parent="menu_car_repair_configuration" action="action_car_support_team"/>
+                
+            
+    </data>
+</odoo>

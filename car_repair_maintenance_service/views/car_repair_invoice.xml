@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+    
+         <record model="ir.ui.view" id="car_repair_button">
+            <field name="name">sale order form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr = "//field[@name='partner_id']" position="after">
+                    <field name="reference_no"/>
+                    <field name="email"/>
+                </xpath>
+                <xpath expr="//page/field/tree//field[@name='product_id']" position="before">
+                    <field name="product_image" widget="image" />
+                </xpath> 
+                <xpath expr = "//button[@name='action_done']" position="after">
+                    <button name="related_field" type="object" string="Order Line"/>
+                </xpath>
+                <xpath expr = "//button[@name='action_cancel']" position="after">
+                    <button name="manager_approved" string="Manager Approval" type="object" states="draft" class="btn-primary"/>
+                </xpath>
+                <xpath expr = "//field[@name='reference_no']" position="after">
+                    <field name="amount_receivable"/>
+                </xpath>
+                 <field name="state" widget="statusbar" statusbar_visible="draft,sent,sale" position="attributes">
+                        <attribute name="statusbar_visible">manager</attribute>
+                    </field>  
+            </field>
+        </record>
+        
+    </data>
+</odoo>
