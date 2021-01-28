@@ -260,12 +260,12 @@ class account_move(models.Model):
                     move_line.cost_center_id = usuario.cost_purchase_center_id.id
                     move_line.department_id = usuario.department_puechase_id.id
         if self.as_extract_sale:
-            for move_line in self.move_id.invoice_line_ids:
+            for move_line in self.invoice_line_ids:
                 move_line.analytic_tag_ids = usuario.analytic_tag_ids.ids
                 move_line.regiones_id = usuario.regiones_id.id
                 move_line.cost_center_id = usuario.cost_center_id.id
                 move_line.department_id = usuario.departmento_id.id
-            for move_line in self.move_id.line_ids:
+            for move_line in self.line_ids:
                 move_line.analytic_tag_ids = usuario.analytic_tag_ids.ids
                 move_line.regiones_id = usuario.regiones_id.id
                 move_line.cost_center_id = usuario.cost_center_id.id
@@ -328,12 +328,12 @@ class account_move(models.Model):
                     move_line.cost_center_id = usuario.cost_purchase_center_id.id
                     move_line.department_id = usuario.department_puechase_id.id
         if self.as_extract_sale:
-            for move_line in self.move_id.invoice_line_ids:
+            for move_line in self.invoice_line_ids:
                 move_line.analytic_tag_ids = usuario.analytic_tag_ids.ids
                 move_line.regiones_id = usuario.regiones_id.id
                 move_line.cost_center_id = usuario.cost_center_id.id
                 move_line.department_id = usuario.departmento_id.id
-            for move_line in self.move_id.line_ids:
+            for move_line in self.line_ids:
                 move_line.analytic_tag_ids = usuario.analytic_tag_ids.ids
                 move_line.regiones_id = usuario.regiones_id.id
                 move_line.cost_center_id = usuario.cost_center_id.id
