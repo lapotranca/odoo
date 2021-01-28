@@ -18,7 +18,7 @@
                     <field name="department_id" />
                 </xpath>
                 <xpath expr="//field[@name='company_id']" position="after">
-                    <field name="as_extract_sale" attrs="{'invisible': [('move_type', '!=', 'entry')]}"/>
+                    <field name="as_extract_sale"/>
                 </xpath>
             </field>
         </record>
