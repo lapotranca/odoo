@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-
-        <!-- <record id="view_invoice_form_account_res_user" model="account.move.line">
-            <field name="name">account.invoice.form</field>
-            <field name="model">account.move</field>
-            <field name="inherit_id" ref="account.view_move_form"/>
-            <field name="arch" type="xml">
-               <xpath expr="//field[@name='invoice_line_ids']//field[@name='quantity']" position="after">
-                    <field name="regiones_id" />
-                    <field name="cost_center_id" />
-                    <field name="department_id" />
+    <!-- <record id="as_view_invoice_form_account_view" model="account.move.line">
+        <field name="name">account.invoice.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="as_extract_sale" />
             </xpath>
-              <xpath expr="//field[@name='line_ids']/tree/field[@name='credit']" position="after">
-                    <field name="regiones_id" />
-                    <field name="cost_center_id" />
-                    <field name="department_id" />
-                </xpath>
-            </field>
-        </record> -->
-       
-    </data>
+        </field>
+    </record> -->
 </odoo>
