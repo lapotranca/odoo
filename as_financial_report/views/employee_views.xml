@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_employee_form_potranca" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit.hr.fleet</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='hr_settings']" position="after">
+                <page name='hr_center_Cost' string="Otras configuraciones">
+                    <group>
+                        <group string="Región, Centro de Costo, Departamento">
+                            <field name="regiones_id" />
+                            <field name="cost_center_id" />
+                            <field name="departmento_id" />
+                        </group>
+                        <group string="Compras">
+                        <field name="analytic_tag_ids" widget="many2many_tags" groups="analytic.group_analytic_tags"
+                            string="Tags" />
+                            <field name="regiones_purchase_id" />
+                            <field name="cost_purchase_center_id" />
+                            <field name="department_puechase_id" />
+                        </group>
+                    </group>
+                </page>
+
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_users_view_form_preferences" model="ir.ui.view">
+        <field name="name">hr.user.preferences.form.inherit.hr.fleet</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='action_id']" position="after">
+                <group string="Ventas">
+                <field name="analytic_tag_ids" widget="many2many_tags" groups="analytic.group_analytic_tags"
+                    string="Tags" />
+                    <field name="regiones_id" />
+                    <field name="cost_center_id" />
+                    <field name="departmento_id" />
+                </group>
+                <group string="Compras">
+                <field name="analytic_tag_purchase_ids" widget="many2many_tags" groups="analytic.group_analytic_tags" string="Tags" />
+                    <field name="regiones_purchase_id" />
+                    <field name="cost_purchase_center_id" />
+                    <field name="department_puechase_id" />
+                </group>
+            </xpath>
+         
+        </field>
+    </record>
+
+</odoo>
