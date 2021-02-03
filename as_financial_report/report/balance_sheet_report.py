@@ -67,7 +67,7 @@ class BalanceSheetReport(models.Model):
                     left join account_analytic_tag_account_move_line_rel tag_rel on tag_rel.account_move_line_id = ml.id\
                     left JOIN account_analytic_tag tag ON tag.id = tag_rel.account_analytic_tag_id\
                     inner join account_account aa on aa.id = ml.account_id\
-                    where m.state!='cancel' and ml.account_id \
+                    where m.state not in ('cancel','draft') and ml.account_id \
                     in ( "+report.account_ids+")"
                 else:        
                     subquery = " SELECT '"+(" "+report.name if report.name == "Balance Sheet" else report.name)+"' as report_name,0 as journal_id, \
@@ -104,7 +104,7 @@ class BalanceSheetReport(models.Model):
                     inner join account_account aa on aa.id = ml.account_id\
                     left join account_analytic_tag_account_move_line_rel tag_rel on tag_rel.account_move_line_id = ml.id\
                     left JOIN account_analytic_tag tag ON tag.id = tag_rel.account_analytic_tag_id\
-                    where m.state!='cancel' and ml.account_id \
+                    where m.state not in ('cancel','draft') and ml.account_id \
                     in ( "+acc_ids+")"                
                 else:        
                     subquery = " SELECT '"+(" "+report.name if report.name == "Balance Sheet" else report.name)+"' as report_name,0 as journal_id, \
