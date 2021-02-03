@@ -57,7 +57,7 @@ class PLReport(models.Model):
                     inner join account_move_line ml on m.id = ml.move_id \
                     left join account_analytic_tag_account_move_line_rel tag_rel on tag_rel.account_move_line_id = ml.id\
                     left JOIN account_analytic_tag tag ON tag.id = tag_rel.account_analytic_tag_id\
-                    where m.state!='cancel' and ml.account_id in ( "+report.account_ids+")"
+                    where m.state not in ('cancel','draft')  and ml.account_id in ( "+report.account_ids+")"
                 else: 
                     subquery = " SELECT '"+(" "+report.name if report.name == "Income" else report.name)+"' as report_name,0 as journal_id, \
                     0 as payment_id,0 as quantity,0 as company_id,0 as currency_id,0 as id,0 as move_id,null as name,null as date,0 as product_id, tag.id as analytic_tag_ids,\
@@ -89,7 +89,7 @@ class PLReport(models.Model):
                     inner join account_move_line ml on m.id = ml.move_id \
                     left join account_analytic_tag_account_move_line_rel tag_rel on tag_rel.account_move_line_id = ml.id\
                     left JOIN account_analytic_tag tag ON tag.id = tag_rel.account_analytic_tag_id\
-                    where m.state!='cancel' and ml.account_id in ( "+acc_ids+")"
+                    where m.state not in ('cancel','draft')  and ml.account_id in ( "+acc_ids+")"
                 else: 
                     subquery = " SELECT '"+(" "+report.name if report.name == "Income" else report.name)+"' as report_name,0 as journal_id, \
                     0 as payment_id,0 as quantity,0 as company_id,0 as currency_id,0 as id,0 as move_id,null as name,null as date,0 as product_id, tag.id as analytic_tag_ids,\
