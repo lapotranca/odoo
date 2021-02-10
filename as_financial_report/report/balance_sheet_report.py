@@ -35,7 +35,7 @@ class BalanceSheetReport(models.Model):
     department_id = fields.Many2one('tf.department', string='Departments')
     regiones_id = fields.Many2one('tf.regiones', string='Región')
     initial_balance = fields.Float('Initial Balance')
-    analytic_tag_ids = fields.Many2one('account.analytic.tag', string='Analytic Tags')
+    # analytic_tag_ids = fields.Many2one('account.analytic.tag', string='Analytic Tags')
 
     def _store_balance_code(self):
         if self.account_id:
@@ -59,13 +59,11 @@ class BalanceSheetReport(models.Model):
                     subquery = " select '"+(report_name if report_name else report.name)+"' as report_name, \
                     ml.journal_id,ml.payment_id,ml.quantity,\
                     ml.company_id ,m.currency_id,ml.id as id, ml.move_id, ml.name,\
-                    ml.date, ml.product_id,ml.partner_id,ml.account_id, ml.analytic_account_id,tag.id as analytic_tag_ids,\
+                    ml.date, ml.product_id,ml.partner_id,ml.account_id, ml.analytic_account_id,\
                     COALESCE((credit), 0) as credit,\
                     COALESCE((debit),0) - COALESCE((credit), 0) as balance,CONCAT(aa.code,' ',aa.name) as account_code,\
                     CASE WHEN    ml.date < \'" + str(date(date.today().year, 1, 1)) + "\'  THEN COALESCE((debit),0) - COALESCE((credit), 0) ELSE 0 END AS initial_balance,\
                     COALESCE((debit), 0) as debit, ml.cost_center_id,ml.regiones_id, ml.department_id from account_move m inner join \
-                    left join account_analytic_tag_account_move_line_rel tag_rel on tag_rel.account_move_line_id = ml.id\
-                    left JOIN account_analytic_tag tag ON tag.id = tag_rel.account_analytic_tag_id\
                     inner join account_account aa on aa.id = ml.account_id\
                     where m.state not in ('cancel','draft') and ml.account_id \
                     in ( "+report.account_ids+")"
@@ -95,15 +93,13 @@ class BalanceSheetReport(models.Model):
                     subquery = " select '"+(report_name if report_name else report.name)+"' as report_name, \
                     ml.journal_id,ml.payment_id,ml.quantity,\
                     ml.company_id,m.currency_id,ml.id as id, ml.move_id, ml.name,\
-                    ml.date, ml.product_id,ml.partner_id,ml.account_id,ml.analytic_account_id, tag.id as analytic_tag_ids,\
+                    ml.date, ml.product_id,ml.partner_id,ml.account_id,ml.analytic_account_id,\
                     COALESCE((credit), 0) as credit,\
                     COALESCE((debit),0) - COALESCE((credit), 0) as balance,CONCAT(aa.code,' ',aa.name) as account_code,\
                     CASE WHEN    ml.date < \'" + str(date(date.today().year, 1, 1)) + "\'  THEN COALESCE((debit),0) - COALESCE((credit), 0) ELSE 0 END AS initial_balance,\
                     COALESCE((debit), 0) as debit, ml.regiones_id, ml.cost_center_id, ml.department_id from account_move m  inner join \
                     account_move_line ml on m.id = ml.move_id \
                     inner join account_account aa on aa.id = ml.account_id\
-                    left join account_analytic_tag_account_move_line_rel tag_rel on tag_rel.account_move_line_id = ml.id\
-                    left JOIN account_analytic_tag tag ON tag.id = tag_rel.account_analytic_tag_id\
                     where m.state not in ('cancel','draft') and ml.account_id \
                     in ( "+acc_ids+")"                
                 else:        
@@ -170,10 +166,10 @@ class BalanceSheetReport(models.Model):
                 if compare_sql_string:
                     compare_sql_string += " and "
                 compare_sql_string += "department_id = " + str(bal['department_id'][0])
-            if bal.get('analytic_tag_ids'):
-                if compare_sql_string:
-                    compare_sql_string += " and "
-                compare_sql_string += "tag.id in " + str(bal['analytic_tag_ids'][0])
+            # if bal.get('analytic_tag_ids'):
+            #     if compare_sql_string:
+            #         compare_sql_string += " and "
+            #     compare_sql_string += "tag.id in " + str(bal['analytic_tag_ids'][0])
 
             self.env.cr.execute("select sum(debit) as debit, sum(credit) as credit \
                                  from account_move_line \
