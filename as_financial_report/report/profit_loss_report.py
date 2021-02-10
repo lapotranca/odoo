@@ -33,7 +33,7 @@ class PLReport(models.Model):
     cost_center_id = fields.Many2one('tf.cost.center', 'Cost Center')
     department_id = fields.Many2one('tf.department', string='Departments')
     regiones_id = fields.Many2one('tf.regiones', string='Región')
-    analytic_tag_ids = fields.Many2one('account.analytic.tag', string='Analytic Tags')
+    # analytic_tag_ids = fields.Many2one('account.analytic.tag', string='Analytic Tags')
 
     def _compute_report_balance(self, reports):
         ''' '''
@@ -51,7 +51,7 @@ class PLReport(models.Model):
                     subquery = " select '"+(" "+report.name if report.name == "Income" else report.name)+"' as report_name, \
                     ml.journal_id,ml.payment_id,ml.quantity,\
                     ml.company_id,m.currency_id,ml.id as id, ml.move_id, ml.name, \
-                    ml.date, ml.product_id,ml.partner_id,ml.account_id, ml.analytic_account_id, tag.id as analytic_tag_ids,\
+                    ml.date, ml.product_id,ml.partner_id,ml.account_id, ml.analytic_account_id,\
                     COALESCE((credit), 0) as credit, ((COALESCE((debit),0) - COALESCE((credit), 0)) * "+str(report.sign)+") as balance, COALESCE((debit), 0) as debit,ml.regiones_id,ml.cost_center_id, ml.department_id \
                     from account_move m \
                     inner join account_move_line ml on m.id = ml.move_id \
@@ -60,7 +60,7 @@ class PLReport(models.Model):
                     where m.state not in ('cancel','draft')  and ml.account_id in ( "+report.account_ids+")"
                 else: 
                     subquery = " SELECT '"+(" "+report.name if report.name == "Income" else report.name)+"' as report_name,0 as journal_id, \
-                    0 as payment_id,0 as quantity,0 as company_id,0 as currency_id,0 as id,0 as move_id,null as name,null as date,0 as product_id, tag.id as analytic_tag_ids,\
+                    0 as payment_id,0 as quantity,0 as company_id,0 as currency_id,0 as id,0 as move_id,null as name,null as date,0 as product_id,\
                     0 as partner_id,0 as account_id,0 as analytic_account_id,0 as credit,0 as balance,0 as debit"
 
                 query = query + (subquery)
@@ -83,16 +83,14 @@ class PLReport(models.Model):
                     subquery = " select '"+(" "+report.name if report.name == "Income" else report.name)+"' as report_name, \
                     ml.journal_id,ml.payment_id,ml.quantity,\
                     ml.company_id,m.currency_id,ml.id as id, ml.move_id, ml.name,\
-                    ml.date, ml.product_id,ml.partner_id,ml.account_id, ml.analytic_account_id, tag.id as analytic_tag_ids,\
+                    ml.date, ml.product_id,ml.partner_id,ml.account_id, ml.analytic_account_id,\
                     COALESCE((credit), 0) as credit, ((COALESCE((debit),0) - COALESCE((credit), 0)) * "+str(report.sign)+") as balance, COALESCE((debit), 0) as debit,ml.regiones_id,ml.cost_center_id, ml.department_id \
                     from account_move m \
                     inner join account_move_line ml on m.id = ml.move_id \
-                    left join account_analytic_tag_account_move_line_rel tag_rel on tag_rel.account_move_line_id = ml.id\
-                    left JOIN account_analytic_tag tag ON tag.id = tag_rel.account_analytic_tag_id\
                     where m.state not in ('cancel','draft')  and ml.account_id in ( "+acc_ids+")"
                 else: 
                     subquery = " SELECT '"+(" "+report.name if report.name == "Income" else report.name)+"' as report_name,0 as journal_id, \
-                    0 as payment_id,0 as quantity,0 as company_id,0 as currency_id,0 as id,0 as move_id,null as name,null as date,0 as product_id, tag.id as analytic_tag_ids,\
+                    0 as payment_id,0 as quantity,0 as company_id,0 as currency_id,0 as id,0 as move_id,null as name,null as date,0 as product_id,\
                     0 as partner_id,0 as account_id,0 as analytic_account_id,0 as credit,0 as balance,0 as debit"
 
                 query = query + (subquery)
