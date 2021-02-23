@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tag_suppliers" model="res.partner.category">
+        <field name="name">Suppliers</field>
+    </record>
+    <record id="tag_expenses" model="res.partner.category">
+        <field name="name">Created for Expenses</field>
+        <field name="parent_id" ref="tag_suppliers"/>
+    </record>
+    <record id="tag_vendors" model="res.partner.category">
+        <field name="name">Vendor</field>
+        <field name="parent_id" ref="tag_suppliers"/>
+    </record>
+    <record id="tag_expense_autovalidate" model="res.partner.category">
+        <field name="name">Auto validate Vendor Bills</field>
+        <field name="parent_id" ref="tag_suppliers"/>
+    </record>
+    <record id="tag_split_taxes" model="res.partner.category">
+        <field name="name">Split Taxes Vendor Bills</field>
+        <field name="parent_id" ref="tag_suppliers"/>
+    </record>
+    <record id="tag_omit_invoice_amount_check" model="res.partner.category">
+        <field name="name">Omit amount check with CFDI</field>
+        <field name="parent_id" ref="tag_suppliers"/>
+    </record>
+    <record id="tag_force_invoice_generation" model="res.partner.category">
+        <field name="name">Force Invoice Generation</field>
+        <field name="parent_id" ref="tag_suppliers"/>
+    </record>
+    <record id="tag_invoice_draft" model="res.partner.category">
+        <field name="name">Create Invoices Draft</field>
+        <field name="parent_id" ref="tag_suppliers"/>
+    </record>
+    <record id="tag_force_invoice_total" model="res.partner.category">
+        <field name="name">Force Invoices Total</field>
+        <field name="parent_id" ref="tag_suppliers"/>
+    </record>
+    <record id="tag_auto_accrue_expenses" model="res.partner.category">
+        <field name="name">Auto Accrue Expenses</field>
+        <field name="parent_id" ref="tag_suppliers"/>
+    </record>
+    <record id="tag_is_airline" model="res.partner.category">
+        <field name="name">Is Airline</field>
+        <field name="parent_id" ref="tag_suppliers"/>
+    </record>
+</odoo>

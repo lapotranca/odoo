@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit_hr_expense_mx" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hr.expense.mx</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="hr_expense.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='hr_expense']" position="inside">
+                <h2>Expenses (MX)</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box" title="Accountant">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Accountant</span>
+                            <div class="text-muted">
+                                Configure the generic accountants by currency
+                            </div>
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label string="For MXN" for="accountant_company_currency_id" class="col-lg-3 o_light_label"/>
+                                    <field name="accountant_company_currency_id" options="{'no_create': True, 'no_open': True}"/>
+                                </div>
+                                <div class="row">
+                                    <label string="For other currencies" for="accountant_foreign_currency_id" class="col-lg-3 o_light_label"/>
+                                    <field name="accountant_foreign_currency_id" options="{'no_create': True, 'no_open': True}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box" title="Notifications">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Notifications</span>
+                            <div class="text-muted">
+                                Configure expense notification
+                            </div>
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label string="Limit amount" for="l10n_mx_expenses_amount" class="col-lg-3 o_light_label"/>
+                                    <field name="l10n_mx_expenses_amount"/>
+                                    <field name="currency_id" class="oe_inline" readonly="1"/>
+                                </div>
+                                <div class="row">
+                                    <label string="Employees" for="l10n_mx_edi_employee_ids" class="col-lg-3 o_light_label"/>
+                                    <field name="l10n_mx_edi_employee_ids" widget="many2many_tags"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

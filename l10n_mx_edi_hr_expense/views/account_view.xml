@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<odoo>
+    <record model="ir.ui.view" id="view_account_journal_filter_petty_cash">
+        <field name="name">view.account.journal.filter.petty.cash</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='dashboard']" position="after">
+                <filter name="petty_cash" domain="[('code', 'ilike', 'E%')]" string="Employee Petty Cash"/>
+                <filter string="Is Petty Cash"  domain="[('is_petty_cash', '=', True)]"  name="is_petty_cash"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_account_journal_l10n_mx_edi_amount_authorized_diff">
+        <field name="name">view.account.journal.filter.l10n_mx_edi.amount.authorized.diff</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <data>
+            <xpath expr="//page[@name='advanced_settings']" position="inside">
+                <group name="amount_authorized" attrs="{'invisible': [('type', 'not in', ['sale', 'purchase'])]}" groups="base.group_no_one">
+                    <field name="l10n_mx_edi_amount_authorized_diff"/>
+                </group>
+            </xpath>
+            <xpath expr="//page[@name='advanced_settings']" position="before">
+                <page name="petty_cash" string="Petty Cash Settings" attrs="{'invisible': [('type', '!=', 'cash')]}">
+                    <group>
+                        <group>
+                            <field name="is_petty_cash"/>
+                            <field name="petty_cash_reserve"  attrs="{'invisible': [('is_petty_cash', '=', False)]}"/>
+                        </group>
+                        <group >
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            </data>
+        </field>
+    </record>
+    <record id="view_account_journal_tree" model="ir.ui.view">
+        <field name="name">account.journal.tree</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='type']" position="after">
+                <field name="is_petty_cash"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="account_journal_dashboard_kanban_view" model="ir.ui.view">
+        <field name="name">account.bank.journal.kanban</field>
+        <field name="model">account.journal</field>
+        <field name="priority">100</field>
+        <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view"/>
+        <field name="arch" type="xml">
+            <data>
+            <xpath expr="//t[@t-name='JournalBodyBankCash']/div[hasclass('o_kanban_primary_right')]" position="inside">
+                <field name="is_petty_cash" invisible="1"/>
+                <div attrs="{'invisible': [('is_petty_cash', '=', False)]}" class="row" name="petty_cash">
+                    <t t-if="dashboard.petty_cash_reserve_no_currency != 0">
+                        <div class="col-7">
+                            <span title="Petty Cash Reserve">Petty Cash Reserve</span>
+                        </div>
+                        <div class="col-5 text-right">
+                            <span><t t-esc="dashboard.petty_cash_reserve"/></span>
+                        </div>
+                    </t>
+                    <t t-if="dashboard.amount_to_replenish_no_currency &gt; 0 and dashboard.petty_cash_reserve_no_currency != 0">
+                        <div class="col-7">
+                            <span title="Amount to Replenish">Amount to Replenish</span>
+                        </div>
+                        <div class="col-5 text-right">
+                            <span><t t-esc="dashboard.amount_to_replenish"/></span>
+                        </div>
+                    </t>
+                </div>
+            </xpath>
+            <xpath expr="//div[a[@name='create_internal_transfer']]" position="after">
+              <field name="is_petty_cash" invisible="1"/>
+              <t t-value="JSON.parse(record.kanban_dashboard.raw_value)" t-set="dashboard"/>
+              <div attrs="{'invisible': [('is_petty_cash', '=', False)]}">
+                <t t-if="dashboard.amount_to_replenish_no_currency &gt; 0 and dashboard.petty_cash_reserve_no_currency != 0">
+                    <a role="menuitem" type="object" name="create_petty_cash_replenishment">Replenish Petty Cash</a>
+                </t>
+              </div>
+            </xpath>
+            </data>
+        </field>
+    </record>
+    <record id="account_reports_journal_dashboard_kanban_view_account_manager" model="ir.ui.view">
+        <field name="name">account.journal.dashboard.kanban.reports</field>
+        <field name="model">account.journal</field>
+        <field name="priority">100</field>
+        <field name="inherit_id" ref="account_reports.account_reports_journal_dashboard_kanban_view_account_manager"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//div[@name='latest_statement']" position="replace">
+                    <field name="is_petty_cash" invisible="1"/>
+                    <div attrs="{'invisible': [('is_petty_cash', '!=', False)]}" class="row" name="latest_statement">
+                        <div class="col-7">
+                            <span title="Latest Statement">Latest Statement</span>
+                        </div>
+                        <div class="col-5 text-right">
+                            <span><t t-esc="dashboard.last_balance"/></span>
+                        </div>
+                    </div>
+                </xpath>
+                <xpath expr="//div[@t-if='dashboard.difference']" position="replace">
+                    <t t-value="JSON.parse(record.kanban_dashboard.raw_value)" t-set="dashboard"/>
+                    <field name="is_petty_cash" invisible="1"/>
+                    <div attrs="{'invisible': [('is_petty_cash', '!=', False)]}" class="row">
+                        <t t-if="dashboard.difference">
+                            <div class="col-7">
+                                <a type="action" name="%(account_reports.action_account_report_bank_reconciliation_with_journal)d">Difference</a>
+                            </div>
+                            <div class="col-5 text-right">
+                                <span><t t-esc="dashboard.difference"/></span>
+                            </div>
+                        </t>
+                    </div>
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="expense_checks_content" name="Expense Checks Content">
+        <div t-att-class="'expenses_checklist' if animate else ''">
+            <div t-if="not messages" class="text-center alert alert-info">
+                <p>No information available</p>
+            </div>
+            <t t-if="messages">
+                <ul class="list-group list-unstyled">
+                    <t t-foreach="sorted_keys" t-as="key">
+                        <t t-set="message" t-value="str(key)"/>
+                        <t t-set="is_ok" t-value="succeeded.get(message, False)"/>
+                        <t t-set="elem" t-value="succeeded.get(message) if is_ok else failed.get(message)"/>
+                        <li t-att-class="'list-group-item list-group-item-%s' % ('success' if is_ok else 'danger')">
+                            <i t-att-class="'fa fa-%s-circle' % ('check' if is_ok else 'times')"></i>
+                            <t t-esc="message"/>
+                            <strong><t t-esc="elem.get('title_ok' if is_ok else 'title')"/>: </strong>
+                            <t t-esc="elem.get('message_ok' if is_ok else 'message')"/>
+                        </li>
+                    </t>
+                </ul>
+            </t>
+        </div>
+    </template>
+</odoo>

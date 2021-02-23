@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_l10n_mx_edi_merge_expense" model="ir.ui.view">
+        <field name="name">view.l10n_mx_edi.merge_expense</field>
+        <field name="model">l10n_mx_edi.merge.expense</field>
+        <field name="arch" type="xml">
+            <form string="Reclassify Journal Entries">
+                <sheet>
+                    <group>
+                        <field name="expense_id" readonly="1"/>
+                    </group>
+                    <separator string="Merge the following expenses"/>
+                    <group>
+                        <field name="expense_ids" nolabel="1" options="{'no_create': True}">
+                            <tree string="Expenses">
+                                <field name="name"/>
+                                <field name="date"/>
+                                <field name="total_amount"/>
+                                <field name="partner_id"/>
+                                <field name="employee_id"/>
+                                <field name="state" invisible="1"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string='Merge Expenses' name="action_merge" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn btn-secondary oe_inline" special="cancel"/>
+                </footer>
+           </form>
+        </field>
+    </record>
+
+    <record id="action_l10n_mx_edi_merge_expense" model="ir.actions.act_window">
+        <field name="name">Merge Expense</field>
+        <field name="res_model">l10n_mx_edi.merge.expense</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_l10n_mx_edi_merge_expense"/>
+        <field name="target">new</field>
+        <field name="groups_id" eval="[(4, ref('l10n_mx_edi_hr_expense.allow_to_generate_expenses_2b_checked'))]"/>
+    </record>
+
+</odoo>

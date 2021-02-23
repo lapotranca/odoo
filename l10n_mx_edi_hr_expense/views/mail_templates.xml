@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="hr_expense_splited_from">
+        <p>This <t t-esc="self._description.lower()"/> was <span t-if="edit">modified</span><span t-if="not edit">created</span> from this expense
+            <t t-foreach="origin" t-as="o">
+                <a href="#" t-att-data-oe-model="o._name" t-att-data-oe-id="o.id"> <t t-esc="o.display_name"/></a><span t-if="origin.ids[-1:] != o.ids">, </span>
+            </t>
+            because is necessary an expense by each CFDI.
+        </p>
+    </template>
+    <template id="hr_expense_splited_to">
+        <p>This <t t-esc="self._description.lower()"/> was <span t-if="edit">splitted</span><span t-if="not edit">splitted</span> in the next expenses:
+            <t t-foreach="dest" t-as="o">
+                <a href="#" t-att-data-oe-model="o._name" t-att-data-oe-id="o.id"> <t t-esc="o.display_name"/></a><span t-if="dest.ids[-1:] != o.ids">, </span>
+            </t>
+            because is necessary an expense by each CFDI.
+        </p>
+    </template>
+    <template id="hr_expense_merge">
+        <p>This <t t-esc="self._description.lower()"/> was <span t-if="edit">merged</span><span t-if="not edit">merged</span> with the next expense:
+            <t t-foreach="origin" t-as="o">
+                <a href="#" t-att-data-oe-model="o._name" t-att-data-oe-id="o.id"> <t t-esc="o.display_name"/></a><span t-if="origin.ids[-1:] != o.ids">, </span>
+            </t>.
+        </p>
+    </template>
+
+</odoo>

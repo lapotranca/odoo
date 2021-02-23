@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/l10n_mx_edi_hr_expense/static/src/sass/widget.scss"/>
+            <script type="text/javascript" src="/l10n_mx_edi_hr_expense/static/src/js/checks_widget.js" ></script>
+            <script type="text/javascript" src="/l10n_mx_edi_hr_expense/static/src/js/checklist_animation.js" ></script>
+        </xpath>
+    </template>
+</odoo>

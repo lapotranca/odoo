@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<odoo>
+    <!--Email templates for expenses -->
+    <record id="mail_template_expense_downloaded" model="mail.template">
+        <field name="name">Expenses: Just received email</field>
+        <field name="model_id" ref="hr_expense.model_hr_expense"/>
+        <field name="subject">Expense: (Ref ${object.name or 'n/a' })</field>
+        <field name="partner_to">${object.employee_id.address_home_id.id}</field>
+        <field name="body_html" type="xml">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Dear ${object.employee_id.address_home_id.name}<br/><br/>
+        Thank you for use our expense system.
+        Here is your acknowledge receipt.
+    </p>
+    <h1>Need help?</h1>
+    <p>Check this video tutorial about <a href="https://youtu.be/lm3yMCdXClk">how administer your expenses</a>.
+    </p>
+    <!-- ${object.l10n_mx_edi_analysis_html|safe} -->
+    ${object.with_context({'animate': False}).l10n_mx_edi_functional_details_html|safe}
+</div>
+</field>
+        <field name="report_name">${(object.name or '').replace('/','-')}</field>
+        <field name="auto_delete" eval="True"/>
+        <field name="user_signature" eval="False"/>
+    </record>
+
+    <!--Email templates for expenses -->
+    <record id="mail_template_expense_draft" model="mail.template">
+        <field name="name">Expenses: Just received email</field>
+        <field name="model_id" ref="hr_expense.model_hr_expense"/>
+        <field name="subject">Expense: (Ref ${object.name or 'n/a' })</field>
+        <field name="partner_to">${object.employee_id.address_home_id.id}</field>
+        <field name="body_html" type="xml">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Dear ${object.employee_id.address_home_id.name}<br/><br/>
+        Thank you for use our expense system.
+        Here is your acknowledge receipt.
+
+        Which are the next steps:
+
+        on DRAFT
+    </p>
+</div>
+</field>
+        <field name="report_name">${(object.name or '').replace('/','-')}</field>
+        <field name="auto_delete" eval="True"/>
+        <field name="user_signature" eval="False"/>
+    </record>
+    <!--Email templates for expenses -->
+    <record id="mail_template_functional" model="mail.template">
+        <field name="name">Expenses Check: Just received email</field>
+        <field name="model_id" ref="hr_expense.model_hr_expense"/>
+        <field name="subject">Result of automatic checks: (Ref ${object.name or 'n/a' })</field>
+        <field name="partner_to">${object.employee_id.address_home_id.id}</field>
+        <field name="body_html" type="xml">
+            <div style="margin: 0px; padding: 0px;">
+                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                Dear ${object.employee_id.address_home_id.name}<br/><br/>
+                Thank you for use our expense system.
+                Here is your acknowledge receipt.
+                </p>
+                <h1>Need help?</h1>
+                <p>Check this video tutorial about <a href="https://youtu.be/lm3yMCdXClk">how administer your expenses</a>.
+                </p>
+            </div>
+        </field>
+    </record>
+    <record id="mail_act_expense_approval_amount_limit" model="mail.activity.type">
+        <field name="name">Expense exceeds amount limit</field>
+        <field name="icon">fa-dollar</field>
+        <field name="res_model_id" ref="hr_expense.model_hr_expense"/>
+    </record>
+    <data noupdate="1">
+        <record id="mail_template_expense_amount_limit_notification" model="mail.template">
+            <field name="name">Expenses: Limit Amount Notification</field>
+            <field name="model_id" ref="hr_expense.model_hr_expense"/>
+            <field name="subject">Expense: (Ref ${object.name or 'n/a' })</field>
+            <field name="partner_to">${ctx['partners']}</field>
+            <field name="body_html" type="xml">
+            <div style="margin: 0px; padding: 0px;">
+                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                    Hello<br/><br/>
+                    This email is to notify that the expense ${object.name|safe} exceeds the amount of ${object.employee_id.company_id.l10n_mx_expenses_amount|safe} ${object.employee_id.company_id.currency_id.name|safe}
+
+                    <br/><br/>
+                    The employee that report this expense is ${object.employee_id.name|safe} and is for ${object.total_amount|safe} ${object.currency_id.name|safe}
+
+                    <br/><br/>
+                    Best Regards,
+                </p>
+            </div>
+            </field>
+            <field name="auto_delete" eval="True"/>
+            <field name="user_signature" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<odoo>
+    <!--Happy path of a deductible expense with Invalid RFC-->
+    <record id="ciel" model="hr.expense">
+        <field name="name">Compra de Agua para la oficina</field>
+        <field name="employee_id" ref="hr.employee_admin"/>
+        <field name="product_id" ref="hr_expense.air_ticket"/>
+        <field eval="0.0" name="unit_amount"/>
+        <field name="product_uom_id" ref="uom.product_uom_unit"/>
+        <field eval="0.0" name="quantity"/>
+    </record>
+    <record id="ciel_attach_xml" model="ir.attachment">
+        <field name="datas" type="base64" file="l10n_mx_edi_hr_expense/static/src/demo/ECO820331KB5_VAU111017CG9_COLXG_1887.XML"/>
+        <field name="name">ECO820331KB5_VAU111017CG9_COLXG_1887.XML</field>
+        <field name="res_model">hr.expense</field>
+        <field name="res_id" ref="ciel"/>
+    </record>
+    <record id="ciel_attach_pdf" model="ir.attachment">
+        <field name="datas" type="base64" file="l10n_mx_edi_hr_expense/static/src/demo/ECO820331KB5_VAU111017CG9_COLXG_1887.PDF"/>
+        <field name="name">ECO820331KB5_VAU111017CG9_COLXG_1887.PDF</field>
+        <field name="res_model">hr.expense</field>
+        <field name="res_id" ref="ciel"/>
+    </record>
+    <record id="ciel_msg" model="mail.message">
+        <field name="subject">Compra de Agua para la oficina</field>
+        <field name="model">hr.expense</field>
+        <field name="res_id" ref="ciel"/>
+        <field name="author_id" ref="base.partner_admin"/>
+        <field name="email_from">jdunagan@leclub.example.com</field>
+        <field name="body"><![CDATA[<p>Hello,<br />
+        I just pay for this</p>]]></field>
+        <field name="message_type">email</field>
+        <field name="subtype_id" ref="mail.mt_comment"/>
+        <field name="attachment_ids" eval="[(6, 0, [ref('ciel_attach_xml'), ref('ciel_attach_pdf')])]"/>
+    </record>
+    <!--Happy path of a deductible expense with valid RFC [On SAT -->
+    <record id="amazon" model="hr.expense">
+        <field name="name">Compre esto por amazon</field>
+        <field name="employee_id" ref="hr.employee_admin"/>
+        <field name="product_id" ref="hr_expense.air_ticket"/>
+        <field eval="0.0" name="unit_amount"/>
+        <field name="product_uom_id" ref="uom.product_uom_unit"/>
+        <field eval="0.0" name="quantity"/>
+    </record>
+    <record id="amazon_xml" model="ir.attachment">
+        <field name="datas" type="base64" file="l10n_mx_edi_hr_expense/static/src/demo/CFDI-amazon.xml"/>
+        <field name="name">CFDI-amazon.xml</field>
+        <field name="res_model">hr.expense</field>
+        <field name="res_id" ref="amazon"/>
+    </record>
+    <record id="amazon_pdf" model="ir.attachment">
+        <field name="datas" type="base64" file="l10n_mx_edi_hr_expense/static/src/demo/CFDI-amazon.pdf"/>
+        <field name="name">CFDI-amazon.pdf</field>
+        <field name="res_model">hr.expense</field>
+        <field name="res_id" ref="amazon"/>
+    </record>
+    <record id="amazon_msg" model="mail.message">
+        <field name="subject">Compramos esta nevera</field>
+        <field name="model">hr.expense</field>
+        <field name="res_id" ref="amazon"/>
+        <field name="author_id" ref="base.partner_admin"/>
+        <!--<field name="email_from"></field>-->
+        <field name="body"><![CDATA[<p>Hello,<br />
+        I just pay for this</p>]]></field>
+        <field name="message_type">email</field>
+        <field name="subtype_id" ref="mail.mt_comment"/>
+        <field name="attachment_ids" eval="[(6, 0, [ref('amazon_pdf'), ref('amazon_xml')])]"/>
+    </record>
+
+    <!-- When partner is duplicated by mistake, the generation of an error was
+    triggered then I will create amazon twice intentionally in order to ensure
+    that error never happen again -->
+    <record id="amazon_contact" model="res.partner">
+        <field name="name">Servicios Comerciales Amazon México S. de R.L. de C.V.</field>
+        <field name="vat">ANE140618P37</field>
+        <field name="zip">05348</field>
+        <field name="is_company">1</field>
+        <field name="country_id" ref="base.mx"/>
+    </record>
+    <record id="amazon_contact_duplicated" model="res.partner">
+        <field name="name">Servicios Comerciales Duplicated Amazon México S. de R.L. de C.V.</field>
+        <field name="vat">ANE140618P37</field>
+        <field name="zip">05348</field>
+        <field name="is_company">1</field>
+        <field name="country_id" ref="base.mx"/>
+    </record>
+
+
+</odoo>

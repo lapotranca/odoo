@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<odoo>
+    <record model="ir.ui.view" id="res_partner_view_form_inherit_expense">
+        <field name="name">res.partner.view.form.inherit.expenses</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="arch" type="xml">
+            <group name="purchase" position="inside">
+                <field name="accountant_company_currency_id"/>
+                <field name="accountant_foreign_currency_id"/>
+            </group>
+        </field>
+    </record>
+</odoo>

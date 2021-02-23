@@ -1,0 +1,2167 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * l10n_mx_edi_hr_expense
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-31 17:49+0000\n"
+"PO-Revision-Date: 2019-03-31 17:49+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:mail.template,report_name:l10n_mx_edi_hr_expense.mail_template_expense_downloaded
+#: model:mail.template,report_name:l10n_mx_edi_hr_expense.mail_template_expense_draft
+msgid "${(object.name or '').replace('/','-')}"
+msgstr "${(object.name or '').replace('/','-')}"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:mail.template,body_html:l10n_mx_edi_hr_expense.mail_template_expense_amount_limit_notification
+msgid "<?xml version=\"1.0\"?>\n"
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    Hello<br/><br/>\n"
+"                    This email is to notify that the expense ${object.name|safe} exceeds the amount of ${object.employee_id.company_id.l10n_mx_expenses_amount|safe} ${object.employee_id.company_id.currency_id.name|safe}\n"
+"\n"
+"                    <br/><br/>\n"
+"                    The employee that report this expense is ${object.employee_id.name|safe} and is for ${object.total_amount|safe} ${object.currency_id.name|safe}\n"
+"\n"
+"                    <br/><br/>\n"
+"                    Best Regards,\n"
+"                </p>\n"
+"            </div>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    Hola<br/><br/>\n"
+"                    Este correo electrónico es para notificar que el gasto ${object.name|safe} excede la cantidad de ${object.employee_id.company_id.l10n_mx_expenses_amount|safe} ${object.employee_id.company_id.currency_id.name|safe}\n"
+"\n"
+"                    <br/><br/>\n"
+"                    El empleado que reporta este gasto es ${object.employee_id.name|safe} y es por ${object.total_amount|safe} ${object.currency_id.name|safe}\n"
+"\n"
+"                    <br/><br/>\n"
+"                    Saludos,\n"
+"                </p>\n"
+"            </div>\n"
+"            "
+
+#. module: l10n_mx_edi_hr_expense
+#: model:mail.template,body_html:l10n_mx_edi_hr_expense.mail_template_functional
+msgid "<?xml version=\"1.0\"?>\n"
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                Dear ${object.employee_id.address_home_id.name}<br/><br/>\n"
+"                Thank you for use our expense system.\n"
+"                Here is your acknowledge receipt.\n"
+"                </p>\n"
+"                <h1>Need help?</h1>\n"
+"                <p>Check this video tutorial about <a href=\"https://youtu.be/lm3yMCdXClk\">how administer your expenses</a>.\n"
+"                </p>\n"
+"            </div>\n"
+"        "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                Estimado ${object.employee_id.address_home_id.name}<br/><br/>\n"
+"                Gracias por usar nuestro sistema de gastos.\n"
+"                Aquí está su acuse de recibo.\n"
+"                </p>\n"
+"                <h1>Necesita ayuda?</h1>\n"
+"                <p>Revise este video tutorial sobre <a href=\"https://youtu.be/lm3yMCdXClk\">cómo administrar sus gastos</a>.\n"
+"                </p>\n"
+"            </div>\n"
+"        "
+
+#. module: l10n_mx_edi_hr_expense
+#: model:mail.template,body_html:l10n_mx_edi_hr_expense.mail_template_expense_draft
+msgid "<?xml version=\"1.0\"?>\n"
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Dear ${object.employee_id.address_home_id.name}<br/><br/>\n"
+"        Thank you for use our expense system.\n"
+"        Here is your acknowledge receipt.\n"
+"\n"
+"        Which are the next steps:\n"
+"\n"
+"        on DRAFT\n"
+"    </p>\n"
+"</div>\n"
+""
+msgstr "<?xml version=\"1.0\"?>\n"
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Estimado ${object.employee_id.address_home_id.name}<br/><br/>\n"
+"        Gracias por utilizar nuestro sistema de gastos.\n"
+"        Este es su acuse de recepción.\n"
+"\n"
+"        Cuales son los siguientes pasos:\n"
+"\n"
+"        en BORRADOR\n"
+"    </p>\n"
+"</div>\n"
+""
+
+#. module: l10n_mx_edi_hr_expense
+#: model:mail.template,body_html:l10n_mx_edi_hr_expense.mail_template_expense_downloaded
+msgid "<?xml version=\"1.0\"?>\n"
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Dear ${object.employee_id.address_home_id.name}<br/><br/>\n"
+"        Thank you for use our expense system.\n"
+"        Here is your acknowledge receipt.\n"
+"    </p>\n"
+"    <h1>Need help?</h1>\n"
+"    <p>Check this video tutorial about <a href=\"https://youtu.be/lm3yMCdXClk\">how administer your expenses</a>.\n"
+"    </p>\n"
+"    <!-- ${object.l10n_mx_edi_analysis_html|safe} -->\n"
+"    ${object.with_context({'animate': False}).l10n_mx_edi_functional_details_html|safe}\n"
+"</div>\n"
+""
+msgstr "<?xml version=\"1.0\"?>\n"
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Estimado ${object.employee_id.address_home_id.name}<br/><br/>\n"
+"        Gracias por utilizar nuestro sistema de gastos.\n"
+"        Este es su acuse de recepción.\n"
+"    </p>\n"
+"    <h1>¿Necesitas ayuda?</h1>\n"
+"    <p>Revisa este video tutorial sobre <a href=\"https://youtu.be/lm3yMCdXClk\">como administrar tus gastos</a>.\n"
+"    </p>\n"
+"    <!-- ${object.l10n_mx_edi_analysis_html|safe} -->\n"
+"    ${object.with_context({'animate': False}).l10n_mx_edi_functional_details_html|safe}\n"
+"</div>\n"
+""
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.res_config_settings_view_form_inherit_hr_expense_mx
+msgid "<span class=\"o_form_label\">Accountant</span>"
+msgstr "<span class=\"o_form_label\">Contador</span>"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.res_config_settings_view_form_inherit_hr_expense_mx
+msgid "<span class=\"o_form_label\">Notifications</span>"
+msgstr "<span class=\"o_form_label\">Notificaciones</span>"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.account_journal_dashboard_kanban_view
+msgid "<span title=\"Amount to Replenish\">Amount to Replenish</span>"
+msgstr "<span title=\"Cantidad a Reponer\">Cantidad a Reponer</span>"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.account_reports_journal_dashboard_kanban_view_account_manager
+msgid "<span title=\"Latest Statement\">Latest Statement</span>"
+msgstr "<span title=\"Último Extracto\">Último Extracto</span>"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.account_journal_dashboard_kanban_view
+msgid "<span title=\"Petty Cash Reserve\">Petty Cash Reserve</span>"
+msgstr "<span title=\"Fondo de Caja de Chica\">Fondo de Caja de Chica</span>"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__account_id
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_l10n_mx_edi_reclassify_journal_entries__account_id
+msgid "Account"
+msgstr "Cuenta"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_employee__l10n_mx_edi_credit_account_id
+msgid "Account defined in the journal to use when the employee paid an invoice from an expense."
+msgstr "Cuenta definida en el diario para ser utilizada cuando el empleado paga una factura de un gasto."
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_employee__l10n_mx_edi_debit_account_id
+msgid "Account defined in the journal to use when the employee receive money for expenses."
+msgstr "Cuenta definida en el diario para ser utilizada para reembolsar dinero al empleado de un gasto."
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_employee__l10n_mx_edi_accountant
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_accountant
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense_sheet__l10n_mx_edi_accountant
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.res_config_settings_view_form_inherit_hr_expense_mx
+msgid "Accountant"
+msgstr "Contador"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_res_company__accountant_company_currency_id
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_res_config_settings__accountant_company_currency_id
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_res_partner__accountant_company_currency_id
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_res_users__accountant_company_currency_id
+msgid "Accountant MXN"
+msgstr "Contador MXN"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_res_partner__accountant_foreign_currency_id
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_res_users__accountant_foreign_currency_id
+msgid "Accountant Other Currencies"
+msgstr "Contador Otras Monedas"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_res_company__accountant_foreign_currency_id
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_res_config_settings__accountant_foreign_currency_id
+msgid "Accountant Other Currency"
+msgstr "Contador Otras Monedas"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Accounting"
+msgstr "Contabilidad"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_hr_expense_sheet_form
+msgid "Accrue Expense"
+msgstr "Provisionar Gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1281
+#, python-format
+msgid "Address looks Ok"
+msgstr "La dirección es correcta"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_res_company__l10n_mx_expenses_amount
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_res_config_settings__l10n_mx_expenses_amount
+msgid "After of this amount will be notified to the employees indicated."
+msgstr "Después esta cantidad se notificará a los empleados indicados."
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,l10n_mx_edi_functional:0
+msgid "All the functional checks Ok!"
+msgstr "Todas las revisiones funcionales Ok!"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model,name:l10n_mx_edi_hr_expense.model_l10n_mx_edi_reclassify_journal_entries
+msgid "Allow reclassify the journal entries"
+msgstr "Permitir reclasificar las entradas de diario"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.groups,name:l10n_mx_edi_hr_expense.allow_to_accrue_expenses
+msgid "Allow to Accrue Expenses"
+msgstr "Permitir provisionar gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.groups,name:l10n_mx_edi_hr_expense.allow_to_generate_expenses_2b_checked
+msgid "Allow to Generate Expenses to be Checked"
+msgstr "Permitir Generar Gastos por Comprobar"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.groups,name:l10n_mx_edi_hr_expense.allow_to_revert_expenses
+msgid "Allow to Revert Expenses"
+msgstr "Permitir Revertir Gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.groups,name:l10n_mx_edi_hr_expense.allow_to_approve_exp_wo_being_responsible
+msgid "Allow to approve expenses without being responsible"
+msgstr "Permitir aprobar gastos sin ser responsable."
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.groups,name:l10n_mx_edi_hr_expense.force_expense
+msgid "Allow to force approval on expenses"
+msgstr "Permitir forzar aprobación en los gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.groups,name:l10n_mx_edi_hr_expense.reclassify_journal_entries_expense
+msgid "Allow to reclassify journal entries on expenses"
+msgstr "Permitir reclasificar las entradas de diarios en gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.groups,name:l10n_mx_edi_hr_expense.allow_to_see_employee_payments
+msgid "Allow to see Employee Payments"
+msgstr "Permitir ver el empleando en el pago"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Allow without fiscal"
+msgstr "Permitir sin fiscal"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Allow without functional"
+msgstr "Permitir sin funcional"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_account_journal__l10n_mx_edi_amount_authorized_diff
+msgid "Amount Authorized Difference (Invoice)"
+msgstr "Monto Autorizado de Diferencia (Factura)"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_subtotal
+msgid "Amount Subtotal"
+msgstr "Cantidad Subtotal"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_account_journal__petty_cash_reserve
+msgid "Amount to be allocated as permanent reserve that is to be fulfilled whenever possible"
+msgstr "Cantidad a ser dispuesta como fondo permanente que se deberá reponer cuando sea posible"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__account_id
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_l10n_mx_edi_reclassify_journal_entries__account_id
+msgid "An expense account is expected"
+msgstr "Se espera una cuenta de gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_analysis
+msgid "Analysis"
+msgstr "Análisis"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_analysis_html
+msgid "Analysis HTML"
+msgstr "Análisis HTML"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,state:0
+msgid "Approved"
+msgstr "Aprobado"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1467
+#, python-format
+msgid "Approved was forced"
+msgstr "La aprobación fue forzada"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Attach Document"
+msgstr "Adjuntar documento"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model,name:l10n_mx_edi_hr_expense.model_ir_attachment
+msgid "Attachment"
+msgstr "Adjunto"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.partner.category,name:l10n_mx_edi_hr_expense.tag_expense_autovalidate
+msgid "Auto validate Vendor Bills"
+msgstr "Validar automáticamente las facturas de compra"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "CFDI Totals"
+msgstr "Totales CFDI"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1346
+#, python-format
+msgid "CFDI is not valid in the SAT"
+msgstr "CFDI valido en el SAT"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1347
+#, python-format
+msgid "CFDI is valid in the SAT"
+msgstr "CFDI no válido en el SAT"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_l10n_mx_edi_reclassify_journal_entries
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,l10n_mx_edi_sat_status:0
+msgid "Cancelled on SAT"
+msgstr "Cancelado en el SAT"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Check Functional"
+msgstr "Revisión Funcional"
+
+#. module: l10n_mx_edi_hr_expense
+#. openerp-web
+#: code:addons/l10n_mx_edi_hr_expense/static/src/xml/checks_widget.xml:50
+#, python-format
+msgid "Checks"
+msgstr "Revisiones"
+
+#. module: l10n_mx_edi_hr_expense
+#. openerp-web
+#: code:addons/l10n_mx_edi_hr_expense/static/src/xml/checks_widget.xml:59
+#, python-format
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model,name:l10n_mx_edi_hr_expense.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,payment_mode:0
+msgid "Company (Generate a payable for the supplier)."
+msgstr "Compañía (Generar un pago para el proveedor)"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1280
+#, python-format
+msgid "Company Address do not match"
+msgstr "La dirección de la compañía no coincide"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_fiscally_approved
+msgid "Comply with the fiscal checks?"
+msgstr "¿Cumple con las revisiones fiscales?"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_functionally_approved
+msgid "Comply with the functional checks?"
+msgstr "¿Cumple con las revisiones funcionales?"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model,name:l10n_mx_edi_hr_expense.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de Configuración"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.res_config_settings_view_form_inherit_hr_expense_mx
+msgid "Configure expense notification"
+msgstr "Configuración de notificaciones de gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.res_config_settings_view_form_inherit_hr_expense_mx
+msgid "Configure the generic accountants by currency"
+msgstr "Configure los contadores genéricos por moneda"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model,name:l10n_mx_edi_hr_expense.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_employee_mx_expense_form
+msgid "Contact Information"
+msgstr "Información de contacto"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1219
+#, python-format
+msgid "Correct RFC"
+msgstr "RFC Correcto"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_count_cfdi
+msgid "Count CFDI's"
+msgstr "Contador de CFDIs"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.partner.category,name:l10n_mx_edi_hr_expense.tag_invoice_draft
+msgid "Create Invoices Draft"
+msgstr "Crear Facturas en Borrador"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Create Partner"
+msgstr "Crear Proveedor"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Create Report"
+msgstr "Crear informe"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_l10n_mx_edi_reclassify_journal_entries__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.partner.category,name:l10n_mx_edi_hr_expense.tag_expenses
+msgid "Created for Expenses"
+msgstr "Creado para Gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_l10n_mx_edi_reclassify_journal_entries__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_employee__l10n_mx_edi_credit_account_id
+msgid "Creditor Number"
+msgstr "Número de Acreedor"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1261
+#, python-format
+msgid "Currency Active"
+msgstr "Moneda Activa"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1260
+#, python-format
+msgid "Currency Disabled"
+msgstr "Moneda Desactivada"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__date
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_l10n_mx_edi_reclassify_journal_entries__date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_date
+msgid "Date (att)"
+msgstr "Fecha (adj)"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1270
+#, python-format
+msgid "Date Valid in period"
+msgstr "Fecha dentro del periodo"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_date
+msgid "Date on the CFDI attached [If 1 if several we will need to split them]"
+msgstr "Fecha en el CFDI adjunto [Si es 1, si son varios se necesita dividirlos]"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__date
+msgid "Date the payment was created in the system"
+msgstr "Fecha en que el pago fue creado en el sistema"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_l10n_mx_edi_reclassify_journal_entries__date
+msgid "Date to assign in the expenses related"
+msgstr "Fecha a asignar en los gastos relacionados"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_employee__l10n_mx_edi_debit_account_id
+msgid "Debtor Number"
+msgstr "Número de Deudor"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_account_journal__is_petty_cash
+msgid "Defines if this journal is to be treated as a Petty Cash"
+msgstr "Define si el diario se va a tratar como una Caja Chica"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__name
+msgid "Description"
+msgstr "Descripción"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_l10n_mx_edi_merge_expense__expense_id
+msgid "Destination Expense"
+msgstr "Gasto de Destino"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_l10n_mx_edi_merge_expense__expense_id
+msgid "Destination expense after merge."
+msgstr "Gasto de destino después del merge"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.account_reports_journal_dashboard_kanban_view_account_manager
+msgid "Difference"
+msgstr "Diferencia"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_discount
+msgid "Discount"
+msgstr "Descuento"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_l10n_mx_edi_reclassify_journal_entries__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_document_type
+msgid "Document Type"
+msgstr "Tipo de Documento"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Documents"
+msgstr "Documentos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__email_from
+msgid "Email From"
+msgstr "Correo De"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_rfc
+msgid "Emitter"
+msgstr "Emisor"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model,name:l10n_mx_edi_hr_expense.model_hr_employee
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_account_payment__l10n_mx_edi_employee_id
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_employee_mx_expense_form
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,payment_mode:0
+msgid "Employee (to reimburse)"
+msgstr "Empleado (a reembolsar)"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_account_journal_filter_petty_cash
+msgid "Employee Petty Cash"
+msgstr "Caja Chica de Empleado"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_account_payment__l10n_mx_edi_employee_id
+msgid "Employee that will to accrue this payment. If this payment is an advance for an supplier and must be accrue for an employee, set here it."
+msgstr "Empleado que va a reponer este gasto. Si este pago es un anticipo a proveedor y debe ser reportado por un empleado, selecciona aquí."
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_employee_mx_expense_form
+msgid "Employee's Name"
+msgstr "Nombre del empleado"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_res_company__l10n_mx_edi_employee_ids
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_res_config_settings__l10n_mx_edi_employee_ids
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.res_config_settings_view_form_inherit_hr_expense_mx
+msgid "Employees"
+msgstr "Empleados"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_account_journal__l10n_mx_edi_employee_ids
+msgid "Employees that could to use this journal."
+msgstr "Empleados que pueden utilizar este diario"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:804
+#, python-format
+msgid "Error during the process: %s"
+msgstr ""
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model,name:l10n_mx_edi_hr_expense.model_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_account_invoice__l10n_mx_edi_expense_id
+msgid "Expense"
+msgstr "Gasto"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model,name:l10n_mx_edi_hr_expense.model_hr_expense_sheet
+msgid "Expense Report"
+msgstr "Informe de Gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_account_invoice__l10n_mx_edi_expense_sheet_id
+msgid "Expense Sheet"
+msgstr "Grupo de Gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:mail.activity.type,name:l10n_mx_edi_hr_expense.mail_act_expense_approval_amount_limit
+msgid "Expense exceeds amount limit"
+msgstr "El gasto excede el monto limite"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:mail.template,subject:l10n_mx_edi_hr_expense.mail_template_expense_amount_limit_notification
+#: model:mail.template,subject:l10n_mx_edi_hr_expense.mail_template_expense_downloaded
+#: model:mail.template,subject:l10n_mx_edi_hr_expense.mail_template_expense_draft
+msgid "Expense: (Ref ${object.name or 'n/a' })"
+msgstr "Gasto: (Ref ${object.name or 'n/a' })"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_employee.py:84
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_employee.py:97
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:207
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_l10n_mx_edi_merge_expense__expense_ids
+#: model:ir.module.category,name:l10n_mx_edi_hr_expense.res_category_expenses_mx
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_employee_view_form_inherit_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_employee_mx_expense_form
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_hr_expense_sheet_tree
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_l10n_mx_edi_merge_expense
+#, python-format
+msgid "Expenses"
+msgstr "Gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.res_config_settings_view_form_inherit_hr_expense_mx
+msgid "Expenses (MX)"
+msgstr "Gastos (MX)"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_employee__expenses_count
+msgid "Expenses Count"
+msgstr "Contador de Gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:179
+#, python-format
+msgid "Expenses Paid"
+msgstr "Gasto Pagado"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_employee_view_form_inherit_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_employee_mx_expense_form
+msgid "Expenses Sheets"
+msgstr "Hojas de Gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_l10n_mx_edi_merge_expense__expense_ids
+msgid "Expenses to merge with the current."
+msgstr "Gastos a ser mezclados con el actual."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1630
+#, python-format
+msgid "FUEL - IEPS"
+msgstr "GASOLINA - IEPS"
+
+#. module: l10n_mx_edi_hr_expense
+#. openerp-web
+#: code:addons/l10n_mx_edi_hr_expense/static/src/xml/checks_widget.xml:11
+#, python-format
+msgid "Failed checks"
+msgstr "Revisiones fallidas"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Fiscal"
+msgstr ""
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Fiscal CHeck"
+msgstr "Revisión Fiscal"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_hr_expense_sheet_form
+msgid "Fiscally"
+msgstr "Fiscalmente"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_fiscally_approved
+msgid "Fiscally Approved"
+msgstr "Aprobado Fiscalmente"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1456
+#, python-format
+msgid "Fiscally Approved was forced"
+msgstr "La aprobación fiscal fue forzada"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.res_config_settings_view_form_inherit_hr_expense_mx
+msgid "For MXN"
+msgstr "Para MXN"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.res_config_settings_view_form_inherit_hr_expense_mx
+msgid "For other currencies"
+msgstr "Para Otras Monedas"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.partner.category,name:l10n_mx_edi_hr_expense.tag_force_invoice_generation
+msgid "Force Invoice Generation"
+msgstr "Forzar la generación de facturas"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.partner.category,name:l10n_mx_edi_hr_expense.tag_force_invoice_total
+msgid "Force Invoices Total"
+msgstr "Forzar el Total en Facturas"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Force all"
+msgstr "Forzar todo"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_hr_expense_sheet_form
+msgid "Forced"
+msgstr "Forzado"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_forced_approved
+msgid "Forced Approved"
+msgstr "Aprobación Forzada"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_functional_details_html
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Functional"
+msgstr "Funcional"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_functional_details
+msgid "Functional Details"
+msgstr "Detalles Funcionales"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_functional
+msgid "Functional status"
+msgstr "Estado funcional"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_hr_expense_sheet_form
+msgid "Functionally"
+msgstr "Funcionalmente"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_functionally_approved
+msgid "Functionally Approved"
+msgstr "Aprobado Funcionalmente"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1445
+#, python-format
+msgid "Functionally Approved was forced"
+msgstr "La aprobación funcional fue forzada"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_expenses_tree
+msgid "Group"
+msgstr "Grupo"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_employee_mx_expense_form
+msgid "HR Settings"
+msgstr "Configuración RRHH"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1295
+#, python-format
+msgid "I checked if there is a valid xml in the expense attached"
+msgstr "Verifiqué si hay un xml válido en el gasto adjunto"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_l10n_mx_edi_reclassify_journal_entries__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_mx_edi_hr_expense
+#: model:product.product,name:l10n_mx_edi_hr_expense.product_product_ieps
+#: model:product.template,name:l10n_mx_edi_hr_expense.product_product_ieps_product_template
+msgid "IEPS"
+msgstr ""
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_is_to_check
+msgid "If is marked, the expense wait for the CFDI with the fiscal data, and must be merged with the expense with a CFDI."
+msgstr "Si se marca, el gasto esperará por el CFDI con la información fiscal, y deberá ser mezclado con el gasto del CFDI."
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__active
+msgid "In the line this will be necessary to split the expenses once they are received."
+msgstr "En la linea esto será necesario para dividir los gastos una vez sean recibidos."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1218
+#, python-format
+msgid "Incorrect RFC"
+msgstr "RFC Incorrecto"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_functional
+msgid "Inform the functional status regarding other data in the system"
+msgstr "Informa el estado funcional de acuerdo a la data en el sistema"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model,name:l10n_mx_edi_hr_expense.model_account_move
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_invoice_id
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_account_invoice__date_invoice
+msgid "Invoice Date"
+msgstr "Fecha factura"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_invoice_id
+msgid "Invoice created with this expense"
+msgstr "Factura creada con este gasto"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1301
+#, python-format
+msgid "Invoice reference unique"
+msgstr "Referencia única por factura"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1473
+#, python-format
+msgid "Invoices"
+msgstr "Facturas"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:146
+#, python-format
+msgid "Invoices Open"
+msgstr "Facturas Abiertas"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:162
+#, python-format
+msgid "Invoices Paid"
+msgstr "Facturas Pagadas"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.partner.category,name:l10n_mx_edi_hr_expense.tag_is_airline
+msgid "Is Airline"
+msgstr "Es Aerolínea"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_account_journal__is_petty_cash
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_account_journal_filter_petty_cash
+msgid "Is Petty Cash"
+msgstr "Es Caja Chica"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_is_to_check
+msgid "Is to check?"
+msgstr "¿Es por comprobar?"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1274
+#, python-format
+msgid "It is inside the safety period (current period or max 5 days at the beginning of the next)"
+msgstr "Esta dentro del periodo de seguridad (periodo actual o máximo a 5 días de haber comenzado el siguiente)"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1291
+#, python-format
+msgid "It is not deductible."
+msgstr "Este no es deducible."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1348
+#, python-format
+msgid "It looks like the CFDI attached is not registered in the SAT system or is cancelled."
+msgstr "Parece que el CFDI adjunto no esta registrado en el SAT o esta cancelada."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1413
+#, python-format
+msgid "It looks like the CFDI have Local Taxes complement and some of that taxes are not found."
+msgstr "Parece que el CFDI tiene complemento de Impuestos Locales y algunos de los impuestos no se encontraron."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1416
+#, python-format
+msgid "It looks like the CFDI have Local Taxes complement and that taxes are found."
+msgstr "Parece que el CFDI tiene complemento de Impuestos Locales y los impuestos se encontraron."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1429
+#, python-format
+msgid "It looks like the CFDI have Local Taxes complement, the taxes are found and the account is properly in the tax."
+msgstr "Parece que el CFDI tiene complemento de Impuestos Locales, los impuestos se encontraron y la cuenta esta configurada correctamente."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1426
+#, python-format
+msgid "It looks like the CFDI have Local Taxes complement, the taxes are found but the account is missing in the tax."
+msgstr "Parece que el CFDI tiene complemento de Impuestos Locales, los impuestos se encontraron pero falta configurar la cuenta."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1335
+#, python-format
+msgid "It looks like this expense must be paid by the company but our policy is that the payment way must be '99' in order to be paid as a payable after approval or this was paid by the employee and is a mistake, change the payment mode and try again to check functionally (clicking on the button)"
+msgstr "Parece que este gasto va a ser pagado por la compañía pero nuestra política es que la forma de pago debe ser '99' para ser pagada después de la aprobación o este debe ser pagado por el empleado y es un error, cambie quien va a pagar el gasto e intente nuevamente la revisión funcional (presionando el botón)"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1322
+#, python-format
+msgid "It looks like this expense must be paid by the company but our policy is that this must be PPD in order to be paid as a payable after approval or this was paid by the employee and is a mistake, change the payment mode and try again to check functionally (clicking on the button)"
+msgstr "Parece que este gasto debe ser pagado por la compañía pero nuestra política es que este debe ser PPD para ser pagada después de la aprobación o este debe ser pagado por el empleado y es un error, cambie quien va a pagar el gasto e intente nuevamente la revisión funcional (presionando el botón)"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1404
+#, python-format
+msgid "It looks like you tried to create an expense for a refund and the node 'CfdiRelacionados' in the CFDI is found."
+msgstr "Parece que se esta intentando generar un gasto para una nota de crédito y el nodo 'CfdiRelacionados' se encuentra en el CFDI"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1376
+#, python-format
+msgid "It looks like you tried to create an expense for a refund, and in that case must be paid by the company."
+msgstr "Parece que se esta intentando generar un gasto para una nota de crédito, y en este caso debe ser pagado por la compañía"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1379
+#, python-format
+msgid "It looks like you tried to create an expense for a refund, and is paid by the company."
+msgstr "Parece que se esta intentando generar un gasto para una nota de crédito, y este es pagado por la compañía"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1388
+#, python-format
+msgid "It looks like you tried to create an expense for a refund, but the CFDI related is not found. First create the invoice and after the refund."
+msgstr "Parece que se esta intentando generar un gasto para una nota de crédito, pero el CFDI relacionado no se encuentra. Primero cree la factura y después la nota de crédito."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1401
+#, python-format
+msgid "It looks like you tried to create an expense for a refund, but the node 'CfdiRelacionados' is not found."
+msgstr "Parece que se esta intentando generar un gasto para una nota de crédito, pero el nodo 'CfdiRelacionados' no se encuentra."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1312
+#, python-format
+msgid "It looks like you tried to create an expense with more than 1 cfdi, please send 1 email per cfdi or split them manually throught odoo"
+msgstr "Parece que se esta intentando generar un gasto con más de un CFDI, por favor envié un correo por cada CFDI o haga la division manualmente en Odoo"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model,name:l10n_mx_edi_hr_expense.model_account_journal
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_employee__journal_id
+msgid "Journal"
+msgstr "Diario"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_move_id
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_move_line_id
+msgid "Journal Item"
+msgstr "Apunte contable"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1364
+#, python-format
+msgid "Journal defined for the employee!"
+msgstr "Diario definido para este empleado!"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1363
+#, python-format
+msgid "Journal not defined for the employee"
+msgstr "Diario no definido para este empleado"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,state:0
+msgid "Just Downloaded"
+msgstr "Solo Descargado"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_account_invoice__date_invoice
+msgid "Keep empty to use the current date"
+msgstr "Dejarlo vacío para utilizar la fecha actual."
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_account_journal__l10n_mx_edi_employee_ids
+msgid "L10N Mx Edi Employee"
+msgstr ""
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_l10n_mx_edi_reclassify_journal_entries____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_l10n_mx_edi_reclassify_journal_entries__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_l10n_mx_edi_reclassify_journal_entries__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.res_config_settings_view_form_inherit_hr_expense_mx
+msgid "Limit amount"
+msgstr "Monto limite"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_res_company__l10n_mx_expenses_amount
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_res_config_settings__l10n_mx_expenses_amount
+msgid "Limit amount for expenses"
+msgstr "Monto limite para gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense_sheet__user_id
+msgid "Manager"
+msgstr "Responsable"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.actions.act_window,name:l10n_mx_edi_hr_expense.action_l10n_mx_edi_merge_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Merge Expense"
+msgstr "Mezclar Gasto"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_l10n_mx_edi_merge_expense
+msgid "Merge Expenses"
+msgstr "Mezclar Gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_l10n_mx_edi_merge_expense
+msgid "Merge the following expenses"
+msgstr "Mezclar con los siguientes gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1310
+#, python-format
+msgid "More than 1 CFDI"
+msgstr "Más de un CFDI"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_hr_expense_sheet_filter
+msgid "My Expenses as Accountant"
+msgstr "Mis Gastos como Contador"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1243
+#, python-format
+msgid "Neither you or somebody else try to declare this UUID as expenses before."
+msgstr "Nadie ha intentado declarar este CFDI como un gasto antes."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:424
+#, python-format
+msgid "New Expense Report"
+msgstr "Reporte de Gastos Nuevo"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1231
+#, python-format
+msgid "New UUID"
+msgstr "UUID Nuevo"
+
+#. module: l10n_mx_edi_hr_expense
+#. openerp-web
+#: code:addons/l10n_mx_edi_hr_expense/static/src/xml/checks_widget.xml:7
+#, python-format
+msgid "No checks performed yet"
+msgstr "Aún no se han realizado revisiones"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/wizard/merge_expenses.py:27
+#, python-format
+msgid "No expenses were found with the same attributes that this record. (Supplier, Employee and marked to be checked)"
+msgstr "No se encontraron gastos con los mismos atributos que este registro. (Proveedor, Empleado y marcados para ser comprobados)"
+
+#. module: l10n_mx_edi_hr_expense
+#. openerp-web
+#: code:addons/l10n_mx_edi_hr_expense/static/src/xml/checks_widget.xml:22
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.expense_checks_content
+#, python-format
+msgid "No information available"
+msgstr "Información no disponible"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1234
+#, python-format
+msgid "No other invoice with this uuid has been declared in the system"
+msgstr "No hay otra factura con este UUID declarada en el sistema"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,l10n_mx_edi_functional:0
+msgid "Not checked yet"
+msgstr "No se había revisado antes"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1269
+#, python-format
+msgid "Not in the period"
+msgstr "No esta en el periodo"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,l10n_mx_edi_sat_status:0
+msgid "Not synced yet with SAT"
+msgstr "No se ha sincronizado con el SAT"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Notes..."
+msgstr "Notas..."
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.res_config_settings_view_form_inherit_hr_expense_mx
+msgid "Notifications"
+msgstr "Notificaciones"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense_sheet__l10n_mx_edi_expenses_count
+msgid "Number of Expenses"
+msgstr "Número de Gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense_sheet__l10n_mx_edi_open_expenses_count
+msgid "Number of Open Expenses"
+msgstr "Número de Gastos Abiertos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense_sheet__l10n_mx_edi_invoices_count
+msgid "Number of Open Invoices"
+msgstr "Número de Facturas Abiertas"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense_sheet__l10n_mx_edi_paid_expenses_count
+msgid "Number of Paid Expenses"
+msgstr "Número de Gastos Pagados"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense_sheet__l10n_mx_edi_paid_invoices_count
+msgid "Number of Paid Invoices"
+msgstr "Número de Facturas Pagadas"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1315
+#, python-format
+msgid "Ok"
+msgstr ""
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.partner.category,name:l10n_mx_edi_hr_expense.tag_omit_invoice_amount_check
+msgid "Omit amount check with CFDI"
+msgstr "Omitir revisión de total con el CFDI"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1311
+#, python-format
+msgid "Only 1 CFDI"
+msgstr "Solo 1 CFDI"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:219
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:248
+#, python-format
+msgid "Only Managers and HR Officers can approve expenses"
+msgstr ""
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1976
+#, python-format
+msgid "Only the users in the group \"Allow to Revert Expenses\" could execute this action."
+msgstr "Solo los usuarios en el grupo \"Permitir Revertir Gastos\" pueden ejecutar esta acción."
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_hr_expense_sheet_form
+msgid "Open Expenses"
+msgstr "Gastos Abiertos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_hr_expense_sheet_form
+msgid "Open Invoices"
+msgstr "Facturas Abiertas"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_employee_mx_expense_form
+msgid "Other Information ..."
+msgstr "Otra información..."
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,state:0
+msgid "Paid"
+msgstr "Pagado"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__payment_mode
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense_sheet__payment_mode
+msgid "Paid By"
+msgstr "Pagado Por"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_hr_expense_sheet_form
+msgid "Paid Expenses"
+msgstr "Gastos Pagados"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_hr_expense_sheet_form
+msgid "Paid Invoices"
+msgstr "Facturas Pagadas"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__partner_id
+msgid "Partner that generated this invoices"
+msgstr "Proveedor que generó esta factura"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1320
+#, python-format
+msgid "Payment Method is PPD and will be paid by us or PUE and was paid by the employee"
+msgstr "El Método de Pago es PPD y va a ser pagado por nosotros o es PUE yfue pagada por el empleado"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_employee__l10n_mx_edi_payment_mode
+msgid "Payment Mode"
+msgstr "Pagado Por"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1329
+#, python-format
+msgid "Payment method is Ok!"
+msgstr "Método de pago es correcto!"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1319
+#, python-format
+msgid "Payment method is not PPD to be paid by us"
+msgstr "El método de pago no es PPD para ser pagado por nosotros"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1334
+#, python-format
+msgid "Payment way is '99' and will be paid by us"
+msgstr "La forma de pago es '99' y va a ser pagada por nosotros"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1342
+#, python-format
+msgid "Payment way is Ok!"
+msgstr "La forma de pago esta bien!"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1333
+#, python-format
+msgid "Payment way is not '99' to be paid by us"
+msgstr "La forma de pago no es '99' para ser pagado por nosotros"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model,name:l10n_mx_edi_hr_expense.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,l10n_mx_edi_sat_status:0
+msgid "Perfectly valid on SAT"
+msgstr "Perfectamente validado en el SAT"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_employee__journal_ids
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense_sheet__petty_journal_id
+msgid "Petty Cash"
+msgstr "Caja Chica"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,payment_mode:0
+msgid "Petty Cash (Debit from the custody of the employee)"
+msgstr "Caja Chica (Débito en resguardo del empleado)"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_account_journal__petty_cash_reserve
+msgid "Petty Cash Reserve"
+msgstr "Fondo de Caja Chica"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_account_journal_l10n_mx_edi_amount_authorized_diff
+msgid "Petty Cash Settings"
+msgstr "Configuraciones de Caja Chica"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,l10n_mx_edi_sat_status:0
+msgid "Please split in several lines there is more than one invoice to check with SAT"
+msgstr "Por favor divida en varias lineas ya que hay más de una factura para verificar en el SAT"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_employee_mx_expense_form
+msgid "Position"
+msgstr "Cargo"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_employee_mx_expense_form
+msgid "Private Information"
+msgstr "Información Privada"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__product_id
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_l10n_mx_edi_reclassify_journal_entries__product_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_l10n_mx_edi_reclassify_journal_entries__product_id
+msgid "Product to assign in the expenses related"
+msgstr "Producto a asignar en los gastos relacionados"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__quantity
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_received_rfc
+msgid "Received By"
+msgstr "Recibido Por"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_l10n_mx_edi_reclassify_journal_entries
+msgid "Reclassify"
+msgstr "Reclasificar"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1796
+#: model:ir.actions.act_window,name:l10n_mx_edi_hr_expense.action_l10n_mx_edi_reclassify_journal_entries_expense
+#: model:ir.actions.act_window,name:l10n_mx_edi_hr_expense.action_l10n_mx_edi_reclassify_journal_entries_invoice
+#: model:ir.actions.act_window,name:l10n_mx_edi_hr_expense.action_l10n_mx_edi_reclassify_journal_entries_sheet
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_l10n_mx_edi_reclassify_journal_entries
+#, python-format
+msgid "Reclassify Journal Entries"
+msgstr "Reclasificar entradas de diario"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_sat_status
+msgid "Refers to the status of the invoice(s) inside the SAT system."
+msgstr "Se refiere al estado de la factura(s) dentro del sistema del SAT"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,state:0
+msgid "Refused"
+msgstr "Rechazada"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_employee_mx_expense_form
+msgid "Related User"
+msgstr "Usuario OpenERP"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.account_journal_dashboard_kanban_view
+msgid "Replenish Petty Cash"
+msgstr "Reponer Caja Chica"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:mail.template,subject:l10n_mx_edi_hr_expense.mail_template_functional
+msgid "Result of automatic checks: (Ref ${object.name or 'n/a' })"
+msgstr "Resultado de las revisiones automáticas: (Ref ${object.name or 'n/a' })"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Revert Expense"
+msgstr "Revertir Gasto"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.actions.server,name:l10n_mx_edi_hr_expense.action_revert_accrue_expenses
+msgid "Revert Expenses"
+msgstr "Revertir Gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_sat_status
+msgid "SAT status"
+msgstr "Estado en el SAT"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1350
+#, python-format
+msgid "SAT status Ok!"
+msgstr "Estado en el SAT correcto!"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_document_type
+msgid "Save the document type in the CFDI."
+msgstr "Guarda el tipo de documento en el CFDI."
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_analysis
+msgid "See in json (and future with a fancy widget) the summary of the test run and their result [Per fiscal test]"
+msgstr "Revise el json (y en un futuro con un widget de lujo) el resumen de las pruebas ejecutadas y sus resultados [Para la prueba fiscal]"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_functional_details
+msgid "See in json (and future with a fancy widget) the summary of the test run and their result [Per functional test]"
+msgstr "Revise el json (y en un futuro con un widget de lujo) el resumen de las pruebas ejecutadas y sus resultados [Para la prueba funcional]"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_hr_expense_filter
+msgid "Sheet ID"
+msgstr "ID Informe de Gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_employee__sheets_count
+msgid "Sheets Count"
+msgstr "Contador de Hojas"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,l10n_mx_edi_functional:0
+msgid "Something failed, please check the message log"
+msgstr "Algo falló, por favor revise el mensaje en el log"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense_sheet__petty_journal_id
+msgid "Specifies the journal that will be used to make the reimbursements to employees, for expenses with type \"Petty Cash\""
+msgstr "Especifica el diario que se utilizará para hacer los reembolsos a los empleados, para los gastos con el tipo \"Caja Chica\""
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_employee__journal_id
+msgid "Specifies the journal that will be used to make the reimbursements to employees, for expenses with type \"to reimburse\""
+msgstr "Especifica el diario que se utilizará para hacer los reembolsos a los empleados, para los gastos con el tipo \"para reembolsar\""
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_employee__journal_ids
+msgid "Specifies the journals that could be used to make the reimbursements to employees, for expenses with type \"Petty Cash\""
+msgstr "Especifica los diarios que pueden ser utilizados para hacer reembolsos a los empleados, para los gastos con el tipo \"Caja Chica\""
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.partner.category,name:l10n_mx_edi_hr_expense.tag_split_taxes
+msgid "Split Taxes Vendor Bills"
+msgstr ""
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,l10n_mx_edi_sat_status:0
+msgid "State not defined(answer on sat not possible to manage)"
+msgstr "Estado no definido (la respuesta del SAT no se puede gestionar)"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__state
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_employee_mx_expense_form
+msgid "Status"
+msgstr "Estado"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_account_invoice__l10n_mx_edi_expense_id
+msgid "Stores the expense related with this invoice"
+msgstr "Almacena el gasto relacionado con esta factura"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_account_invoice__l10n_mx_edi_expense_sheet_id
+msgid "Stores the expense sheet related with this invoice"
+msgstr "Almacena el grupo de gasto relacionado con esta factura"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__state
+msgid "Status of the expense."
+msgstr "Estado del gasto"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,state:0
+msgid "Submitted"
+msgstr "Enviado"
+
+#. module: l10n_mx_edi_hr_expense
+#. openerp-web
+#: code:addons/l10n_mx_edi_hr_expense/static/src/xml/checks_widget.xml:14
+#, python-format
+msgid "Succesfull checks"
+msgstr "Revisiones exitosas"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__partner_id
+msgid "Supplier"
+msgstr "Proveedor"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.partner.category,name:l10n_mx_edi_hr_expense.tag_suppliers
+msgid "Suppliers"
+msgstr "Proveedores"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_tax
+msgid "Tax"
+msgstr "Impuesto"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__tax_ids
+msgid "Taxes"
+msgstr "Impuestos"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1355
+#, python-format
+msgid "Taxes in the CFDI found!"
+msgstr "Impuestos en el CFDI encontrados!"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1354
+#, python-format
+msgid "Taxes in the CFDI not found"
+msgstr "Impuestos en el CFDI no encontrados"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "Technical Information"
+msgstr "Información técnica"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1412
+#, python-format
+msgid "The CFDI have Local Taxes and that are found"
+msgstr "El CFDI tiene Impuestos Locales y se encontraron"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1421
+#, python-format
+msgid "The CFDI have Local Taxes and that are found but is missing the account in the tax"
+msgstr "El CFDI tiene Impuestos Locales y se encontraron, pero falta configurarles la cuenta"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1410
+#, python-format
+msgid "The CFDI have Local Taxes and that are not found"
+msgstr "El CFDI tiene Impuestos Locales y no se encontraron"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1424
+#, python-format
+msgid "The CFDI have Local Taxes, the taxes are found and are properly configured"
+msgstr "El CFDI tiene Impuestos Locales y estos se encontraron"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1375
+#, python-format
+msgid "The CFDI is a refund and be paid by us!"
+msgstr "El CFDI es uns nota de crédito y será pagada por nosotros"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1374
+#, python-format
+msgid "The CFDI is a refund and not be paid by us"
+msgstr "El CFDI es una nota de crédito y no será pagada por nosotros"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1392
+#, python-format
+msgid "The CFDI is a refund and the CFDI related is found in the instance."
+msgstr "El CFDI es una nota de crédito y el CFDI relacionado se encuentra en la instancia."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1386
+#, python-format
+msgid "The CFDI is a refund, and the CFDI related is found!"
+msgstr "El CFDI es una nota de crédito, y el CFDI relacionado existe!"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1384
+#, python-format
+msgid "The CFDI is a refund, and the CFDI related is not found"
+msgstr "El CFDI es una nota de crédito, y el CFDI relacionado no se encuentra"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1399
+#, python-format
+msgid "The CFDI is a refund, and the node 'CfdiRelacionados' is found"
+msgstr "El CFDI es una nota de crédito, y el nodo 'CfdiRelacionados' existe"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1397
+#, python-format
+msgid "The CFDI is a refund, and the node 'CfdiRelacionados' is not found"
+msgstr "El CFDI es una nota de crédito, y el nodo 'CfdiRelacionados' no existe"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1220
+#, python-format
+msgid "The RFC of this invoice is not for this company, maybe your supplier made a mistake generating the CFDI of it simply was sent by mistake."
+msgstr "El RFC de esta factura no es para esta compañía, tal vez el proveedor cometió un error generando el CFDI o simplemente lo envió por error."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1224
+#, python-format
+msgid "The RFC used on this CFDI is the one on this company"
+msgstr "El RFC utilizado para este CFDI es el mismo de esta compañía"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1241
+#, python-format
+msgid "The XML UUID belongs to other expense already loaded on the system."
+msgstr "El UUID de este XML pertenece a otro gasto que ya fue creado en el sistema."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1232
+#, python-format
+msgid "The XML UUID belongs to other invoice already loaded on the system."
+msgstr "El UUID de este XML pertenece a otra factura que ya fue creada en el sistema."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1250
+#, python-format
+msgid "The administrative team will need to check if invoices for this vendor are valid, and if we need to pay something to them this will need further communication to have the payment information."
+msgstr "El equipo administrativo necesita verificar si las facturas para este proveedor son validas, y si se necesita hacer algún pago a ellos necesitamos que se comuniquen para obtener más información sobre el pago."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/account_invoice.py:17
+#, python-format
+msgid "The amount total in the CFDI is (%s) and that value is different to the invoice total (%s), that values must be consistent. Please review the invoice lines and try again. You can contact your manager to change the minimum allowed for this difference in the journal.\n"
+"\n"
+"CFDI with UUID: %s"
+msgstr "El monto total en el CFDI es (%s) y es diferente al total de la factura (%s), estos montos deben ser consistentes. Por favor revise las lineas de la factura e intente nuevamente. O contacte a su administrador para que cambie el monto mínimo permitido para esta diferencia en el diario.\n"
+"\n"
+"CFDI con UUID: %s"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1264
+#, python-format
+msgid "The currency declared in the CFDI is valid and is configured properly"
+msgstr "La moneda declarada en el CFDI es correcta is esta configurada correctamente"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1262
+#, python-format
+msgid "The currency in the XML was not found or is disabled"
+msgstr "La moneda del XML no se encontró o se encuentra desactivada"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1271
+#, python-format
+msgid "The date on the CFDI is not on this period, this will need and extra approval of your expense"
+msgstr "La fecha en el CFDI no es de este periodo, esto va a necesitar una aprobación extra en su gasto"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1365
+#, python-format
+msgid "The journal in the employee is required for expenses paid for the employee or with petty cash."
+msgstr "El diario en el empleado es requerido para gastos pagados por el empleado o con caja chica"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1305
+#, python-format
+msgid "The reference (folio/serie) is first time we see it in this system"
+msgstr "La referencia (folio/serie) es la primera vez que se registra en el sistema"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1358
+#, python-format
+msgid "The taxes declared in the CFDI are valid and are configured properly"
+msgstr "Los impuestos declarados en el CFDI son validos y estan configurados correctamente"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1356
+#, python-format
+msgid "The taxes in the XML was not found or are disabled"
+msgstr "Los impuestos en el CFDI no se encuentran o están desactivados"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1282
+#, python-format
+msgid "The zip code used in the invoice is not the same we have in in the company or in the offices (invoice address in the contacts of the company)"
+msgstr "El código postal utilizado en la factura no es el mismo que tiene configurada la compañía o en las sucursales (direcciones de factura en los contactos de la compañía)"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_splited_from
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_splited_to
+msgid "This"
+msgstr "Este"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1503
+#, python-format
+msgid "This expense already have an invoice related."
+msgstr "Este gasto ya tiene una factura relacionada."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/wizard/merge_expenses.py:18
+#, python-format
+msgid "This expense cannot be merged, because already has an invoice related."
+msgstr "Este gasto no puede ser mezclado porque ya tiene una factura relacionada."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:436
+#, python-format
+msgid "This expense is marked to be checked but the supplier does not have the label that forces the invoice generation."
+msgstr "Este gasto esta marcado para ser comprobado, pero el proveedor no tiene la etiqueta que fuerza la generación de facturas."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1293
+#, python-format
+msgid "This expense is not deductible, it looks like an expense without valid CFDI in the invoice"
+msgstr "Este gasto no es deducible, parece un gasto sin CFDI valido en la factura"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:397
+#, python-format
+msgid "This expense is not functionally approved, see errors or ask your supervisor to force the functional exception"
+msgstr "Este gasto no esta funcionalmente aprobado, revise los errores o solicite a su supervisor forzar por las excepciones funcionales"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1198
+#, python-format
+msgid "This expense is not possible to verify functionally because there is not CFDI associated yet, add the xml or ask for extra permissions to propose as an expense."
+msgstr "No es posible revisar funcionalmente porque no se tiene un CFDI asociado, agregue el xml o solicite permisos adicionales para proponer como un gasto."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:401
+#, python-format
+msgid "This expense looks as do not comply with the fiscal validation, please load a valid invoice or ask you supervisor to approve this exception, sending a message."
+msgstr "Este gasto parece que no cumple con la validación fiscal, por favor cargue una factura valida o solicite a su supervisor que apruebe esta excepción, enviando un mensaje."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1368
+#, python-format
+msgid "This expense was paid for the employee or with petty cash and the journal is correctly configured."
+msgstr "Este gasto fue pagado por el empleado o caja chica y el diario esta correctamente configurado."
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_account_journal__l10n_mx_edi_amount_authorized_diff
+msgid "This field depicts the maximum difference allowed between a CFDI and an invoice. When validate an invoice will be verified that the amount total is the same of the total in the invoice, or the difference is less that this value."
+msgstr "Este campo representa la diferencia maxima permitida entre un CFDI y una factura. Cuando se valide una factura se verificará que el monto total es el mismo que el total en el CFDI, o la diferencia es menor que este valor."
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.groups,comment:l10n_mx_edi_hr_expense.allow_to_approve_exp_wo_being_responsible
+msgid "This group allows an employee to approve expenses, even when is not the manager of a department or responsible for some employee."
+msgstr "Este grupo le permite a un empleado aprobar gastos, incluso cuando no es el gerente de un departamento o responsable de algún empleado."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1292
+#, python-format
+msgid "This has a valid invoice"
+msgstr "Este tiene una factura valida"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1300
+#, python-format
+msgid "This invoice looks duplicated"
+msgstr "Esta factura parece duplicada"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1302
+#, python-format
+msgid "This invoice reference was loaded for this partner invoice reference belongs to other invoice of the same partner."
+msgstr "La referencia de esta factura pertenece a otra factura factura del mismo proveedor."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/account_invoice.py:50
+#, python-format
+msgid "This invoice was not created from an expense"
+msgstr "Esta factura no fue creada desde un gasto"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_forced_approved
+msgid "This is a paid not deductible"
+msgstr "Este es un pago no deducible."
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_res_company__accountant_company_currency_id
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_res_config_settings__accountant_company_currency_id
+msgid "This user will be the accountant assigned in the expense sheets generated for generic suppliers in MXN."
+msgstr "Este usuario será el contador asignado en los grupos de gastos generados para proveedores genéricos en MXN."
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_res_company__accountant_foreign_currency_id
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_res_config_settings__accountant_foreign_currency_id
+msgid "This user will be the accountant assigned in the expense sheets generated for generic suppliers in other currency."
+msgstr "Este usuario será el contador asignado en los grupos de gastos generados para proveedores genéricos en otras monedas."
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_res_partner__accountant_company_currency_id
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_res_partner__accountant_foreign_currency_id
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_res_users__accountant_company_currency_id
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_res_users__accountant_foreign_currency_id
+msgid "This user will be the accountant assigned in the expense sheets generated to this supplier."
+msgstr "Este usuario será el contador asignado en los grupos de gastos generados para este proveedor."
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_employee__l10n_mx_edi_accountant
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_accountant
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense_sheet__l10n_mx_edi_accountant
+msgid "This user will be the responsible to review the expenses report after the manager actually approve it."
+msgstr "Este usuario será el responsable de revisar los reportes de gastos después de que el gerente lo apruebe."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1249
+#, python-format
+msgid "This vendor has been used  before"
+msgstr "Este proveedor se ha utilizado antes"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,state:0
+msgid "To Submit"
+msgstr "A enviar"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__total_amount
+msgid "Total"
+msgstr ""
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,l10n_mx_edi_functional:0
+msgid "Trying to check occurred an error, check the log"
+msgstr "Intentando hacer las revisiones ocurrió un error, revise el log"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_uuid
+msgid "UUID"
+msgstr ""
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1239
+#, python-format
+msgid "UUID Duplicated on expenses"
+msgstr "UUID duplicado en gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1230
+#, python-format
+msgid "UUID Duplicated on invoices"
+msgstr "UUID duplicado en facturas"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1240
+#, python-format
+msgid "UUID Without declaration"
+msgstr "UUID no declarado"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_uuid
+msgid "UUID of the xml's attached comma separated if more than one."
+msgstr "UUID del los xml's adjuntos, separados por comas si es más de uno."
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__unit_amount
+msgid "Unit Price"
+msgstr "Precio unitario"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:product.product,uom_name:l10n_mx_edi_hr_expense.product_product_ieps
+#: model:product.template,uom_name:l10n_mx_edi_hr_expense.product_product_ieps_product_template
+msgid "Unit(s)"
+msgstr "Unidad(es)"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_employee_mx_expense_form
+msgid "Use here the home address of the employee.\n"
+"                                        This private address is used in the expense report reimbursement document.\n"
+"                                        It should be different from the work address."
+msgstr "Utilice la dirección de la casa del empleado.\n"
+"                                        Esta dirección privada será utilizada en el reporte de reposición gastos.\n"
+"                                        Esta deberá ser diferente a la dirección de trabajo."
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_hr_employee__l10n_mx_edi_payment_mode
+msgid "Value used by default in the expenses for this employee."
+msgstr "Valor utilizado por default en los gastos para este empleado."
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.partner.category,name:l10n_mx_edi_hr_expense.tag_vendors
+msgid "Vendor"
+msgstr "Proveedor"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,l10n_mx_edi_document_type:0
+msgid "Vendor Bill"
+msgstr "Factura de Compra"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,l10n_mx_edi_document_type:0
+msgid "Vendor Credit Note"
+msgstr "Nota de Crédito"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_account_invoice_expense
+msgid "View Expense"
+msgstr "Ver Gasto"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "View Report"
+msgstr "Informe"
+
+#. module: l10n_mx_edi_hr_expense
+#: selection:hr.expense,l10n_mx_edi_sat_status:0
+msgid "We could not find it in the SAT"
+msgstr "No podemos encontrarlo en el SAT"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1255
+#, python-format
+msgid "We have old invoices from this vendor, stayin touch if we need something extra."
+msgstr "Tenemos facturas antiguas de este proveedor, manténgase en contacto por si necesitamos algo extra."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1248
+#, python-format
+msgid "We never bought to this partner."
+msgstr "Nunca hemos comprado a este proveedor."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1286
+#, python-format
+msgid "We reviewed if the zip code of the receiver company is the same than this company"
+msgstr "Revisamos si el código postal de la compañía receptora es el mismo de nuestra compañía"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_res_company__l10n_mx_edi_employee_ids
+#: model:ir.model.fields,help:l10n_mx_edi_hr_expense.field_res_config_settings__l10n_mx_edi_employee_ids
+msgid "When the amount in an expense is bigger than the \"Limit amount for expenses\" will be notified this employees."
+msgstr "Cuando el monto en un gasto es mayor que el \"Monto limite para gastos\" será enviada una notificación para estos empleados."
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.model.fields,field_description:l10n_mx_edi_hr_expense.field_hr_expense__l10n_mx_edi_withhold
+msgid "Withhold"
+msgstr "Retenciones"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_employee_mx_expense_form
+msgid "Work Information"
+msgstr "información del trabajo"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1441
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:1452
+#, python-format
+msgid "You can not force to approve an expense by any mean if you do not belong to the proper group"
+msgstr "No puede forzar la aprobación de un gasto si no pertenece al grupo correspondiente"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:388
+#, python-format
+msgid "You can not report a line in any state different from draft if it is in **Downloaded** state waitfor the automatic check."
+msgstr "No se puede reportar una linea en un estado diferente de borrador, si aún esta en estado **Descargado** espere por la verificación automática."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:392
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:406
+#, python-format
+msgid "You can not report a line in any state different from draft if it is in **Just Downloaded** state wait for the automatic check."
+msgstr "No se puede reportar una linea en un estado diferente de borrador, si aún esta en estado **Solo Descargado** espere por la verificación automática."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:411
+#, python-format
+msgid "You can not report a line paid by the employee and that they do not have a journal configured."
+msgstr "No es posible reportar una linea pagada por el empleado y que este no tenga un diario configurado."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:430
+#, python-format
+msgid "You can not report a line without payment mode."
+msgstr "No es posible reportar una linea sin forma de pago."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:395
+#, python-format
+msgid "You can not report lines with different payment mode."
+msgstr "No es posible reportar lineas con diferente manera de pago."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:235
+#, python-format
+msgid "You can only approve your department expenses"
+msgstr "Solo puedes aprobar gastos de tu departamento"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/wizard/reclassify_journal_entries.py:28
+#, python-format
+msgid "You can only reclassify journal entries for vendor bills"
+msgstr "Únicamente se pueden reclasificar entradas de diario para facturas de compra"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:256
+#, python-format
+msgid "You can only refuse your department expenses"
+msgstr "Solo puedes rechazar gastos de tu departamento"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:225
+#, python-format
+msgid "You cannot approve your own expenses"
+msgstr "No puedes aprobar tus propios gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:253
+#, python-format
+msgid "You cannot refuse your own expenses"
+msgstr "No puedes rechazar tus propios gastos"
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:385
+#, python-format
+msgid "You cannot report expenses for different employees in the same report."
+msgstr "No puede reportar gastos para diferentes empleados en el mismo reporte."
+
+#. module: l10n_mx_edi_hr_expense
+#: code:addons/l10n_mx_edi_hr_expense/models/hr_expense.py:383
+#, python-format
+msgid "You cannot report twice the same line!"
+msgstr "No puedes reportar dos veces la misma línea!"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_splited_from
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_splited_to
+msgid "because is necessary an expense by each CFDI."
+msgstr "porque es necesario un gasto por cada CFDI."
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_splited_from
+msgid "created"
+msgstr "creado"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_view_form_mx
+msgid "e.g. Lunch with Customer"
+msgstr "Ej. Comida con cliente"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.view_employee_mx_expense_form
+msgid "e.g. Part Time"
+msgstr "Por ejemplo, media jornada"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_splited_from
+msgid "from this expense"
+msgstr "de este gasto"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:base.automation,name:l10n_mx_edi_hr_expense.hr_expense_auto_journal
+#: model:ir.actions.server,name:l10n_mx_edi_hr_expense.hr_expense_auto_journal_ir_actions_server
+msgid "hr_expense: Auto create journal on all employees"
+msgstr "hr_expense: Creación automática del diario en todos los empleados"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.actions.server,name:l10n_mx_edi_hr_expense.hr_expense_autovalidate_sheet_ir_actions_server
+#: model:ir.cron,cron_name:l10n_mx_edi_hr_expense.hr_expense_autovalidate_sheet
+#: model:ir.cron,name:l10n_mx_edi_hr_expense.hr_expense_autovalidate_sheet
+msgid "hr_expense: Create sheet daily (Auto validate)"
+msgstr "hr_expense: Crear hoja diaria (Auto validar)"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:ir.actions.server,name:l10n_mx_edi_hr_expense.hr_expense_ack_ir_actions_server
+#: model:ir.cron,cron_name:l10n_mx_edi_hr_expense.hr_expense_ack
+#: model:ir.cron,name:l10n_mx_edi_hr_expense.hr_expense_ack
+msgid "hr_expense: Send ACK when created"
+msgstr "hr_expense: Enviar ACK cuando se crea"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:base.automation,name:l10n_mx_edi_hr_expense.hr_expense_sheet_state_done
+#: model:ir.actions.server,name:l10n_mx_edi_hr_expense.hr_expense_sheet_state_done_ir_actions_server
+msgid "hr_expense: Update state sheet (Done)"
+msgstr "hr_expense: Actualizar estado de la hoja (Done)"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:base.automation,name:l10n_mx_edi_hr_expense.hr_expense_sheet_state_open
+#: model:ir.actions.server,name:l10n_mx_edi_hr_expense.hr_expense_sheet_state_open_ir_actions_server
+msgid "hr_expense: Update state sheet (Open)"
+msgstr "hr_expense: Actualizar estado de la hoja (Open)"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_splited_to
+msgid "in the next expenses:"
+msgstr "en los siguientes gastos:"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:product.product,weight_uom_name:l10n_mx_edi_hr_expense.product_product_ieps
+#: model:product.template,weight_uom_name:l10n_mx_edi_hr_expense.product_product_ieps_product_template
+msgid "kg"
+msgstr ""
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_merge
+msgid "merged"
+msgstr "mezclado"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_splited_from
+msgid "modified"
+msgstr "modificado"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_splited_to
+msgid "splitted"
+msgstr "separado"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_merge
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_splited_from
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_splited_to
+msgid "was"
+msgstr "fue"
+
+#. module: l10n_mx_edi_hr_expense
+#: model_terms:ir.ui.view,arch_db:l10n_mx_edi_hr_expense.hr_expense_merge
+msgid "with the next expense:"
+msgstr "con el siguiente gasto:"
+
+#. module: l10n_mx_edi_hr_expense
+#: model:res.partner.category,name:l10n_mx_edi_hr_expense.tag_auto_accrue_expenses
+msgid "Auto Accrue Expenses"
+msgstr "Provisionar Gastos Automáticamente"

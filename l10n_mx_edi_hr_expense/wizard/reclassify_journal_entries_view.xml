@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_l10n_mx_edi_reclassify_journal_entries" model="ir.ui.view">
+        <field name="name">view.l10n_mx_edi.reclassify.journal.entries</field>
+        <field name="model">l10n_mx_edi.reclassify.journal.entries</field>
+        <field name="arch" type="xml">
+            <form string="Reclassify Journal Entries">
+                <group>
+                     <group>
+                         <field name="product_id"/>
+                         <field name="account_id"/>
+                     </group>
+                     <group>
+                         <field name="date"/>
+                     </group>
+                </group>
+                <footer>
+                    <button string='Reclassify' name="reclassify_journal_entries" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+           </form>
+        </field>
+    </record>
+
+    <record id="action_l10n_mx_edi_reclassify_journal_entries_expense" model="ir.actions.act_window">
+        <field name="name">Reclassify Journal Entries</field>
+        <field name="res_model">l10n_mx_edi.reclassify.journal.entries</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_l10n_mx_edi_reclassify_journal_entries"/>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="hr_expense.model_hr_expense"/>
+        <field name="groups_id" eval="[(4, ref('l10n_mx_edi_hr_expense.reclassify_journal_entries_expense'))]"/>
+    </record>
+
+    <record id="action_l10n_mx_edi_reclassify_journal_entries_sheet" model="ir.actions.act_window">
+        <field name="name">Reclassify Journal Entries</field>
+        <field name="res_model">l10n_mx_edi.reclassify.journal.entries</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_l10n_mx_edi_reclassify_journal_entries"/>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="hr_expense.model_hr_expense_sheet"/>
+        <field name="groups_id" eval="[(4, ref('l10n_mx_edi_hr_expense.reclassify_journal_entries_expense'))]"/>
+    </record>
+
+    <record id="action_l10n_mx_edi_reclassify_journal_entries_invoice" model="ir.actions.act_window">
+        <field name="name">Reclassify Journal Entries</field>
+        <field name="res_model">l10n_mx_edi.reclassify.journal.entries</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_l10n_mx_edi_reclassify_journal_entries"/>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="groups_id" eval="[(4, ref('l10n_mx_edi_hr_expense.reclassify_journal_entries_expense'))]"/>
+    </record>
+
+</odoo>

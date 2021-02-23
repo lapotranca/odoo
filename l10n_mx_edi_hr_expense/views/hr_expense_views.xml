@@ -1,0 +1,382 @@
+<?xml version="1.0"?>
+<odoo>
+    <record model="ir.ui.view" id="view_expenses_tree">
+        <field name="name">hr.expense.tree.inh.l10n.mx</field>
+        <field name="model">hr.expense</field>
+        <field name="inherit_id" ref="hr_expense.view_expenses_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='sheet_id']" position="attributes">
+                <attribute name="invisible">0</attribute>
+                <attribute name="string">Group</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date']" position="after">
+                <field name="l10n_mx_edi_date"/>
+            </xpath>
+            <xpath expr="//field[@name='payment_mode']" position="after">
+                <field name="partner_id"/>
+                <field name="reference"/>
+                <field name="l10n_mx_edi_document_type"/>
+                <field name="l10n_mx_edi_uuid"/>
+            </xpath>
+            <xpath expr="//field[@name='total_amount']" position="before">
+                <field name="l10n_mx_edi_subtotal"/>
+                <field name="l10n_mx_edi_tax"/>
+                <field name="l10n_mx_edi_discount"/>
+                <field name="l10n_mx_edi_withhold"/>
+                <field name="create_uid"/>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="before">
+                <field name="l10n_mx_edi_sat_status"/>
+                <field name="l10n_mx_edi_functional"/>
+                <field name="l10n_mx_edi_functionally_approved"/>
+                <field name="l10n_mx_edi_fiscally_approved"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="hr_expense_view_search">
+        <field name="name">hr.expense.view.search</field>
+        <field name="model">hr.expense</field>
+        <field name="inherit_id" ref="hr_expense.hr_expense_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="id"/>
+                <field name="l10n_mx_edi_uuid"/>
+                <field name="l10n_mx_edi_rfc"/>
+                <field name="l10n_mx_edi_received_rfc"/>
+                <field name="payment_mode"/>
+                <field name="l10n_mx_edi_functional"/>
+                <field name="email_from"/>
+                <field name="partner_id"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_hr_expense_sheet_form">
+        <field name="name">hr.expense.sheet.form</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_mode']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="id"/>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_title')]" position="inside">
+                <label for="payment_mode"/>
+                <h1>
+                    <field name="payment_mode" widget="radio" options="{'horizontal': true}"/>
+                </h1>
+            </xpath>
+            <xpath expr="//field[@name='expense_line_ids']//tree" position="inside">
+                <field name="product_id"/>
+                <field name="account_id"/>
+                <field name="state"/>
+                <field name="l10n_mx_edi_sat_status" invisible="1"/>
+                <field name="l10n_mx_edi_forced_approved" string="Forced"/>
+                <field name="l10n_mx_edi_functionally_approved" string="Functionally"/>
+                <field name="l10n_mx_edi_fiscally_approved" string="Fiscally"/>
+                <button name="l10n_mx_edi_reclassify_journal_entries" type="object" icon="fa-refresh" groups="l10n_mx_edi_hr_expense.reclassify_journal_entries_expense"/>
+            </xpath>
+            <xpath expr="//field[@name='expense_line_ids']//tree" position="attributes">
+                <attribute name="decoration-warning">l10n_mx_edi_sat_status != 'valid'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='expense_line_ids']" position="attributes">
+              <attribute name="domain">[('sheet_id', '=', False), ('l10n_mx_edi_functionally_approved', '=', True), ('l10n_mx_edi_fiscally_approved', '=', True)]</attribute>
+              <attribute name="options">{'reload_on_button': True, 'no_create': [('sheet_id', '=', False), ('l10n_mx_edi_functionally_approved', '=', True), ('l10n_mx_edi_fiscally_approved', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='employee_id']" position="after">
+                <field name="create_uid"/>
+                <field name="petty_journal_id"
+                    attrs="{'invisible': [('payment_mode', '!=', 'petty_account')], 'required': [('payment_mode', '=', 'petty_account')]}"
+                    domain="[('l10n_mx_edi_employee_ids', 'in', employee_id)]"/>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="action_get_expenses_paid_view"
+                    class="oe_stat_button"
+                    icon="fa-bars"
+                    type="object"
+                    attrs="{'invisible': [('l10n_mx_edi_paid_expenses_count', '=', 0)]}">
+                    <field name="l10n_mx_edi_paid_expenses_count" widget="statinfo" string="Paid Expenses"/>
+                </button>
+                <button name="action_get_expenses_view"
+                    class="oe_stat_button"
+                    icon="fa-bars"
+                    type="object"
+                    attrs="{'invisible': [('l10n_mx_edi_open_expenses_count', '=', 0)]}">
+                    <field name="l10n_mx_edi_open_expenses_count" widget="statinfo" string="Open Expenses"/>
+                </button>
+                <button name="action_open_invoices_paid"
+                    class="oe_stat_button"
+                    attrs="{'invisible':['|', ('state','=','submit'), ('l10n_mx_edi_paid_invoices_count', '=', 0)]}"
+                    icon="fa-bars"
+                    type="object">
+                    <field name="l10n_mx_edi_paid_invoices_count" widget="statinfo" string="Paid Invoices"/>
+                </button>
+                <button name="action_open_invoices"
+                    class="oe_stat_button"
+                    attrs="{'invisible':['|', ('state','=','submit'), ('l10n_mx_edi_invoices_count', '=', 0)]}"
+                    icon="fa-bars"
+                    type="object">
+                    <field name="l10n_mx_edi_invoices_count" widget="statinfo" string="Open Invoices"/>
+                </button>
+            </xpath>
+            <xpath expr="//button[@name='approve_expense_sheets']" position="after">
+                <button name="l10n_mx_edi_accrue_expenses"
+                    states="approve" string="Accrue Expense"
+                    type="object" groups="l10n_mx_edi_hr_expense.allow_to_accrue_expenses"
+                    class="oe_highlight o_expense_sheet_post"/>
+            </xpath>
+            <xpath expr="//button[@name='action_sheet_move_create']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_sheet_move_create']" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </xpath>
+            <xpath expr="//field[@name='account_move_id']" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="l10n_mx_edi_accountant" readonly="True"/>
+            </xpath>
+            <xpath expr="//field[@name='expense_line_ids']" position="attributes">
+                <attribute name="context">{'form_view_ref' : 'l10n_mx_edi_hr_expense.hr_expense_view_form_mx_without_header', 'expense_adding_line': True}</attribute>
+            </xpath>
+            <xpath expr="//button[hasclass('o_expense_sheet_pay')]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_hr_expense_sheet_tree">
+        <field name="name">hr.expense.sheet.tree</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="id"/>
+            </xpath>
+            <xpath expr="//field[@name='create_date']" position="before">
+                <field name="create_uid"/>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="l10n_mx_edi_expenses_count" string="Expenses"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="hr_expense_sheet_view_search">
+        <field name="name">hr.expense.sheet.view.search</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref="hr_expense.hr_expense_sheet_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="id"/>
+            </xpath>
+            <xpath expr="//field[@name='accounting_date']" position="after">
+                <field name="create_uid"/>
+                <field name="l10n_mx_edi_accountant"/>
+            </xpath>
+            <xpath expr="//filter[@name='to_post']" position="before">
+                <filter string="My Expenses as Accountant" name="my_expenses_sheet" domain="[('l10n_mx_edi_accountant.user_id', '=', uid)]"/>
+                <separator />
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_expense.action_hr_expense_sheet_all_to_post" model="ir.actions.act_window">
+        <field name="context">{'search_default_to_post': 1, 'search_default_my_expenses_sheet': 1}</field>
+    </record>
+    <record id="hr_expense_view_form_mx" model="ir.ui.view">
+        <field name="name">hr.expense.view.form.mx</field>
+        <field name="priority">1</field>
+        <field name="model">hr.expense</field>
+        <field name="arch" type="xml">
+            <form string="Expenses" class="o_expense_form">
+                <header>
+                    <button name="action_submit_expenses" string="Create Report" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('attachment_number', '&lt;=', 0), ('sheet_id', '!=', False)]}"/>
+                    <widget name="attach_document" string="Attach Document" action="message_post" attrs="{'invisible': ['|', ('attachment_number', '&lt;', 1), ('id','=',False)]}"/>
+                    <widget name="attach_document" string="Attach Document" action="message_post" highlight="1" attrs="{'invisible': ['|',('attachment_number', '&gt;=', 1), ('id','=',False)]}"/>
+                    <button name="action_submit_expenses" string="Create Report" type="object" class="o_expense_submit" attrs="{'invisible': ['|', ('attachment_number', '&gt;=', 1), ('sheet_id', '!=', False)]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="downloaded,draft,reported,approved,done,refused"/>
+                    <button name="action_view_sheet" type="object" string="View Report" class="oe_highlight" attrs="{'invisible': [('sheet_id', '=', False)]}"/>
+                    <button name="l10n_mx_edi_revert_expense" string="Revert Expense" type="object" class="o_expense_submit" states="approved,done" groups="l10n_mx_edi_hr_expense.allow_to_revert_expenses"/>
+                    <button name="%(action_l10n_mx_edi_merge_expense)d" string="Merge Expense" type="action" groups="l10n_mx_edi_hr_expense.allow_to_generate_expenses_2b_checked" attrs="{'invisible': ['|', ('l10n_mx_edi_invoice_id', '!=', False), ('l10n_mx_edi_analysis', '=', False)]}"/>
+                    <button name="check_fiscal_status"
+                        class="oe_stat_button"
+                        string="Fiscal CHeck"
+                        attrs="{'invisible':[('state','=','submit')]}"
+                        type="object"/>
+                    <button name="check_functional"
+                        class="oe_stat_button"
+                        string="Check Functional"
+                        attrs="{'invisible':[('state','=','submit')]}"
+                        type="object"
+                        context="{'message': True}"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_get_attachment_view"
+                            class="oe_stat_button"
+                            icon="fa-file-text-o"
+                            type="object"
+                            attrs="{'invisible': [('attachment_number', '=', 0)]}">
+                            <field name="attachment_number" widget="statinfo" string="Documents" options="{'reload_on_button': true}"/>
+                        </button>
+                        <button name="action_open_invoices"
+                            class="oe_stat_button"
+                            string="Invoice"
+                            icon="fa-bars"
+                            type="object"
+                            contex="{'default_expense_id': active_id}"
+                            attrs="{'invisible': [('l10n_mx_edi_invoice_id', '=', False)]}"/>
+                    </div>
+                    <div class="oe_row">
+                        <field name="l10n_mx_edi_functional_details" nolabel="1" widget='expenses_checks'/>
+                    </div>
+                    <div class="pull-right">
+                        <label for="l10n_mx_edi_forced_approved" class="oe_inline"
+                        attrs="{'invisible':[('l10n_mx_edi_forced_approved','=',False), ('payment_mode', '=', 'company_account')]}"/>
+                        <field name="l10n_mx_edi_forced_approved" class="oe_inline"
+                            attrs="{'invisible':[('l10n_mx_edi_forced_approved','=',False), ('payment_mode', '=', 'company_account')]}"/>
+                        <button name="force_approved"
+                            string="Force all"
+                            attrs="{'invisible':['|', ('state','=','submit'), '|', ('payment_mode', '=', 'company_account'), ('l10n_mx_edi_forced_approved', '=', True)]}"
+                            type="object" class="oe_link oe_inline"
+                            context="{'message': True}"
+                            groups="l10n_mx_edi_hr_expense.force_expense"/>
+                        <label for="l10n_mx_edi_functionally_approved" class="oe_inline"/>
+                        <field name="l10n_mx_edi_functionally_approved" class="oe_inline"/>
+                        <button name="force_functional"
+                            string="Allow without functional"
+                            attrs="{'invisible':['|', ('state','=','submit'), ('l10n_mx_edi_functionally_approved', '=', True)]}"
+                            type="object" class="oe_link oe_inline"
+                            context="{'message': True}"
+                            groups="l10n_mx_edi_hr_expense.force_expense"/>
+                        <label for="l10n_mx_edi_fiscally_approved" class="oe_inline"/>
+                        <field name="l10n_mx_edi_fiscally_approved" class="oe_inline"/>
+                        <button name="force_fiscal"
+                            string="Allow without fiscal"
+                            attrs="{'invisible':['|', ('state','=','submit'), ('l10n_mx_edi_fiscally_approved', '=', True)]}"
+                            type="object" class="oe_link oe_inline"
+                            context="{'message': True}"
+                            groups="l10n_mx_edi_hr_expense.force_expense"/>
+                        <label for="l10n_mx_edi_is_to_check" class="oe_inline"/>
+                        <field name="l10n_mx_edi_is_to_check" class="oe_inline" groups="l10n_mx_edi_hr_expense.allow_to_generate_expenses_2b_checked"/>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Lunch with Customer"/>
+                        </h1>
+                        <label for="payment_mode" class="oe_edit_only"/>
+                        <h1>
+                            <field name="payment_mode" widget="radio" options="{'horizontal': true}"/>
+                        </h1>
+                    </div>
+                    <field name="l10n_mx_edi_uuid" readonly="1"/>
+                    <group>
+                        <group>
+                            <field name="is_editable" invisible="1"/>
+                            <field name="is_ref_editable" invisible="1"/>
+                            <button name="create_partner_from_cfdi"
+                                class="oe_link oe_inline"
+                                string="Create Partner"
+                                attrs="{'invisible':['|', ('partner_id','!=',False), ('l10n_mx_edi_analysis', '=', False)]}"
+                                type="object"/>
+                            <field name="partner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'supplier'}"/>
+                            <field name="product_id" context="{'default_can_be_expensed': 1, 'tree_view_ref': 'hr_expense.product_product_expense_tree_view'}"
+                                   widget="many2one_barcode"/>
+                            <field name="unit_amount" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="product_uom_category_id" invisible="1"/>
+                            <label for="quantity"/>
+                            <div>
+                                <field name="quantity" class="oe_inline"/>
+                                <field name="product_uom_id" widget="selection" class="oe_inline" groups="uom.group_uom"/>
+                            </div>
+                            <field name="tax_ids" domain="[('type_tax_use', '=', 'purchase')]" widget="many2many_tags" groups="hr_expense.group_hr_expense_user"/>
+                        </group>
+                        <group>
+                            <field name="l10n_mx_edi_document_type"/>
+                            <field name="reference" attrs="{'readonly': [('is_ref_editable', '=', False)]}"/>
+                            <field name="sheet_id" string="Group" attrs="{'invisible':[('sheet_id','=',False)]}"/>
+                            <field name="email_from" widget="email" attrs="{'invisible':[('email_from','=',False)]}"/>
+                            <field name="date"/>
+                            <field name="account_id" options="{'no_create': True}" domain="[('internal_type', '=', 'other'), ('company_id', '=', company_id)]" groups="account.group_account_user" attrs="{'readonly': [('is_editable', '=', False)]}"/>
+                            <field name="employee_id" groups="hr_expense.group_hr_expense_team_approver" context="{'form_view_ref': 'l10n_mx_edi_hr_expense.view_employee_mx_expense_form'}"/>
+                            <field name="sheet_id" invisible="1"/>
+                            <field name="currency_id" groups="base.group_multi_currency" attrs="{'readonly': [('l10n_mx_edi_fiscally_approved', '=', True)]}"/>
+                            <field name="analytic_account_id" domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]" groups="analytic.group_analytic_accounting" attrs="{'readonly': [('is_editable', '=', False)]}"/>
+                            <field name="analytic_tag_ids" widget="many2many_tags" groups="analytic.group_analytic_tags" attrs="{'readonly': [('is_editable', '=', False)]}"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group class="oe_subtotal_footer oe_right" readonly="True">
+                            <separator string="CFDI Totals"/>
+                            <field name="l10n_mx_edi_subtotal" readonly="True"/>
+                            <field name="l10n_mx_edi_tax" readonly="True"/>
+                            <field name="l10n_mx_edi_discount" readonly="True"/>
+                            <field name="l10n_mx_edi_withhold" readonly="True"/>
+                            <field nolabel="1" name="l10n_mx_edi_analysis" invisible="1"/>
+                            <field name="total_amount" widget='monetary' options="{'currency_field': 'currency_id'}" readonly="True"/>
+                        </group>
+                    </group>
+                    <div>
+                        <field name="description" class="oe_inline" placeholder="Notes..."/>
+                        <notebook>
+                            <page string="Fiscal" groups="base.group_no_one">
+                                <field name="l10n_mx_edi_analysis_html" nolabel="1"/>
+                            </page>
+                            <page string="Functional" groups="base.group_no_one">
+                                <field name="l10n_mx_edi_functional_details_html" nolabel="1"/>
+                            </page>
+                            <page string="Technical Information" groups="base.group_no_one">
+                                <group>
+                                    <field name="l10n_mx_edi_accountant"/>
+                                    <field name="l10n_mx_edi_sat_status" widget="radio"/>
+                                    <field name="l10n_mx_edi_functional" widget="radio"/>
+                                    <field name="create_uid"/>
+                                    <field name="l10n_mx_count_cfdi"/>
+                                </group>
+                            </page>
+                            <page string="Accounting" name="accounting_entries" groups="account.group_account_user">
+                                <group>
+                                    <field name="l10n_mx_edi_rfc"/>
+                                    <field name="l10n_mx_edi_received_rfc"/>
+                                    <field name="l10n_mx_edi_date"/>
+                                    <field name="l10n_mx_edi_invoice_id"/>
+                                    <field name="l10n_mx_edi_move_id"/>
+                                    <field name="l10n_mx_edi_move_line_id"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </div>
+                </sheet>
+                <div class="o_attachment_preview"/>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="hr_expense_view_form_mx_without_header" model="ir.ui.view">
+        <field name="name">hr.expense.view.mx.form</field>
+        <field name="model">hr.expense</field>
+        <field name="inherit_id" ref="l10n_mx_edi_hr_expense.hr_expense_view_form_mx"/>
+        <field eval="35" name="priority"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_button_box')]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_expense.hr_expense_actions_my_unsubmitted" model="ir.actions.act_window">
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree'}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('hr_expense_view_form_mx')}),
+            (0, 0, {'view_mode': 'kanban'})]"/>
+    </record>
+</odoo>

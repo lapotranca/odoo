@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="ExpenseChecks">
+        <div class="btn">
+            <a role="button" tabindex="0" class="js_expense_checks">
+                <t t-if="!widget.messages">
+                    <p class="text-info"><i class="fa fa-info-circle"/> No checks performed yet</p>
+                </t>
+                <p>
+                    <t t-if="widget.failed">
+                        <span class="text-danger"><i class="fa fa-times"></i> <t t-esc="widget.failed"/> Failed checks</span>
+                    </t>
+                    <t t-if="widget.succeeded">
+                        <span class="text-success"><i class="fa fa-check"></i> <t t-esc="widget.succeeded"/> Succesfull checks</span>
+                    </t>
+                </p>
+            </a>
+        </div>
+    </t>
+    <t t-name="ExpenseChecksPopover">
+        <div class="text-center alert alert-info" t-if="!checks">
+            <p>No information available</p>
+        </div>
+        <t t-if="succeeded_keys">
+            <t t-foreach="succeeded_keys" t-as="key">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">
+                        <i class="fa fa-check"></i>
+                        <t t-esc="succeeded[key].message_ok"/>
+                    </li>
+                </ul>
+            </t>
+        </t>
+        <t t-if="failed_keys">
+            <t t-foreach="failed_keys" t-as="failed_key">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-danger">
+                        <i class="fa fa-times"></i>
+                        <t t-esc="failed[failed_key].message"/>
+                    </li>
+                </ul>
+            </t>
+        </t>
+    </t>
+    <t t-name="ExpenseChecksModal">
+        <div class="modal fade expense_check_modal" id="ExpenseChecksModal" tabindex="-1" role="dialog" aria-labelledby="ExpenseChecksModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ExpenseChecksModalLabel">Checks</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <t t-raw="html_field"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+        </div>
+
+    </t>
+</templates>

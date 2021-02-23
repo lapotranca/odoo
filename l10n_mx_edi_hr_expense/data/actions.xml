@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="hr_expense_ack" model="ir.cron">
+        <field name="name">hr_expense: Send ACK when created</field>
+        <field name="model_id" ref="hr_expense.model_hr_expense"/>
+        <field name="state">code</field>
+        <field name="code">
+json_loads = model.loads()
+records = model.search([
+    ('state', 'in', ['downloaded'])
+])
+for record in records:
+    record.check_fiscal_status()
+    record.check_functional()
+    record.with_context({'mode': record.state}).ack()
+    values = {'state': 'draft'}
+
+    # If the expense is duplicated, archive it
+    functional_details = json_loads(record.l10n_mx_edi_functional_details or '{}')
+    functional_fails = functional_details.get('fail', {})
+    fail = functional_fails.get('2') or functional_fails.get('3')
+    if fail:
+        record.message_post(body=(
+            "&lt;p&gt;This expense was archived because the following failure was found&lt;/p&gt;"
+            "&lt;p&gt;%s&lt;/p&gt;"
+            "&lt;p&gt;%s&lt;/p&gt;") % (fail.get('title', ''), fail.get('message', '')))
+        values.update({'active': False})
+
+    # If the CFDI is a payment complement, archive the expense
+    analysis = json_loads(record.l10n_mx_edi_analysis or '{}')
+    invoices = analysis.get('invoices')
+    if invoices and invoices[0].get('document_type') == 'P':
+        record.message_post(body=(
+            "This expense was archived because its CFDI is a payment complement"))
+        record.l10n_mx_edi_retrieve_payment()
+        values.update({'active': False})
+
+    record.write(values)
+        </field>
+        <field name="interval_number">2</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="active" eval="True"/>
+    </record>
+    <record id="hr_expense_auto_journal" model="base.automation">
+        <field name="name">hr_expense: Auto create journal on all employees</field>
+        <field name="state">code</field>
+        <field name="active">False</field>
+        <field name="model_id" ref="hr.model_hr_employee"/>
+        <field name="trigger">on_create</field>
+<field name="code">
+# You can filter the employees which the journals will be created by default
+# all employees can have a journal.
+record.create_petty_cash_journal()
+</field>
+    </record>
+    <record id="hr_expense_sheet_state_done" model="base.automation">
+        <field name="name">hr_expense: Update state sheet (Done)</field>
+        <field name="state">code</field>
+        <field name="active">True</field>
+        <field name="filter_pre_domain">[('state', '!=', 'done')]</field>
+        <field name="filter_domain">[('state', '=', 'done')]</field>
+        <field name="model_id" ref="hr_expense.model_hr_expense"/>
+        <field name="trigger">on_write</field>
+<field name="code">
+# Used this action because the write() do not work in this case
+lines = record.sheet_id.expense_line_ids
+if lines and lines == lines.filtered(lambda exp: exp.state == 'done'):
+    record.sheet_id.write({'state': 'done'})
+</field>
+    </record>
+    <record id="hr_expense_sheet_state_open" model="base.automation">
+        <field name="name">hr_expense: Update state sheet (Open)</field>
+        <field name="state">code</field>
+        <field name="active">True</field>
+        <field name="filter_pre_domain">[('state', '=', 'done')]</field>
+        <field name="filter_domain">[('state', '!=', 'done')]</field>
+        <field name="model_id" ref="hr_expense.model_hr_expense"/>
+        <field name="trigger">on_write</field>
+<field name="code">
+# Used this action because the write() do not work in this case
+lines = record.sheet_id.expense_line_ids
+if lines and lines != lines.filtered(lambda exp: exp.state == 'done'):
+    record.sheet_id.write({'state': 'post'})
+</field>
+    </record>
+    <record id="hr_expense_autovalidate_sheet" model="ir.cron">
+        <field name="name">hr_expense: Create sheet daily (Auto validate)</field>
+        <field name="model_id" ref="hr_expense.model_hr_expense"/>
+        <field name="state">code</field>
+        <field name="code">
+# Create a sheet with the next conditions:
+# 1. Search all the partners that have the label "Auto Validate".
+# 2. Search all the expenses with 2 days of antiquity for each partner.
+# 3. That expenses are grouped by employee and after by currency.
+# 4. Create many expense sheets with 50 expenses lines each one.
+
+sheet = env['hr.expense.sheet']
+date_mx = env['l10n_mx_edi.certificate'].sudo().get_mx_current_datetime().date()
+label = env.ref('l10n_mx_edi_hr_expense.tag_expense_autovalidate')
+partners = env['res.partner'].search([]).filtered(lambda p: label in p.category_id)
+records = model.l10n_mx_records_autovalidate()
+records = records.filtered(
+    lambda exp: exp.partner_id.id in partners.ids and
+    exp.l10n_mx_edi_document_type == 'in_invoice')
+for partner in partners:
+    partner_records = records.filtered(lambda exp: exp.partner_id == partner)
+    for employee in partner_records.mapped('employee_id'):
+        employee_records = partner_records.filtered(lambda exp: exp.employee_id == employee)
+        for currency in employee_records.mapped('currency_id'):
+            currency_records = employee_records.filtered(lambda exp: exp.currency_id == currency)
+            for mode in list(set(currency_records.mapped('payment_mode'))):
+                mode_records = currency_records.filtered(lambda exp: exp.payment_mode == mode)
+                for index in range((len(mode_records) - 1) // 50 + 1):
+                    expenses = mode_records[index*50:(index+1)*50]
+                    data = expenses.action_submit_expenses()
+                    sheet.with_context(data['context']).create({
+                        'name': '%s - %s' % (partner.name, date_mx),
+                    })
+
+# As we are grouping the expenses per partner just above,
+# we can be sure there will be only one partner per sheet.
+sheets = set(records.mapped(lambda rec: (rec.sheet_id, rec.partner_id)))
+auto_accrue_label = env.ref('l10n_mx_edi_hr_expense.tag_auto_accrue_expenses')
+for sheet, partner in sheets:
+    sheet.action_submit_sheet()
+    sheet.approve_expense_sheets()
+    if auto_accrue_label in partner.category_id:
+      sheet.l10n_mx_edi_accrue_expenses()
+</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="active" eval="True"/>
+    </record>
+    <record id="action_revert_accrue_expenses" model="ir.actions.server">
+        <field name="name">Revert Expenses</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_hr_expense"/>
+        <field name="state">code</field>
+        <field name="binding_type">action</field>
+        <field name="binding_model_id" ref="model_hr_expense"/>
+        <field name="code">records.l10n_mx_edi_revert_expense()</field>
+    </record>
+</odoo>

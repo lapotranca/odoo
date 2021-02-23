@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<odoo>
+    <record model="ir.ui.view" id="hr_employee_view_form_inherit_expense">
+        <field name="name">hr.employee.analytic.expenses</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr_expense.hr_employee_view_form_inherit_expense"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="action_open_expenses" class="oe_stat_button" icon="fa-clone" type="object" contex="{'default_employee_id': active_id}" groups="hr.group_hr_manager">
+                    <field name="expenses_count" widget="statinfo" string="Expenses"/>
+                </button>
+                <button name="action_open_sheets" class="oe_stat_button" icon="fa-folder-open" type="object" contex="{'default_employee_id': active_id}" groups="hr.group_hr_manager">
+                    <field name="sheets_count" widget="statinfo" string="Expenses Sheets"/>
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='expense_manager_id']" position="after">
+                <field name="journal_id"/>
+                <field name="journal_ids" widget="many2many_tags"/>
+                <field name="l10n_mx_edi_debit_account_id"/>
+                <field name="l10n_mx_edi_credit_account_id"/>
+                <field name="l10n_mx_edi_accountant"/>
+                <field name="l10n_mx_edi_payment_mode"/>
+            </xpath>
+        </field>
+    </record>
+    <!-- Employee -->
+    <record id="view_employee_mx_expense_form" model="ir.ui.view">
+        <field name="name">hr.employee.mx.expense.form</field>
+        <field name="model">hr.employee</field>
+        <field name="arch" type="xml">
+            <form string="Employee" js_class="hr_employee_form">
+                <field name="active" invisible="1"/>
+                <field name="user_partner_id" invisible="1"/>
+                <field name="hr_presence_state" invisible="1"/>
+                <header>
+                    <button string="Chat" class="btn btn-primary o_employee_chat_btn" attrs="{'invisible': [('user_id','=', False)]}"/>
+                    <button name="%(hr.plan_wizard_action)d" string="Launch Plan" type="action" groups="hr.group_hr_manager"/>
+                </header>
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button
+                            id="hr_presence_button"
+                            class="oe_stat_button"
+                            disabled="1"
+                            attrs="{'invisible': ['|', ('last_activity', '=', False), ('user_id', '=', False)]}">
+                            <div role="img" class="fa fa-fw fa-circle text-success o_button_icon" attrs="{'invisible': [('hr_presence_state', '!=', 'present')]}" aria-label="Available" title="Available"/>
+                            <div role="img" class="fa fa-fw fa-circle text-warning o_button_icon" attrs="{'invisible': [('hr_presence_state', '!=', 'to_define')]}" aria-label="Away" title="Away"/>
+                            <div role="img" class="fa fa-fw fa-circle text-danger o_button_icon" attrs="{'invisible': [('hr_presence_state', '!=', 'absent')]}" aria-label="Not available" title="Not available"/>
+
+                            <div class="o_stat_info" attrs="{'invisible': [('hr_presence_state', '=', 'present')]}">
+                                <span class="o_stat_text">
+                                    Not Connected
+                                </span>
+                            </div>
+                            <div class="o_stat_info" attrs="{'invisible': [('hr_presence_state', '!=', 'present')]}">
+                                <span class="o_stat_value" attrs="{'invisible': [('last_activity_time', '=', False)]}">
+                                    <field name="last_activity_time"/>
+                                </span>
+                                <span class="o_stat_value" attrs="{'invisible': [('last_activity_time', '!=', False)]}">
+                                    <field name="last_activity"/>
+                                </span>
+                                <span class="o_stat_text">Present Since</span>
+                            </div>
+                        </button>
+                        <button name="action_open_expenses" class="oe_stat_button" icon="fa-clone" type="object" contex="{'default_employee_id': active_id}" groups="hr.group_hr_manager">
+                            <field name="expenses_count" widget="statinfo" string="Expenses"/>
+                        </button>
+                        <button name="action_open_sheets" class="oe_stat_button" icon="fa-folder-open" type="object" contex="{'default_employee_id': active_id}" groups="hr.group_hr_manager">
+                            <field name="sheets_count" widget="statinfo" string="Expenses Sheets"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <field name="image_1920" widget='image' class="oe_avatar" options='{"zoom": true, "preview_image":"image_128"}'/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Employee's Name" required="True"/>
+                        </h1>
+                        <h2>
+                            <field name="job_title" placeholder="Job Position" />
+                        </h2>
+                        <field name="category_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="Tags"  groups="hr.group_hr_manager"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="mobile_phone" widget="phone"/>
+                            <field name="work_phone" widget="phone"/>
+                            <field name="work_email" widget="email"/>
+                            <field name="work_location"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="department_id"/>
+                            <field name="job_id"/>
+                            <field name="parent_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="public" string="Work Information">
+                            <div id="o_work_employee_container"> <!-- These two div are used to position org_chart -->
+                                <div id="o_work_employee_main">
+                                    <group string="Location">
+                                        <field name="address_id"
+                                            context="{'show_address': 1}"
+                                            options='{"always_reload": True, "highlight_first_line": True}'/>
+                                    </group>
+                                    <group name="managers" string="Responsibles">
+                                        <field name="coach_id"/>
+                                    </group>
+                                    <group name="departure" string="Departure" attrs="{'invisible': [('active', '=', True)]}">
+                                        <field name="departure_reason"/>
+                                        <field name="departure_description"/>
+                                    </group>
+                                    <group string="Schedule" groups="base.group_no_one">
+                                        <field name="resource_calendar_id" required="1"/>
+                                        <field name="tz"/>
+                                    </group>
+                                </div>
+                            </div>
+                        </page>
+                        <page name="personal_information" string="Private Information" groups="hr.group_hr_user">
+                            <group>
+                                <group string="Contact Information">
+                                    <field name="address_home_id"
+                                        context="{
+                                            'show_address': 1,
+                                            'default_type': 'private',
+                                            'form_view_ref': 'base.res_partner_view_form_private'}"
+                                        options='{"always_reload": True, "highlight_first_line": True}'/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="hr_settings" string="HR Settings" groups="hr.group_hr_user">
+                            <group>
+                                <group string='Status' name="active_group">
+                                    <field name="user_id" string="Related User"/>
+                                    <field name="expense_manager_id"/>
+                                </group>
+                                <group string='Expenses' name="expenses">
+                                    <field name="journal_id"/>
+                                    <field name="journal_ids" widget="many2many_tags"/>
+                                    <field name="l10n_mx_edi_debit_account_id"/>
+                                    <field name="l10n_mx_edi_credit_account_id"/>
+                                    <field name="l10n_mx_edi_accountant"/>
+                                    <field name="l10n_mx_edi_payment_mode"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>
