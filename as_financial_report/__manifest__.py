@@ -2,7 +2,7 @@
 
 {
     'name': 'TI AMERICAS Pivote Financiero',
-    'version': '1.0.7',
+    'version': '1.0.8',
     'author': 'TI AMERICAS',
     'website': 'http://www.tiamericas.com/',
     'summary': 'Pivote Financiero',
