@@ -12,6 +12,8 @@
                     <field name="regiones_id"/>
                     <field name="cost_center_id"/>
                     <field name="department_id"/>
+                    <field name="as_laboratorio"/>
+                    <field name="as_line_product"/>
                 </xpath>
              
             </field>

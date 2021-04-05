@@ -1,29 +1,12 @@
 # -*- coding: utf-8 -*-
+# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import models, fields, api
-
-class as_sale_order(models.Model):
-    _inherit = "sale.order.line"
-
-    # @api.onchange('regiones_id')
-    # def compute_regiones(self):
-    #     for rec in self:
-    #         return {'domain': {
-    #             'department_id': [('id', 'in', rec.regiones_id.cost_center_id.ids)]
-    #         }}
-
-    # @api.onchange('cost_center_id')
-    # def compute_department(self):
-    #     for rec in self:
-    #         return {'domain': {
-    #             'department_id': [('id', 'in', rec.cost_center_id.department_ids.ids)]
-    #         }}
+from odoo import api, fields, models, tools
 
 
-    analytic_tag_ids = fields.Many2many('account.analytic.tag', string='Analytic Tags')
-    regiones_id = fields.Many2one('tf.regiones', string='Región')
-    cost_center_id = fields.Many2one('tf.cost.center', 'Cost Center')
-    department_id = fields.Many2one('tf.department', string='Departments')
+class SaleReport(models.Model):
+    _inherit = "sale.report"
+
     as_laboratorio = fields.Selection(selection=[
         ('SERVICIOS','SERVICIOS'),
         ('ACEROS NACIONALES','ACEROS NACIONALES'),
@@ -112,7 +95,7 @@ class as_sale_order(models.Model):
         ('TECNOLOGIA ANIMAL','TECNOLOGIA ANIMAL'),
         ('INSTRUVET','INSTRUVET'),
         ('OTROS AGRICOLAS','OTROS AGRICOLAS'),
-        ], string='Laboratorios / Marcas', default='')
+        ], string='Laboratorios / Marcas', default='SERVICIOS')
     as_line_product = fields.Selection(selection=[
         ('ACEROS NACIONALES','ACEROS NACIONALES'),
         ('OSATU','OSATU'),
@@ -137,15 +120,12 @@ class as_sale_order(models.Model):
         ('VIRBAC GE','VIRBAC GE'),
         ('VIRBAC HPM','VIRBAC HPM'),
         ('OTROS AGRICOLAS','OTROS AGRICOLAS'),
-        ], string='Linea de producto', default='')
+        ], string='Linea de producto', default='ACEROS NACIONALES')
 
+    def _query(self, with_clause='', fields={}, groupby='', from_clause=''):
+        fields['as_laboratorio'] = ', l.as_laboratorio as as_laboratorio'
+        fields['as_line_product'] = ', l.as_line_product as as_line_product'
+        groupby += ', l.as_laboratorio'
+        groupby += ', l.as_line_product'
 
-    @api.onchange('product_id')
-    def get_coste_center(self):
-        usuario = self.env.user
-        self.analytic_tag_ids = usuario.analytic_tag_ids.ids
-        self.regiones_id = usuario.regiones_id.id
-        self.cost_center_id = usuario.cost_center_id.id
-        self.department_id = usuario.departmento_id.id
-        self.as_laboratorio = self.product_id.as_laboratorio
-        self.as_line_product = self.product_id.as_line_product
+        return super(SaleReport, self)._query(with_clause, fields, groupby, from_clause)

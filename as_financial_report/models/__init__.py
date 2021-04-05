@@ -5,3 +5,4 @@ from . import as_purchase_order
 from . import as_res_user
 from . import as_sale_order
 from . import as_stock_landed_cost
+from . import as_product_template
