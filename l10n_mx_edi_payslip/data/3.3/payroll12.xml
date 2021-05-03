@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="payroll12">
+        <cfdi:Comprobante
+            xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd http://www.sat.gob.mx/nomina12 http://www.sat.gob.mx/sitio_internet/cfd/nomina/nomina12.xsd"
+             xmlns:cfdi="http://www.sat.gob.mx/cfd/3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:nomina12="http://www.sat.gob.mx/nomina12"
+             Version="3.3"
+             t-att-Serie="record._get_string_cfdi(serie or '', 25) or False"
+             t-att-Folio="record._get_string_cfdi(folio or '', 40) or False"
+             t-att-Fecha="date"
+             Sello=""
+             FormaPago="99"
+             t-att-NoCertificado="certificate_number"
+             t-att-Certificado="certificate"
+             t-att-SubTotal="amount_untaxed"
+             t-att-Descuento="amount_discount"
+             Moneda="MXN"
+             t-att-Total="'%.2f' % abs(float(amount_untaxed) - float(amount_discount))"
+             TipoDeComprobante="N"
+             MetodoPago="PUE"
+             t-att-LugarExpedicion="supplier.zip"
+             t-att-Confirmacion="confirmation">
+            <t t-set="related" t-value="record.get_cfdi_related()"/>
+            <t t-if="related">
+                <cfdi:CfdiRelacionados
+                    t-att-TipoRelacion="related['type']">
+                    <t t-foreach="related['related']" t-as="number">
+                        <cfdi:CfdiRelacionado t-att-UUID="number"/>
+                    </t>
+                </cfdi:CfdiRelacionados>
+            </t>
+            <cfdi:Emisor
+                t-att-Rfc="supplier.vat"
+                t-att-Nombre="record._get_string_cfdi(supplier.name, 254)"
+                t-att-RegimenFiscal="company.l10n_mx_edi_fiscal_regime"/>
+            <cfdi:Receptor
+                t-att-Rfc="customer.l10n_mx_edi_get_customer_rfc()"
+                t-att-Nombre="record._get_string_cfdi(customer.commercial_partner_id.name, 254)"
+                UsoCFDI="P01"/>
+            <cfdi:Conceptos>
+                <cfdi:Concepto
+                    ClaveProdServ="84111505"
+                    Cantidad="1"
+                    ClaveUnidad="ACT"
+                    Descripcion="Pago de nómina"
+                    t-att-ValorUnitario="amount_untaxed"
+                    t-att-Importe="amount_untaxed"
+                    t-att-Descuento="amount_discount">
+                </cfdi:Concepto>
+            </cfdi:Conceptos>
+            <cfdi:Complemento>
+                <nomina12:Nomina
+                    Version="1.2"
+                    t-att-TipoNomina="payslip_type"
+                    t-att-FechaPago="record.l10n_mx_edi_payment_date"
+                    t-att-FechaInicialPago="record.date_from"
+                    t-att-FechaFinalPago="record.date_to"
+                    t-att-NumDiasPagados="number_of_days"
+                    t-att-TotalPercepciones="'%.2f' % total_perceptions"
+                    t-att-TotalDeducciones="'%.2f' % total_deductions if total_deductions else False"
+                    t-att-TotalOtrosPagos="'%.2f' % total_other if total_other else False">
+                    <nomina12:Emisor
+                        t-att-Curp="company.partner_id.l10n_mx_edi_curp"
+                        t-att-RegistroPatronal="record._get_string_cfdi(company.company_registry or '', 20)"
+                        t-att-RfcPatronOrigen="company.vat">
+                        <t t-if="record.l10n_mx_edi_source_resource">
+                            <nomina12:EntidadSNCF
+                                t-att-OrigenRecurso="record.l10n_mx_edi_source_resource"
+                                t-att-MontoRecursoPropio="record.l10n_mx_edi_amount_sncf"/>
+                        </t>
+                    </nomina12:Emisor>
+                    <nomina12:Receptor
+                        t-att-Curp="customer.l10n_mx_edi_curp"
+                        t-att-NumSeguridadSocial="employee.ssnid"
+                        t-att-FechaInicioRelLaboral="date_start"
+                        t-att-Antigüedad="seniority_emp"
+                        t-att-TipoContrato="contract_type"
+                        t-att-Sindicalizado="emp_syndicated"
+                        t-att-TipoJornada="working_day"
+                        t-att-TipoRegimen="employee.l10n_mx_edi_contract_regime_type"
+                        t-att-NumEmpleado="employee.id"
+                        t-att-Departamento="record._get_string_cfdi(employee.department_id.name or '')"
+                        t-att-Puesto="record._get_string_cfdi(employee.job_id.name or '')"
+                        t-att-RiesgoPuesto="employee.l10n_mx_edi_risk_rank.code"
+                        t-att-PeriodicidadPago="record.contract_id.l10n_mx_edi_schedule_pay if payslip_type != 'E' else 99"
+                        t-att-Banco="employee.bank_account_id.bank_id.l10n_mx_edi_code"
+                        t-att-CuentaBancaria="employee.bank_account_id.acc_number"
+                        t-att-SalarioBaseCotApor="employee.contract_id.wage"
+                        t-att-SalarioDiarioIntegrado="emp_diary_salary"
+                        t-att-ClaveEntFed="employee.address_id.state_id.code">
+                        <t t-foreach="outsourcing" t-as="out">
+                            <nomina12:SubContratacion
+                                t-att-RfcLabora="vat_outsourcing"
+                                t-att-PorcentajeTiempo="percent_outsourcing"/>
+                        </t>
+                    </nomina12:Receptor>
+                    <nomina12:Percepciones
+                        t-att-TotalSueldos="total_salaries"
+                        t-att-TotalSeparacionIndemnizacion="total_compensation"
+                        t-att-TotalJubilacionPensionRetiro="total_retirement"
+                        t-att-TotalGravado="total_taxed or '0.00'"
+                        t-att-TotalExento="total_exempt or '0.00'">
+                        <t t-foreach="perceptions" t-as="perception">
+                            <nomina12:Percepcion
+                                t-att-TipoPercepcion="perception.code[-3:]"
+                                t-att-Clave="perception.salary_rule_id.l10n_mx_edi_code or perception.code"
+                                t-att-Concepto="record._get_string_cfdi(perception.name or '')"
+                                t-att-ImporteGravado="'%.2f' % (perception.total if perception.category_id == category_taxed else 0.0)"
+                                t-att-ImporteExento="'%.2f' % (perception.total if perception.category_id == category_exempt else 0.0)">
+                                <t t-if="perception.code[2:] == '045'">
+                                    <nomina12:AccionesOTitulos
+                                        t-att-ValorMercado="record.l10n_mx_edi_action_title_ids.filtered(lambda r: r.category_id == perception.category_id).market_value"
+                                        t-att-PrecioAlOtorgarse="record.l10n_mx_edi_action_title_ids.filtered(lambda r: r.category_id == perception.category_id).price_granted"/>
+                                </t>
+                                <t t-if="perception.code[2:] == '019'">
+                                    <t t-foreach="record.l10n_mx_edi_overtime_line_ids" t-as="extra">
+                                        <nomina12:HorasExtra
+                                            t-att-Dias="extra.days"
+                                            t-att-TipoHoras="extra.overtime_type"
+                                            t-att-HorasExtra="extra.hours"
+                                            t-att-ImportePagado="extra.amount"/>
+                                    </t>
+                                </t>
+                            </nomina12:Percepcion>
+                        </t>
+                        <t t-if="total_retirement">
+                            <t t-set="line" t-value="record.l10n_mx_edi_extra_node_ids.filtered(lambda r: r.node == 'retirement')"/>
+                            <nomina12:JubilacionPensionRetiro
+                                t-att-TotalUnaExhibicion="line.amount_total if not line.amount_daily else None"
+                                t-att-TotalParcialidad="line.amount_total if line.amount_daily else None"
+                                t-att-MontoDiario="line.amount_daily"
+                                t-att-IngresoAcumulable="line.accumulable_income"
+                                t-att-IngresoNoAcumulable="line.non_accumulable_income or '0'"/>
+                        </t>
+                        <t t-if="total_compensation">
+                            <t t-set="line" t-value="record.l10n_mx_edi_extra_node_ids.filtered(lambda r: r.node == 'separation')"/>
+                            <nomina12:SeparacionIndemnizacion
+                                t-att-TotalPagado="line.amount_total"
+                                t-att-NumAñosServicio="line.service_years or '0'"
+                                t-att-UltimoSueldoMensOrd="line.last_salary"
+                                t-att-IngresoAcumulable="line.accumulable_income"
+                                t-att-IngresoNoAcumulable="line.non_accumulable_income or '0'"/>
+                        </t>
+                    </nomina12:Percepciones>
+                    <t t-if="total_other_deductions or total_taxes_withheld">
+                        <nomina12:Deducciones
+                            t-att-TotalOtrasDeducciones="'%.2f' % total_other_deductions"
+                            t-att-TotalImpuestosRetenidos="total_taxes_withheld">
+                            <t t-foreach="deductions" t-as="deduction">
+                                <nomina12:Deduccion
+                                    t-att-TipoDeduccion="deduction.code[-3:]"
+                                    t-att-Clave="deduction.salary_rule_id.l10n_mx_edi_code or deduction.code"
+                                    t-att-Concepto="record._get_string_cfdi(deduction.name or '')"
+                                    t-att-Importe="'%.2f' % abs(deduction.total)"/>
+                            </t>
+                        </nomina12:Deducciones>
+                    </t>
+                    <t t-if="other_payments">
+                        <nomina12:OtrosPagos>
+                            <t t-foreach="other_payments" t-as="payment">
+                                <nomina12:OtroPago
+                                    t-att-TipoOtroPago="payment.code[-3:]"
+                                    t-att-Clave="payment.salary_rule_id.l10n_mx_edi_code or payment.code"
+                                    t-att-Concepto="record._get_string_cfdi(payment.name or '')"
+                                    t-att-Importe="'%.2f' % abs(payment.total)">
+                                    <t t-if="payment.code[-3:] == '002'">
+                                        <nomina12:SubsidioAlEmpleo
+                                            t-att-SubsidioCausado="'%.2f' % abs(payment.total)"/>
+                                    </t>
+                                    <t t-if="payment.code[-3:] == '004'">
+                                        <nomina12:CompensacionSaldosAFavor
+                                            t-att-SaldoAFavor="record.l10n_mx_edi_balance_favor"
+                                            t-att-Año="record.l10n_mx_edi_comp_year"
+                                            t-att-RemanenteSalFav="record.l10n_mx_edi_remaining"/>
+                                    </t>
+                                </nomina12:OtroPago>
+                            </t>
+                        </nomina12:OtrosPagos>
+                    </t>
+                    <t t-if="record.l10n_mx_edi_inability_line_ids">
+                        <nomina12:Incapacidades>
+                            <t t-foreach="record.l10n_mx_edi_inability_line_ids" t-as="inability">
+                                <nomina12:Incapacidad
+                                    t-att-DiasIncapacidad="inability.days"
+                                    t-att-TipoIncapacidad="inability.inability_type"
+                                    t-att-ImporteMonetario="inability.amount"/>
+                            </t>
+                        </nomina12:Incapacidades>
+                    </t>
+                </nomina12:Nomina>
+            </cfdi:Complemento>
+        </cfdi:Comprobante>
+    </template>
+</odoo>

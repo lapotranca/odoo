@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Holiday -->
+    <record id="mexican_holiday" model="hr.leave.type">
+        <field name="name" eval="'HOLIDAYS'"/>
+        <field name="allocation_type">fixed</field>
+        <field name="color_name">black</field>
+        <field name="validity_start" eval="time.strftime('%Y-01-01')"/>
+    </record>
+    <!-- Holiday -->
+    <record id="mexican_maternity" model="hr.leave.type">
+        <field name="name" eval="'MATERNITY'"/>
+        <field name="allocation_type">fixed</field>
+        <field name="color_name">black</field>
+        <field name="validity_start" eval="time.strftime('%Y-01-01')"/>
+    </record>
+</odoo>

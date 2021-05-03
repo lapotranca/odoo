@@ -1,0 +1,77 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* l10n_mx_edi_payslip
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-30 18:38+0000\n"
+"PO-Revision-Date: 2018-01-30 18:38+0000\n"
+"Last-Translator: Luis González<lgonzalez@vauxoo.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_mx_edi_payslip
+#: selection:hr.contract,schedule_pay:0
+msgid "Bimonthly"
+msgstr "Bimestral"
+
+#. module: l10n_mx_edi_payslip
+#: selection:hr.contract,schedule_pay:0
+msgid "Biweekly"
+msgstr "Catorcenal"
+
+#. module: l10n_mx_edi_payslip
+#: selection:hr.contract,schedule_pay:0
+msgid "Commission"
+msgstr "Comisión"
+
+#. module: l10n_mx_edi_payslip
+#: selection:hr.contract,schedule_pay:0
+msgid "Daily"
+msgstr "Diario"
+
+#. module: l10n_mx_edi_payslip
+#: selection:hr.contract,schedule_pay:0
+msgid "Decennial"
+msgstr "Decenal"
+
+#. module: l10n_mx_edi_payslip
+#: model:ir.model.fields,help:hr_contract.field_hr_contract_schedule_pay
+msgid "Defines the frequency of the wage payment."
+msgstr "Define la frecuencia del pago del salario."
+
+#. module: l10n_mx_edi_payslip
+#: selection:hr.contract,schedule_pay:0
+msgid "Fortnightly"
+msgstr "Quincenal"
+
+#. module: l10n_mx_edi_payslip
+#: selection:hr.contract,schedule_pay:0
+msgid "Monthly"
+msgstr "Mensual"
+
+#. module: l10n_mx_edi_payslip
+#: selection:hr.contract,schedule_pay:0
+msgid "Other"
+msgstr "Otra periodicidad"
+
+#. module: l10n_mx_edi_payslip
+#: selection:hr.contract,schedule_pay:0
+msgid "Raised price"
+msgstr "Precio alzado"
+
+#. module: l10n_mx_edi_payslip
+#: selection:hr.contract,schedule_pay:0
+msgid "Unit work"
+msgstr "Unidad obra"
+
+#. module: l10n_mx_edi_payslip
+#: selection:hr.contract,schedule_pay:0
+msgid "Weekly"
+msgstr "Semanal"
+

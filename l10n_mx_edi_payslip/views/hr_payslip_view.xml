@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_hr_payslip_form_l10n_mx">
+        <field name="name">view.hr.payslip.form.l10n_mx</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='credit_note']" position="after">
+                <label for="l10n_mx_edi_pac_status" states="verify,done,cancel"/>
+                <div class="o_row">
+                    <field name="l10n_mx_edi_pac_status" states="verify,done,cancel"/>
+                    <button name="l10n_mx_edi_update_pac_status" string="Retry" class="oe_link" type="object" groups="hr_payroll.group_hr_payroll_user" attrs="{'invisible':['|', ('l10n_mx_edi_pac_status', 'in', ['signed', False]), ('state', 'not in', ['verify', 'done', 'cancel'])]}"/>
+                </div>
+                <label for="l10n_mx_edi_sat_status" states="verify,done,cancel"/>
+                <div class="o_row">
+                    <field name="l10n_mx_edi_sat_status" states="verify,done,cancel"/>
+                    <button name="l10n_mx_edi_update_sat_status" string="Retry" class="oe_link" type="object" groups="hr_payroll.group_hr_payroll_user" attrs="{'invisible':['|', ('l10n_mx_edi_pac_status', 'in', ['retry', 'to_sign', 'to_cancel', False]), ('state', 'not in', ['verify', 'done', 'cancel'])]}"/>
+                </div>
+                <label for="l10n_mx_edi_cfdi_uuid" states="verify,done,cancel"/>
+                <div class="o_row">
+                    <field name="l10n_mx_edi_cfdi_uuid" states="verify,done,cancel"/>
+                </div>
+                <field name="l10n_mx_edi_origin"/>
+            </xpath>
+            <xpath expr="//field[@name='input_line_ids']" position="after">
+                <separator string="Extra Hours"/>
+                <field name="l10n_mx_edi_overtime_line_ids" colspan="4" nolabel="1">
+                    <tree string="Extra Hours" editable="bottom">
+                        <field name="name"/>
+                        <field name="days"/>
+                        <field name="hours"/>
+                        <field name="overtime_type"/>
+                        <field name="amount"/>
+                    </tree>
+                    <form string="Extra Hours">
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="days"/>
+                            <field name="hours"/>
+                            <field name="overtime_type"/>
+                            <field name="amount"/>
+                        </group>
+                    </form>
+                </field>
+                <separator string="Inabilities"/>
+                <field name="l10n_mx_edi_inability_line_ids" colspan="4" nolabel="1">
+                    <tree string="Inability" editable="bottom">
+                        <field name="days"/>
+                        <field name="inability_type"/>
+                        <field name="amount"/>
+                        <field name="sequence" invisible="True"/>
+                    </tree>
+                    <form string="Inability">
+                        <group col="4">
+                            <field name="days"/>
+                            <field name="inability_type"/>
+                            <field name="amount"/>
+                            <field name="sequence"/>
+                        </group>
+                    </form>
+                </field>
+            </xpath>
+            <xpath expr="//field[@name='contract_id']" position="before">
+                <field name="l10n_mx_edi_payment_date"/>
+            </xpath>
+            <xpath expr='//notebook' position="inside">
+                <page string="Technical CFDI Information" name="cfdi">
+                    <group string="Retirement / Indemnity">
+                        <field name="l10n_mx_edi_extra_node_ids" nolabel="1">
+                            <tree string="Retirement / Indemnity" editable="bottom">
+                                <field name="node"/>
+                                <field name="amount_total"/>
+                                <field name="amount_daily" attrs="{'readonly': [('node', '!=', 'retirement')]}"/>
+                                <field name="service_years" attrs="{'readonly': [('node', '!=', 'separation')]}"/>
+                                <field name="last_salary" attrs="{'readonly': [('node', '!=', 'separation')]}"/>
+                                <field name="accumulable_income"/>
+                                <field name="non_accumulable_income"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group string="Actions or Titles">
+                        <group>
+                            <field name="l10n_mx_edi_action_title_ids" nolabel="1">
+                                <tree string="Actions or Titles" editable="bottom">
+                                    <field name="category_id"/>
+                                    <field name="market_value"/>
+                                    <field name="price_granted"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+                    <group string="Extra Other Payments">
+                        <group string="Compensation Balances in favor">
+                            <group>
+                                <field name="l10n_mx_edi_balance_favor"/>
+                                <field name="l10n_mx_edi_comp_year"/>
+                                <field name="l10n_mx_edi_remaining"/>
+                            </group>
+                        </group>
+                    </group>
+                    <group string="SNCF Entity">
+                        <group>
+                            <field name="l10n_mx_edi_source_resource"/>
+                            <field name="l10n_mx_edi_amount_sncf"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//button[@name='action_payslip_cancel']" position="attributes">
+                <attribute name="states">draft,hr_check,confirm,verify,done</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_payslip_cancel']" position="after">
+                <field name="sent" invisible="1"/>
+                <button name="action_payroll_sent" type="object" string="Send by Email" attrs="{'invisible': ['|', ('sent', '=', True), ('state', '!=', 'done')]}" class="oe_highlight" groups="base.group_user"/>
+                <button name="action_payroll_sent" type="object" string="Send by Email" attrs="{'invisible': ['|', ('sent', '=', False), ('state', '!=', 'done')]}" groups="base.group_user"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_hr_payslip_tree_inherit">
+        <field name="name">view.hr.payslip.tree.inherit</field>
+        <field name="model">hr.payslip</field>
+        <field name="type">tree</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="/tree/field[@name='state']" position="after">
+                <field name="l10n_mx_edi_pac_status"/>
+                <field name="l10n_mx_edi_cfdi_uuid" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_hr_employee_form_inherit_l10n_mx">
+        <field name="name">view.hr.employee.form.inherit.l10n_mx</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='o_work_employee_main']/group[4]" position="after">
+                <group string="Payroll CFDI">
+                    <field name="ssnid"/>
+                    <field name="l10n_mx_edi_is_assimilated"/>
+                    <field name="l10n_mx_edi_syndicated"/>
+                    <field name="l10n_mx_edi_risk_rank"/>
+                    <field name="l10n_mx_edi_contract_regime_type"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_hr_payslip_run_form_inherit_l10n_mx">
+        <field name="name">view.hr.payslip.run.form.inherit.l10n_mx</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_draft']" position="after">
+                <button name="action_payslips_done" type="object" states="close" string="Confirm payslips" class="oe_highlight"/>
+                <button name="action_payroll_sent" type="object" string="Send by Email" states="close" class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//field[@name='credit_note']" position="before">
+                <field name="l10n_mx_edi_payment_date"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

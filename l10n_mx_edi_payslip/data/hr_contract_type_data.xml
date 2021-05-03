@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+    <!-- Risk rank -->
+    <record id="class_job_risk_1" model="l10n_mx_edi.job.risk">
+        <field name="name">Class I</field>
+        <field name="code">1</field>
+        <field name="percentage">0.54355</field>
+    </record>
+    <record id="class_job_risk_2" model="l10n_mx_edi.job.risk">
+        <field name="name">Class II</field>
+        <field name="code">2</field>
+        <field name="percentage">1.13065</field>
+    </record>
+    <record id="class_job_risk_3" model="l10n_mx_edi.job.risk">
+        <field name="name">Class III</field>
+        <field name="code">3</field>
+        <field name="percentage">2.59840</field>
+    </record>
+    <record id="class_job_risk_4" model="l10n_mx_edi.job.risk">
+        <field name="name">Class IV</field>
+        <field name="code">4</field>
+        <field name="percentage">4.65325</field>
+    </record>
+    <record id="class_job_risk_5" model="l10n_mx_edi.job.risk">
+        <field name="name">Class V</field>
+        <field name="code">5</field>
+        <field name="percentage">7.58875</field>
+    </record>
+</odoo>

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+hr_payslip_inability_manager,hr.payslip.inability.manager,model_hr_payslip_inability,,1,1,1,1
+hr_payslip_overtime_manager,hr.payslip.overtime.manager,model_hr_payslip_overtime,,1,1,1,1
+hr_payslip_action_titles_manager,hr.payslip.action.titles.manager,model_hr_payslip_action_titles,,1,1,1,1
+hr_payslip_extra_perception_manager,hr.payslip.extra.perception.manager,model_hr_payslip_extra_perception,,1,1,1,1
+access_l10n_mx_edi_job_risk,access_l10n_mx_edi_job_risk,model_l10n_mx_edi_job_risk,,1,1,1,1

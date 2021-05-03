@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Perceptions -->
+    <record id="hr_rule_l10n_mx_payroll_perception_002_e" model="hr.salary.rule">
+        <field name="name">Gratificación Anual - Aguinaldo</field>
+        <field name="sequence" eval="2000"/>
+        <field name="code">PE002</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_02"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+bonus_total = (contract.wage/30) * (contract.l10n_mx_edi_christmas_bonus or 15)
+seniority = contract.get_seniority(date_to=payslip.date_to)
+
+if 1 > seniority['years']:
+    bonus_total = (bonus_total / 365) * seniority['days']
+
+# Minimum wage set with values of SAT http://www.sat.gob.mx/informacion_fiscal/tablas_indicadores/Documents/salarios_minimos_historico.xls
+
+uma = contract.company_id.l10n_mx_edi_uma
+amount_exempt = uma * 30.4
+
+diff =  bonus_total - amount_exempt
+
+result = bonus_total
+if diff >= 0:
+    result =  amount_exempt</field>
+        <field name="note">Sólo 30 días de SM queda exento, el excedente es gravado</field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_002_g" model="hr.salary.rule">
+        <field name="name">Gratificación Anual - Aguinaldo</field>
+        <field name="sequence" eval="2000"/>
+        <field name="code">PG002</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_02"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+bonus_total = (contract.wage/30) * (contract.l10n_mx_edi_christmas_bonus or 15)
+seniority = contract.get_seniority(date_to=payslip.date_to)
+
+if 1 > seniority['years']:
+    bonus_total = (bonus_total /365) * seniority['days']
+
+# Minimum wage set with values of SAT http://www.sat.gob.mx/informacion_fiscal/tablas_indicadores/Documents/salarios_minimos_historico.xls
+
+uma = contract.company_id.l10n_mx_edi_uma
+amount_exempt = uma * 30.4
+
+diff =  bonus_total - amount_exempt
+result = 0
+if diff > 0:
+    result =  diff</field>
+        <field name="note">Sólo 30 días de SM queda exento, el excedente es gravado</field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_isr_02" model="hr.salary.rule">
+        <field name="name">AUX ISR</field>
+        <field name="sequence" eval="53500"/>
+        <field name="code">AUX_ISR</field>
+        <field name="category_id" ref="hr_salary_rule_category_aux_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_02"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+income_period = categories.PERGRA
+# Table ISR (limite_inferior, limite_superior, cuota_fija, tasa)
+table = {'05': [(0.01, 578.52, 0.00, 0.0192), (578.53, 4910.18, 11.11, 0.0640),
+         (4910.19, 8629.20, 288.33, 0.1088), (8629.21, 10031.07, 692.96, 0.1600),
+         (10031.08, 12009.94, 917.26, 0.1792), (12009.95, 24222.31, 1271.87, 0.2136),
+         (24222.32, 38177.69, 3880.44, 0.2352), (38177.70, 72887.50, 7162.74, 0.3000),
+         (72887.51, 97183.33, 17575.69, 0.3200), (97183.34, 291550.00, 25350.35, 0.3400),
+         (291550.01, 999999999, 91435.02, 0.3500)],
+         '04': [(0.01, 285.45, 0.00, 0.0192), (285.46, 2422.80, 5.55, 0.0640),
+         (2422.81, 4257.90, 142.20,  0.1088), (4257.91, 4949.55, 341.85,  0.1600),
+         (4949.56, 5925.90, 452.55,  0.1792), (5925.91, 11951.85, 627.60, 0.2136),
+         (11951.86, 18837.75, 1914.75, 0.2352), (18837.76, 35964.30, 3534.30, 0.3000),
+         (35964.31, 47952.30, 8672.25, 0.3200), (47952.31, 143856.90, 12508.35, 0.3400),
+         (143856.91, 999999999, 45115.95, 0.3500)],
+         '02': [(0.01, 133.21, 0.00, 0.0192), (133.22, 1130.64, 2.59, 0.0640),
+         (1130.65, 1987.02, 66.36, 0.1088), (1987.03, 2309.79, 159.53, 0.1600),
+         (2309.80, 2765.42, 211.19, 0.1792), (2765.43, 5577.53, 292.88, 0.2136),
+         (5577.54, 8790.95, 893.55, 0.2352), (8790.96, 16783.34, 1649.34, 0.3000),
+         (16783.35, 22377.74, 4047.05, 0.3200), (22377.75, 67133.22, 5837.23, 0.3400),
+         (67133.23, 99999999, 21054.11, 0.3500)],
+         '01': [(0.01, 19.03, 0.00, 0.0192), (19.04, 161.52, 0.37, 0.0640),
+         (161.53, 283.86, 9.48, 0.1088), (283.87, 329.97, 22.79, 0.1600),
+         (329.98, 395.06, 30.17, 0.1792), (395.07, 796.79, 41.84, 0.2136),
+         (796.80, 1255.85, 127.65, 0.2352), (1255.86, 2397.62, 235.62, 0.3000),
+         (2397.63, 3196.82, 578.15, 0.3200), (3196.83, 9590.46, 833.89, 0.3400),
+         (9590.47, 99999999, 3007.73, 0.3500)],
+         '10': [(0.01, 190.30, 0.00, 0.0192), (190.31, 1615.20, 3.70, 0.0640),
+         (1615.21, 2838.60, 94.80, 0.1088), (2838.61, 3299.70, 227.90, 0.1600),
+         (3299.71, 3950.60, 301.70, 0.1792), (3950.61, 7967.90, 418.40, 0.2136),
+         (7967.91, 12558.50, 1276.50, 0.2352), (12558.51, 23976.20, 2356.20, 0.3000),
+         (23976.21, 31968.20, 5781.50, 0.3200), (31968.21, 95904.60, 8338.90, 0.3400),
+         (95904.61, 99999999, 30077.30, 0.3500)]}
+result = 0
+table_isr = table.get(contract.l10n_mx_edi_schedule_pay, [])
+if table_isr:
+    for value in table_isr:
+        if income_period >=value[0] and value[1] >= income_period:
+            extra = income_period - value[0]
+            result = ((extra * value[3]) + value[2]) * -1
+            break
+if employee.env['hr.payslip'].browse(payslip.id).l10n_mx_edi_is_last_payslip():
+    category = employee.env.ref('l10n_mx_edi_payslip.hr_salary_rule_category_perception_mx_taxed')
+    payslips = employee.slip_ids.filtered(lambda sl: sl.state == 'done' and sl.id != payslip.id and sl.date_from.month == payslip.date_from.month and sl.date_from.year == payslip.date_from.year)
+    lines = payslips.mapped('line_ids')
+    income_monthly = income_period + sum(lines.filtered(lambda li: li.category_id.id == category.id).mapped('total'))
+    for value in table['05']:
+        if income_monthly >=value[0] and value[1] >= income_monthly:
+            extra = income_monthly - value[0]
+            result = ((extra * value[3]) + value[2]) * -1
+            break
+    rule = employee.env.ref('l10n_mx_edi_payslip.hr_rule_l10n_mx_payroll_deduction_isr')
+    result = result - sum(lines.filtered(lambda li: li.salary_rule_id == rule).mapped('total'))</field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_other_payment_aux_02" model="hr.salary.rule">
+        <field name="name">Auxiliar Subsidio para el empleo</field>
+        <field name="code">AUX_OP002</field>
+        <field name="sequence">53501</field>
+        <field name="category_id" ref="hr_salary_rule_category_aux_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_02"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Based on http://www.sat.gob.mx/informacion_fiscal/devoluciones_compensaciones/Paginas/subsidio_al_empleo.aspx
+# TODO - Complete tables
+income_period = categories.PERGRA
+table = {
+    '05': [
+        (0.01, 1768.96, 407.02),
+        (1768.97, 2653.38, 406.83),
+        (2653.39, 3472.84, 406.62),
+        (3472.85, 3537.87, 392.77),
+        (3537.88, 4446.15, 382.46),
+        (4446.16, 4717.18, 354.23),
+        (4717.19, 5335.42, 324.87),
+        (5335.43, 6224.67, 294.63),
+        (6224.68, 7113.90, 253.54),
+        (7113.91, 7382.33, 217.61),
+        (7382.34, 99999999.00, 0)],
+    '04': [
+        (0.01, 872.85, 200.85),
+        (872.86, 1309.20, 200.70),
+        (1309.21, 1713.60, 200.70),
+        (1713.61, 1745.70, 193.80),
+        (1745.71, 2193.75, 188.70),
+        (2193.76, 2327.55, 174.75),
+        (2327.56, 2632.65, 160.35),
+        (2632.66, 3071.40, 145.35),
+        (3071.41, 3510.15, 125.10),
+        (3510.16, 3642.60, 107.40),
+        (3642.61, 99999999.00, 0)],
+}
+result = 0.00
+table = table.get(contract.l10n_mx_edi_schedule_pay, [])
+if table:
+    for value in table:
+        if income_period >=value[0] and value[1] >= income_period:
+            result = value[2]
+            break</field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_aguinaldo_002" model="hr.salary.rule">
+        <field name="name">ISR - Aguinaldo</field>
+        <field name="sequence" eval="55100"/>
+        <field name="code">002</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_02"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+income_period = categories.PERGRA
+# Table ISR (limite_inferior, limite_superior, cuota_fija, tasa)
+table = [(0.01, 578.52, 0.00, 0.0192), (578.53, 4910.18, 11.11, 0.0640),
+         (4910.19, 8629.20, 288.33, 0.1088), (8629.21, 10031.07, 692.96, 0.1600),
+         (10031.08, 12009.94, 917.26, 0.1792), (12009.95, 24222.31, 1271.87, 0.2136),
+         (24222.32, 38177.69, 3880.44, 0.2352), (38177.70, 72887.50, 7162.74, 0.3000),
+         (72887.51, 97183.33, 17575.69, 0.3200), (97183.34, 291550.00, 25350.35, 0.3400),
+         (291550.01, 999999999, 91435.02, 0.3500)]
+result = 0
+
+for value in table:
+    if income_period >= value[0] and value[1] >= income_period:
+        result = (((income_period - value[0]) * value[3]) + value[2]) * -1
+        break
+        </field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_071_02" model="hr.salary.rule">
+        <field name="name">Ajuste en Subsidio para el empleo - efectivamente entregado al trabajador</field>
+        <field name="sequence" eval="81700"/>
+        <field name="code">071</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_02"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Based on http://www.sat.gob.mx/informacion_fiscal/devoluciones_compensaciones/Paginas/subsidio_al_empleo.aspx
+income_period = categories.PERGRA
+table = [(0.01, 1768.96, 407.02), (1768.97, 2653.38, 406.83),
+         (2653.39, 3472.84, 406.62), (3472.85, 3537.87, 392.77),
+         (3537.88, 4446.15, 382.46), (4446.16, 4717.18, 354.23),
+         (4717.19, 5335.42, 324.87), (5335.43, 6224.67, 294.63),
+         (6224.68, 7113.90, 253.54), (7113.91, 7382.33, 217.61),
+         (7382.34, 99999999.00, 0)]
+days_schedule = {'01': 1, '02': 7, '03': 14, '04': 15, '05': 30}
+result = -0.01
+days_work = days_schedule.get(contract.l10n_mx_edi_schedule_pay, 0)
+if days_work:
+    income_period = (income_period / days_work) * 30
+    for value in table:
+        if income_period >=value[0] and value[1] >= income_period:
+            result = value[2]
+            break
+    result = -0.01 if not (result * days_work) / 30 else 0 </field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_other_payment_002_02" model="hr.salary.rule">
+        <field name="name">Subsidio para el empleo - efectivamente entregado al trabajador</field>
+        <field name="code">OP002</field>
+        <field name="sequence">87000</field>
+        <field name="category_id" ref="hr_salary_rule_category_other_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_02"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = AUX_OP002
+result = result + AUX_ISR if result &gt; abs(AUX_ISR) else 0.01</field>
+    </record>
+    <record id="hr_rule_net_salary_02" model="hr.salary.rule">
+        <field name="name">Net Salary</field>
+        <field name="sequence" eval="1000000"/>
+        <field name="code">NetSalary</field>
+        <field name="category_id" ref="hr_salary_rule_category_netsa_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_02"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = categories.PERGRA + categories.DEDUC + categories.PEREXE + categories.OTHER</field>
+    </record>
+</odoo>

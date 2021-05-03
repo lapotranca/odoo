@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id='l10n_mx_edi_report_payslip' inherit_id="hr_payroll.report_payslip">
+        <xpath expr="//div[hasclass('page')]" position="before">
+            <t t-set="company" t-value="o.company_id or o.contract_id.company_id"/>
+            <t t-if="not o.l10n_mx_edi_cfdi_uuid and o.l10n_mx_edi_is_required()">
+                <div class="btn btn-danger">
+                    <h1>A signature of this payment is required, but it is not signed.</h1>
+                </div>
+            </t>
+            <t t-if="o.l10n_mx_edi_cfdi_uuid">
+                <!--New global variables-->
+                <t t-set="xml" t-value="o.l10n_mx_edi_get_xml_etree()"/>
+                <t t-set="tfd" t-value="o.l10n_mx_edi_get_tfd_etree(xml)"/>
+                <t t-set="payroll" t-value="o.l10n_mx_edi_get_payroll_etree(xml)"/>
+                <t t-set="tfd_original_string" t-value="o._get_l10n_mx_edi_cadena()"/>
+            </t>
+        </xpath>
+        <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
+            <table class="table table-condensed table-bordered" style="font-size:8px; margin-bottom:1px;">
+                <t t-if="o.l10n_mx_edi_cfdi_uuid">
+                    <tr>
+                        <td>
+                            <strong>Name</strong><br/>
+                            <strong>Email</strong><br/>
+                            <strong>RFC</strong><br/>
+                            <strong>CURP</strong><br/>
+                            <strong>Start of Employment</strong><br/>
+                            <strong>Working hours</strong><br/>
+                            <strong>Risk of Job</strong><br/>
+                            <strong>Contract Type</strong><br/>
+                            <strong>NSS</strong><br/>
+                            <strong>Bank Account</strong><br/>
+                        </td>
+                        <td>
+                            <span t-field="o.employee_id"/><br/>
+                            <span t-field="o.employee_id.work_email"/><br/>
+                            <span t-esc="xml.Receptor.get('Rfc', '')"/><br/>
+                            <span t-esc="payroll.Receptor.get('Curp', '')"/><br/>
+                            <span t-esc="payroll.Receptor.get('FechaInicioRelLaboral', '')"/><br/>
+                            <span t-esc="payroll.Receptor.get('TipoJornada', '')"/><br/>
+                            <span t-esc="payroll.Receptor.get('RiesgoPuesto', '')"/><br/>
+                            <span t-esc="payroll.Receptor.get('TipoContrato', '')"/><br/>
+                            <span t-esc="payroll.Receptor.get('NumSeguridadSocial', '')"/><br/>
+                            <span t-field="o.employee_id.bank_account_id"/><br/>
+                        </td>
+                        <td>
+                            <strong>Reference</strong><br/>
+                            <strong>Date From</strong><br/>
+                            <strong>Date To</strong><br/>
+                            <strong>Designation</strong><br/>
+                            <strong>Department</strong><br/>
+                            <strong>Payment Period</strong><br/>
+                            <strong>Payment days</strong><br/>
+                            <strong>Payment date</strong><br/>
+                            <strong>Salary Integrated</strong><br/>
+                            <strong>SBC</strong><br/>
+                        </td>
+                        <td>
+                            <span t-field="o.number"/><br/>
+                            <span t-field="o.date_from"/><br/>
+                            <span t-field="o.date_to"/><br/>
+                            <span t-field="o.employee_id.job_id"/><br/>
+                            <span t-esc="payroll.Receptor.get('Departamento', '')"/><br/>
+                            <span t-esc="payroll.Receptor.get('PeriodicidadPago', '')"/><br/>
+                            <span t-esc="payroll.get('NumDiasPagados', '')"/><br/>
+                            <span t-esc="payroll.get('FechaPago', '')"/><br/>
+                            <span t-esc="float(payroll.Receptor.get('SalarioDiarioIntegrado', '0.0'))"
+                                t-esc-options='{"widget": "monetary", "display_currency": company.currency_id}'/><br/>
+                            <span t-esc="float(payroll.Receptor.get('SalarioBaseCotApor', '0.0'))"
+                                t-esc-options='{"widget": "monetary", "display_currency": company.currency_id}'/><br/>
+                        </td>
+                    </tr>
+                </t>
+                <t t-if="not o.l10n_mx_edi_cfdi_uuid">
+                    <tr>
+                        <td><strong>Name</strong></td>
+                        <td><span t-field="o.employee_id"/></td>
+                        <td><strong>Designation</strong></td>
+                        <td><span t-field="o.employee_id.job_id"/></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Address</strong></td>
+                        <td colspan="3">
+                            <div t-field="o.employee_id.address_home_id"
+                                t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email</strong></td>
+                        <td><span t-field="o.employee_id.work_email"/></td>
+                        <td><strong>Identification No</strong></td>
+                        <td><span t-field="o.employee_id.identification_id"/></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reference</strong></td>
+                        <td><span t-field="o.number"/></td>
+                        <td><strong>Bank Account</strong></td>
+                        <td><span t-field="o.employee_id.bank_account_id"/></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Date From</strong></td>
+                        <td><span t-field="o.date_from"/></td>
+                        <td><strong>Date To</strong></td>
+                        <td><span t-field="o.date_to"/></td>
+                    </tr>
+                </t>
+            </table>
+        </xpath>
+
+        <xpath expr="//div[hasclass('page')]/table[4]" position="replace">
+        </xpath>
+
+        <xpath expr="//div[hasclass('page')]/table[3]" position="replace">
+        </xpath>
+
+        <xpath expr="//div[hasclass('page')]/table[2]" position="replace">
+            <t t-if="o.l10n_mx_edi_cfdi_uuid">
+                <table class="table table-condensed" style="font-size:9px; margin-bottom:1px;">
+                    <thead>
+                        <tr>
+                            <th  style="width: 10%;">Type</th>
+                            <th  style="width: 10%;">Code</th>
+                            <th  style="width: 50%;">Concept</th>
+                            <th  class="text-right" style="width: 15%;">Deduction</th>
+                            <th  class="text-right" style="width: 15%;">Perception</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="[p for p in payroll.Percepciones.Percepcion]" t-as="perception">
+                            <td><span t-esc="perception.get('TipoPercepcion', '')"/></td>
+                            <td><span t-esc="perception.get('Clave', '')"/></td>
+                            <td><span t-esc="perception.get('Concepto', '')"/></td>
+                            <td></td>
+                            <t t-set="amount" t-value="perception.get('ImporteGravado', '') if float(perception.get('ImporteGravado', '0.0')) else perception.get('ImporteExento', '')"/>
+                            <td class="text-right"><span t-esc="float(amount)"
+                                    t-esc-options='{"widget": "monetary", "display_currency": company.currency_id}'/></td>
+                        </tr>
+                        <t t-if="[a.tag for a in payroll.iterchildren('{http://www.sat.gob.mx/nomina12}OtrosPagos')]">
+                            <tr t-foreach="[p for p in payroll.OtrosPagos.OtroPago]" t-as="perception">
+                                <td><span t-esc="perception.get('TipoOtroPago', '')"/></td>
+                                <td><span t-esc="perception.get('Clave', '')"/></td>
+                                <td><span t-esc="perception.get('Concepto', '')"/></td>
+                                <td></td>
+                                <td class="text-right"><span t-esc="float(perception.get('Importe', '0.0'))"
+                                        t-esc-options='{"widget": "monetary", "display_currency": company.currency_id}'/></td>
+                            </tr>
+                        </t>
+                        <t t-if="[a.tag for a in payroll.iterchildren('{http://www.sat.gob.mx/nomina12}Deducciones')]">
+                            <tr t-foreach="[d for d in payroll.Deducciones.Deduccion]" t-as="deduction">
+                                <td><span t-esc="deduction.get('TipoDeduccion', '')"/></td>
+                                <td><span t-esc="deduction.get('Clave', '')"/></td>
+                                <td><span t-esc="deduction.get('Concepto', '')"/></td>
+                                <td class="text-right"><span t-esc="float(deduction.get('Importe', '0.0'))"
+                                        t-esc-options='{"widget": "monetary", "display_currency": company.currency_id}'/></td>
+                                <td></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <div class="clearfix">
+                    <div id="total" class="row">
+                        <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                            <table class="table table-sm">
+                                <tr class="border-black o_total">
+                                    <td><strong>Total</strong></td>
+                                    <td class="text-right">
+                                        <span t-esc="sum(o.line_ids.filtered(lambda line: line.category_id.code == 'NETSA').mapped('total'))"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 pull-right" style="font-size:10px;">
+                        <table class="table table-condensed" style="margin-bottom:5px;">
+                            <tr class="border-black">
+                                <td>Sub Total:</td>
+                                <td class="text-right"><span t-esc="float(xml.get('Descuento', '0.0'))"
+                                        t-esc-options='{"widget": "monetary", "display_currency": company.currency_id}'/></td>
+                                <td class="text-right"><span t-esc="float(xml.get('SubTotal', '0.0'))"
+                                        t-esc-options='{"widget": "monetary", "display_currency": company.currency_id}'/></td>
+                            </tr>
+                            <tr class="border-black">
+                                <td><strong>Total:</strong></td>
+                                <td></td>
+                                <td class="text-right">
+                                     <strong><span t-esc="float(xml.get('Total', '0.0'))"
+                                             t-esc-options='{"widget": "monetary", "display_currency": company.currency_id}'/></strong>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </t>
+            <t t-if="not o.l10n_mx_edi_cfdi_uuid">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Quantity/rate</th>
+                            <th>Amount</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line">
+                            <td><span t-field="line.code"/></td>
+                            <td><span t-field="line.name"/></td>
+                            <td><span t-field="line.quantity"/></td>
+                            <td><span t-esc="line.amount"
+                                  t-esc-options='{"widget": "monetary", "display_currency": company.currency_id}'/></td>
+                            <td><span t-esc="line.total"
+                                t-esc-options='{"widget": "monetary", "display_currency": company.currency_id}'/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </t>
+        </xpath>
+        <xpath expr="//div[hasclass('page')]/p[hasclass('text-right')]" position="attributes">
+             <attribute name='style'>font-size:9px; margin-bottom:1px;</attribute>
+             <attribute name='class'>text-left</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('page')]/p" position="after">
+            <t t-if="o.l10n_mx_edi_cfdi_uuid">
+                <div class="row">
+                    <div class="col-xs-6 pull-left" style="padding-top:5px;">
+                        <strong><span style="font-size:9px;">Disabilities</span></strong>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr class="border-black" style="font-size:9px;">
+                                    <th style="width: 30%;">Days Disability</th>
+                                    <th style="width: 30%;">Disability Type</th>
+                                    <th style="width: 40%;">Discount</th>
+                                </tr>
+                            </thead>
+                            <tbody style="font-size:9px;">
+                                <tr t-foreach="[p for p in o.l10n_mx_edi_inability_line_ids]" t-as="inc">
+                                    <td><span t-esc="inc.days"/></td>
+                                    <td><span t-esc="inc.inability_type"/></td>
+                                    <td><span t-esc="inc.amount"
+                                            t-esc-options='{"widget": "monetary", "display_currency": company.currency_id}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-6 pull-righ" style="padding-top:5px;" t-if="o.l10n_mx_edi_overtime_line_ids">
+                        <strong><span style="font-size:9px;">Overtimes</span></strong>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr class="border-black" style="font-size:9px;">
+                                    <th  style="width: 20%;">Days</th>
+                                    <th  style="width: 20%;">Overtimes</th>
+                                    <th  style="width: 20%;">Type Hours</th>
+                                    <th  style="width: 40%;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody style="font-size:9px;">
+                                <tr t-foreach="[e for e in o.l10n_mx_edi_overtime_line_ids]" t-as="extra">
+                                    <td><span t-esc="extra.days"/></td>
+                                    <td><span t-esc="extra.hours"/></td>
+                                    <td><span t-esc="extra.overtime_type"/></td>
+                                    <td><span t-esc="extra.amount"
+                                            t-esc-options='{"widget": "monetary", "display_currency": company.currency_id}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" id='complement'>
+                    <div class="barcode col-3">
+                        <img t-att-src="'/report/barcode/QR/%s' % quote_plus('?') + keep_query(
+                                re=o.l10n_mx_edi_cfdi_supplier_rfc, rr=o.l10n_mx_edi_cfdi_customer_rfc,
+                                tt=0, id=o.l10n_mx_edi_cfdi_uuid)"/>
+                    </div>
+                    <div class="complement-details col-9">
+                        <div class="digital-stamp">
+                            <span>Digital stamp of the emitter</span>
+                        </div>
+                        <div class="digital-stamp-content">
+                            <span t-esc="xml.get('Sello', 'No identificado')"/>
+                        </div>
+                        <div class="digital-stamp">
+                            <span>Digital stamp SAT</span>
+                        </div>
+                        <div class="digital-stamp-content">
+                            <span t-esc="tfd.get('SelloSAT', 'No identificado')"/>
+                        </div>
+                        <div class="digital-stamp">
+                            <span>Original chain complement of digital certification SAT</span>
+                        </div>
+                        <div class="digital-stamp-content">
+                            <span class="nowrap" t-esc="tfd_original_string"/>
+                        </div>
+                        <div t-if="xml.Emisor.xpath('cfdi:ExpedidoEn', namespaces=xml.nsmap)" class="digital-stamp">
+                            <span>Issued from</span>
+                        </div>
+                        <div t-if="xml.Emisor.xpath('cfdi:ExpedidoEn', namespaces=xml.nsmap)" class="digital-stamp-content">
+                            <span t-esc="xml.get('LugarExpedicion', 'No identificado')"/>
+                        </div>
+                        <div class="digital-stamp">
+                            <span>Extra Info</span>
+                        </div>
+                        <div class="digital-stamp-content">
+                            <span>Emitter certificate:</span> <span t-esc="xml.get('NoCertificado')"/>
+                            <span> | Expedition place:</span> <span t-esc="xml.get('LugarExpedicion')"/>
+                            <span> | Fiscal Regime:</span> <span t-esc="xml.Emisor.get('RegimenFiscal', '')"/>
+                            <span> | Emission Date:</span> <span t-esc="xml.get('Fecha', '').replace('T', ' ')"/>
+                            <span> | Certification Date:</span> <span t-esc="tfd.get('FechaTimbrado', '').replace('T', ' ')"/>
+                            <span> | Fiscal Folio:</span> <span t-esc="tfd.get('UUID')"/>
+                            <span> | Employer registration:</span> <span t-esc="payroll.Emisor.get('RegistroPatronal', 'NA')"/>
+                            <span> | Bank:</span> <span t-esc="payroll.Receptor.get('Banco', 'NA')"/>
+                        </div>
+                        <div class="digital-stamp-content text-center">
+                            <strong>This document is a printed representation of a CFDI</strong>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="report_payslip_document_details_by_rule">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <t t-set="taxed" t-value="o.env.ref('l10n_mx_edi_payslip.hr_salary_rule_category_perception_mx_taxed')"/>
+                <t t-set="exempt" t-value="o.env.ref('l10n_mx_edi_payslip.hr_salary_rule_category_perception_mx_exempt')"/>
+                <t t-set="deduction" t-value="o.env.ref('l10n_mx_edi_payslip.hr_salary_rule_category_deduction_mx')"/>
+                <t t-set="other" t-value="o.env.ref('l10n_mx_edi_payslip.hr_salary_rule_category_other_mx')"/>
+                <t t-set="company_categ" t-value="o.env.ref('hr_payroll.COMP')"/>
+                <t t-set="total_taxed" t-value='0'/>
+                <t t-set="total_exempt" t-value='0'/>
+                <t t-set="total_deduction" t-value='0'/>
+                <t t-set="total_other" t-value='0'/>
+                <t t-set="total_company_categ" t-value='0'/>
+                <h2><span>Summary from </span><span t-field="o.date_from"/><span> to </span><span t-field="o.date_to"/></h2>
+                <div class="col-12">
+                    <table class="table table-condensed" style="font-size:11px;">
+                        <thead>
+                            <tr>
+                                <th>Concept</th>
+                                <th>Perception Taxed</th>
+                                <th>Perception Exempt</th>
+                                <th>Deduction</th>
+                                <th>Other Payments</th>
+                                <th>Company</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o._l10n_mx_edi_get_details()" t-as="rule">
+                                <t t-set="categories" t-value="o._l10n_mx_edi_get_details_by_category(rule['salary_rule_id'][0])[0]"/>
+                                <td><span t-esc="rule['salary_rule_id'][1]"/></td>
+                                <td class="text-right"><span t-esc="categories.get('amount') if categories['category_id'][0] == taxed.id else 0" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                                <td class="text-right"><span t-esc="categories.get('amount') if categories['category_id'][0] == exempt.id else 0" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                                <td class="text-right"><span t-esc="abs(categories.get('amount') if categories['category_id'][0] == deduction.id else 0)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                                <td class="text-right"><span t-esc="categories.get('amount') if categories['category_id'][0] == other.id else 0" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                                <td class="text-right"><span t-esc="categories.get('amount') if categories['category_id'][0] == company_categ.id else 0" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                                <t t-set="total_taxed" t-value="total_taxed + (categories.get('amount') if categories['category_id'][0] == taxed.id else 0)"/>
+                                <t t-set="total_exempt" t-value="total_exempt + (categories.get('amount') if categories['category_id'][0] == exempt.id else 0)"/>
+                                <t t-set="total_deduction" t-value="total_deduction + (categories.get('amount') if categories['category_id'][0] == deduction.id else 0)"/>
+                                <t t-set="total_other" t-value="total_other + (categories.get('amount') if categories['category_id'][0] == other.id else 0)"/>
+                                <t t-set="total_company_categ" t-value="total_company_categ + (categories.get('amount') if categories['category_id'][0] == company_categ.id else 0)"/>
+                            </tr>
+                            <tr>
+                                <td><strong>Total Gral.</strong></td>
+                                <td class="text-right"><strong><span t-esc="total_taxed" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></strong></td>
+                                <td class="text-right"><strong><span t-esc="total_exempt" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></strong></td>
+                                <td class="text-right"><strong><span t-esc="abs(total_deduction)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></strong></td>
+                                <td class="text-right"><strong><span t-esc="total_other" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></strong></td>
+                                <td class="text-right"><strong><span t-esc="total_company_categ" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_payslip_details_by_rule">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.env.user.lang"/>
+                <t t-call="l10n_mx_edi_payslip.report_payslip_document_details_by_rule" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+
+    <report
+        id="payslip_details_by_rule"
+        model="hr.payslip.report.detail"
+        string="Payslip Details by Rule"
+        report_type="qweb-pdf"
+        name="l10n_mx_edi_payslip.report_payslip_details_by_rule"
+        file="l10n_mx_edi_payslip.report_payslip_details_by_rule"
+        menu="False"
+        print_report_name="'Payslip Details'"
+    />
+</odoo>

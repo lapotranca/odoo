@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_payslip_report_detail" model="ir.ui.view">
+        <field name="name">view.hr.payslip.report.detail</field>
+        <field name="model">hr.payslip.report.detail</field>
+        <field name="arch" type="xml">
+            <form string="Payslips Detail">
+                <group col="4">
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </group>
+                <footer>
+                    <button string="Print" name="print_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_payslip_report_detail" model="ir.actions.act_window">
+        <field name="name">Payslips Detail</field>
+        <field name="res_model">hr.payslip.report.detail</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_hr_payslip_report_detail"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="menu_payslip_reports"
+        name="Reports"
+        parent="hr_payroll.menu_hr_payroll_root"
+        groups="hr_payroll.group_hr_payroll_manager"
+        sequence="55"/>
+    <menuitem
+        id="menu_payslip_reports_details_by_rule"
+        name="Details by Rule"
+        action="action_hr_payslip_report_detail"
+        parent="l10n_mx_edi_payslip.menu_payslip_reports"
+        sequence="55"/>
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+    <record id="hr_employee_category_01" model="hr.employee.category">
+        <field name="name">01 - Diurna</field>
+        <field name="color">3</field>
+    </record>
+    <record id="hr_employee_category_02" model="hr.employee.category">
+        <field name="name">02 - Nocturna</field>
+        <field name="color">3</field>
+    </record>
+    <record id="hr_employee_category_03" model="hr.employee.category">
+        <field name="name">03 - Mixta</field>
+        <field name="color">3</field>
+    </record>
+    <record id="hr_employee_category_04" model="hr.employee.category">
+        <field name="name">04 - Por hora</field>
+        <field name="color">3</field>
+    </record>
+    <record id="hr_employee_category_05" model="hr.employee.category">
+        <field name="name">05 - Reducida</field>
+        <field name="color">3</field>
+    </record>
+    <record id="hr_employee_category_06" model="hr.employee.category">
+        <field name="name">06 - Continuada</field>
+        <field name="color">3</field>
+    </record>
+    <record id="hr_employee_category_07" model="hr.employee.category">
+        <field name="name">07 - Partida</field>
+        <field name="color">3</field>
+    </record>
+    <record id="hr_employee_category_08" model="hr.employee.category">
+        <field name="name">08 - Por turnos</field>
+        <field name="color">3</field>
+    </record>
+    <record id="hr_employee_category_99" model="hr.employee.category">
+        <field name="name">99 - Otra Jornada</field>
+        <field name="color">3</field>
+    </record>
+</odoo>

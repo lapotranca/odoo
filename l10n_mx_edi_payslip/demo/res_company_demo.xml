@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+    <record id="base.main_company" model="res.company">
+        <field name='company_registry' eval="1203256"/>
+        <field name='l10n_mx_edi_minimum_wage' eval="80.04"/>
+        <field name='l10n_mx_edi_uma' eval="84.49"/>
+    </record>
+</odoo>

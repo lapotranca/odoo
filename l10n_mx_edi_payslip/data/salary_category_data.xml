@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <!-- Categories -->
+    <record id="hr_salary_rule_category_perception_mx_taxed" model="hr.salary.rule.category">
+        <field name="name">Perception Taxed</field>
+        <field name="code">PERGRA</field>
+    </record>
+    <record id="hr_salary_rule_category_perception_mx_exempt" model="hr.salary.rule.category">
+        <field name="name">Perception Exempt</field>
+        <field name="code">PEREXE</field>
+    </record>
+    <record id="hr_salary_rule_category_deduction_mx" model="hr.salary.rule.category">
+        <field name="name">Deduction</field>
+        <field name="code">DEDUC</field>
+    </record>
+    <record id="hr_salary_rule_category_aux_mx" model="hr.salary.rule.category">
+        <field name="name">Auxiliar</field>
+        <field name="code">AUX</field>
+    </record>
+    <record id="hr_salary_rule_category_other_mx" model="hr.salary.rule.category">
+        <field name="name">Other Payments</field>
+        <field name="code">OTHER</field>
+    </record>
+    <record id="hr_salary_rule_category_netsa_mx" model="hr.salary.rule.category">
+        <field name="name">Net Salary</field>
+        <field name="code">NETSA</field>
+    </record>
+</odoo>

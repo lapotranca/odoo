@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+    <!-- Structure types -->
+    <record id="payroll_structure_type_finiquito" model="hr.payroll.structure.type">
+        <field name="name">Finiquito</field>
+    </record>
+    <record id="payroll_structure_type_aguinaldo" model="hr.payroll.structure.type">
+        <field name="name">Aguinaldo</field>
+    </record>
+    <record id="payroll_structure_type_payroll" model="hr.payroll.structure.type">
+        <field name="name">Data Payroll</field>
+    </record>
+    <record id="payroll_structure_type_liquidacion" model="hr.payroll.structure.type">
+        <field name="name">Liquidación</field>
+    </record>
+    <!-- Structures -->
+    <record id="payroll_structure_data_04" model="hr.payroll.structure">
+        <field name='name'>Liquidación CFDI</field>
+        <field name="type_id" ref="payroll_structure_type_liquidacion"/>
+        <field name="journal_id" model="account.journal" search="[('type','=', 'general')]"/>
+    </record>
+    <record id="payroll_structure_data_03" model="hr.payroll.structure">
+        <field name='name'>Finiquito CFDI</field>
+        <field name="type_id" ref="payroll_structure_type_finiquito"/>
+        <field name="journal_id" model="account.journal" search="[('type','=', 'general')]"/>
+    </record>
+    <record id="payroll_structure_data_02" model="hr.payroll.structure">
+        <field name='name'>Structure Aguinaldo Data CFDI</field>
+        <field name="type_id" ref="payroll_structure_type_aguinaldo"/>
+        <field name="journal_id" model="account.journal" search="[('type','=', 'general')]"/>
+    </record>
+    <record id="payroll_structure_data_01" model="hr.payroll.structure">
+        <field name='name'>Structure Data CFDI</field>
+        <field name="type_id" ref="payroll_structure_type_payroll"/>
+        <field name="journal_id" model="account.journal" search="[('type','=', 'general')]"/>
+    </record>
+</odoo>

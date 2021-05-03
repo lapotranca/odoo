@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_hr_contract_form_inherit_l10n_mx">
+        <field name="name">view.hr.contract.form.inherit.l10n_mx</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='job_id']" position="after">
+                <field name="l10n_mx_edi_contract_type"/>
+                <field name="l10n_mx_edi_schedule_pay"/>
+            </xpath>
+            <xpath expr="//field[@name='advantages']" position="after">
+                <label for="l10n_mx_edi_integrated_salary" class="oe_inline"/>
+                <div class="o_row">
+                    <field name="l10n_mx_edi_integrated_salary"/>
+                    <button name="compute_integrated_salary"
+                        string="Update"
+                        type="object" class="oe_link oe_inline"
+                        groups="hr_payroll.group_hr_payroll_user"/>
+                </div>
+                <field name="l10n_mx_edi_sdi_variable"/>
+                <field name="l10n_mx_edi_holidays"/>
+                <field name="l10n_mx_edi_vacation_bonus"/>
+                <field name="l10n_mx_edi_christmas_bonus"/>
+                <field name="l10n_mx_edi_infonavit_type"/>
+                <field name='l10n_mx_edi_infonavit_rate' attrs="{'invisible':[('l10n_mx_edi_infonavit_type', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="l10n_mx_edi_job_risk_form_view" model="ir.ui.view">
+        <field name="name">l10n_mx_edi.job.risk.form.view</field>
+        <field name="model">l10n_mx_edi.job.risk</field>
+        <field name="arch" type="xml">
+            <form string="Job Risk">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="percentage"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

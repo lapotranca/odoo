@@ -1,0 +1,2805 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Perceptions -->
+    <record id="hr_rule_l10n_mx_payroll_perception_001_g" model="hr.salary.rule">
+        <field name="name">Sueldos, Salarios Rayas y Jornales</field>
+        <field name="sequence" eval="1000"/>
+        <field name="code">PG001</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = 0
+if not employee.l10n_mx_edi_is_assimilated:
+    # In case commission or raised price
+    payment_daily = (contract.wage / 30)
+    holidays = worked_days.dict.get('HOLIDAYS') and worked_days.HOLIDAYS.number_of_days or 0.0
+    if contract.l10n_mx_edi_schedule_pay ==  '01':
+        result = payment_daily - holidays
+    elif contract.l10n_mx_edi_schedule_pay ==  '02':
+        result = payment_daily * (7 - holidays)
+    elif contract.l10n_mx_edi_schedule_pay == '03':
+        result = payment_daily * (14 - holidays)
+    elif contract.l10n_mx_edi_schedule_pay == '04':
+        result = payment_daily * (15 - holidays)
+    elif contract.l10n_mx_edi_schedule_pay == '05':
+        result = payment_daily * (30 - holidays)
+    elif contract.l10n_mx_edi_schedule_pay == '06':
+        result = payment_daily * (60 - holidays)
+    elif contract.l10n_mx_edi_schedule_pay == '10':
+        result = payment_daily * (10 - holidays)
+        </field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_001_holidays" model="hr.salary.rule">
+        <field name="name">Vacaciones</field>
+        <field name="sequence" eval="1010"/>
+        <field name="code">PGH001</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+holidays = worked_days.dict.get('HOLIDAYS') and worked_days.HOLIDAYS.number_of_days or 0.0
+payment_daily = (contract.wage / 30)
+result = payment_daily * holidays
+        </field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_003_g" model="hr.salary.rule">
+        <field name="name">Participación de los Trabajadores en las Utilidades PTU</field>
+        <field name="sequence" eval="3000"/>
+        <field name="code">PG003</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_003 and inputs.pg_003.amount</field>
+        <field name="note">Sólo 15 días de SM queda exento, el excedente es gravado</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_003_g" model="hr.payslip.input.type">
+        <field name="code">pg_003</field>
+        <field name="name">Participación de los Trabajadores en las Utilidades PTU</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_003_e" model="hr.salary.rule">
+        <field name="name">Participación de los Trabajadores en las Utilidades PTU</field>
+        <field name="sequence" eval="3000"/>
+        <field name="code">PE003</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_003 and inputs.pe_003.amount</field>
+        <field name="note">Sólo 15 días de SM queda exento, el excedente es gravado</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_003_e" model="hr.payslip.input.type">
+        <field name="code">pe_003</field>
+        <field name="name">Participación de los Trabajadores en las Utilidades PTU</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_004_e" model="hr.salary.rule">
+        <field name="name">Reembolso de Gastos Médicos Dentales y Hospitalarios</field>
+        <field name="sequence" eval="4000"/>
+        <field name="code">PE004</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_004 and inputs.pe_004.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_004_e" model="hr.payslip.input.type">
+        <field name="code">pe_04</field>
+        <field name="name">Reembolso de Gastos Médicos Dentales y Hospitalarios</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_005_e" model="hr.salary.rule">
+        <field name="name">Fondo de Ahorro</field>
+        <field name="sequence" eval="5000"/>
+        <field name="code">PE005</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_005 and inputs.pe_005.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_005_e" model="hr.payslip.input.type">
+        <field name="code">pe_005</field>
+        <field name="name">Fondo de Ahorro</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_006_e" model="hr.salary.rule">
+        <field name="name">Caja de ahorro</field>
+        <field name="sequence" eval="6000"/>
+        <field name="code">PE006</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_006 and inputs.pe_006.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_006_e" model="hr.payslip.input.type">
+        <field name="code">pe_006</field>
+        <field name="name">Caja de ahorro</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_009_e" model="hr.salary.rule">
+        <field name="name">Contribuciones a Cargo del Trabajador Pagadas por el Patrón</field>
+        <field name="sequence" eval="9000"/>
+        <field name="code">PE009</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_009 and inputs.pe_009.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_009_e" model="hr.payslip.input.type">
+        <field name="code">pe_009</field>
+        <field name="name">Contribuciones a Cargo del Trabajador Pagadas por el Patrón</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_010_g" model="hr.salary.rule">
+        <field name="name">Premios por puntualidad</field>
+        <field name="sequence" eval="10000"/>
+        <field name="code">PG010</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_010 and inputs.pg_010.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_010_g" model="hr.payslip.input.type">
+        <field name="code">pg_010</field>
+        <field name="name">Premios por puntualidad</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_011_g" model="hr.salary.rule">
+        <field name="name">Prima de Seguro de vida</field>
+        <field name="sequence" eval="11000"/>
+        <field name="code">PG011</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_011 and inputs.pg_011.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_011_g" model="hr.payslip.input.type">
+        <field name="code">pg_011</field>
+        <field name="name">Prima de Seguro de vida</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_012_e" model="hr.salary.rule">
+        <field name="name">Seguro de Gastos Medicos Mayores</field>
+        <field name="sequence" eval="12000"/>
+        <field name="code">PE012</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_012 and inputs.pe_012.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_012_e" model="hr.payslip.input.type">
+        <field name="code">pe_012</field>
+        <field name="name">Seguro de Gastos Medicos Mayores</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_013_e" model="hr.salary.rule">
+        <field name="name">Cuotas Sindicales Pagadas por el Patrón</field>
+        <field name="sequence" eval="13000"/>
+        <field name="code">PE013</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_013 and inputs.pe_013.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_013_e" model="hr.payslip.input.type">
+        <field name="code">pe_013</field>
+        <field name="name">Cuotas Sindicales Pagadas por el Patrón</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_014_e" model="hr.salary.rule">
+        <field name="name">Subsidios por incapacidad</field>
+        <field name="sequence" eval="14000"/>
+        <field name="code">PE014</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_014 and inputs.pe_014.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_014_e" model="hr.payslip.input.type">
+        <field name="code">pe_014</field>
+        <field name="name">Subsidios por incapacidad</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_015_e" model="hr.salary.rule">
+        <field name="name">Becas para trabajadores o hijos</field>
+        <field name="sequence" eval="15000"/>
+        <field name="code">PE015</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_015 and inputs.pe_015.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_015_e" model="hr.payslip.input.type">
+        <field name="code">pe_015</field>
+        <field name="name">Becas para trabajadores o hijos</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_019_e" model="hr.salary.rule">
+        <field name="name">Horas extra</field>
+        <field name="sequence" eval="19000"/>
+        <field name="code">PE019</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_019 and inputs.pe_019.amount</field>
+        <field name="note">Si SD &lt;= SM son 9 hr exentas, pero si SD &gt; SM son 2.5 hr exentas</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_019_e" model="hr.payslip.input.type">
+        <field name="code">pe_019</field>
+        <field name="name">Horas extra</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_019_g" model="hr.salary.rule">
+        <field name="name">Horas extra</field>
+        <field name="sequence" eval="19000"/>
+        <field name="code">PG019</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_019 and inputs.pg_019.amount</field>
+        <field name="note">Si SD &lt;= SM son 9 hr exentas, pero si SD &gt; SM son 2.5 hr exentas</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_019_g" model="hr.payslip.input.type">
+        <field name="code">pg_019</field>
+        <field name="name">Horas extra</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_020_e" model="hr.salary.rule">
+        <field name="name">Prima dominical</field>
+        <field name="sequence" eval="20000"/>
+        <field name="code">PE020</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_020 and inputs.pe_020.amount</field>
+        <field name="note">Sólo 1 SM por cada domingo trabajado es exento, el excedente es gravado</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_020_e" model="hr.payslip.input.type">
+        <field name="code">pe_020</field>
+        <field name="name">Prima dominical</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_020_g" model="hr.salary.rule">
+        <field name="name">Prima dominical</field>
+        <field name="sequence" eval="20000"/>
+        <field name="code">PG020</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_020 and inputs.pg_020.amount</field>
+        <field name="note">Sólo 1 SM por cada domingo trabajado es exento, el excedente es gravado</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_020_g" model="hr.payslip.input.type">
+        <field name="code">pg_020</field>
+        <field name="name">Prima dominical</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_021_e" model="hr.salary.rule">
+        <field name="name">Prima vacacional</field>
+        <field name="sequence" eval="21000"/>
+        <field name="code">PE021</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+holidays = worked_days.dict.get('HOLIDAYS') and worked_days.HOLIDAYS.number_of_days or 0.0
+daily_wage = contract.wage / 30
+uma = contract.company_id.l10n_mx_edi_uma
+result = daily_wage * holidays * .25
+result = uma * 15 if result >= (uma * 15) else result
+        </field>
+        <field name="note">Sólo 15 dias de SM son exentos, el excedente es gravado</field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_021_g" model="hr.salary.rule">
+        <field name="name">Prima vacacional</field>
+        <field name="sequence" eval="21000"/>
+        <field name="code">PG021</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+holidays = worked_days.dict.get('HOLIDAYS') and worked_days.HOLIDAYS.number_of_days or 0.0
+daily_wage = contract.wage / 30
+uma = contract.company_id.l10n_mx_edi_uma
+result = daily_wage * holidays * .25
+result = result - uma * 15 if result >= uma * 15 else 0
+        </field>
+        <field name="note">Sólo 15 dias de SM son exentos, el excedente es gravado</field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_024_e" model="hr.salary.rule">
+        <field name="name">Seguro de retiro</field>
+        <field name="sequence" eval="24000"/>
+        <field name="code">PE024</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_024 and inputs.pe_024.amount</field>
+        <field name="note">Sólo 90 SM por año trabajado es exento, el excedente es gravado</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_024_e" model="hr.payslip.input.type">
+        <field name="code">pe_024</field>
+        <field name="name">Seguro de retiro</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_024_g" model="hr.salary.rule">
+        <field name="name">Seguro de retiro</field>
+        <field name="sequence" eval="24000"/>
+        <field name="code">PG024</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_024 and inputs.pg_024.amount</field>
+        <field name="note">Sólo 90 SM por año trabajado es exento, el excedente es gravado</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_024_g" model="hr.payslip.input.type">
+        <field name="code">pg_024</field>
+        <field name="name">Seguro de retiro</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_025_e" model="hr.salary.rule">
+        <field name="name">Indeminizaciones</field>
+        <field name="sequence" eval="25000"/>
+        <field name="code">PE025</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_025 and inputs.pe_025.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_025_e" model="hr.payslip.input.type">
+        <field name="code">pe_025</field>
+        <field name="name">Indeminizaciones</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_026_e" model="hr.salary.rule">
+        <field name="name">Reembolso por funeral</field>
+        <field name="sequence" eval="26000"/>
+        <field name="code">PE026</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_026 and inputs.pe_026.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_026_e" model="hr.payslip.input.type">
+        <field name="code">pe_026</field>
+        <field name="name">Reembolso por funeral</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_027_e" model="hr.salary.rule">
+        <field name="name">Cuotas de seguridad social pagadas por el patrón</field>
+        <field name="sequence" eval="27000"/>
+        <field name="code">PE027</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_027 and inputs.pe_027.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_027_e" model="hr.payslip.input.type">
+        <field name="code">pe_027</field>
+        <field name="name">Cuotas de seguridad social pagadas por el patrón</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_028_g" model="hr.salary.rule">
+        <field name="name">Comisiones</field>
+        <field name="sequence" eval="28000"/>
+        <field name="code">PG028</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_028 and inputs.pg_028.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_028_g" model="hr.payslip.input.type">
+        <field name="code">pg_028</field>
+        <field name="name">Comisiones</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_029_e" model="hr.salary.rule">
+        <field name="name">Vales de despensa</field>
+        <field name="sequence" eval="29000"/>
+        <field name="code">PE029</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_029 and inputs.pe_029.amount</field>
+        <field name="note">Sólo mediante monedero del SAT son 7 SM elevado al año como importe exento, el excedente es gravado</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_029_e" model="hr.payslip.input.type">
+        <field name="code">pe_029</field>
+        <field name="name">Vales de despensa</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_029_g" model="hr.salary.rule">
+        <field name="name">Vales de despensa</field>
+        <field name="sequence" eval="29000"/>
+        <field name="code">PG029</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_029 and inputs.pg_029.amount</field>
+        <field name="note">Sólo mediante monedero del SAT son 7 SM elevado al año como importe exento, el excedente es gravado</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_029_g" model="hr.payslip.input.type">
+        <field name="code">pg_029</field>
+        <field name="name">Vales de despensa</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_030_g" model="hr.salary.rule">
+        <field name="name">Vales de restaurante</field>
+        <field name="sequence" eval="30000"/>
+        <field name="code">PG030</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_030 and inputs.pg_030.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_030_g" model="hr.payslip.input.type">
+        <field name="code">pg_030</field>
+        <field name="name">Vales de restaurante</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_031_e" model="hr.salary.rule">
+        <field name="name">Vales de gasolina</field>
+        <field name="sequence" eval="31000"/>
+        <field name="code">PE031</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_031 and inputs.pe_031.amount</field>
+        <field name="note">Sólo si están a nombre de la dependencia</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_031_e" model="hr.payslip.input.type">
+        <field name="code">pe_031</field>
+        <field name="name">Vales de gasolina</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_031_g" model="hr.salary.rule">
+        <field name="name">Vales de gasolina</field>
+        <field name="sequence" eval="31000"/>
+        <field name="code">PG031</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_031 and inputs.pg_031.amount</field>
+        <field name="note">Sólo si están a nombre de la dependencia</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_031_g" model="hr.payslip.input.type">
+        <field name="code">pg_031</field>
+        <field name="name">Vales de gasolina</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_032_g" model="hr.salary.rule">
+        <field name="name">Vales de ropa</field>
+        <field name="sequence" eval="32000"/>
+        <field name="code">PG032</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_032 and inputs.pg_032.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_032_g" model="hr.payslip.input.type">
+        <field name="code">pg_032</field>
+        <field name="name">Vales de ropa</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_033_g" model="hr.salary.rule">
+        <field name="name">Ayuda para renta</field>
+        <field name="sequence" eval="33000"/>
+        <field name="code">PG033</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_033 and inputs.pg_033.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_033_g" model="hr.payslip.input.type">
+        <field name="code">pg_033</field>
+        <field name="name">Ayuda para renta</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_034_g" model="hr.salary.rule">
+        <field name="name">Ayuda para artículos escolares</field>
+        <field name="sequence" eval="34000"/>
+        <field name="code">PG034</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_034 and inputs.pg_034.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_034_g" model="hr.payslip.input.type">
+        <field name="code">pg_034</field>
+        <field name="name">Ayuda para artículos escolares</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_035_g" model="hr.salary.rule">
+        <field name="name">Ayuda para anteojos</field>
+        <field name="sequence" eval="35000"/>
+        <field name="code">PG035</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_035 and inputs.pg_035.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_035_g" model="hr.payslip.input.type">
+        <field name="code">pg_035</field>
+        <field name="name">Ayuda Anteojos</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_036_e" model="hr.salary.rule">
+        <field name="name">Ayuda para transporte</field>
+        <field name="sequence" eval="36000"/>
+        <field name="code">PE036</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_036 and inputs.pe_036.amount</field>
+        <field name="note">Si es vehículo de la empresa se exenta</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_036_e" model="hr.payslip.input.type">
+        <field name="code">pe_036</field>
+        <field name="name">Ayuda para transporte</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_036_g" model="hr.salary.rule">
+        <field name="name">Ayuda para transporte</field>
+        <field name="sequence" eval="36000"/>
+        <field name="code">PG036</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_036 and inputs.pg_036.amount</field>
+        <field name="note">Si es vehículo de la empresa se exenta</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_036_g" model="hr.payslip.input.type">
+        <field name="code">pg_036</field>
+        <field name="name">Ayuda para transporte</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_037_e" model="hr.salary.rule">
+        <field name="name">Ayuda para gastos de funeral</field>
+        <field name="sequence" eval="37000"/>
+        <field name="code">PE037</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_037 and inputs.pe_037.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_037_e" model="hr.payslip.input.type">
+        <field name="code">pe_037</field>
+        <field name="name">Ayuda para gastos de funeral</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_038_e" model="hr.salary.rule">
+        <field name="name">Otros ingresos por salarios</field>
+        <field name="sequence" eval="38000"/>
+        <field name="code">PE038</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_038 and inputs.pe_038.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_038_e" model="hr.payslip.input.type">
+        <field name="code">pe_038</field>
+        <field name="name">Otros ingresos por salarios</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_038_g" model="hr.salary.rule">
+        <field name="name">Otros ingresos por salarios</field>
+        <field name="sequence" eval="38000"/>
+        <field name="code">PG038</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_038 and inputs.pg_038.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_038_g" model="hr.payslip.input.type">
+        <field name="code">pg_038</field>
+        <field name="name">Otros ingresos por salarios</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_039_e" model="hr.salary.rule">
+        <field name="name">Jubilaciones, pensiones o haberes de retiro</field>
+        <field name="sequence" eval="39000"/>
+        <field name="code">PE039</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_039 and inputs.pe_039.amount</field>
+        <field name="note">Sólo 15 SM son exentos, el excedente es gravado.</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_039_e" model="hr.payslip.input.type">
+        <field name="code">pe_039</field>
+        <field name="name">Jubilaciones, pensiones o haberes de retiro</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_039_g" model="hr.salary.rule">
+        <field name="name">Jubilaciones, pensiones o haberes de retiro</field>
+        <field name="sequence" eval="39000"/>
+        <field name="code">PG039</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_039 and inputs.pg_039.amount</field>
+        <field name="note">Sólo 15 SM son exentos, el excedente es gravado.</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_039_g" model="hr.payslip.input.type">
+        <field name="code">pg_039</field>
+        <field name="name">Jubilaciones, pensiones o haberes de retiro</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_044_e" model="hr.salary.rule">
+        <field name="name">Jubilaciones, pensiones o haberes de retiro en parcialidades</field>
+        <field name="sequence" eval="44000"/>
+        <field name="code">PE044</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_044 and inputs.pe_044.amount</field>
+        <field name="note">Sólo 15 SM son exentos, el excedente es gravado.</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_044_e" model="hr.payslip.input.type">
+        <field name="code">pe_044</field>
+        <field name="name">Jubilaciones, pensiones o haberes de retiro en parcialidades</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_044_g" model="hr.salary.rule">
+        <field name="name">Jubilaciones, pensiones o haberes de retiro en parcialidades</field>
+        <field name="sequence" eval="44000"/>
+        <field name="code">PG044</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_044 and inputs.pg_044.amount</field>
+        <field name="note">Sólo 15 SM son exentos, el excedente es gravado.</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_044_g" model="hr.payslip.input.type">
+        <field name="code">pg_044</field>
+        <field name="name">Jubilaciones, pensiones o haberes de retiro en parcialidades</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_045_e" model="hr.salary.rule">
+        <field name="name">Ingresos en acciones o títulos valor que representan bienes</field>
+        <field name="sequence" eval="45000"/>
+        <field name="code">PE045</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_045 and inputs.pe_045.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_045_e" model="hr.payslip.input.type">
+        <field name="code">pe_045</field>
+        <field name="name">Ingresos en acciones o títulos valor que representan bienes</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_045_g" model="hr.salary.rule">
+        <field name="name">Ingresos en acciones o títulos valor que representan bienes</field>
+        <field name="sequence" eval="45000"/>
+        <field name="code">PG045</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_045 and inputs.pg_045.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_045_g" model="hr.payslip.input.type">
+        <field name="code">pg_045</field>
+        <field name="name">Ingresos en acciones o títulos valor que representan bienes</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_046_g" model="hr.salary.rule">
+        <field name="name">Ingresos asimilados a salarios</field>
+        <field name="sequence" eval="46000"/>
+        <field name="code">PG046</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = 0
+if employee.l10n_mx_edi_is_assimilated:
+    # In case commission or raised price
+    payment_daily = (contract.wage / 30)
+    holidays = worked_days.dict.get('HOLIDAYS') and worked_days.HOLIDAYS.number_of_days or 0.0
+    if contract.l10n_mx_edi_schedule_pay ==  '01':
+        result = payment_daily - holidays
+    elif contract.l10n_mx_edi_schedule_pay ==  '02':
+        result = payment_daily * (7 - holidays)
+    elif contract.l10n_mx_edi_schedule_pay == '03':
+        result = payment_daily * (14 - holidays)
+    elif contract.l10n_mx_edi_schedule_pay == '04':
+        result = payment_daily * (15 - holidays)
+    elif contract.l10n_mx_edi_schedule_pay == '05':
+        result = payment_daily * (30 - holidays)
+    elif contract.l10n_mx_edi_schedule_pay == '06':
+        result = payment_daily * (60 - holidays)
+    elif contract.l10n_mx_edi_schedule_pay == '10':
+        result = payment_daily * (10 - holidays)
+        </field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_047_e" model="hr.salary.rule">
+        <field name="name">Alimentación</field>
+        <field name="sequence" eval="47000"/>
+        <field name="code">PE047</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_047 and inputs.pe_047.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_047_e" model="hr.payslip.input.type">
+        <field name="code">pe_047</field>
+        <field name="name">Alimentación</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_047_g" model="hr.salary.rule">
+        <field name="name">Alimentación</field>
+        <field name="sequence" eval="47000"/>
+        <field name="code">PG047</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_047 and inputs.pg_047.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_047_g" model="hr.payslip.input.type">
+        <field name="code">pg_047</field>
+        <field name="name">Alimentación</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_048_e" model="hr.salary.rule">
+        <field name="name">Habitación</field>
+        <field name="sequence" eval="48000"/>
+        <field name="code">PE048</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_048 and inputs.pe_048.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_048_e" model="hr.payslip.input.type">
+        <field name="code">pe_048</field>
+        <field name="name">Habitación</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_048_g" model="hr.salary.rule">
+        <field name="name">Habitación</field>
+        <field name="sequence" eval="48000"/>
+        <field name="code">PG048</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_048 and inputs.pg_048.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_048_g" model="hr.payslip.input.type">
+        <field name="code">pg_048</field>
+        <field name="name">Habitación</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_049_g" model="hr.salary.rule">
+        <field name="name">Premios por asistencia</field>
+        <field name="sequence" eval="49000"/>
+        <field name="code">PG049</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_049 and inputs.pg_049.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_049_g" model="hr.payslip.input.type">
+        <field name="code">pg_049</field>
+        <field name="name">Premios por asistencia</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_050_e" model="hr.salary.rule">
+        <field name="name">Viáticos</field>
+        <field name="sequence" eval="50000"/>
+        <field name="code">PE050</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_exempt"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pe_050 and inputs.pe_050.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_050_e" model="hr.payslip.input.type">
+        <field name="code">pe_050</field>
+        <field name="name">Viáticos</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_050_g" model="hr.salary.rule">
+        <field name="name">Viáticos</field>
+        <field name="sequence" eval="50000"/>
+        <field name="code">PG050</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_050 and inputs.pg_050.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_perception_050_g" model="hr.payslip.input.type">
+        <field name="code">pg_050</field>
+        <field name="name">Viáticos</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_051_g" model="hr.salary.rule">
+        <field name="name">Pagos por gratificaciones, primas, compensaciones, recompensas u otros a extrabajadores derivados de jubilación en parcialidades</field>
+        <field name="sequence" eval="51000"/>
+        <field name="code">PG051</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_051 and inputs.pg_051.amount</field>
+    </record>
+    <record id="hr_rule_input_perception_051_g" model="hr.payslip.input.type">
+        <field name="code">pg_051</field>
+        <field name="name">Pagos por gratificaciones, primas, compensaciones, recompensas u otros a extrabajadores derivados de jubilación en parcialidades</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_052_g" model="hr.salary.rule">
+        <field name="name">Pagos que se realicen a extrabajadores que obtengan una jubilación en parcialidades derivados de la ejecución de resoluciones judicial o de un laudo</field>
+        <field name="sequence" eval="52000"/>
+        <field name="code">PG052</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_052 and inputs.pg_052.amount</field>
+    </record>
+    <record id="hr_rule_input_perception_052_g" model="hr.payslip.input.type">
+        <field name="code">pg_052</field>
+        <field name="name">Pagos que se realicen a extrabajadores que obtengan una jubilación en parcialidades derivados de la ejecución de resoluciones judicial o de un laudo</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_perception_053_g" model="hr.salary.rule">
+        <field name="name">Pagos que se realicen a extrabajadores que obtengan una jubilación en una sola exhibición derivados de la ejecución de resoluciones judicial o de un laudo</field>
+        <field name="sequence" eval="53000"/>
+        <field name="code">PG053</field>
+        <field name="category_id" ref="hr_salary_rule_category_perception_mx_taxed"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.pg_053 and inputs.pg_053.amount</field>
+    </record>
+    <record id="hr_rule_input_perception_053_g" model="hr.payslip.input.type">
+        <field name="code">pg_053</field>
+        <field name="name">Pagos que se realicen a extrabajadores que obtengan una jubilación en una sola exhibición derivados de la ejecución de resoluciones judicial o de un laudo</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <!-- Deductions -->
+    <record id="hr_rule_l10n_mx_payroll_deduction_001" model="hr.salary.rule">
+        <field name="name">Seguridad social</field>
+        <field name="sequence" eval="54000"/>
+        <field name="code">001</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = 0
+if not employee.l10n_mx_edi_is_assimilated:
+    # http://www.sat.gob.mx/informacion_fiscal/tablas_indicadores/Paginas/salarios_minimos.aspx
+    sbc = contract.l10n_mx_edi_integrated_salary
+    uma = contract.company_id.l10n_mx_edi_uma
+    days_schedule = {'01': 1, '02': 7, '03': 14, '04': 15, '05': 30, '06': 60}
+    days_work = days_schedule.get(contract.l10n_mx_edi_schedule_pay, 0)
+    salary = days_work * sbc
+
+    result = 0.02375 * salary
+
+    imss = 0
+    if sbc > (uma * 3):
+        imss = 0.004 * (sbc - uma * 3) * days_work
+
+    result = (result + imss) * -1
+        </field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_isr" model="hr.salary.rule">
+        <field name="name">AUX ISR</field>
+        <field name="sequence" eval="53500"/>
+        <field name="code">AUX_ISR</field>
+        <field name="category_id" ref="hr_salary_rule_category_aux_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+income_period = categories.PERGRA
+# Table ISR (limite_inferior, limite_superior, cuota_fija, tasa)
+table = {'05': [(0.01, 578.52, 0.00, 0.0192), (578.53, 4910.18, 11.11, 0.0640),
+         (4910.19, 8629.20, 288.33, 0.1088), (8629.21, 10031.07, 692.96, 0.1600),
+         (10031.08, 12009.94, 917.26, 0.1792), (12009.95, 24222.31, 1271.87, 0.2136),
+         (24222.32, 38177.69, 3880.44, 0.2352), (38177.70, 72887.50, 7162.74, 0.3000),
+         (72887.51, 97183.33, 17575.69, 0.3200), (97183.34, 291550.00, 25350.35, 0.3400),
+         (291550.01, 999999999, 91435.02, 0.3500)],
+         '04': [(0.01, 285.45, 0.00, 0.0192), (285.46, 2422.80, 5.55, 0.0640),
+         (2422.81, 4257.90, 142.20,  0.1088), (4257.91, 4949.55, 341.85,  0.1600),
+         (4949.56, 5925.90, 452.55,  0.1792), (5925.91, 11951.85, 627.60, 0.2136),
+         (11951.86, 18837.75, 1914.75, 0.2352), (18837.76, 35964.30, 3534.30, 0.3000),
+         (35964.31, 47952.30, 8672.25, 0.3200), (47952.31, 143856.90, 12508.35, 0.3400),
+         (143856.91, 999999999, 45115.95, 0.3500)],
+         '02': [(0.01, 133.21, 0.00, 0.0192), (133.22, 1130.64, 2.59, 0.0640),
+         (1130.65, 1987.02, 66.36, 0.1088), (1987.03, 2309.79, 159.53, 0.1600),
+         (2309.80, 2765.42, 211.19, 0.1792), (2765.43, 5577.53, 292.88, 0.2136),
+         (5577.54, 8790.95, 893.55, 0.2352), (8790.96, 16783.34, 1649.34, 0.3000),
+         (16783.35, 22377.74, 4047.05, 0.3200), (22377.75, 67133.22, 5837.23, 0.3400),
+         (67133.23, 99999999, 21054.11, 0.3500)],
+         '01': [(0.01, 19.03, 0.00, 0.0192), (19.04, 161.52, 0.37, 0.0640),
+         (161.53, 283.86, 9.48, 0.1088), (283.87, 329.97, 22.79, 0.1600),
+         (329.98, 395.06, 30.17, 0.1792), (395.07, 796.79, 41.84, 0.2136),
+         (796.80, 1255.85, 127.65, 0.2352), (1255.86, 2397.62, 235.62, 0.3000),
+         (2397.63, 3196.82, 578.15, 0.3200), (3196.83, 9590.46, 833.89, 0.3400),
+         (9590.47, 99999999, 3007.73, 0.3500)],
+         '10': [(0.01, 190.30, 0.00, 0.0192), (190.31, 1615.20, 3.70, 0.0640),
+         (1615.21, 2838.60, 94.80, 0.1088), (2838.61, 3299.70, 227.90, 0.1600),
+         (3299.71, 3950.60, 301.70, 0.1792), (3950.61, 7967.90, 418.40, 0.2136),
+         (7967.91, 12558.50, 1276.50, 0.2352), (12558.51, 23976.20, 2356.20, 0.3000),
+         (23976.21, 31968.20, 5781.50, 0.3200), (31968.21, 95904.60, 8338.90, 0.3400),
+         (95904.61, 99999999, 30077.30, 0.3500)]}
+result = 0
+table_isr = table.get(contract.l10n_mx_edi_schedule_pay, [])
+if table_isr:
+    for value in table_isr:
+        if income_period >=value[0] and value[1] >= income_period:
+            extra = income_period - value[0]
+            result = ((extra * value[3]) + value[2]) * -1
+            break
+if employee.env['hr.payslip'].browse(payslip.id).l10n_mx_edi_is_last_payslip():
+    category = employee.env.ref('l10n_mx_edi_payslip.hr_salary_rule_category_perception_mx_taxed')
+    payslips = employee.slip_ids.filtered(lambda sl: sl.state == 'done' and sl.id != payslip.id and sl.date_from.month == payslip.date_from.month and sl.date_from.year == payslip.date_from.year)
+    lines = payslips.mapped('line_ids')
+    income_monthly = income_period + sum(lines.filtered(lambda li: li.category_id.id == category.id).mapped('total'))
+    for value in table['05']:
+        if income_monthly >=value[0] and value[1] >= income_monthly:
+            extra = income_monthly - value[0]
+            result = ((extra * value[3]) + value[2]) * -1
+            break
+    rule = employee.env.ref('l10n_mx_edi_payslip.hr_rule_l10n_mx_payroll_deduction_isr')
+    result = result - sum(lines.filtered(lambda li: li.salary_rule_id == rule).mapped('total'))</field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_other_payment_aux_002" model="hr.salary.rule">
+        <field name="name">Auxiliar Subsidio para el empleo</field>
+        <field name="code">AUX_OP002</field>
+        <field name="sequence">53501</field>
+        <field name="category_id" ref="hr_salary_rule_category_aux_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Based on http://www.sat.gob.mx/informacion_fiscal/devoluciones_compensaciones/Paginas/subsidio_al_empleo.aspx
+# TODO - Complete tables
+result = 0.00
+if not employee.l10n_mx_edi_is_assimilated:
+    income_period = categories.PERGRA
+    table = {
+        '05': [
+            (0.01, 1768.96, 407.02),
+            (1768.97, 2653.38, 406.83),
+            (2653.39, 3472.84, 406.62),
+            (3472.85, 3537.87, 392.77),
+            (3537.88, 4446.15, 382.46),
+            (4446.16, 4717.18, 354.23),
+            (4717.19, 5335.42, 324.87),
+            (5335.43, 6224.67, 294.63),
+            (6224.68, 7113.90, 253.54),
+            (7113.91, 7382.33, 217.61),
+            (7382.34, 99999999.00, 0)],
+        '04': [
+            (0.01, 872.85, 200.85),
+            (872.86, 1309.20, 200.70),
+            (1309.21, 1713.60, 200.70),
+            (1713.61, 1745.70, 193.80),
+            (1745.71, 2193.75, 188.70),
+            (2193.76, 2327.55, 174.75),
+            (2327.56, 2632.65, 160.35),
+            (2632.66, 3071.40, 145.35),
+            (3071.41, 3510.15, 125.10),
+            (3510.16, 3642.60, 107.40),
+            (3642.61, 99999999.00, 0)],
+    }
+    table = table.get(contract.l10n_mx_edi_schedule_pay, [])
+    if table:
+        for value in table:
+            if income_period >=value[0] and value[1] >= income_period:
+                result = value[2]
+                break</field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_002" model="hr.salary.rule">
+        <field name="name">ISR</field>
+        <field name="sequence" eval="55000"/>
+        <field name="code">002</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = AUX_ISR + AUX_OP002 if abs(AUX_ISR) - AUX_OP002 &gt; 0 else 0</field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_003" model="hr.salary.rule">
+        <field name="name">Aportaciones a retiro, cesantía en edad avanzada y vejez</field>
+        <field name="sequence" eval="56000"/>
+        <field name="code">003</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_003 and inputs.d_003.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_003" model="hr.payslip.input.type">
+        <field name="code">d_003</field>
+        <field name="name">Aportaciones a retiro, cesantía en edad avanzada y vejez</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_004" model="hr.salary.rule">
+        <field name="name">Otros</field>
+        <field name="sequence" eval="57000"/>
+        <field name="code">004</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_004 and inputs.d_004.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_004" model="hr.payslip.input.type">
+        <field name="code">d_004</field>
+        <field name="name">Otros</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_005" model="hr.salary.rule">
+        <field name="name">Aportaciones a Fondo de vivienda</field>
+        <field name="sequence" eval="58000"/>
+        <field name="code">005</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_005 and inputs.d_005.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_005" model="hr.payslip.input.type">
+        <field name="code">d_005</field>
+        <field name="name">Aportaciones a Fondo de vivienda</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_006" model="hr.salary.rule">
+        <field name="name">Descuento por incapacidad</field>
+        <field name="sequence" eval="59000"/>
+        <field name="code">006</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_006 and inputs.d_006.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_006" model="hr.payslip.input.type">
+        <field name="code">d_006</field>
+        <field name="name">Descuento por incapacidad</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_007" model="hr.salary.rule">
+        <field name="name">Pensión alimenticia</field>
+        <field name="sequence" eval="60000"/>
+        <field name="code">007</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_007 and inputs.d_007.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_007" model="hr.payslip.input.type">
+        <field name="code">d_007</field>
+        <field name="name">Pensión alimenticia</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_008" model="hr.salary.rule">
+        <field name="name">Renta</field>
+        <field name="sequence" eval="61000"/>
+        <field name="code">008</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_008 and inputs.d_008.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_008" model="hr.payslip.input.type">
+        <field name="code">d_008</field>
+        <field name="name">Renta</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_009" model="hr.salary.rule">
+        <field name="name">Préstamos provenientes del Fondo Nacional de la Vivienda para los Trabajadores</field>
+        <field name="sequence" eval="62000"/>
+        <field name="code">009</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_009 and inputs.d_009.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_009" model="hr.payslip.input.type">
+        <field name="code">d_009</field>
+        <field name="name">Préstamos provenientes del Fondo Nacional de la Vivienda para los Trabajadores</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_010" model="hr.salary.rule">
+        <field name="name">Pago por crédito de vivienda</field>
+        <field name="sequence" eval="63000"/>
+        <field name="code">010</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = 0
+extra = inputs.d_010 and inputs.d_010.amount
+days_work = worked_days.dict.get('WORK100') and worked_days.WORK100.number_of_days or 0.0
+if contract.l10n_mx_edi_infonavit_type == 'percentage':
+    result  = contract.l10n_mx_edi_integrated_salary * (contract.l10n_mx_edi_infonavit_rate/100) * days_work
+elif contract.l10n_mx_edi_infonavit_type == 'vsm' and days_work:
+    result = ((contract.company_id.l10n_mx_edi_umi * contract.l10n_mx_edi_infonavit_rate) * 2 / 61) * days_work
+elif contract.l10n_mx_edi_infonavit_type == 'fixed_amount':
+    result = contract.l10n_mx_edi_infonavit_rate
+result += extra
+result = result * -1</field>
+    </record>
+    <record id="hr_rule_input_deduction_010" model="hr.payslip.input.type">
+        <field name="code">d_010</field>
+        <field name="name">Seguro pago por crédito de vivienda</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_011" model="hr.salary.rule">
+        <field name="name">Pago de abonos INFONACOT</field>
+        <field name="sequence" eval="64000"/>
+        <field name="code">011</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_011 and inputs.d_011.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_011" model="hr.payslip.input.type">
+        <field name="code">d_011</field>
+        <field name="name">Pago de abonos INFONACOT</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_012" model="hr.salary.rule">
+        <field name="name">Anticipo de salarios</field>
+        <field name="sequence" eval="65000"/>
+        <field name="code">012</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_012 and inputs.d_012.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_012" model="hr.payslip.input.type">
+        <field name="code">d_012</field>
+        <field name="name">Anticipo de salarios</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_013" model="hr.salary.rule">
+        <field name="name">Pagos hechos con exceso al trabajador</field>
+        <field name="sequence" eval="66000"/>
+        <field name="code">013</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_013 and inputs.d_013.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_013" model="hr.payslip.input.type">
+        <field name="code">d_013</field>
+        <field name="name">Pagos hechos con exceso al trabajador</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_014" model="hr.salary.rule">
+        <field name="name">Errores</field>
+        <field name="sequence" eval="67000"/>
+        <field name="code">014</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_014 and inputs.d_014.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_014" model="hr.payslip.input.type">
+        <field name="code">d_014</field>
+        <field name="name">Errores</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_015" model="hr.salary.rule">
+        <field name="name">Pérdidas</field>
+        <field name="sequence" eval="68000"/>
+        <field name="code">015</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_015 and inputs.d_015.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_015" model="hr.payslip.input.type">
+        <field name="code">d_015</field>
+        <field name="name">Pérdidas</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_016" model="hr.salary.rule">
+        <field name="name">Averías</field>
+        <field name="sequence" eval="69000"/>
+        <field name="code">016</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_016 and inputs.d_016.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_016" model="hr.payslip.input.type">
+        <field name="code">d_016</field>
+        <field name="name">Averías</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_017" model="hr.salary.rule">
+        <field name="name">Adquisición de artículos producidos por la empresa o establecimiento</field>
+        <field name="sequence" eval="70000"/>
+        <field name="code">017</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_017 and inputs.d_017.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_017" model="hr.payslip.input.type">
+        <field name="code">d_017</field>
+        <field name="name">Adquisición de artículos producidos por la empresa o establecimiento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_018" model="hr.salary.rule">
+        <field name="name">Cuotas para la constitución y fomento de sociedades cooperativas y de cajas de ahorro</field>
+        <field name="sequence" eval="71000"/>
+        <field name="code">018</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_018 and inputs.d_018.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_018" model="hr.payslip.input.type">
+        <field name="code">d_018</field>
+        <field name="name">Cuotas para la constitución y fomento de sociedades cooperativas y de cajas de ahorro</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_019" model="hr.salary.rule">
+        <field name="name">Cuotas sindicales</field>
+        <field name="sequence" eval="72000"/>
+        <field name="code">019</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_019 and inputs.d_019.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_019" model="hr.payslip.input.type">
+        <field name="code">d_019</field>
+        <field name="name">Cuotas sindicales</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_020" model="hr.salary.rule">
+        <field name="name">Ausencia - Ausentismo</field>
+        <field name="sequence" eval="73000"/>
+        <field name="code">020</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_020 and inputs.d_020.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_020" model="hr.payslip.input.type">
+        <field name="code">d_020</field>
+        <field name="name">Ausencia - Ausentismo</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_021" model="hr.salary.rule">
+        <field name="name">Cuotas obrero patronales</field>
+        <field name="sequence" eval="74000"/>
+        <field name="code">021</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_021 and inputs.d_021.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_021" model="hr.payslip.input.type">
+        <field name="code">d_021</field>
+        <field name="name">Cuotas obrero patronales</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_022" model="hr.salary.rule">
+        <field name="name">Impuestos Locales</field>
+        <field name="sequence" eval="75000"/>
+        <field name="code">022</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_022 and inputs.d_022.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_022" model="hr.payslip.input.type">
+        <field name="code">d_022</field>
+        <field name="name">Impuestos Locales</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_023" model="hr.salary.rule">
+        <field name="name">Aportaciones voluntarias</field>
+        <field name="sequence" eval="76000"/>
+        <field name="code">023</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_023 and inputs.d_023.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_023" model="hr.payslip.input.type">
+        <field name="code">d_023</field>
+        <field name="name">Aportaciones voluntarias</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_024" model="hr.salary.rule">
+        <field name="name">Ajuste en Gratificación Anual - Exento</field>
+        <field name="sequence" eval="77000"/>
+        <field name="code">024</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_024 and inputs.d_024.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_024" model="hr.payslip.input.type">
+        <field name="code">d_024</field>
+        <field name="name">Ajuste en Gratificación Anual - Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_025" model="hr.salary.rule">
+        <field name="name">Ajuste en Gratificación Anual - Gravado</field>
+        <field name="sequence" eval="77100"/>
+        <field name="code">025</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_025 and inputs.d_025.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_025" model="hr.payslip.input.type">
+        <field name="code">d_025</field>
+        <field name="name">Ajuste en Gratificación Anual - Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_026" model="hr.salary.rule">
+        <field name="name">Ajuste en Participación de los Trabajadores en las Utilidades PTU Exento</field>
+        <field name="sequence" eval="77200"/>
+        <field name="code">026</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_026 and inputs.d_026.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_026" model="hr.payslip.input.type">
+        <field name="code">d_026</field>
+        <field name="name">Ajuste en Participación de los Trabajadores en las Utilidades PTU Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_027" model="hr.salary.rule">
+        <field name="name">Ajuste en Participación de los Trabajadores en las Utilidades PTU Gravado</field>
+        <field name="sequence" eval="77300"/>
+        <field name="code">027</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_027 and inputs.d_027.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_027" model="hr.payslip.input.type">
+        <field name="code">d_027</field>
+        <field name="name">Ajuste en Participación de los Trabajadores en las Utilidades PTU Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_028" model="hr.salary.rule">
+        <field name="name">Ajuste en Reembolso de Gastos Médicos Dentales y Hospitalarios Exento</field>
+        <field name="sequence" eval="77400"/>
+        <field name="code">028</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_028 and inputs.d_028.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_028" model="hr.payslip.input.type">
+        <field name="code">d_028</field>
+        <field name="name">Ajuste en Reembolso de Gastos Médicos Dentales y Hospitalarios Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_029" model="hr.salary.rule">
+        <field name="name">Ajuste en Fondo de ahorro Exento</field>
+        <field name="sequence" eval="77500"/>
+        <field name="code">029</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_029 and inputs.d_029.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_029" model="hr.payslip.input.type">
+        <field name="code">d_029</field>
+        <field name="name">Ajuste en Fondo de ahorro Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_030" model="hr.salary.rule">
+        <field name="name">Ajuste en Caja de ahorro Exento</field>
+        <field name="sequence" eval="77600"/>
+        <field name="code">030</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_030 and inputs.d_030.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_030" model="hr.payslip.input.type">
+        <field name="code">d_030</field>
+        <field name="name">Ajuste en Caja de ahorro Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_031" model="hr.salary.rule">
+        <field name="name">Ajuste en Contribuciones a Cargo del Trabajador Pagadas por el Patrón Exento</field>
+        <field name="sequence" eval="77700"/>
+        <field name="code">031</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_031 and inputs.d_031.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_031" model="hr.payslip.input.type">
+        <field name="code">d_031</field>
+        <field name="name">Ajuste en Contribuciones a Cargo del Trabajador Pagadas por el Patrón Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_032" model="hr.salary.rule">
+        <field name="name">Ajuste en Premios por puntualidad Gravado</field>
+        <field name="sequence" eval="77800"/>
+        <field name="code">032</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_032 and inputs.d_032.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_032" model="hr.payslip.input.type">
+        <field name="code">d_032</field>
+        <field name="name">Ajuste en Premios por puntualidad Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_033" model="hr.salary.rule">
+        <field name="name">Ajuste en Prima de Seguro de vida Exento</field>
+        <field name="sequence" eval="77900"/>
+        <field name="code">033</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_033 and inputs.d_033.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_033" model="hr.payslip.input.type">
+        <field name="code">d_033</field>
+        <field name="name">Ajuste en Prima de Seguro de vida Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_034" model="hr.salary.rule">
+        <field name="name">Ajuste en Seguro de Gastos Médicos Mayores Exento</field>
+        <field name="sequence" eval="78000"/>
+        <field name="code">034</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_034 and inputs.d_034.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_034" model="hr.payslip.input.type">
+        <field name="code">d_034</field>
+        <field name="name">Ajuste en Seguro de Gastos Médicos Mayores Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_035" model="hr.salary.rule">
+        <field name="name">Ajuste en Cuotas Sindicales Pagadas por el Patrón Exento</field>
+        <field name="sequence" eval="78100"/>
+        <field name="code">035</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_035 and inputs.d_035.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_035" model="hr.payslip.input.type">
+        <field name="code">d_035</field>
+        <field name="name">Ajuste en Cuotas Sindicales Pagadas por el Patrón Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_036" model="hr.salary.rule">
+        <field name="name">Ajuste en Subsidios por incapacidad Exento</field>
+        <field name="sequence" eval="78200"/>
+        <field name="code">036</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_036 and inputs.d_036.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_036" model="hr.payslip.input.type">
+        <field name="code">d_036</field>
+        <field name="name">Ajuste en Subsidios por incapacidad Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_037" model="hr.salary.rule">
+        <field name="name">Ajuste en Becas para trabajadores o hijos Exento</field>
+        <field name="sequence" eval="78300"/>
+        <field name="code">037</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_037 and inputs.d_037.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_037" model="hr.payslip.input.type">
+        <field name="code">d_037</field>
+        <field name="name">Ajuste en Becas para trabajadores o hijos Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_038" model="hr.salary.rule">
+        <field name="name">Ajuste en Horas extra Exento</field>
+        <field name="sequence" eval="78400"/>
+        <field name="code">038</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_038 and inputs.d_038.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_038" model="hr.payslip.input.type">
+        <field name="code">d_038</field>
+        <field name="name">Ajuste en Horas extra Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_039" model="hr.salary.rule">
+        <field name="name">Ajuste en Horas extra Gravado</field>
+        <field name="sequence" eval="78500"/>
+        <field name="code">039</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_039 and inputs.d_039.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_039" model="hr.payslip.input.type">
+        <field name="code">d_039</field>
+        <field name="name">Ajuste en Horas extra Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_040" model="hr.salary.rule">
+        <field name="name">Ajuste en Prima dominical Exento</field>
+        <field name="sequence" eval="78600"/>
+        <field name="code">040</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_040 and inputs.d_040.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_040" model="hr.payslip.input.type">
+        <field name="code">d_040</field>
+        <field name="name">Ajuste en Prima dominical Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_041" model="hr.salary.rule">
+        <field name="name">Ajuste en Prima dominical Gravado</field>
+        <field name="sequence" eval="78700"/>
+        <field name="code">041</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_041 and inputs.d_041.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_041" model="hr.payslip.input.type">
+        <field name="code">d_041</field>
+        <field name="name">Ajuste en Prima dominical Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_042" model="hr.salary.rule">
+        <field name="name">Ajuste en Prima vacacional Exento</field>
+        <field name="sequence" eval="78800"/>
+        <field name="code">042</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_042 and inputs.d_042.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_042" model="hr.payslip.input.type">
+        <field name="code">d_042</field>
+        <field name="name">Ajuste en Prima vacacional Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_043" model="hr.salary.rule">
+        <field name="name">Ajuste en Prima vacacional Gravado</field>
+        <field name="sequence" eval="78900"/>
+        <field name="code">043</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_043 and inputs.d_043.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_043" model="hr.payslip.input.type">
+        <field name="code">d_043</field>
+        <field name="name">Ajuste en Prima vacacional Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_048" model="hr.salary.rule">
+        <field name="name">Ajuste en Seguro de retiro Exento</field>
+        <field name="sequence" eval="79400"/>
+        <field name="code">048</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_048 and inputs.d_048.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_048" model="hr.payslip.input.type">
+        <field name="code">d_048</field>
+        <field name="name">Ajuste en Seguro de retiro Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_049" model="hr.salary.rule">
+        <field name="name">Ajuste en Indemnizaciones Exento</field>
+        <field name="sequence" eval="79500"/>
+        <field name="code">049</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_049 and inputs.d_049.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_049" model="hr.payslip.input.type">
+        <field name="code">d_049</field>
+        <field name="name">Ajuste en Indemnizaciones Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_050" model="hr.salary.rule">
+        <field name="name">Ajuste en Indemnizaciones Gravado</field>
+        <field name="sequence" eval="79600"/>
+        <field name="code">050</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_050 and inputs.d_050.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_050" model="hr.payslip.input.type">
+        <field name="code">d_050</field>
+        <field name="name">Ajuste en Indemnizaciones Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_051" model="hr.salary.rule">
+        <field name="name">Ajuste en Reembolso por funeral Exento</field>
+        <field name="sequence" eval="79700"/>
+        <field name="code">051</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_051 and inputs.d_051.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_051" model="hr.payslip.input.type">
+        <field name="code">d_051</field>
+        <field name="name">Ajuste en Reembolso por funeral Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_052" model="hr.salary.rule">
+        <field name="name">Ajuste en Cuotas de seguridad social pagadas por el patrón Exento</field>
+        <field name="sequence" eval="79800"/>
+        <field name="code">052</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_052 and inputs.d_052.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_052" model="hr.payslip.input.type">
+        <field name="code">d_052</field>
+        <field name="name">Ajuste en Cuotas de seguridad social pagadas por el patrón Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_053" model="hr.salary.rule">
+        <field name="name">Ajuste en Comisiones Gravado</field>
+        <field name="sequence" eval="79900"/>
+        <field name="code">053</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_053 and inputs.d_053.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_053" model="hr.payslip.input.type">
+        <field name="code">d_053</field>
+        <field name="name">Ajuste en Comisiones Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_054" model="hr.salary.rule">
+        <field name="name">Ajuste en Vales de despensa Exento</field>
+        <field name="sequence" eval="80000"/>
+        <field name="code">054</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_054 and inputs.d_054.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_054" model="hr.payslip.input.type">
+        <field name="code">d_054</field>
+        <field name="name">Ajuste en Vales de despensa Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_055" model="hr.salary.rule">
+        <field name="name">Ajuste en Vales de restaurante Exento</field>
+        <field name="sequence" eval="80100"/>
+        <field name="code">055</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_055 and inputs.d_055.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_055" model="hr.payslip.input.type">
+        <field name="code">d_055</field>
+        <field name="name">Ajuste en Vales de restaurante Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_056" model="hr.salary.rule">
+        <field name="name">Ajuste en Vales de gasolina Exento</field>
+        <field name="sequence" eval="80200"/>
+        <field name="code">056</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_056 and inputs.d_056.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_056" model="hr.payslip.input.type">
+        <field name="code">d_056</field>
+        <field name="name">Ajuste en Vales de gasolina Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_057" model="hr.salary.rule">
+        <field name="name">Ajuste en Vales de ropa Exento</field>
+        <field name="sequence" eval="80300"/>
+        <field name="code">057</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_057 and inputs.d_057.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_057" model="hr.payslip.input.type">
+        <field name="code">d_057</field>
+        <field name="name">Ajuste en Vales de ropa Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_058" model="hr.salary.rule">
+        <field name="name">Ajuste en Ayuda para renta Exento</field>
+        <field name="sequence" eval="80400"/>
+        <field name="code">058</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_058 and inputs.d_058.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_058" model="hr.payslip.input.type">
+        <field name="code">d_058</field>
+        <field name="name">Ajuste en Ayuda para renta Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_059" model="hr.salary.rule">
+        <field name="name">Ajuste en Ayuda para artículos escolares Exento</field>
+        <field name="sequence" eval="80500"/>
+        <field name="code">059</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_059 and inputs.d_059.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_059" model="hr.payslip.input.type">
+        <field name="code">d_059</field>
+        <field name="name">Ajuste en Ayuda para artículos escolares Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_060" model="hr.salary.rule">
+        <field name="name">Ajuste en Ayuda para anteojos Exento</field>
+        <field name="sequence" eval="80600"/>
+        <field name="code">060</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_060 and inputs.d_060.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_060" model="hr.payslip.input.type">
+        <field name="code">d_060</field>
+        <field name="name">Ajuste en Ayuda para anteojos Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_061" model="hr.salary.rule">
+        <field name="name">Ajuste en Ayuda para transporte Exento</field>
+        <field name="sequence" eval="80700"/>
+        <field name="code">061</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_061 and inputs.d_061.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_061" model="hr.payslip.input.type">
+        <field name="code">d_061</field>
+        <field name="name">Ajuste en Ayuda para transporte Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_062" model="hr.salary.rule">
+        <field name="name">Ajuste en Ayuda para gastos de funeral Exento</field>
+        <field name="sequence" eval="80800"/>
+        <field name="code">062</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_062 and inputs.d_062.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_062" model="hr.payslip.input.type">
+        <field name="code">d_062</field>
+        <field name="name">Ajuste en Ayuda para gastos de funeral Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_063" model="hr.salary.rule">
+        <field name="name">Ajuste en Otros ingresos por salarios Exento</field>
+        <field name="sequence" eval="80900"/>
+        <field name="code">063</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_063 and inputs.d_063.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_063" model="hr.payslip.input.type">
+        <field name="code">d_063</field>
+        <field name="name">Ajuste en Otros ingresos por salarios Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_064" model="hr.salary.rule">
+        <field name="name">Ajuste en Otros ingresos por salarios Gravado</field>
+        <field name="sequence" eval="81000"/>
+        <field name="code">064</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_064 and inputs.d_064.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_064" model="hr.payslip.input.type">
+        <field name="code">d_064</field>
+        <field name="name">Ajuste en Otros ingresos por salarios Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_065" model="hr.salary.rule">
+        <field name="name">Ajuste en Jubilaciones, pensiones o haberes de retiro Exento</field>
+        <field name="sequence" eval="81100"/>
+        <field name="code">065</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_065 and inputs.d_065.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_065" model="hr.payslip.input.type">
+        <field name="code">d_065</field>
+        <field name="name">Ajuste en Jubilaciones, pensiones o haberes de retiro Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_066" model="hr.salary.rule">
+        <field name="name">Ajuste en Jubilaciones, pensiones o haberes de retiro Gravado</field>
+        <field name="sequence" eval="81200"/>
+        <field name="code">066</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_066 and inputs.d_066.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_066" model="hr.payslip.input.type">
+        <field name="code">d_066</field>
+        <field name="name">Ajuste en Jubilaciones, pensiones o haberes de retiro Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_069" model="hr.salary.rule">
+        <field name="name">Ajuste en Jubilaciones, pensiones o haberes de retiro Acumulable</field>
+        <field name="sequence" eval="81500"/>
+        <field name="code">069</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_069 and inputs.d_069.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_069" model="hr.payslip.input.type">
+        <field name="code">d_069</field>
+        <field name="name">Ajuste en Jubilaciones, pensiones o haberes de retiro Acumulable</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_070" model="hr.salary.rule">
+        <field name="name">Ajuste en Jubilaciones, pensiones o haberes de retiro No Acumulable</field>
+        <field name="sequence" eval="81600"/>
+        <field name="code">070</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_070 and inputs.d_070.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_070" model="hr.payslip.input.type">
+        <field name="code">d_070</field>
+        <field name="name">Ajuste en Jubilaciones, pensiones o haberes de retiro No Acumulable</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_071" model="hr.salary.rule">
+        <field name="name">Ajuste en Subsidio para el empleo - efectivamente entregado al trabajador</field>
+        <field name="sequence" eval="81700"/>
+        <field name="code">071</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Based on http://www.sat.gob.mx/informacion_fiscal/devoluciones_compensaciones/Paginas/subsidio_al_empleo.aspx
+income_period = categories.PERGRA
+table = [(0.01, 1768.96, 407.02), (1768.97, 2653.38, 406.83),
+         (2653.39, 3472.84, 406.62), (3472.85, 3537.87, 392.77),
+         (3537.88, 4446.15, 382.46), (4446.16, 4717.18, 354.23),
+         (4717.19, 5335.42, 324.87), (5335.43, 6224.67, 294.63),
+         (6224.68, 7113.90, 253.54), (7113.91, 7382.33, 217.61),
+         (7382.34, 99999999.00, 0)]
+days_schedule = {'01': 1, '02': 7, '03': 14, '04': 15, '05': 30}
+result = -0.01
+days_work = days_schedule.get(contract.l10n_mx_edi_schedule_pay, 0)
+if days_work:
+    income_period = (income_period / days_work) * 30
+    for value in table:
+        if income_period >=value[0] and value[1] >= income_period:
+            result = value[2]
+            break
+    result = -0.01 if not (result * days_work) / 30 else 0 </field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_072" model="hr.salary.rule">
+        <field name="name">Ajuste en Ingresos en acciones o títulos valor que representan bienes Exento</field>
+        <field name="sequence" eval="81800"/>
+        <field name="code">072</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_072 and inputs.d_072.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_072" model="hr.payslip.input.type">
+        <field name="code">d_072</field>
+        <field name="name">Ajuste en Ingresos en acciones o títulos valor que representan bienes Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_073" model="hr.salary.rule">
+        <field name="name">Ajuste en Ingresos en acciones o títulos valor que representan bienes Gravado</field>
+        <field name="sequence" eval="81900"/>
+        <field name="code">073</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_073 and inputs.d_073.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_073" model="hr.payslip.input.type">
+        <field name="code">d_073</field>
+        <field name="name">Ajuste en Ingresos en acciones o títulos valor que representan bienes Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_074" model="hr.salary.rule">
+        <field name="name">Ajuste en Alimentación Exento</field>
+        <field name="sequence" eval="82000"/>
+        <field name="code">074</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_074 and inputs.d_074.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_074" model="hr.payslip.input.type">
+        <field name="code">d_074</field>
+        <field name="name">Ajuste en Alimentación Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_075" model="hr.salary.rule">
+        <field name="name">Ajuste en Alimentación Gravado</field>
+        <field name="sequence" eval="82100"/>
+        <field name="code">075</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_075 and inputs.d_075.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_075" model="hr.payslip.input.type">
+        <field name="code">d_075</field>
+        <field name="name">Ajuste en Alimentación Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_076" model="hr.salary.rule">
+        <field name="name">Ajuste en Habitación Exento</field>
+        <field name="sequence" eval="82200"/>
+        <field name="code">076</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_076 and inputs.d_076.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_076" model="hr.payslip.input.type">
+        <field name="code">d_076</field>
+        <field name="name">Ajuste en Habitación Exento</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_077" model="hr.salary.rule">
+        <field name="name">Ajuste en Habitación Gravado</field>
+        <field name="sequence" eval="82300"/>
+        <field name="code">077</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_077 and inputs.d_077.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_077" model="hr.payslip.input.type">
+        <field name="code">d_077</field>
+        <field name="name">Ajuste en Habitación Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_078" model="hr.salary.rule">
+        <field name="name">Ajuste en Premios por asistencia</field>
+        <field name="sequence" eval="82400"/>
+        <field name="code">078</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_078 and inputs.d_078.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_078" model="hr.payslip.input.type">
+        <field name="code">d_078</field>
+        <field name="name">Ajuste en Premios por asistencia</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_079" model="hr.salary.rule">
+        <field name="name">Ajuste en Pagos distintos a los listados y que no deben considerarse como ingreso por sueldos, salarios o ingresos asimilados</field>
+        <field name="sequence" eval="82500"/>
+        <field name="code">079</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_079 and inputs.d_079.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_079" model="hr.payslip.input.type">
+        <field name="code">d_079</field>
+        <field name="name">Ajuste en Pagos distintos a los listados y que no deben considerarse como ingreso por sueldos, salarios o ingresos asimilados</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_080" model="hr.salary.rule">
+        <field name="name">Ajuste en Viáticos gravados</field>
+        <field name="sequence" eval="82600"/>
+        <field name="code">080</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_080 and inputs.d_080.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_080" model="hr.payslip.input.type">
+        <field name="code">d_080</field>
+        <field name="name">Ajuste en Viáticos gravados</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_081" model="hr.salary.rule">
+        <field name="name">Ajuste en Viáticos - entregados al trabajador</field>
+        <field name="sequence" eval="82700"/>
+        <field name="code">081</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_081 and inputs.d_081.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_081" model="hr.payslip.input.type">
+        <field name="code">d_081</field>
+        <field name="name">Ajuste en Viáticos - entregados al trabajador</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_082" model="hr.salary.rule">
+        <field name="name">Ajuste en Fondo de ahorro Gravado</field>
+        <field name="sequence" eval="82800"/>
+        <field name="code">082</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_082 and inputs.d_082.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_082" model="hr.payslip.input.type">
+        <field name="code">d_082</field>
+        <field name="name">Ajuste en Fondo de ahorro Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_083" model="hr.salary.rule">
+        <field name="name">Ajuste en Caja de ahorro Gravado</field>
+        <field name="sequence" eval="82900"/>
+        <field name="code">083</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_083 and inputs.d_083.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_083" model="hr.payslip.input.type">
+        <field name="code">d_083</field>
+        <field name="name">Ajuste en Caja de ahorro Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_084" model="hr.salary.rule">
+        <field name="name">Ajuste en Prima de Seguro de vida Gravado</field>
+        <field name="sequence" eval="83000"/>
+        <field name="code">084</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_084 and inputs.d_084.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_084" model="hr.payslip.input.type">
+        <field name="code">d_084</field>
+        <field name="name">Ajuste en Prima de Seguro de vida Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_085" model="hr.salary.rule">
+        <field name="name">Ajuste en Seguro de Gastos Médicos Mayores Gravado</field>
+        <field name="sequence" eval="83100"/>
+        <field name="code">085</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_085 and inputs.d_085.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_085" model="hr.payslip.input.type">
+        <field name="code">d_085</field>
+        <field name="name">Ajuste en Seguro de Gastos Médicos Mayores Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_086" model="hr.salary.rule">
+        <field name="name">Ajuste en Subsidios por incapacidad Gravado</field>
+        <field name="sequence" eval="83200"/>
+        <field name="code">086</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_086 and inputs.d_086.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_086" model="hr.payslip.input.type">
+        <field name="code">d_086</field>
+        <field name="name">Ajuste en Subsidios por incapacidad Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_087" model="hr.salary.rule">
+        <field name="name">Ajuste en Becas para trabajadores o hijos Gravado</field>
+        <field name="sequence" eval="83300"/>
+        <field name="code">087</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_087 and inputs.d_087.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_087" model="hr.payslip.input.type">
+        <field name="code">d_087</field>
+        <field name="name">Ajuste en Becas para trabajadores o hijos Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_088" model="hr.salary.rule">
+        <field name="name">Ajuste en Seguro de retiro Gravado</field>
+        <field name="sequence" eval="83400"/>
+        <field name="code">088</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_088 and inputs.d_088.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_088" model="hr.payslip.input.type">
+        <field name="code">d_088</field>
+        <field name="name">Ajuste en Seguro de retiro Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_089" model="hr.salary.rule">
+        <field name="name">Ajuste en Vales de despensa Gravado</field>
+        <field name="sequence" eval="83500"/>
+        <field name="code">089</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_089 and inputs.d_089.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_089" model="hr.payslip.input.type">
+        <field name="code">d_089</field>
+        <field name="name">Ajuste en Vales de despensa Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_090" model="hr.salary.rule">
+        <field name="name">Ajuste en Vales de restaurante Gravado</field>
+        <field name="sequence" eval="83600"/>
+        <field name="code">090</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_090 and inputs.d_090.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_090" model="hr.payslip.input.type">
+        <field name="code">d_090</field>
+        <field name="name">Ajuste en Vales de restaurante Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_091" model="hr.salary.rule">
+        <field name="name">Ajuste en Vales de gasolina Gravado</field>
+        <field name="sequence" eval="83700"/>
+        <field name="code">091</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_091 and inputs.d_091.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_091" model="hr.payslip.input.type">
+        <field name="code">d_091</field>
+        <field name="name">Ajuste en Vales de gasolina Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_092" model="hr.salary.rule">
+        <field name="name">Ajuste en Vales de ropa Gravado</field>
+        <field name="sequence" eval="83800"/>
+        <field name="code">092</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_092 and inputs.d_092.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_092" model="hr.payslip.input.type">
+        <field name="code">d_092</field>
+        <field name="name">Ajuste en Vales de ropa Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_093" model="hr.salary.rule">
+        <field name="name">Ajuste en Ayuda para renta Gravado</field>
+        <field name="sequence" eval="83900"/>
+        <field name="code">093</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_093 and inputs.d_093.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_093" model="hr.payslip.input.type">
+        <field name="code">d_093</field>
+        <field name="name">Ajuste en Ayuda para renta Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_094" model="hr.salary.rule">
+        <field name="name">Ajuste en Ayuda para artículos escolares Gravado</field>
+        <field name="sequence" eval="84000"/>
+        <field name="code">094</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_094 and inputs.d_094.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_094" model="hr.payslip.input.type">
+        <field name="code">d_094</field>
+        <field name="name">Ajuste en Ayuda para artículos escolares Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_095" model="hr.salary.rule">
+        <field name="name">Ajuste en Ayuda para anteojos Gravado</field>
+        <field name="sequence" eval="84100"/>
+        <field name="code">095</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_095 and inputs.d_095.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_095" model="hr.payslip.input.type">
+        <field name="code">d_095</field>
+        <field name="name">Ajuste en Ayuda para anteojos Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_096" model="hr.salary.rule">
+        <field name="name">Ajuste en Ayuda para transporte Gravado</field>
+        <field name="sequence" eval="84200"/>
+        <field name="code">096</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_096 and inputs.d_096.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_096" model="hr.payslip.input.type">
+        <field name="code">d_096</field>
+        <field name="name">Ajuste en Ayuda para transporte Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_097" model="hr.salary.rule">
+        <field name="name">Ajuste en Ayuda para gastos de funeral Gravado</field>
+        <field name="sequence" eval="84300"/>
+        <field name="code">097</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_097 and inputs.d_097.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_097" model="hr.payslip.input.type">
+        <field name="code">d_097</field>
+        <field name="name">Ajuste en Ayuda para gastos de funeral Gravado</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_098" model="hr.salary.rule">
+        <field name="name">Ajuste a ingresos asimilados a salarios gravados</field>
+        <field name="sequence" eval="84400"/>
+        <field name="code">098</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_098 and inputs.d_098.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_098" model="hr.payslip.input.type">
+        <field name="code">d_098</field>
+        <field name="name">Ajuste a ingresos asimilados a salarios gravados</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_099" model="hr.salary.rule">
+        <field name="name">Ajuste a ingresos por sueldos y salarios gravados</field>
+        <field name="sequence" eval="84500"/>
+        <field name="code">099</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_099 and inputs.d_099.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_099" model="hr.payslip.input.type">
+        <field name="code">d_099</field>
+        <field name="name">Ajuste a ingresos por sueldos y salarios gravados</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_100" model="hr.salary.rule">
+        <field name="name">Ajuste en Viáticos exentos</field>
+        <field name="sequence" eval="84600"/>
+        <field name="code">100</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_100 and inputs.d_100.amount)*-1</field>
+    </record>
+    <record id="hr_payslip_input_type_deduction_100" model="hr.payslip.input.type">
+        <field name="code">d_100</field>
+        <field name="name">Ajuste en Viáticos exentos</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_101" model="hr.salary.rule">
+        <field name="name">ISR Retenido de ejercicio anterior</field>
+        <field name="sequence" eval="85000"/>
+        <field name="code">101</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_101 and inputs.d_101.amount)*-1</field>
+    </record>
+    <record id="hr_rule_input_deduction_101" model="hr.payslip.input.type">
+        <field name="code">d_101</field>
+        <field name="name">ISR Retenido de ejercicio anterior</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_102" model="hr.salary.rule">
+        <field name="name">Ajuste a pagos por gratificaciones, primas, compensaciones, recompensas u otros a extrabajadores derivados de jubilación en parcialidades, gravados</field>
+        <field name="sequence" eval="86000"/>
+        <field name="code">102</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_102 and inputs.d_102.amount)*-1</field>
+    </record>
+    <record id="hr_rule_input_deduction_102" model="hr.payslip.input.type">
+        <field name="code">d_102</field>
+        <field name="name">Ajuste a pagos por gratificaciones, primas, compensaciones, recompensas u otros a extrabajadores derivados de jubilación en parcialidades, gravados</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_103" model="hr.salary.rule">
+        <field name="name">Ajuste a pagos que se realicen a extrabajadores que obtengan una jubilación en parcialidades derivados de la ejecución de una resolución judicial o de un laudo gravados</field>
+        <field name="sequence" eval="86100"/>
+        <field name="code">103</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_103 and inputs.d_103.amount)*-1</field>
+    </record>
+    <record id="hr_rule_input_deduction_103" model="hr.payslip.input.type">
+        <field name="code">d_103</field>
+        <field name="name">Ajuste a pagos que se realicen a extrabajadores que obtengan una jubilación en parcialidades derivados de la ejecución de una resolución judicial o de un laudo gravados</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_104" model="hr.salary.rule">
+        <field name="name">Ajuste a pagos que se realicen a extrabajadores que obtengan una jubilación en parcialidades derivados de la ejecución de una resolución judicial o de un laudo exentos</field>
+        <field name="sequence" eval="86200"/>
+        <field name="code">104</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_104 and inputs.d_104.amount)*-1</field>
+    </record>
+    <record id="hr_rule_input_deduction_104" model="hr.payslip.input.type">
+        <field name="code">d_104</field>
+        <field name="name">Ajuste a pagos que se realicen a extrabajadores que obtengan una jubilación en parcialidades derivados de la ejecución de una resolución judicial o de un laudo exentos</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_105" model="hr.salary.rule">
+        <field name="name">Ajuste a pagos que se realicen a extrabajadores que obtengan una jubilación en una sola exhibición derivados de la ejecución de una resolución judicial o de un laudo gravados</field>
+        <field name="sequence" eval="86300"/>
+        <field name="code">105</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_105 and inputs.d_105.amount)*-1</field>
+    </record>
+    <record id="hr_rule_input_deduction_105" model="hr.payslip.input.type">
+        <field name="code">d_105</field>
+        <field name="name">Ajuste a pagos que se realicen a extrabajadores que obtengan una jubilación en una sola exhibición derivados de la ejecución de una resolución judicial o de un laudo gravados</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_106" model="hr.salary.rule">
+        <field name="name">Ajuste a pagos que se realicen a extrabajadores que obtengan una jubilación en una sola exhibición derivados de la ejecución de una resolución judicial o de un laudo exentos</field>
+        <field name="sequence" eval="86400"/>
+        <field name="code">106</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.d_106 and inputs.d_106.amount)*-1</field>
+    </record>
+    <record id="hr_rule_input_deduction_106" model="hr.payslip.input.type">
+        <field name="code">d_106</field>
+        <field name="name">Ajuste a pagos que se realicen a extrabajadores que obtengan una jubilación en una sola exhibición derivados de la ejecución de una resolución judicial o de un laudo exentos</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_deduction_107" model="hr.salary.rule">
+        <field name="name">Ajuste al Subsidio Causado </field>
+        <field name="sequence" eval="86500"/>
+        <field name="code">107</field>
+        <field name="category_id" ref="hr_salary_rule_category_deduction_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+table = [
+        (0.01, 1768.96, 407.02),
+        (1768.97, 2653.38, 406.83),
+        (2653.39, 3472.84, 406.62),
+        (3472.85, 3537.87, 392.77),
+        (3537.88, 4446.15, 382.46),
+        (4446.16, 4717.18, 354.23),
+        (4717.19, 5335.42, 324.87),
+        (5335.43, 6224.67, 294.63),
+        (6224.68, 7113.90, 253.54),
+        (7113.91, 7382.33, 217.61),
+        (7382.34, 99999999.00, 0)]
+income_period = categories.PERGRA
+payslips = employee.slip_ids.filtered(lambda sl: sl.state == 'done' and sl.id != payslip.id and sl.date_from.month == payslip.date_from.month and sl.date_from.year == payslip.date_from.year)
+lines = payslips.mapped('line_ids')
+if employee.env['hr.payslip'].browse(payslip.id).l10n_mx_edi_is_last_payslip():
+    category = employee.env.ref('l10n_mx_edi_payslip.hr_salary_rule_category_perception_mx_taxed')
+    income_monthly = income_period  + sum(lines.filtered(lambda li: li.category_id.id == category.id).mapped('total'))
+    for value in table:
+        if income_monthly >=value[0] and value[1] >= income_monthly:
+            result = value[2] * -1
+            break
+if not result:
+    rule = employee.env.ref('l10n_mx_edi_payslip.hr_rule_l10n_mx_payroll_other_payment_aux_002')
+    result = (sum(lines.filtered(lambda li: li.salary_rule_id == rule).mapped('total'))) * -1</field>
+    </record>
+    <!-- Other Payments -->
+    <record id="hr_rule_l10n_mx_payroll_other_payment_001" model="hr.salary.rule">
+        <field name="name">Reintegro de ISR pagado en exceso - siempre que no haya sido enterado al SAT</field>
+        <field name="code">OP001</field>
+        <field name="category_id" ref="hr_salary_rule_category_other_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.op_001 and inputs.op_001.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_other_payment_001" model="hr.payslip.input.type">
+        <field name="code">op_001</field>
+        <field name="name">Reintegro de ISR pagado en exceso - siempre que no haya sido enterado al SAT</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_other_payment_002" model="hr.salary.rule">
+        <field name="name">Subsidio para el empleo - efectivamente entregado al trabajador</field>
+        <field name="code">OP002</field>
+        <field name="sequence">87000</field>
+        <field name="category_id" ref="hr_salary_rule_category_other_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = AUX_OP002
+result = result + AUX_ISR if result &gt; abs(AUX_ISR) else 0.01</field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_other_payment_003" model="hr.salary.rule">
+        <field name="name">Viáticos - entregados al trabajador</field>
+        <field name="code">OP003</field>
+        <field name="category_id" ref="hr_salary_rule_category_other_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.op_003 and inputs.op_003.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_other_payment_003" model="hr.payslip.input.type">
+        <field name="code">op_003</field>
+        <field name="name">Viáticos - entregados al trabajador</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_other_payment_004" model="hr.salary.rule">
+        <field name="name">Aplicación de saldo a favor por compensación anual</field>
+        <field name="code">OP004</field>
+        <field name="category_id" ref="hr_salary_rule_category_other_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.op_004 and inputs.op_004.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_other_payment_004" model="hr.payslip.input.type">
+        <field name="code">op_004</field>
+        <field name="name">Aplicación de saldo a favor por compensación anual</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_other_payment_005" model="hr.salary.rule">
+        <field name="name">Reintegro de ISR retenido en exceso de ejercicio anterior (siempre que no haya sido enterado al SAT).</field>
+        <field name="code">OP005</field>
+        <field name="category_id" ref="hr_salary_rule_category_other_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.op_005 and inputs.op_005.amount</field>
+    </record>
+    <record id="hr_rule_input_other_payment_005" model="hr.payslip.input.type">
+        <field name="code">op_005</field>
+        <field name="name">Reintegro de ISR retenido en exceso de ejercicio anterior (siempre que no haya sido enterado al SAT).</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_other_payment_006" model="hr.salary.rule">
+        <field name="name">Alimentos en bienes (Servicios de comedor y comida) Art 94 último párrafo LISR</field>
+        <field name="code">OP006</field>
+        <field name="category_id" ref="hr_salary_rule_category_other_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.op_006 and inputs.op_006.amount</field>
+    </record>
+    <record id="hr_rule_input_other_payment_006" model="hr.payslip.input.type">
+        <field name="code">op_006</field>
+        <field name="name">Alimentos en bienes (Servicios de comedor y comida) Art 94 último párrafo LISR</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_other_payment_007" model="hr.salary.rule">
+        <field name="name">ISR ajustado por subsidio</field>
+        <field name="code">OP007</field>
+        <field name="category_id" ref="hr_salary_rule_category_other_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.op_007 and inputs.op_007.amount</field>
+    </record>
+    <record id="hr_rule_input_other_payment_007" model="hr.payslip.input.type">
+        <field name="code">op_007</field>
+        <field name="name">ISR ajustado por subsidio</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_other_payment_008" model="hr.salary.rule">
+        <field name="name">Subsidio efectivamente entregado que no correspondía (Aplica sólo cuando haya ajuste al cierre de mes en relación con el Apéndice 7 de la guía de llenado de nómina)</field>
+        <field name="code">OP008</field>
+        <field name="category_id" ref="hr_salary_rule_category_other_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.op_008 and inputs.op_008.amount</field>
+    </record>
+    <record id="hr_rule_input_other_payment_008" model="hr.payslip.input.type">
+        <field name="code">op_008</field>
+        <field name="name">Subsidio efectivamente entregado que no correspondía (Aplica sólo cuando haya ajuste al cierre de mes en relación con el Apéndice 7 de la guía de llenado de nómina)</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_other_payment_999" model="hr.salary.rule">
+        <field name="name">Pagos distintos a los listados y que no deben considerarse como ingreso por sueldos, salarios o ingresos asimilados</field>
+        <field name="code">OP999</field>
+        <field name="category_id" ref="hr_salary_rule_category_other_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.op_999 and inputs.op_999.amount</field>
+    </record>
+    <record id="hr_payslip_input_type_other_payment_999" model="hr.payslip.input.type">
+        <field name="code">op_999</field>
+        <field name="name">Pagos distintos a los listados y que no deben considerarse como ingreso por sueldos, salarios o ingresos asimilados</field>
+        <field name="struct_ids" eval="[(6, 0, [ref('payroll_structure_data_01')])]"/>
+    </record>
+    <!-- Sueldo Neto -->
+    <record id="hr_rule_net_salary_0" model="hr.salary.rule">
+        <field name="name">Net Salary</field>
+        <field name="sequence" eval="1000000"/>
+        <field name="code">NetSalary</field>
+        <field name="category_id" ref="hr_salary_rule_category_netsa_mx"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = categories.PERGRA + categories.DEDUC + categories.PEREXE + categories.OTHER</field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_seguridad_social_company" model="hr.salary.rule">
+        <field name="name">Seguridad social Compañía</field>
+        <field name="sequence" eval="40001"/>
+        <field name="code">SSComp</field>
+        <field name="category_id" ref="hr_payroll.COMP"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = 0
+if not employee.l10n_mx_edi_is_assimilated:
+    sbc = contract.l10n_mx_edi_integrated_salary
+    uma = contract.company_id.l10n_mx_edi_uma
+    days_schedule = {'01': 1, '02': 7, '03': 14, '04': 15, '05': 30, '06': 60}
+    days_work = days_schedule.get(contract.l10n_mx_edi_schedule_pay, 0)
+    specie_fixed = uma * 0.204 * days_work
+    specie_excess = ((sbc - (uma * 3)) * 0.011 * days_work) if (sbc - (uma * 3)) &gt; 0 else 0
+    aux = sbc * days_work
+    benefits = 0.007 * aux
+    pensioners = 0.0105 * aux
+    disability = 0.0175 * aux
+    risk = employee.l10n_mx_edi_risk_rank.percentage / 100 * aux
+    kindergarten = 0.01 * aux
+
+    result = -(specie_fixed + specie_excess + benefits + pensioners + disability + risk + kindergarten)
+        </field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_infonavit_company" model="hr.salary.rule">
+        <field name="name">Infonavit Compañía</field>
+        <field name="sequence" eval="49001"/>
+        <field name="code">InfComp</field>
+        <field name="category_id" ref="hr_payroll.COMP"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = 0
+if not employee.l10n_mx_edi_is_assimilated:
+    sbc = contract.l10n_mx_edi_integrated_salary
+    days_work = worked_days.dict.get('WORK100') and worked_days.WORK100.number_of_days or 0.0
+    aux = sbc * days_work
+    infonavit = 0.05 * aux
+
+    result = -(infonavit)
+        </field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_retirement_company" model="hr.salary.rule">
+        <field name="name">Retiro Compañía</field>
+        <field name="sequence" eval="42001"/>
+        <field name="code">RetComp</field>
+        <field name="category_id" ref="hr_payroll.COMP"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = 0
+if not employee.l10n_mx_edi_is_assimilated:
+    sbc = contract.l10n_mx_edi_integrated_salary
+    days_work = worked_days.dict.get('WORK100') and worked_days.WORK100.number_of_days or 0.0
+    aux = sbc * days_work
+    retirement = 0.02 * aux
+
+    result = -(retirement)
+        </field>
+    </record>
+    <record id="hr_rule_l10n_mx_payroll_cesantia_company" model="hr.salary.rule">
+        <field name="name">Cesantía en edad avanzada y vejez Compañía</field>
+        <field name="sequence" eval="42002"/>
+        <field name="code">RetComp</field>
+        <field name="category_id" ref="hr_payroll.COMP"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = 0
+if not employee.l10n_mx_edi_is_assimilated:
+    sbc = contract.l10n_mx_edi_integrated_salary
+    days_work = worked_days.dict.get('WORK100') and worked_days.WORK100.number_of_days or 0.0
+    aux = sbc * days_work
+    unemployment = 0.0315 * aux
+
+    result = -(unemployment)
+        </field>
+    </record>
+</odoo>

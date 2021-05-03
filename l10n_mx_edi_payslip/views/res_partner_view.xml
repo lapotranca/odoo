@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="res_partner_view_form_private_inherit">
+        <field name="name">res.partner.view.form.private.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_view_form_private"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phone']" position="before">
+                <field name="vat" string="VAT"/>
+                <field name="l10n_mx_edi_curp"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

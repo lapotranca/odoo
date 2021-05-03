@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+    <record id="hr_payslip_mlc_cfdi0" model="hr.payslip">
+        <field name="name">Payroll Test CFDI</field>
+        <field name="employee_id" ref="hr.employee_qdp"/>
+        <field name="contract_id" ref="hr_payroll.hr_contract_gilles_gravie"/>
+        <field name="struct_id" ref="payroll_structure_data_01"/>
+        <field name="l10n_mx_edi_source_resource">IP</field>
+    </record>
+
+    <record id="hr_payslip_mlc_cfdi0_worked_days_line" model="hr.payslip.worked_days">
+        <field name="name">Normal Working Days paid at 100%</field>
+        <field name="code">WORK100</field>
+        <field name="number_of_days" eval="15"/>
+        <field name="number_of_hours" eval="40"/>
+        <field name="contract_id" ref="hr_payroll.hr_contract_gilles_gravie"/>
+        <field name="payslip_id" ref="hr_payslip_mlc_cfdi0"/>
+        <field name="work_entry_type_id" ref="hr_work_entry.work_entry_type_attendance"/>
+    </record>
+    <!-- Perceptions -->
+    <record id="hr_payslip_mlc_cfdi0_input_line1" model="hr.payslip.input">
+        <field name="code">pe_005</field>
+        <field name="name">Fondo de Ahorro</field>
+        <field name="amount" eval="200.0"/>
+        <field name="contract_id" ref="hr_payroll.hr_contract_gilles_gravie"/>
+        <field name="payslip_id" ref="hr_payslip_mlc_cfdi0"/>
+        <field name="input_type_id" ref="hr_payslip_input_type_perception_005_e"/>
+    </record>
+    <record id="hr_payslip_mlc_cfdi0_input_line2" model="hr.payslip.input">
+        <field name="code">pe_019</field>
+        <field name="name">Horas extra</field>
+        <field name="amount" eval="300.0"/>
+        <field name="contract_id" ref="hr_payroll.hr_contract_gilles_gravie"/>
+        <field name="payslip_id" ref="hr_payslip_mlc_cfdi0"/>
+        <field name="input_type_id" ref="hr_payslip_input_type_perception_019_g"/>
+    </record>
+    <!-- Deductions -->
+    <record id="hr_payslip_mlc_cfdi0_input_line5" model="hr.payslip.input">
+        <field name="code">d_006</field>
+        <field name="name">Descuento por incapacidad</field>
+        <field name="amount" eval="100.0"/>
+        <field name="contract_id" ref="hr_payroll.hr_contract_gilles_gravie"/>
+        <field name="payslip_id" ref="hr_payslip_mlc_cfdi0"/>
+        <field name="input_type_id" ref="hr_payslip_input_type_deduction_006"/>
+    </record>
+    <!-- Overtime -->
+    <record id="hr_payslip_mlc_cfdi0_overtime_line0" model="hr.payslip.overtime">
+        <field name="amount" eval="100.0"/>
+        <field name="name">Overtime test1</field>
+        <field name="days" eval="1"/>
+        <field name="hours" eval="1"/>
+        <field name="overtime_type">02</field>
+        <field name="payslip_id" ref="hr_payslip_mlc_cfdi0"/>
+    </record>
+    <record id="hr_payslip_mlc_cfdi0_overtime_line1" model="hr.payslip.overtime">
+        <field name="amount" eval="200.0"/>
+        <field name="name">Overtime test2</field>
+        <field name="days" eval="2"/>
+        <field name="hours" eval="2"/>
+        <field name="overtime_type">01</field>
+        <field name="payslip_id" ref="hr_payslip_mlc_cfdi0"/>
+    </record>
+    <!-- Inability -->
+    <record id="hr_payslip_mlc_cfdi0_inability_line0" model="hr.payslip.inability">
+        <field name="amount">50.0</field>
+        <field name="days">1</field>
+        <field name="inability_type">02</field>
+        <field name="payslip_id" ref="hr_payslip_mlc_cfdi0"/>
+    </record>
+    <record id="hr_payslip_mlc_cfdi0_inability_line1" model="hr.payslip.inability">
+        <field name="amount">50.0</field>
+        <field name="days">2</field>
+        <field name="inability_type">02</field>
+        <field name="payslip_id" ref="hr_payslip_mlc_cfdi0"/>
+    </record>
+    <!-- Other Payments -->
+    <record id="hr_payslip_mlc_cfdi0_input_other1" model="hr.payslip.input">
+        <field name="code">op_003</field>
+        <field name="name">Viáticos</field>
+        <field name="amount" eval="300.0"/>
+        <field name="contract_id" ref="hr_payroll.hr_contract_gilles_gravie"/>
+        <field name="payslip_id" ref="hr_payslip_mlc_cfdi0"/>
+        <field name="input_type_id" ref="hr_payslip_input_type_other_payment_003"/>
+    </record>
+</odoo>
