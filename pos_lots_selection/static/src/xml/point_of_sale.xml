@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+   <t t-extend="Orderline">
+      <t t-jquery="t[t-if='line.get_product().tracking!==\'none\'']" t-operation="replace">
+         <t t-if="line.get_product().tracking!=='none'">
+            <i t-attf-class="oe_link_icon fa fa-server oe_icon quant-line-extra"/>
+         </t>
+      </t>
+   </t>
+   <t t-name="PackLotLinePopupWidgetNew">
+      <div class="modal-dialog" role="dialog">
+         <div class="popup popup-text clientlist-screen screen" style="width: 800px;">
+            <header class="title">
+               <t t-esc=" widget.options.title || '' "/>
+            </header>
+            <main class="packlot-lines">
+               <t t-if="widget.options.pack_lot_lines">
+                  <table class="client-list">
+                     <thead>
+                        <tr>
+                           <th>Lot Name</th>
+                           <th>Package</th>
+                           <th>Location</th>
+                           <th>Balance</th>
+                           <th>Qty</th>
+                           <th title="Consume All Available Quantities">All QTY</th>
+                        </tr>
+                     </thead>
+                     <tbody class="client-list-contents">
+                        <t t-set="lot_lines" t-value="widget.options.pack_lot_lines"/>
+                        <t t-as="lots" t-foreach="lot_lines || []">
+                           <t t-set="lot_id" t-value="lots['lot_id'][0]"/>
+                           <t t-set="lot_name" t-value="lots['lot_id'][1]"/>
+                           <t t-set="location_id" t-value="lots['location_id'][0]"/>
+                           <t t-set="location_name" t-value="lots['location_id'][1]"/>
+                           <t t-set="lot_qty" t-value="lots['quantity']"/>
+                           <t t-set="package_id" t-value="lots['package_id'][0]"/>
+                           <t t-set="package_name" t-value="lots['package_id'][1]"/>
+                           <!-- <t t-if="lot_id"> -->
+                              <tr>
+                                 <td class="lot_name" t-att-data-lotname="lot_name">
+                                    <t t-esc="lot_name"/>
+                                 </td>
+                                 <td class="package_name" t-att-data-packagename="package_name">
+                                    <t t-esc="package_name"/>
+                                 </td>
+                                 <td class="location_name" t-att-data-locationname="location_name">
+                                    <t t-esc="location_name"/>
+                                 </td>
+                                 <td class="lot_qty" t-att-data-lotqty="lot_qty">
+                                    <t t-esc="lot_qty"/>
+                                 </td>
+                                 <td>
+                                    <input t-attf-class="lot_inputs lot_qty_autocheckbox_{{lots_index}}" style="margin:5px;" t-att-data-lot-index="lot_id" t-att-data-lot-index2="lot_index" t-att-data-package_id="package_id" t-att-tabindex="100+lots_index" type="text"/>
+                                 </td>
+                                 <td class="checkbox" t-att-data-lotqty="lot_qty">
+                                    <input class="lot_qty_autocheckbox" t-attf-id="lot_qty_autocheckbox_{{lots_index}}" style="margin:5px;" t-att-data-lot_qty="lot_qty" t-att-tabindex="101+lots_index" type="checkbox"/>
+                                 </td>
+                              </tr>
+                           <!-- </t> -->
+                        </t>
+                     </tbody>
+                  </table>
+               </t>
+            </main>
+            <footer class="footer">
+               <t t-set="total_lots" t-value="0"/>
+               <t t-if="lot_lines">
+                  <t t-set="total_lots" t-value="Object.keys(lot_lines).length"/>
+               </t>
+               <div t-att-tabindex="100+total_lots+1" class="button confirm">Ok</div>
+               <div t-att-tabindex="100+total_lots" class="button cancel">Cancel</div>
+            </footer>
+         </div>
+      </div>
+   </t>
+</templates>
