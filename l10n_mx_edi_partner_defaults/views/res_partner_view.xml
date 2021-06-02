@@ -1,0 +1,15 @@
+<odoo>
+    <record id="partner_payment_method_view" model="ir.ui.view">
+        <field name="name">partner.payment.method</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="arch" type="xml">
+            <group name="accounting_entries" position="after">
+                <group>
+                    <field name="l10n_mx_edi_payment_method_id"/>
+                    <field name="l10n_mx_edi_usage"/>
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>
