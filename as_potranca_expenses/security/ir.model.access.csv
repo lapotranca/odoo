@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_as_modelo_item,as_modelo_item,model_as_modelo_item,sales_team.group_sale_salesman,1,1,1,1
+access_as_color,as_color,model_as_color,sales_team.group_sale_salesman,1,1,1,1
+access_as_super_product,as_super_product,model_as_super_product,sales_team.group_sale_salesman,1,1,1,1
+access_as_tipo_insumo,as_tipo_insumo,model_as_tipo_insumo,sales_team.group_sale_salesman,1,1,1,1
+access_as_familia,as_familia,model_as_familia,sales_team.group_sale_salesman,1,1,1,1
+access_as_grupo,as_grupo,model_as_grupo,sales_team.group_sale_salesman,1,1,1,1
+access_as_tag_venta,as_tag_venta,model_as_tag_venta,sales_team.group_sale_salesman,1,1,1,1
+access_as_factor,as_factor,model_as_factor,sales_team.group_sale_salesman,1,1,1,1

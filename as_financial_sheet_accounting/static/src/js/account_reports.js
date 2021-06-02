@@ -286,6 +286,7 @@ odoo.define('tf_balance_sheet_accounting.account_report', function (require) {
             });
 
             // partner filter
+            window.partner_option = this.report_options;
             if (this.report_options.partner) {
                 if (!this.M2MFilters) {
                     var fields = {};

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="product_potranca_form_view" model="ir.ui.view">
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='default_code']" position="after">
+                    <field name="as_expense_xml" />
+                </xpath>
+
+            </field>
+
+        </record>
+
+    </data>
+</odoo>

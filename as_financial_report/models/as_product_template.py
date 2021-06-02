@@ -93,6 +93,7 @@ class  as_hr_empoyee_ids(models.Model):
         ('SIJI','SIJI'),
         ('TECNOLOGIA ANIMAL','TECNOLOGIA ANIMAL'),
         ('INSTRUVET','INSTRUVET'),
+        ('VERSA','VERSA'),
         ('OTROS AGRICOLAS','OTROS AGRICOLAS'),
         ], string='Laboratorios / Marcas', default='')
     as_line_product = fields.Selection(selection=[
