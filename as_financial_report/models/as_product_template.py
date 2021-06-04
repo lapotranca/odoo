@@ -119,6 +119,7 @@ class  as_hr_empoyee_ids(models.Model):
         ('VIRBAC PE','VIRBAC PE'),
         ('VIRBAC GE','VIRBAC GE'),
         ('VIRBAC HPM','VIRBAC HPM'),
+        ('VERSA','VERSA'),
         ('OTROS AGRICOLAS','OTROS AGRICOLAS'),
         ], string='Linea de producto', default='')
 
