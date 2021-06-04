@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="report_access_restrict" model="ir.ui.view">
+        <field name="name">ir.actions.report.access.restrict</field>
+        <field name="model">ir.actions.report</field>
+        <field name="inherit_id" ref="base.act_report_xml_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet//notebook/page" position="after">
+                <page string="Security Restrictions">
+                    <field name="hide_for_group_ids">
+                        <tree>
+                            <field name="display_name" string="Hidden for groups"/>
+                        </tree>
+                    </field>
+                    <field name="hide_for_user_ids">
+                        <tree>
+                            <field name="display_name" string="Hidden for users"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

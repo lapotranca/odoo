@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_users_hidden_menus_form" model="ir.ui.view">
+        <field name="name">res.users.hidden.menus.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="page_hidden_menus_reports" string="Restrictions">
+                    <field name="hidden_menu_ids">
+                        <tree>
+                            <field name="display_name" string="Hidden menus"/>
+                        </tree>
+                    </field>
+                    <field name="hidden_reports_ids">
+                        <tree>
+                            <field name="display_name" string="Hidden reports"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

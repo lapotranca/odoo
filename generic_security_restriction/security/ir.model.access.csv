@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_field_security_generic_security_manager,access.field.security.generic.security.manager,model_generic_security_restriction_field,base.group_system,1,1,1,1

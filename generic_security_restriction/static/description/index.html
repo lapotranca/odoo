@@ -1,0 +1,204 @@
+<section style="max-width: 896px; margin: 0 auto;">
+    <div align="center">
+        <h1 style="color:#875A7B;">Generic Security Restriction</h1>
+    </div>
+    <div align="center">
+        <p><a href="https://www.odoo.com/documentation/user/12.0/legal/licenses/licenses.html#odoo-apps"><img
+                alt="License: OPL-1" src="https://img.shields.io/badge/license-OPL--1-blue.png"/></a> <a
+                href="https://crnd.pro/"><img alt="CR&amp;D"
+                                              src="https://img.shields.io/badge/maintainer-CR&amp;D-purple.png"/></a>
+        </p>
+        <p><br></p>
+    </div>
+</section>
+
+<section style="margin: 0 auto; max-width: 896px;">
+    <div>
+        <p>Generic Security Restriction allows you to hide user menus, specific fields or stat buttons on the view. It also allows you to
+            overwrite the parameters of <code>Many2one</code> fields as if they were rewritten in the field definition of the model.</p>
+        <p>This module has simple and fast configuration, and it is very easy to use!</p>
+        <h3>You can do the following:</h3>
+        <ul>
+            <li>Hide menus by security groups</li>
+            <li>Restrict menus and any report / priniting form from specific users</li>
+            <li>Hide specific fields of the selected model from certain security groups</li>
+            <li>Make fields readonly for certain security groups</li>
+            <li>Hide stat buttons (oe_stat_button) on the view from certain security groups</li>
+        </ul>
+        <h3>Change fields paramaters on Many2one fields:</h3>
+        <ul>
+            <li>Rewrite field parameter: (<code>'no_open'=True</code>)</li>
+            <li>Rewrite field parameter: (<code>'no_create'=True</code>)</li>
+            <li>Rewrite field parameter: (<code>'no_quick_create'=True</code>)</li>
+            <li>Rewrite field parameter: (<code>'no_create_edit'=True</code>)</li>
+        </ul>
+    </div>
+    <blockquote><b>Note:</b>
+            <p>You can not grant access to the restricted menu items using Odoo access rights. Restrict menus for the
+                <i>Employee</i> security group with caution.</p>
+            <p>User with <u>super</u>admin rights gets full access regardless of restriction. This is done to avoid
+                accidental permanent restrictions.</p></blockquote>
+
+    <p style="font-size: 120%;">
+        <i>Hide menu by security groups</i>
+    </p>
+    <div align="center">
+        <img src="group.gif" alt="groups" style="max-width: 100%">
+        <p><br></p>
+    </div>
+    <p style="font-size: 120%;">
+        <i>Hide menu from a specific user (Menu Items settings)</i>
+    </p>
+    <div align="center">
+        <img src="menu_user.gif" alt="menu_user" style="max-width: 100%">
+        <p><br></p>
+    </div>
+    <p style="font-size: 120%;">
+        <i>Restrict menu from a specific user (User settings)</i>
+    </p>
+    <div align="center">
+        <img src="user_menu.gif" alt="user" style="max-width: 100%">
+        <p><br></p>
+    </div>
+    <p style="font-size: 120%;">
+        <i>Restrict report from a specific user (User settings)</i>
+    </p>
+    <div align="center">
+        <img src="user_report.gif" alt="user" style="max-width: 100%">
+        <p><br></p>
+    </div>
+    <p style="font-size: 120%;">
+        <i>Restrict menu from a specific groups</i>
+    </p>
+    <div align="center">
+        <img src="group_report.gif" alt="user" style="max-width: 100%">
+        <p><br></p>
+    </div>
+    <p style="font-size: 120%;">
+        <i>Hide specific fields of the selected model from certain security groups</i>
+    </p>
+    <p>For this, you need to activate the Developer Mode. Then, click <b>Database Structure</b> -> <b>Models</b> and
+        select the desired model. On the <b>Fields Security</b> tab, specify the fields to hide or make readonly, and
+        user security groups to hide from.</p>
+    <div align="center">
+        <img src="hide_field.gif" alt="hide fields" style="max-width: 100%">
+        <p><br></p>
+    </div>
+    <p style="font-size: 120%;">
+        <i>Make a field readonly</i>
+    </p>
+    <div align="center">
+        <img src="readonly_field.gif" alt="make a field readonly" style="max-width: 100%">
+        <p><br></p>
+    </div>
+    <p style="font-size: 120%;">
+        <i>Hide stat buttons on the view</i>
+    </p>
+    <div align="center">
+        <img src="stat_button.gif" alt="hide stat button" style="max-width: 100%">
+        <p><br></p>
+    </div>
+    <hr>
+    <div><p>You can overwrite the parameters of <code>Many2one</code> fields from the user interface. When you select <code>Many2one</code> field,
+        you will see additional options. To use these options, select the <b>Rewrite Options</b> checkbox.</p>
+    <div align="center">
+        <img src="rewrite_options.png" alt="rewrite options" style="max-width: 100%">
+        <p><br></p>
+    </div>
+    </div>
+    <p style="font-size: 120%;">
+        <i>Rewrite field parameter: (<code>'no_open'=True</code>)</i>
+    </p>
+    <p>This parameter makes the following changes:</p>
+    <ul>
+        <li>In the <i>Read</i> mode, fields that are usually rendered and displayed as a link will be displayed as a normal readonly text</li>
+        <li>In the <i>Edit</i> mode, the button to open the record will be hidden</li>
+    </ul>
+    <div align="center">
+        <img src="no_open.gif" alt="no open" style="max-width: 100%">
+        <p><br></p>
+    </div>
+    <p style="font-size: 120%;">
+        <i>Rewrite field parameter: (<code>'no_create'=True</code>)</i>
+    </p>
+    <p>This parameter forbids the creation of new records.</p>
+    <div align="center">
+        <img src="no_create.gif" alt="no create" style="max-width: 100%">
+        <p><br></p>
+    </div>
+    <p style="font-size: 120%;">
+        <i>Rewrite field parameter: (<code>'no_quick_create'=True</code>)</i>
+    </p>
+    <p>This parameter forbids the quick create of new records. Users can still create them using <i>Create and edit...</i> option.</p>
+    <div align="center">
+        <img src="no_quick_create.gif" alt="no quick create" style="max-width: 100%">
+        <p><br></p>
+    </div>
+    <p style="font-size: 120%;">
+        <i>Rewrite field parameter: (<code>'no_create_edit'=True</code>)</i>
+    </p>
+    <p>This parameter forbids the creation of new records using <i>Create and edit...</i> option. Users can still create records with quick create.</p>
+    <div align="center">
+        <img src="no_create_edit.gif" alt="no create edit" style="max-width: 100%">
+        <p><br></p>
+    </div>
+</section>
+
+<section style="max-width: 896px; margin: 0 auto;">
+    <p>This module is part of the Bureaucrat ITSM project. You can try it by the links below.</p>
+</section>
+
+<section style="max-width: 896px; margin: 0 auto;">
+    <div align="center"><h3>More security with our modules</h3></div>
+    <div class="row" align="center">
+        <div class="col-xs-12" align="center">
+            <a href="https://www.odoo.com/apps/modules/12.0/crnd_website_security/" target="_blank"><img
+                    style="margin-bottom: 10px; max-width: 230px; border-radius: 8%;" alt="Website Security"
+                    src="banner_website_security.png"/></a>
+            <p>Restrict access to website pages for unauthorized users</p>
+            <p><br></p>
+        </div>
+    </div>
+</section>
+
+<section align="center" style="max-width: 896px; margin: 0 auto;">
+    <div>
+        <h2 style="color:#875A7B;">Launch your own ITSM system in 60 seconds:</h2>
+        <p>Create your own <a href="https://yodoo.systems/saas/template/bureaucrat-itsm-demo-data-95">Bureaucrat ITSM</a> database
+            <a href="https://yodoo.systems"><img alt="yodoo.systems"
+                                                 src="https://img.shields.io/badge/powered%20by-yodoo.systems-00a09d.png"/></a>
+        </p>
+    </div>
+</section>
+
+<section align="center" style="max-width: 896px; margin: 0 auto;">
+    <div>
+        <h2 style="color: #138c33">Maintainer</h2>
+        <a href="https://crnd.pro/"><img alt="CR&amp;D" src="https://crnd.pro/web/image/3699/300x140/crnd.png"/></a>
+        <div align="center">
+            <a class="btn btn-primary mb16" title="Website" href="https://crnd.pro"><i class="fa fa-globe"></i> Website</a>
+            <a class="btn btn-primary mb16" title="Contact us" href="mailto:info@crnd.pro"><i
+                    class="fa fa-envelope"></i> Contact us</a>
+            <a class="btn btn-primary mb16" title="Bug" href="https://crnd.pro/requests"><i class="fa fa-bug"></i>
+                Bug</a>
+            <a class="btn btn-primary mb16" title="Requests" href="https://crnd.pro/requests"><i
+                    class="fa fa-bullhorn"></i> Requests</a>
+        </div>
+        <div align="center">
+            <a class="btn btn-primary mb16" title="Blog" href="https://crnd.pro/blog"><i class="fa fa-quote-right"></i>
+                Blog</a>
+            <a class="btn btn-primary mb16" title="Youtube Channel"
+               href="https://www.youtube.com/channel/UCRSGFeR0NgqflPmzpDjL2tw"><i class="fa fa-youtube-play"></i>
+                Youtube Channel</a>
+            <p><br></p>
+        </div>
+
+        <p>This module is maintained by the <a href="https://crnd.pro/">Center of Research &amp; Development</a>
+            company.
+        </p>
+        <p>
+            We can provide you further Odoo Support, Odoo implementation, Odoo customization, Odoo 3rd Party development
+            and integration software, consulting services. Our main goal is to provide the best quality product for you.
+        </p>
+    </div>
+</section>

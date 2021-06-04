@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="edit_menu_access_restrict" model="ir.ui.view">
+        <field name="name">edit.menu.access.restrict</field>
+        <field name="model">ir.ui.menu</field>
+        <field name="inherit_id" ref="base.edit_menu_access"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet//notebook/page" position="after">
+                <page string="Access Restrict">
+                    <field name="restrict_group_ids"/>
+                </page>
+            </xpath>
+            <xpath expr="//form/sheet//notebook" position="inside">
+                <page string="Hidden for users">
+                    <field name="hide_from_user_ids">
+                        <tree>
+                            <field name="display_name"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

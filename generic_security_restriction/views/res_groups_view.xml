@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_groups_form_restrict_access" model="ir.ui.view">
+        <field name="name">view.groups.form.restrict.access</field>
+        <field name="model">res.groups</field>
+        <field name="inherit_id" ref="base.view_groups_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet//notebook//field[@name='menu_access']" position="before">
+                <label for="menu_access"/>
+            </xpath>
+            <xpath expr="//form/sheet//notebook//field[@name='menu_access']" position="after">
+                <label for="menu_access_restrict"/>
+                <field name="menu_access_restrict"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="page_hidden_reports" string="Report Restrictions">
+
+                    <field name="hidden_report_ids">
+                        <tree>
+                            <field name="display_name" string="Hidden reports"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

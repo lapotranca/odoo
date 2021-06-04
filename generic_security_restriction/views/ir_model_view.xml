@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="generic_security_restriction_model_form" model="ir.ui.view">
+        <field name="name">generic.security.restriction.model.form</field>
+        <field name="model">ir.model</field>
+        <field name="inherit_id" ref="base.view_model_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet//notebook" position="inside">
+                <page string="Fields Security" name="fields_security">
+                    <div class="mt16 mb16">
+                        <span>
+                            <strong>
+                                NOTE: To apply these changes, the user must reload the page after saving the changes!
+                            </strong>
+                        </span>
+                    </div>
+                    <field name="field_security_ids"
+                           context="{'default_model_id': active_id}"
+                           nolabel="1">
+                        <tree>
+                            <field name="model_id" invisible="1"/>
+                            <field name="field_name"/>
+                            <field name="field_type" invisible="1"/>
+                            <field name="group_ids" widget="many2many_tags"/>
+                            <field name="set_readonly"/>
+                            <field name="set_invisible"/>
+                            <field name="hide_stat_button"/>
+                            <field name="set_no_open" attrs="{'invisible': [('field_type', '!=', 'many2one')]}"/>
+                            <field name="set_no_create" attrs="{'invisible': [('field_type', '!=', 'many2one')]}"/>
+                            <field name="set_no_quick_create" attrs="{'invisible': [('field_type', '!=', 'many2one')]}"/>
+                            <field name="set_no_create_edit" attrs="{'invisible': [('field_type', '!=', 'many2one')]}"/>
+                        </tree>
+                        <form>
+                            <sheet>
+                                <div class="oe_button_box" name="button_box">
+                                </div>
+                                <group>
+                                    <group>
+                                        <field name="model_id" readonly="1"/>
+                                        <field name="field_id" domain="[('model_id', '=', model_id)]" options="{'no_create': true}"/>
+                                        <field name="field_name"/>
+                                        <field name="field_type" invisible="1"/>
+                                        <field name="group_ids" widget="many2many_tags"/>
+                                    </group>
+                                    <group>
+                                        <field name="set_readonly"/>
+                                        <field name="set_invisible"/>
+                                        <field name="hide_stat_button"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <group attrs="{'invisible': [('field_type', '!=', 'many2one')]}"
+                                           name="gsr_rewrite_options">
+                                        <field name="rewrite_options"/>
+                                    </group>
+                                    <group attrs="{'invisible': [('field_type', '!=', 'many2one')]}"
+                                           name="gsr_field_options">
+                                        <field name="set_no_open"
+                                               attrs="{'readonly': [('rewrite_options', '!=', True)]}"/>
+                                        <field name="set_no_create"
+                                               attrs="{'readonly': [('rewrite_options', '!=', True)]}"/>
+                                        <field name="set_no_quick_create"
+                                               attrs="{'readonly': [('rewrite_options', '!=', True)]}"/>
+                                        <field name="set_no_create_edit"
+                                               attrs="{'readonly': [('rewrite_options', '!=', True)]}"/>
+                                    </group>
+                                </group>
+                                <group attrs="{'invisible': [('field_type', '!=', 'many2one')]}"
+                                       name="gsr_options_help_description">
+                                    <div class="mt4">
+                                        <p><h4><strong>NOTE:</strong></h4></p>
+                                        <p>The <i>Rewrite Options</i> checkbox allows you to overwrite field parameters.
+                                            If it is not set, the field parameters are set as in the view.</p>
+                                        <ul>
+                                            <li><i>'no_open'</i>: (in read mode) do not render as a link,</li>
+                                            <li><i>'no_create'</i>: it is <i>'no_quick_create'</i> and <i>'no_create_edit'</i> combined,</li>
+                                            <li><i>'no_quick_create'</i>: remove the <b><i>"Create 'foo' "</i></b> option,</li>
+                                            <li><i>'no_create_edit'</i>: Remove the  <b><i>"Create and edit..."</i></b> option.</li>
+                                        </ul>
+                                    </div>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
