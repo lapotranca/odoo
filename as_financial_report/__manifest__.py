@@ -2,7 +2,7 @@
 
 {
     'name': 'TI AMERICAS Pivote Financiero',
-    'version': '1.1.1',
+    'version': '1.1.2',
     'author': 'TI AMERICAS',
     'website': 'http://www.tiamericas.com/',
     'summary': 'Pivote Financiero',
@@ -22,6 +22,7 @@
             'views/stock_expense_hr.xml',
             'views/balance_sheet_report_view.xml',
             'views/as_product_template.xml',
+            'views/as_stock_move_line.xml',
             'report/as_report_sale_pivot.xml',
             'security/ir.model.access.csv',
             ],
