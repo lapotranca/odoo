@@ -2,13 +2,24 @@
 
 from odoo import models, fields, api
 
+class AccountMove(models.Model):
+    _inherit = "account.move"
+
+    line_ids = fields.One2many('account.move.line', 'move_id', string='Journal Items', copy=True, readonly=True,
+        states={'draft': [('readonly', False)],'posted': [('readonly', False)]})
+
 class account_move_line(models.Model):
     _inherit = "account.move.line"
 
     cost_center_id = fields.Many2one('tf.cost.center', 'Cost Center')
     department_id = fields.Many2one('tf.department', string='Departments')
     regiones_id = fields.Many2one('tf.regiones', string='Región')
-    
+    group_ediat_account_posted = fields.Boolean(compute='as_get_edit_account')
+    state = fields.Selection(related="move_id.state")
+
+    def as_get_edit_account(self):
+        for line in self:
+            line.group_ediat_account_posted = self.user_has_groups('as_financial_report.group_ediat_account_posted')
 
     @api.onchange('product_id')
     def get_coste_center(self):

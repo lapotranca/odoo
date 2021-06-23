@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 
 class as_stock_expense(models.Model):
     _inherit = "hr.expense"
@@ -82,6 +83,18 @@ class as_stock_expense(models.Model):
 
         return move_group_by_sheet
 
+    def _get_expense_account_destination(self):
+        self.ensure_one()
+        account_dest = self.env['account.account']
+        if self.payment_mode == 'company_account':
+            if not self.sheet_id.bank_journal_id.default_credit_account_id:
+                raise UserError(_("No credit account found for the %s journal, please configure one.") % (self.sheet_id.bank_journal_id.name))
+            account_dest = self.sheet_id.bank_journal_id.default_credit_account_id.id
+        else:
+            partner = self.employee_id.address_home_id.with_context(force_company=self.company_id.id)
+            account_dest = self.as_proveedor.property_account_payable_id.id
+        return account_dest
+
     def _get_account_move_line_values(self):
         move_line_values_by_expense = {}
         for expense in self:
@@ -98,7 +111,6 @@ class as_stock_expense(models.Model):
             total_amount = 0.0
             total_amount_currency = 0.0
             partner_id = expense.as_proveedor.id
-            
 
             # source move line
             amount = taxes['total_excluded']
@@ -134,13 +146,6 @@ class as_stock_expense(models.Model):
                 if different_currency:
                     amount = expense.currency_id._convert(amount, company_currency, expense.company_id, account_date)
                     amount_currency = tax['amount']
-
-                if tax['tax_repartition_line_id']:
-                    rep_ln = self.env['account.tax.repartition.line'].browse(tax['tax_repartition_line_id'])
-                    base_amount = self.env['account.move']._get_base_amount_to_display(tax['base'], rep_ln)
-                else:
-                    base_amount = None
-
                 move_line_tax_values = {
                     'name': tax['name'],
                     'quantity': 1,
@@ -150,12 +155,10 @@ class as_stock_expense(models.Model):
                     'account_id': tax['account_id'] or move_line_src['account_id'],
                     'tax_repartition_line_id': tax['tax_repartition_line_id'],
                     'tag_ids': tax['tag_ids'],
-                    'tax_base_amount': base_amount,
+                    'tax_base_amount': tax['base'],
                     'expense_id': expense.id,
                     'partner_id': partner_id,
                     'currency_id': expense.currency_id.id if different_currency else False,
-                    'analytic_account_id': expense.analytic_account_id.id if tax['analytic'] else False,
-                    'analytic_tag_ids': [(6, 0, expense.analytic_tag_ids.ids)] if tax['analytic'] else False,
                 }
                 total_amount -= amount
                 total_amount_currency -= move_line_tax_values['amount_currency'] or amount
@@ -177,6 +180,7 @@ class as_stock_expense(models.Model):
 
             move_line_values_by_expense[expense.id] = move_line_values
         return move_line_values_by_expense
+
 
 class as_stock_expenseline(models.Model):
     _inherit = "hr.expense.sheet"

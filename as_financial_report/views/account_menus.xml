@@ -8,17 +8,40 @@
             <field name="inherit_id" ref="account.view_move_form" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='partner_id']" position="after">
+                <field name="group_ediat_account_posted" />
                     <field name="regiones_id" />
                     <field name="cost_center_id" />
                     <field name="department_id" />
                 </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']//form//field[@name='partner_id']" position="after">
+                <field name="group_ediat_account_posted" />
+                    <field name="regiones_id" />
+                    <field name="cost_center_id" />
+                    <field name="department_id" />
+                </xpath>
+
                 <xpath expr="//field[@name='line_ids']//tree//field[@name='credit']" position="after">
-                    <field name="regiones_id" />
-                    <field name="cost_center_id" />
-                    <field name="department_id" />
+                <field name="state" invisible="1"/>
+                    <field name="group_ediat_account_posted" invisible="1" />
+                    <field name="regiones_id" attrs="{'readonly': [('group_ediat_account_posted', '!=', True),('state', 'not in', ('draft','posted'))]}" />
+                    <field name="cost_center_id" attrs="{'readonly': [('group_ediat_account_posted', '!=', True),('state', 'not in', ('draft','posted'))]}" />
+                    <field name="department_id" attrs="{'readonly': [('group_ediat_account_posted', '!=', True),('state', 'not in', ('draft','posted'))]}" />
                 </xpath>
+                <xpath expr="//field[@name='line_ids']//tree//field[@name='account_id']" position="attributes">
+                   <attribute name="attrs">{'readonly': [('state', 'not in', ('draft'))]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='line_ids']//tree//field[@name='currency_id']" position="attributes">
+                   <attribute name="attrs">{'readonly': [('state', 'not in', ('draft'))]}</attribute>
+                </xpath>
+                  <xpath expr="//field[@name='line_ids']//tree//field[@name='debit']" position="attributes">
+                   <attribute name="attrs">{'readonly': [('state', 'not in', ('draft'))]}</attribute>
+                </xpath>
+                  <xpath expr="//field[@name='line_ids']//tree//field[@name='credit']" position="attributes">
+                   <attribute name="attrs">{'readonly': [('state', 'not in', ('draft'))]}</attribute>
+                </xpath>
+                
                 <xpath expr="//field[@name='company_id']" position="after">
-                    <field name="as_extract_sale"/>
+                    <field name="as_extract_sale" />
                 </xpath>
             </field>
         </record>

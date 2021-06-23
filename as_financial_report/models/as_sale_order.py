@@ -111,6 +111,8 @@ class as_sale_order(models.Model):
         ('SIJI','SIJI'),
         ('TECNOLOGIA ANIMAL','TECNOLOGIA ANIMAL'),
         ('INSTRUVET','INSTRUVET'),
+        ('VERSA','VERSA'),
+        ('CERES ','CERES '),
         ('OTROS AGRICOLAS','OTROS AGRICOLAS'),
         ], string='Laboratorios / Marcas', default='')
     as_line_product = fields.Selection(selection=[
@@ -136,6 +138,7 @@ class as_sale_order(models.Model):
         ('VIRBAC PE','VIRBAC PE'),
         ('VIRBAC GE','VIRBAC GE'),
         ('VIRBAC HPM','VIRBAC HPM'),
+        ('VERSA','VERSA'),
         ('OTROS AGRICOLAS','OTROS AGRICOLAS'),
         ], string='Linea de producto', default='')
 

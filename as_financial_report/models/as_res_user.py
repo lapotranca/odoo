@@ -49,4 +49,25 @@ class AsAnalitycTag(models.Model):
     _inherit = "account.analytic.tag"
 
     as_user_id = fields.Many2one('res.users', string='Usuario')
-    
+
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    group_ediat_account_posted = fields.Boolean(string="Para habilitar edicion en lineas de asiento una vez posteado", implied_group='as_financial_report.group_ediat_account_posted')
+
+    @api.model
+    def get_values(self):
+        res = super(ResConfigSettings, self).get_values()
+        res['group_ediat_account_posted'] = self.env['ir.config_parameter'].sudo().get_param('as_financial_report.group_ediat_account_posted', default=0)
+
+        return res
+
+    @api.model
+    def set_values(self):
+        self.env['ir.config_parameter'].sudo().set_param('as_financial_report.group_ediat_account_posted', self.group_ediat_account_posted)
+        super(ResConfigSettings, self).set_values()
+
+    @api.onchange('group_ediat_account_posted')
+    def onchange_group_ediat_account_posted(self):
+        if self.group_ediat_account_posted:
+            self.module_account_accountant = True
