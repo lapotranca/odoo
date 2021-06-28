@@ -22,22 +22,22 @@
 
                 <xpath expr="//field[@name='line_ids']//tree//field[@name='credit']" position="after">
                 <field name="state" invisible="1"/>
-                    <field name="group_ediat_account_posted" invisible="1" />
+                    <field name="group_ediat_account_posted" invisible="1"/>
                     <field name="regiones_id" attrs="{'readonly': [('group_ediat_account_posted', '!=', True),('state', 'not in', ('draft','posted'))]}" />
                     <field name="cost_center_id" attrs="{'readonly': [('group_ediat_account_posted', '!=', True),('state', 'not in', ('draft','posted'))]}" />
                     <field name="department_id" attrs="{'readonly': [('group_ediat_account_posted', '!=', True),('state', 'not in', ('draft','posted'))]}" />
                 </xpath>
                 <xpath expr="//field[@name='line_ids']//tree//field[@name='account_id']" position="attributes">
-                   <attribute name="attrs">{'readonly': [('state', 'not in', ('draft'))]}</attribute>
+                   <attribute name="attrs">{'readonly': [('state', 'in', ('posted'))]}</attribute>
                 </xpath>
                 <xpath expr="//field[@name='line_ids']//tree//field[@name='currency_id']" position="attributes">
-                   <attribute name="attrs">{'readonly': [('state', 'not in', ('draft'))]}</attribute>
+                   <attribute name="attrs">{'readonly': [('state', 'in', ('posted'))]}</attribute>
                 </xpath>
                   <xpath expr="//field[@name='line_ids']//tree//field[@name='debit']" position="attributes">
-                   <attribute name="attrs">{'readonly': [('state', 'not in', ('draft'))]}</attribute>
+                   <attribute name="attrs">{'readonly': [('state', 'in', ('posted'))]}</attribute>
                 </xpath>
                   <xpath expr="//field[@name='line_ids']//tree//field[@name='credit']" position="attributes">
-                   <attribute name="attrs">{'readonly': [('state', 'not in', ('draft'))]}</attribute>
+                   <attribute name="attrs">{'readonly': [('state', 'in', ('posted'))]}</attribute>
                 </xpath>
                 
                 <xpath expr="//field[@name='company_id']" position="after">

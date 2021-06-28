@@ -17,6 +17,8 @@ class account_move_line(models.Model):
     group_ediat_account_posted = fields.Boolean(compute='as_get_edit_account')
     state = fields.Selection(related="move_id.state")
 
+    @api.onchange('debit','credit')
+    @api.depends('debit','credit')
     def as_get_edit_account(self):
         for line in self:
             line.group_ediat_account_posted = self.user_has_groups('as_financial_report.group_ediat_account_posted')

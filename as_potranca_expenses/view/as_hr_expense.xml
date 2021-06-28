@@ -6,21 +6,45 @@
 		<field name="inherit_id" ref="hr_expense.hr_expense_view_form" />
 		<field name="arch" type="xml">
 			<xpath expr="//field[@name='company_id']" position="after">
-				<field name="as_xml_invocie" readonly="1" force_save="1"  filename="file_xml.xml" />
-				<field name="UUID"/>
-				<button class="btn-primary" string="Adjunta XML" type="action" name="%(as_invoice_expenses_action)d" icon="fa-bars" />
+				<field name="as_require_xml" invisible="1" />
+				<field name="as_xml_invocie" filename="file_xml.xml" attrs="{'required': [('as_require_xml', '=', True)]}"/>
+				<!-- <button class="btn-primary" string="Adjunta XML" type="action" name="%(as_invoice_expenses_action)d"
+					icon="fa-bars" /> -->
+				<field name="as_subido" invisible="1" />
+				<field name="as_no_subido" invisible="1" />
+				<field name="as_repetida" invisible="1" />
+				<field name="as_no_company" invisible="1" />
 
 			</xpath>
- 			<xpath expr="//header" position="replace">
-                <header>
-                  <button name="action_submit_expenses" string="Create Report" type="object" class="oe_highlight o_expense_submit" attrs="{'invisible': ['|', ('attachment_number', '&lt;=', 0), ('sheet_id', '!=', False)]}"/>
-                  <button name="action_submit_expenses" string="Create Report" type="object" class="o_expense_submit" attrs="{'invisible': ['|', ('attachment_number', '&gt;=', 1), ('sheet_id', '!=', False)]}"/>
-                  <field name="state" widget="statusbar" statusbar_visible="draft,reported,approved,done,refused"/>
-                  <button name="action_view_sheet" type="object" string="View Report" class="oe_highlight" attrs="{'invisible': [('sheet_id', '=', False)]}"/>
-                </header>
-            </xpath>
+			<xpath expr="//field[@name='reference']" position="before">
+				<field name="UUID" />
 
-			
+			</xpath>
+			<xpath expr="//header" position="replace">
+				<header>
+					<button name="action_submit_expenses" string="Create Report" type="object"
+						class="oe_highlight o_expense_submit"
+						attrs="{'invisible': ['|', ('attachment_number', '&lt;=', 0), ('sheet_id', '!=', False)]}" />
+					<button name="action_submit_expenses" string="Create Report" type="object" class="o_expense_submit"
+						attrs="{'invisible': ['|', ('attachment_number', '&gt;=', 1), ('sheet_id', '!=', False)]}" />
+					<field name="state" widget="statusbar" statusbar_visible="draft,reported,approved,done,refused" />
+					<button name="action_view_sheet" type="object" string="View Report" class="oe_highlight"
+						attrs="{'invisible': [('sheet_id', '=', False)]}" />
+				</header>
+			</xpath>
+			<xpath expr="//sheet" position="inside">
+				<br />
+				<div class="alert alert-info text-center" role="alert"
+					attrs="{'invisible': [('as_subido', '=', False)]}">Subido Satisfactoriamente</div>
+				<div class="alert alert-danger text-center" role="alert"
+					attrs="{'invisible': [('as_no_subido', '=', False)]}">Subida Fallida, elimine el existente!</div>
+				<div class="alert alert-danger text-center" role="alert"
+					attrs="{'invisible': [('as_repetida', '=', False)]}">Subida Fallida, La factura ya fue subida en
+					otro gasto!</div>
+				<div class="alert alert-danger text-center" role="alert"
+					attrs="{'invisible': [('as_no_company', '=', False)]}">Subida Fallida, la factura que intenta subir
+					no pertenece a la compañia del gasto!</div>
+			</xpath>
 		</field>
 	</record>
 </odoo>
