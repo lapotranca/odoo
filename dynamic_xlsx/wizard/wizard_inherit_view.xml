@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <report
+            id="action_ins_financial_report_xlsx"
+            model="ins.financial.report"
+            string="Financial Report"
+            report_type="xlsx"
+            name="dynamic_xlsx.ins_financial_report_xlsx"
+            file="dynamic_xlsx.ins_financial_report_xlsx"
+            attachment_use="False"
+            print_report_name="'FinancialReport - %s/%s' % (object.date_from,object.date_to)"
+        />
+
+        <report
+            id="action_ins_general_ledger_xlsx"
+            model="ins.general.ledger"
+            string="General Ledger"
+            report_type="xlsx"
+            name="dynamic_xlsx.ins_general_ledger_xlsx"
+            file="dynamic_xlsx.ins_general_ledger_xlsx"
+            attachment_use="False"
+            print_report_name="'GeneralLedger - %s/%s' % (object.date_from,object.date_to)"
+        />
+
+        <report
+            id="action_ins_partner_ledger_xlsx"
+            model="ins.partner.ledger"
+            string="Partner Ledger"
+            report_type="xlsx"
+            name="dynamic_xlsx.ins_partner_ledger_xlsx"
+            file="dynamic_xlsx.ins_partner_ledger_xlsx"
+            attachment_use="False"
+            print_report_name="'PartnerLedger - %s/%s' % (object.date_from,object.date_to)"
+        />
+
+        <report
+            id="action_ins_partner_ageing_xlsx"
+            model="ins.partner.ageing"
+            string="Partner Ageing"
+            report_type="xlsx"
+            name="dynamic_xlsx.ins_partner_ageing_xlsx"
+            file="dynamic_xlsx.ins_partner_ageing_xlsx"
+            attachment_use="False"
+            print_report_name="'Ageing - %s' % (object.as_on_date)"
+        />
+
+        <report
+            id="action_ins_trial_balance_xlsx"
+            model="ins.trial.balance"
+            string="Trial Balance"
+            report_type="xlsx"
+            name="dynamic_xlsx.ins_trial_balance_xlsx"
+            file="dynamic_xlsx.ins_trial_balance_xlsx"
+            attachment_use="False"
+            print_report_name="'TrialBalance - %s/%s' % (object.date_from,object.date_to)"
+        />
+
+    </data>
+</odoo>
