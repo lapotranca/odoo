@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="ins_report_financial">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <t t-set="data_report_margin_top" t-value="12"/>
+                <t t-set="data_report_header_spacing" t-value="9"/>
+                <t t-set="data_report_dpi" t-value="110"/>
+                <div class="page">
+                    <style>
+                        .pims_report_content{
+                            font-size: 14px;
+                            font-family" 'Arial';
+                        }
+
+                        .pims_report_line_table {
+                            width:100%;
+                        }
+
+                        .pims_report_summary_table {
+                            width:100%;
+                            font-weight: bold;
+                        }
+
+                        .pims_report_line_main_tr {
+                            font-weight:bold;
+                            font-size: 14px;
+                            font-family" 'Arial';
+                            border-bottom:1px solid grey;
+                        }
+
+                        .pims_report_line_initial_tr {
+                            font-style:italic;
+                        }
+
+                        .pims_report_line_subtotal {
+                            font-weight:bold;
+                            background-color: white;
+                            border:1px solid grey;
+                        }
+                    </style>
+                    <h3><span t-esc="res_company.name"/>: <t t-esc="data['form']['account_report_id'][1]"/> </h3>
+
+                    <div class="row mt32 pims_report_content">
+                        <div class="col-3">
+                            <strong>Target Moves:</strong>
+                            <p>
+                                <span t-if="data['form']['target_move'] == 'all'">All Entries</span>
+                                <span t-if="data['form']['target_move'] == 'posted'">All Posted Entries</span>
+                            </p>
+                        </div>
+                        <div class="col-3">
+                            <strong>Date From:</strong>
+                            <p t-esc="data['form']['date_from']" t-options='{"widget": "date"}'></p>
+                        </div>
+                        <div class="col-3">
+                            <strong>Date To:</strong>
+                            <p t-esc="data['form']['date_to']" t-options='{"widget": "date"}'></p>
+                        </div>
+                    </div>
+                    <t t-if="data['form']['enable_filter']">
+                        <div class="row mt32 pims_report_content">
+                            <div class="col-3">
+                                <strong>Comparison Date From:</strong>
+                                <p t-esc="data['form']['comparison_context']['date_from']" t-options='{"widget": "date"}'></p>
+                            </div>
+                            <div class="col-3">
+                                <strong>Comparison Date To:</strong>
+                                <p t-esc="data['form']['comparison_context']['date_to']" t-options='{"widget": "date"}'></p>
+                            </div>
+                        </div>
+                    </t>
+                    <br></br><br></br>
+
+                    <table class="pims_report_line_table" t-if="data['form']['debit_credit'] == 1">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th class="text-right">Debit</th>
+                                <th class="text-right">Credit</th>
+                                <th class="text-right">Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="pims_report_line_main_tr" t-foreach="report_lines" t-as="a">
+                                <t t-if="a.get('level') &gt; 3">
+                                    <t t-set="style" t-value="'font-weight: normal;'"/>
+                                </t>
+                                <t t-if="not a.get('level') &gt; 3">
+                                    <t t-set="style" t-value="'font-weight: bold;'"/>
+                                </t>
+
+                                <td>
+                                    <span style="color: white;" t-esc="'..' * a.get('level', 0)"/>
+                                    <span t-att-style="style" t-esc="a.get('name')"/>
+                                </td>
+                                <td class="text-right" style="white-space: text-nowrap;">
+                                    <span t-att-style="style" t-esc="a.get('debit')"
+                                          t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                </td>
+                                <td class="text-right" style="white-space: text-nowrap;">
+                                    <span t-att-style="style" t-esc="a.get('credit')"
+                                          t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                </td>
+                                <td class="text-right" style="white-space: text-nowrap;">
+                                    <span t-att-style="style" t-esc="a.get('balance')"
+                                          t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="pims_report_line_table"
+                           t-if="not data['form']['debit_credit']">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <t t-if="data['form']['enable_filter']">
+                                    <th class="text-right"><t t-esc="data['form']['label_filter']"/></th>
+                                </t>
+                                <th class="text-right">Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="pims_report_line_main_tr" t-foreach="report_lines" t-as="a">
+                                <t t-if="a.get('level') &gt; 3">
+                                    <t t-set="style" t-value="'font-weight: normal;'"/>
+                                </t>
+                                <t t-if="not a.get('level') &gt; 3">
+                                    <t t-set="style" t-value="'font-weight: bold;'"/>
+                                </t>
+
+                                <td>
+                                    <span style="color: white;" t-esc="'..' * a.get('level', 0)"/>
+                                    <span t-att-style="style" t-esc="a.get('name')"/>
+                                </td>
+                                <t t-if="data['form']['enable_filter']">
+                                    <td class="text-right">
+                                        <span t-att-style="style" t-esc="a.get('balance_cmp')"
+                                              t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    </td>
+                                </t>
+                                <td class="text-right">
+                                    <span t-att-style="style" t-esc="a.get('balance')"
+                                          t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <t t-if="data['initial_balance'] or data['current_balance'] or data['ending_balance']">
+                        <br></br>
+                        <div class="row">
+                            <div class="col-8"></div>
+                            <div class="col-4">
+                                <table class="pims_report_summary_table">
+                                    <tr>
+                                        <td>Initial Cash Balance</td>
+                                        <td class="text-right">
+                                            <span t-att-style="style" t-esc="data['initial_balance']"
+                                                  t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Current Cash Balance</td>
+                                        <td class="text-right">
+                                            <span t-att-style="style" t-esc="data['current_balance']"
+                                                  t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Net Cash Balance</td>
+                                        <td class="text-right">
+                                            <span t-att-style="style" t-esc="data['ending_balance']"
+                                                  t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <report
+        id="ins_financial_report_pdf"
+        model="ins.financial.report"
+        string="Financial reports"
+        report_type="qweb-pdf"
+        name="account_dynamic_reports.ins_report_financial"
+        file="account_dynamic_reports.ins_report_financial"
+    />
+
+</odoo>

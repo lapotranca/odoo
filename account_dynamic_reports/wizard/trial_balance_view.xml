@@ -1,0 +1,76 @@
+<odoo>
+    <data>
+
+        <record id="ins_trial_balance_wizard" model="ir.ui.view">
+            <field name="name">ins.trial.balance.view</field>
+            <field name="model">ins.trial.balance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group col="4">
+                        <field name="date_range"/>
+                        <field name="company_id"/>
+                        <field name="target_moves" widget="radio"/>
+                        <field name="display_accounts" widget="radio"/>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="show_hierarchy" invisible="1"/>
+                        <field name="financial_year" invisible="1"/>
+                    </group>
+                    <group col="2">
+                        <field name="account_ids" widget="many2many_tags"
+                                domain="[('company_id','=',company_id)]"
+                                options="{'no_create_edit': True,'no_create': True, 'no_quick_create': True}"/>
+                        <field name="journal_ids" widget="many2many_tags"
+                                domain="[('company_id','=',company_id)]"
+                                options="{'no_create_edit': True,'no_create': True, 'no_quick_create': True}"/>
+                        <field name="analytic_ids" widget="many2many_tags"
+                                domain="[('company_id','=',company_id)]"
+                                options="{'no_create_edit': True,'no_create': True, 'no_quick_create': True}"/>
+                        <field name="strict_range" help="If checked the accounts will act strict to the date range
+                                    else it will consider initial balance to account"/>
+                    </group>
+                    <footer>
+                        <button name="action_pdf" type="object" string="PDF" class="oe_highlight"/>
+                        <button name="action_xlsx" type="object" string="XLSX" class="oe_highlight"/>
+                        <button name="action_view" type="object" string="VIEW" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_ins_trial_balance_wizard" model="ir.actions.act_window">
+            <field name="name">Trial Balance</field>
+            <field name="res_model">ins.trial.balance</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="ins_trial_balance_wizard"/>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="account_dynamic_reports.model_ins_trial_balance" />
+            <field name="binding_type">report</field>
+        </record>
+
+<!--        <report-->
+<!--            id="action_ins_trial_balance_xlsx"-->
+<!--            model="ins.trial.balance"-->
+<!--            string="Trial Balance"-->
+<!--            report_type="xlsx"-->
+<!--            name="account_dynamic_reports.ins_trial_balance_xlsx"-->
+<!--            file="account_dynamic_reports.ins_trial_balance_xlsx"-->
+<!--            attachment_use="False"-->
+<!--            print_report_name="'TrialBalance - %s/%s' % (object.date_from,object.date_to)"-->
+<!--        />-->
+
+        <record id="action_dynamic_allinone_tb_report" model="ir.actions.client">
+            <field name="name">Trial Balance Report</field>
+            <field name="tag">dynamic.tb</field>
+        </record>
+
+        <menuitem id="account_report_tb" sequence="30" action="action_ins_trial_balance_wizard"
+                  name="Trial Balance" parent="account_reports_ins" groups="account.group_account_user"/>
+
+        <menuitem id="account_report_tb_wiz" sequence="30" action="action_dynamic_allinone_tb_report"
+                  name="Trial Balance" parent="account_reports_ins_wiz" groups="account.group_account_user"/>
+
+    </data>
+</odoo>
