@@ -1,0 +1,1353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+<t t-name="SummarySectionFr"><div class="row py-data-summary" t-if="initial_balance or current_balance or ending_balance"><div class="col-8"/>
+<div class="col-4"><table><tr><td>Initial Cash Balance</td><td><t t-raw="initial_balance"/></td></tr>
+<tr><td>Current Cash Balance</td><td><t t-raw="current_balance"/></td></tr><tr><td>Net Cash Balance</td><td><t t-raw="ending_balance"/></td>
+</tr></table></div></div></t>
+<t t-name="DataSectionFr">
+<div>
+<table id="data-lines" class="system-data-table-fr" cellspacing="0" width="100%">
+<thead>
+<tr>
+<th colspan="1"></th>
+<t t-if="filter_data['debit_credit'] == 1">
+<th class="amt-head" colspan="1"><span>Debit</span></th>
+<th class="amt-head" colspan="1"><span>Credit</span></th>
+</t>
+<t t-if="filter_data['enable_filter']">
+<th class="amt-head" colspan="1"><span><t t-esc="filter_data['label_filter']"/></span></th>
+</t>
+<th class="amt-head" colspan="1"><span>Balance</span></th>
+</tr>
+</thead>
+<tbody>
+<t t-foreach="account_data" t-as="a">
+<t t-if="a['level'] &lt; 4">
+<t t-set="style" t-value="'font-weight:bold;'"/>
+</t>
+<t t-if="a['level'] &gt; 3">
+<t t-set="style" t-value="'font-weight:normal;border:none;'"/>
+</t>
+<t t-if="a['level'] == 0">
+<t t-set="style_td" t-value="style + 'border-bottom:2px solid #666666;'"/>
+</t>
+<t t-if="a['level'] == 1">
+<t t-set="style_td" t-value="style + 'border-bottom:double #666666;padding-top: 30px;'"/>
+</t>
+<t t-if="a['level'] != 0 and a['level'] != 1">
+<t t-set="style_td" t-value="style + 'border-bottom:1px solid #e2e2e2;'"/>
+</t>
+<tr
+t-att-style="style"
+t-attf-class="py-mline row-toggle a{{a['parent']}}"
+t-attf-data-target=".a{{a['self_id']}}"
+data-toggle="collapse">
+<td t-att-style="style_td">
+<div class="dropdown">
+<t t-foreach="a['list_len']" t-as="i">
+<span>&amp;nbsp;</span>
+<span>&amp;nbsp;</span>
+</t>
+<!--<t t-if="a['type'] == 'report' and (a['account_type'] == 'account_type')">-->
+<!--<i class="fa fa-caret-down" role="img" aria-label="Unfolded" title="Unfolded"></i>-->
+<!--</t>-->
+<a data-toggle="dropdown" href="#">
+<span data-id="17">
+<span t-att-style="style" t-esc="a['name']"/>
+</span>
+<!--<t t-if="a['account']">-->
+<!--<i class="fa fa-caret-right" role="img" aria-label="Unfolded" title="Unfolded"></i>-->
+<!--</t>-->
+</a>
+<span data-id="17"></span>
+<ul class="dropdown-menu" role="menu">
+<t t-if="a['account']">
+<li role="presentation">
+<a role="menuitem" class="view-source" tabindex="-1"
+action="open_document" t-att-data-account-id="a['account']">
+View General Ledger
+</a>
+</li>
+</t>
+</ul>
+</div>
+</td>
+<t t-if="filter_data['debit_credit'] == 1">
+<td t-att-style="style_td" class="amt"><span t-raw="a['debit']"/></td>
+<td t-att-style="style_td" class="amt"><span t-raw="a['credit']"/></td>
+</t>
+<t t-if="filter_data['enable_filter']">
+<td t-att-style="style_td" class="amt"><span t-raw="a['balance_cmp']"/></td>
+</t>
+<td t-att-style="style_td" class="amt"><span t-raw="a['balance']"/></td>
+</tr>
+</t>
+</tbody>
+</table>
+</div>
+</t>
+<t t-name="FilterSectionFr">
+<div class="py-control-div">
+<ol class="py-breadcrumb"><li><t t-esc="filter_data['account_report_id'][1]"/></li></ol>
+</div>
+<div class="py-control-div">
+<div class="py-cntrl-left">
+<div class="py-ctrl-buttons">
+<button type="button" class="btn py-btn-primary" id="pdf" action="print_pdf" style="position: relative;">Print (Pdf)</button>
+<button type="button" class="btn py-btn-primary" id="xlsx" action="print_xlsx" style="position: relative;">Export (XLSX)</button>
+</div>
+</div>
+<div class="py_cntrl_right">
+<div class="py-search-buttons">
+<button type="button" id="filter_apply_button" class="btn py-btn-secondary" action="apply_filter" style="position: relative;">Apply</button>
+<div class="py-search-btn-date">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+<span class="fa fa-calendar" title="Dates" role="img" aria-label="Dates"></span>
+Custom
+</a>
+<div class="dropdown-menu py-filters-menu" role="menu">
+<div role="separator" class="dropdown-divider"></div>
+<span role="menuitem" class="dropdown-item" data-filter="custom_filter_date">Custom</span>
+<div class="o_foldable_menu o_closed_menu o_account_report_search" data-filter="custom_filter_date">
+<label class="custom-date" for="date_from">Start Date :</label>
+<div class="form-group custom-date">
+<div class="o_datepicker" aria-atomic="true" id="datepicker10" data-target-input="nearest">
+<input type="text" id="date_from"></input>
+<span class="o_datepicker_button"></span>
+</div>
+</div>
+<label class="custom-date" for="date_to">End Date :</label>
+<div class="form-group custom-date">
+<div class="o_datepicker" aria-atomic="true" id="datepicker11" data-target-input="nearest">
+<input type="text" id="date_to"></input>
+<span class="o_datepicker_button"></span>
+</div>
+</div>
+</div>
+<div role="separator" class="dropdown-divider"></div>
+<span role="menuitem" class="dropdown-item" data-filter="custom_filter_date">Comparison</span>
+<div class="o_foldable_menu o_closed_menu o_account_report_search" data-filter="custom_filter_date">
+<label class="custom-date" for="date_from">Start Date :</label>
+<div class="form-group custom-date">
+<div class="o_datepicker" aria-atomic="true" id="datepicker10" data-target-input="nearest">
+<input type="text" id="date_from_cmp"></input>
+<span class="o_datepicker_button"></span>
+</div>
+</div>
+<label class="custom-date" for="date_to">End Date :</label>
+<div class="form-group custom-date">
+<div class="o_datepicker" aria-atomic="true" id="datepicker11" data-target-input="nearest">
+<input type="text" id="date_to_cmp"></input>
+<span class="o_datepicker_button"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="py-search-journals">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Journals:
+</a>
+<select class="dropdown-menu py-filters-menu journal-multiple" name="states[]" multiple="multiple">
+<b role="menuitem" class="dropdown-item-text"><t t-esc="filter_data.company_id"/></b>
+<div role="separator" class="dropdown-divider"></div>
+<t t-foreach="filter_data.journals_list" t-as="journal">
+<option t-attf-value="{{journal[0]}}"><t t-esc="journal[1]"/></option>
+</t>
+</select>
+</div>
+<div class="py-search-analytics">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Analytic:
+</a>
+<select class="dropdown-menu py-filters-menu analytic-multiple" name="states[]" multiple="multiple">
+<t t-foreach="filter_data.analytics_list" t-as="analytic">
+<option t-attf-value="{{analytic[0]}}"><t t-esc="analytic[1]"/></option>
+</t>
+</select>
+</div>
+<div class="py-search-analytic-tag">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Analytic Tags:
+</a>
+<select class="dropdown-menu py-filters-menu analytic-tag-multiple" name="states[]" multiple="multiple">
+<t t-foreach="filter_data.analytic_tag_list" t-as="analytic_tag">
+<option t-attf-value="{{analytic_tag[0]}}"><t t-esc="analytic_tag[1]"/></option>
+</t>
+</select>
+</div>
+<div class="py-search-date-filter">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Date Range:
+</a>
+<select class="dropdown-menu py-filters-menu date_filter-multiple" name="states[]" multiple="multiple">
+<option value="today">Today</option>
+<option value="this_week">This Week</option>
+<option value="this_month">This Month</option>
+<option value="this_quarter">This Quarter</option>
+<option value="this_financial_year">This Year</option>
+<option value="yesterday">Yesterday</option>
+<option value="last_week">Last Week</option>
+<option value="last_month">Last Month</option>
+<option value="last_quarter">Last Quarter</option>
+<option value="last_financial_year">Last Year</option>
+</select>
+</div>
+<div class="py-search-extra">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-filter"></span>
+Options:
+</a>
+<select class="dropdown-menu py-filters-menu extra-multiple" name="states[]" multiple="multiple">
+<option value="debit_credit">Show Debit Credit</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</t>
+<t t-name="DynamicFrMain">
+<div class="py-main-container">
+<div class="py-filter-container">
+<div class="py-control-panel">
+</div>
+</div>
+<div class="py-data-container">
+</div>
+</div>
+</t>
+<t t-name="SubSection">
+<div class="py-mline-table-div">
+<table class="py-mline-data-table display compact">
+<thead>
+<tr>
+<th>Date</th>
+<th>JRNL</th>
+<th>Partner</th>
+<th>Move</th>
+<th>Entry Label</th>
+<th class="amt-head">Debit</th>
+<th class="amt-head">Credit</th>
+<th class="amt-head">Balance</th>
+<th class="amt-head">Balance in FC</th>
+</tr>
+</thead>
+<tbody>
+<t t-foreach="account_data" t-as="account_line">
+<t t-set="style" t-value="''"/>
+<t t-if="account_line.move_name == 'Initial Balance'">
+<t t-set="style" t-value="'font-style: italic;'"/>
+</t>
+<t t-if="account_line.move_name == 'Ending Balance'">
+<t t-set="style" t-value="'font-style: italic;'"/>
+</t>
+<tr>
+<td>
+<t t-if="account_line.ldate">
+<div class="dropdown">
+<a data-toggle="dropdown" href="#">
+<span data-id="17">
+<t t-esc="account_line.ldate"/>
+</span>
+<i class="fa fa-caret-down" role="img" aria-label="Unfolded" title="Unfolded"></i>
+</a>
+<span data-id="17"></span>
+<ul class="dropdown-menu" role="menu">
+<t t-if="account_line.move_name">
+<li role="presentation">
+<a role="menuitem" class="view-source" tabindex="-1"
+action="open_document" t-att-data-move-id="account_line.move_id">
+View Source move
+</a>
+</li>
+</t>
+</ul>
+</div>
+</t>
+</td>
+<td><t t-esc="account_line.lcode"/></td>
+<td><t t-esc="account_line.partner_name"/></td>
+<td t-att-style="style"><t t-esc="account_line.move_name"/></td>
+<td t-att-style="style"><t t-esc="account_line.lname"/></td>
+<td t-att-style="style" class="amt"><t t-raw="account_line.debit"/></td>
+<td t-att-style="style" class="amt"><t t-raw="account_line.credit"/></td>
+<td t-att-style="style" class="amt"><t t-raw="account_line.balance"/></td>
+<td t-att-style="style" class="amt">
+<t t-if="account_line['currency_symbol'] != account_line['company_currency_symbol']">
+<t t-if="account_line['currency_position'] == 'before'">
+<span t-esc="account_line['currency_symbol']"/>
+<span t-esc="account_line['amount_currency']"/>
+</t>
+<t t-if="account_line['currency_position'] == 'after'">
+<span t-esc="account_line['amount_currency']"/>
+<span t-esc="account_line['currency_symbol']"/>
+</t>
+</t>
+</td>
+</tr>
+</t>
+</tbody>
+</table>
+</div>
+</t>
+<t t-name="DataSection">
+<div>
+<table id="data-lines" class="system-data-table" cellspacing="0" width="100%">
+<thead>
+<tr>
+<th colspan="6">Account</th>
+<th class="amt-head">Debit</th>
+<th class="amt-head">Credit</th>
+<th class="amt-head">Balance</th>
+<th class="amt-head"></th>
+</tr>
+</thead>
+<tbody>
+<t t-foreach="account_data" t-as="account">
+<t t-set="common_id" t-value=""/>
+<tr class="py-mline" data-toggle="collapse"
+t-att-data-account-id="account_data[account]['id']"
+t-attf-data-target=".a{{account_data[account]['id']}}">
+<td colspan="6"><i class="fa fa-caret-down" role="img" aria-label="Unfolded" title="Unfolded"></i><span><t t-esc="account_data[account]['code']"/> - <t t-esc="account_data[account]['name']"/></span></td>
+<td class="amt">
+<t t-raw="account_data[account]['debit']"/>
+</td>
+<td class="amt">
+<t t-raw="account_data[account]['credit']"/>
+</td>
+<td class="amt">
+<t t-raw="account_data[account]['balance']"/>
+</td>
+<td class="amt"></td>
+<t t-set="common_id" t-value="'a'+account_data[account]['id']"/>
+</tr>
+<tr t-attf-class="collapse a{{account_data[account]['id']}}">
+<td colspan="10">
+<ul class="py-mline-ul">
+<t t-if="!account_data[account]['single_page']">
+<t t-foreach="account_data[account]['pages']" t-as="i">
+<li>
+<a class="py-mline-page"
+t-att-data-page-number="i"
+t-att-data-count="account_data[account]['count']"
+t-att-data-account-id="account_data[account]['id']">
+<t t-esc="i"/>
+</a>
+</li>
+</t>
+</t>
+</ul>
+</td>
+</tr>
+</t>
+</tbody>
+</table>
+</div>
+</t>
+<t t-name="FilterSection">
+<div class="py-control-div">
+<ol class="py-breadcrumb"><li>General Ledger</li></ol>
+</div>
+<div class="py-control-div">
+<div class="py-cntrl-left">
+<div class="py-ctrl-buttons">
+<button type="button" class="btn py-btn-primary" id="pdf" action="print_pdf" style="position: relative;">Print (Pdf)</button>
+<button type="button" class="btn py-btn-primary" id="xlsx" action="print_xlsx" style="position: relative;">Export (XLSX)</button>
+</div>
+</div>
+<div class="py_cntrl_right">
+<div class="py-search-buttons">
+<button type="button" id="filter_apply_button" class="btn py-btn-secondary" action="apply_filter" style="position: relative;">Apply</button>
+<div class="py-search-btn-date">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+<span class="fa fa-calendar" title="Dates" role="img" aria-label="Dates"></span>
+Custom
+</a>
+<div class="dropdown-menu py-filters-menu" role="menu">
+<div class="o_foldable_menu o_closed_menu o_account_report_search" data-filter="custom_filter_date">
+<label class="custom-date" for="date_from">Start Date :</label>
+<div class="form-group custom-date">
+<div class="o_datepicker" aria-atomic="true" id="datepicker10" data-target-input="nearest">
+<input type="text" id="date_from"></input>
+<span class="o_datepicker_button"></span>
+</div>
+</div>
+<label class="custom-date" for="date_to">End Date :</label>
+<div class="form-group custom-date">
+<div class="o_datepicker" aria-atomic="true" id="datepicker11" data-target-input="nearest">
+<input type="text" id="date_to"></input>
+<span class="o_datepicker_button"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="py-search-date-filter">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-filter"></span>
+Date Range:
+</a>
+<select class="dropdown-menu py-filters-menu date_filter-multiple" name="states[]" multiple="multiple">
+<option value="today">Today</option>
+<option value="this_week">This Week</option>
+<option value="this_month">This Month</option>
+<option value="this_quarter">This Quarter</option>
+<option value="this_financial_year">This Year</option>
+<option value="yesterday">Yesterday</option>
+<option value="last_week">Last Week</option>
+<option value="last_month">Last Month</option>
+<option value="last_quarter">Last Quarter</option>
+<option value="last_financial_year">Last Year</option>
+</select>
+</div>
+<div class="py-search-journals">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Journals:
+</a>
+<select class="dropdown-menu py-filters-menu journal-multiple" name="states[]" multiple="multiple">
+<b role="menuitem" class="dropdown-item-text"><t t-esc="filter_data.company_name"/></b>
+<div role="separator" class="dropdown-divider"></div>
+<t t-foreach="filter_data.journals_list" t-as="journal">
+<option t-attf-value="{{journal[0]}}"><t t-esc="journal[1]"/></option>
+</t>
+</select>
+</div>
+<div class="py-search-accounts">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Accounts:
+</a>
+<select class="dropdown-menu py-filters-menu account-multiple" name="states[]" multiple="multiple">
+<t t-foreach="filter_data.accounts_list" t-as="account">
+<option t-attf-value="{{account[0]}}"><t t-esc="account[1]"/></option>
+</t>
+</select>
+</div>
+<div class="py-search-accounts-tag">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Account Tags:
+</a>
+<select class="dropdown-menu py-filters-menu account-tag-multiple" name="states[]" multiple="multiple">
+<t t-foreach="filter_data.account_tag_list" t-as="account_tag">
+<option t-attf-value="{{account_tag[0]}}"><t t-esc="account_tag[1]"/></option>
+</t>
+</select>
+</div>
+<div class="py-search-analytics">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Analytic:
+</a>
+<select class="dropdown-menu py-filters-menu analytic-multiple" name="states[]" multiple="multiple">
+<t t-foreach="filter_data.analytics_list" t-as="analytic">
+<option t-attf-value="{{analytic[0]}}"><t t-esc="analytic[1]"/></option>
+</t>
+</select>
+</div>
+<div class="py-search-analytic-tag">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Analytic Tags:
+</a>
+<select class="dropdown-menu py-filters-menu analytic-tag-multiple" name="states[]" multiple="multiple">
+<t t-foreach="filter_data.analytic_tag_list" t-as="analytic_tag">
+<option t-attf-value="{{analytic_tag[0]}}"><t t-esc="analytic_tag[1]"/></option>
+</t>
+</select>
+</div>
+<div class="py-search-extra">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-filter"></span>
+Options:
+</a>
+<select class="dropdown-menu py-filters-menu extra-multiple" name="states[]" multiple="multiple">
+<option value="include_details">Include Details</option>
+<option value="initial_balance">Initial Balance</option>
+<option value="bal_not_zero">With Balance not Zero</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</t>
+<t t-name="DynamicGlMain">
+<div class="py-main-container">
+<div class="py-filter-container">
+<div class="py-control-panel">
+</div>
+</div>
+<div class="py-data-container">
+<div class="py-data-container-orig">
+</div>
+<div id="loader">
+<div id="top"></div>
+<div id="bottom"></div>
+<div id="line"></div>
+</div>
+</div>
+</div>
+</t>
+<t t-name="SubSectionPa">
+<div class="py-mline-table-div">
+<table class="py-mline-data-table display compact">
+<thead>
+<tr>
+<th>Entry Label</th>
+<th>Due Date</th>
+<th>Journal</th>
+<th>Account</th>
+<t t-foreach="period_list" t-as="period">
+<th class="amt-head"><t t-esc="period"/></th>
+</t>
+</tr>
+</thead>
+<tbody>
+<t t-if="account_data">
+<t t-foreach="account_data" t-as="account_line">
+<tr>
+<t t-if="account_line.move_name">
+<td>
+<div class="dropdown">
+<a data-toggle="dropdown" href="#">
+<span data-id="17">
+<t t-esc="account_line.move_name"/>
+</span>
+<i class="fa fa-caret-down" role="img" aria-label="Unfolded" title="Unfolded"></i>
+</a>
+<span data-id="17"></span>
+<ul class="dropdown-menu" role="menu">
+<t t-if="account_line.move_name">
+<li role="presentation">
+<a role="menuitem" class="view-source" tabindex="-1"
+action="open_document" t-att-data-move-id="account_line.move_id">
+View Source move
+</a>
+</li>
+</t>
+</ul>
+</div>
+</td>
+</t>
+<td><t t-esc="account_line.date_maturity"/></td>
+<td><t t-esc="account_line.journal_name"/></td>
+<td><t t-esc="account_line.account_name"/></td>
+<td class="amt"><t t-raw="account_line.range_0"/></td>
+<td class="amt"><t t-raw="account_line.range_1"/></td>
+<td class="amt"><t t-raw="account_line.range_2"/></td>
+<td class="amt"><t t-raw="account_line.range_3"/></td>
+<td class="amt"><t t-raw="account_line.range_4"/></td>
+<td class="amt"><t t-raw="account_line.range_5"/></td>
+<td class="amt"><t t-raw="account_line.range_6"/></td>
+</tr>
+</t>
+</t>
+</tbody>
+</table>
+</div>
+</t>
+<t t-name="DataSectionPa">
+<div>
+<table id="data-lines" class="system-data-table-age" cellspacing="0" width="100%">
+<thead>
+<tr>
+<th colspan="4">Account</th>
+<t t-foreach="period_list" t-as="period">
+<th class="amt-head"><t t-esc="period"/></th>
+</t>
+<th class="amt-head">Total</th>
+</tr>
+</thead>
+<tbody>
+<t t-foreach="ageing_data" t-as="partner">
+<t t-if="partner != 'Total'">
+<t t-set="common_id" t-value=""/>
+<tr class="py-mline" data-toggle="collapse"
+t-att-data-partner-id="partner"
+t-attf-data-target=".a{{partner}}">
+<td colspan="4"><i class="fa fa-caret-right" role="img" aria-label="Unfolded" title="Unfolded"></i><span><t t-esc="ageing_data[partner]['partner_name']"/></span></td>
+<t t-foreach="period_list" t-as="period">
+<td class="amt">
+<t t-raw="ageing_data[partner][period]"/>
+</td>
+</t>
+<td class="amt">
+<t t-raw="ageing_data[partner]['total']"/>
+</td>
+<t t-set="common_id" t-value="'a'+partner"/>
+</tr>
+<tr t-attf-class="collapse a{{partner}}">
+<td colspan="12">
+<ul class="py-mline-ul">
+<t t-if="!ageing_data[partner]['single_page']">
+<t t-foreach="ageing_data[partner]['pages']" t-as="i">
+<li>
+<a class="py-mline-page"
+t-att-data-page-number="i"
+t-att-data-count="ageing_data[partner]['count']"
+t-att-data-partner-id="partner">
+<t t-esc="i"/>
+</a>
+</li>
+</t>
+</t>
+</ul>
+</td>
+</tr>
+</t>
+<t t-else="">
+<tr class="py-total-line">
+<td colspan="4" align="left"><span>Total</span></td>
+<t t-foreach="period_list" t-as="period">
+<td class="amt">
+<t t-raw="ageing_data[partner][period]"/>
+</td>
+</t>
+<td class="amt">
+<t t-raw="ageing_data[partner]['total']"/>
+</td>
+</tr>
+</t>
+</t>
+</tbody>
+</table>
+</div>
+</t>
+<t t-name="FilterSectionPa">
+<div class="py-control-div">
+<ol class="py-breadcrumb"><li>Partner Ageing</li></ol>
+</div>
+<div class="py-control-div">
+<div class="py-cntrl-left">
+<div class="py-ctrl-buttons">
+<button type="button" class="btn py-btn-primary" id="pdf" action="print_pdf" style="position: relative;">Print (Pdf)</button>
+<button type="button" class="btn py-btn-primary" id="xlsx" action="print_xlsx" style="position: relative;">Export (XLSX)</button>
+</div>
+</div>
+<div class="py_cntrl_right">
+<div class="py-search-buttons">
+<button type="button" id="filter_apply_button" class="btn py-btn-secondary" action="apply_filter" style="position: relative;">Apply</button>
+<div class="py-search-btn-date">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+<span class="fa fa-calendar" title="Dates" role="img" aria-label="Dates"></span>
+Custom
+</a>
+<div class="dropdown-menu py-filters-menu" role="menu">
+<div class="o_foldable_menu o_closed_menu o_account_report_search" data-filter="custom_filter_date">
+<label class="custom-date" for="as_on_date">As on Date :</label>
+<div class="form-group custom-date">
+<div class="o_datepicker" aria-atomic="true" id="datepicker10" data-target-input="nearest">
+<input type="text" id="as_on_date"></input>
+<span class="o_datepicker_button"></span>
+</div>
+</div>
+</div>
+<div role="separator" class="dropdown-divider"></div>
+<span>Custom Buckets</span>
+<div role="separator" class="dropdown-divider"></div>
+<span>Bucket-1</span>
+<input type="number" id="bucket_1" min="0" required="required" style="text-align: center;" t-att-value="filter_data.bucket_1"></input>
+<span>Bucket-2</span>
+<input type="number" id="bucket_2" min="0" style="text-align: center;" t-att-value="filter_data.bucket_2"></input>
+<span>Bucket-3</span>
+<input type="number" id="bucket_3" min="0" style="text-align: center;" t-att-value="filter_data.bucket_3"></input>
+<span>Bucket-4</span>
+<input type="number" id="bucket_4" min="0" style="text-align: center;" t-att-value="filter_data.bucket_4"></input>
+<span>Bucket-5</span>
+<input type="number" id="bucket_5" min="0" style="text-align: center;" t-att-value="filter_data.bucket_5"></input>
+</div>
+</div>
+<div class="py-search-type">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Account Type:
+</a>
+<select class="dropdown-menu py-filters-menu type-multiple" name="states[]" multiple="multiple">
+<option value="receivable">Receivable Accounts Only</option>
+<option value="payable">Payable Accounts Only</option>
+</select>
+</div>
+<div class="py-search-partner-type">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-filter"></span>
+Partner Type:
+</a>
+<select class="dropdown-menu py-filters-menu partner-type-multiple" name="states[]" multiple="multiple">
+<option value="customer">Customers Only</option>
+<option value="supplier">Suppliers Only</option>
+</select>
+</div>
+<div class="py-search-partners">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-users"></span>
+Partners:
+</a>
+<select class="dropdown-menu py-filters-menu partner-multiple" name="states[]" multiple="multiple">
+<t t-foreach="filter_data.partners_list" t-as="partner">
+<option t-attf-value="{{partner[0]}}"><t t-esc="partner[1]"/></option>
+</t>
+</select>
+</div>
+<div class="py-search-partner-tags">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-filter"></span>
+Partner Tag:
+</a>
+<select class="dropdown-menu py-filters-menu partner-tag-multiple" name="states[]" multiple="multiple">
+<t t-foreach="filter_data.category_list" t-as="category">
+<option t-attf-value="{{category[0]}}"><t t-esc="category[1]"/></option>
+</t>
+</select>
+</div>
+<div class="py-search-extra">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-filter"></span>
+Options:
+</a>
+<select class="dropdown-menu py-filters-menu extra-multiple" name="states[]" multiple="multiple">
+<option value="include_details">Include Details</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</t>
+<t t-name="DynamicPaMain">
+<div class="py-main-container">
+<div class="py-filter-container">
+<div class="py-control-panel">
+</div>
+</div>
+<div class="py-data-container">
+<div class="py-data-container-orig">
+</div>
+<div id="loader">
+<div id="top"></div>
+<div id="bottom"></div>
+<div id="line"></div>
+</div>
+</div>
+</div>
+</t>
+<t t-name="SubSectionPl">
+<div class="py-mline-table-div">
+<table class="py-mline-data-table display compact">
+<thead>
+<tr>
+<th>Date</th>
+<th>JRNL</th>
+<th>Account</th>
+<th>Move</th>
+<th>Entry Label</th>
+<th class="amt-head">Debit</th>
+<th class="amt-head">Credit</th>
+<th class="amt-head">Balance</th>
+<th class="amt-head">Balance in FC</th>
+</tr>
+</thead>
+<tbody>
+<t t-foreach="account_data" t-as="account_line">
+<t t-set="style" t-value="''"/>
+<t t-if="account_line.move_name == 'Initial Balance'">
+<t t-set="style" t-value="'font-style: italic;'"/>
+</t>
+<t t-if="account_line.move_name == 'Ending Balance'">
+<t t-set="style" t-value="'font-style: italic;'"/>
+</t>
+<tr>
+<td>
+<t t-if="account_line.ldate">
+<div class="dropdown">
+<a data-toggle="dropdown" href="#">
+<span data-id="17">
+<t t-esc="account_line.ldate"/>
+</span>
+<i class="fa fa-caret-down" role="img" aria-label="Unfolded" title="Unfolded"></i>
+</a>
+<span data-id="17"></span>
+<ul class="dropdown-menu" role="menu">
+<t t-if="account_line.move_name">
+<li role="presentation">
+<a role="menuitem" class="view-source" tabindex="-1"
+action="open_document" t-att-data-move-id="account_line.move_id">
+View Source move
+</a>
+</li>
+</t>
+</ul>
+</div>
+</t>
+</td>
+<td><t t-esc="account_line.lcode"/></td>
+<td><t t-esc="account_line.account_name"/></td>
+<td t-att-style="style"><t t-esc="account_line.move_name"/></td>
+<td t-att-style="style"><t t-esc="account_line.lname"/></td>
+<td t-att-style="style" class="amt"><t t-raw="account_line.debit"/></td>
+<td t-att-style="style" class="amt"><t t-raw="account_line.credit"/></td>
+<td t-att-style="style" class="amt"><t t-raw="account_line.balance"/></td>
+<td t-att-style="style" class="amt">
+<t t-if="account_line['currency_symbol'] != account_line['company_currency_symbol']">
+<t t-if="account_line['currency_position'] == 'before'">
+<span t-esc="account_line['currency_symbol']"/>
+<span t-esc="account_line['amount_currency']"/>
+</t>
+<t t-if="account_line['currency_position'] == 'after'">
+<span t-esc="account_line['amount_currency']"/>
+<span t-esc="account_line['currency_symbol']"/>
+</t>
+</t>
+</td>
+</tr>
+</t>
+</tbody>
+</table>
+</div>
+</t>
+<t t-name="DataSectionPl">
+<div>
+<table id="data-lines" class="system-data-table" cellspacing="0" width="100%">
+<thead>
+<tr>
+<th colspan="6">Partner</th>
+<th class="amt-head">Debit</th>
+<th class="amt-head">Credit</th>
+<th class="amt-head">Balance</th>
+<th class="amt-head"></th>
+</tr>
+</thead>
+<tbody>
+<t t-foreach="account_data" t-as="account">
+<t t-set="common_id" t-value=""/>
+<tr class="py-mline" data-toggle="collapse"
+t-att-data-account-id="account_data[account]['id']"
+t-attf-data-target=".a{{account_data[account]['id']}}">
+<td colspan="6"><i class="fa fa-caret-down" role="img" aria-label="Unfolded" title="Unfolded"></i><span><t t-esc="account_data[account]['name']"/></span></td>
+<td class="amt">
+<t t-raw="account_data[account]['debit']"/>
+</td>
+<td class="amt">
+<t t-raw="account_data[account]['credit']"/>
+</td>
+<td class="amt">
+<t t-raw="account_data[account]['balance']"/>
+</td>
+<td class="amt"></td>
+<t t-set="common_id" t-value="'a'+account_data[account]['id']"/>
+</tr>
+<tr t-attf-class="collapse a{{account_data[account]['id']}}">
+<td colspan="10">
+<ul class="py-mline-ul">
+<t t-if="!account_data[account]['single_page']">
+<t t-foreach="account_data[account]['pages']" t-as="i">
+<li>
+<a class="py-mline-page"
+t-att-data-page-number="i"
+t-att-data-count="account_data[account]['count']"
+t-att-data-account-id="account_data[account]['id']">
+<t t-esc="i"/>
+</a>
+</li>
+</t>
+</t>
+</ul>
+</td>
+</tr>
+</t>
+</tbody>
+</table>
+</div>
+</t>
+<t t-name="FilterSectionPl">
+<div class="py-control-div">
+<ol class="py-breadcrumb"><li>Partner Ledger</li></ol>
+</div>
+<div class="py-control-div">
+<div class="py-cntrl-left">
+<div class="py-ctrl-buttons">
+<button type="button" class="btn py-btn-primary" id="pdf" action="print_pdf" style="position: relative;">Print (Pdf)</button>
+<button type="button" class="btn py-btn-primary" id="xlsx" action="print_xlsx" style="position: relative;">Export (XLSX)</button>
+</div>
+</div>
+<div class="py_cntrl_right">
+<div class="py-search-buttons">
+<button type="button" id="filter_apply_button" class="btn py-btn-secondary" action="apply_filter" style="position: relative;">Apply</button>
+<div class="py-search-btn-date">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+<span class="fa fa-calendar" title="Dates" role="img" aria-label="Dates"></span>
+Custom
+</a>
+<div class="dropdown-menu py-filters-menu" role="menu">
+<div class="o_foldable_menu o_closed_menu o_account_report_search" data-filter="custom_filter_date">
+<label class="custom-date" for="date_from">Start Date :</label>
+<div class="form-group custom-date">
+<div class="o_datepicker" aria-atomic="true" id="datepicker10" data-target-input="nearest">
+<input type="text" id="date_from"></input>
+<span class="o_datepicker_button"></span>
+</div>
+</div>
+<label class="custom-date" for="date_to">End Date :</label>
+<div class="form-group custom-date">
+<div class="o_datepicker" aria-atomic="true" id="datepicker11" data-target-input="nearest">
+<input type="text" id="date_to"></input>
+<span class="o_datepicker_button"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="py-search-date-filter">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Date Range:
+</a>
+<select class="dropdown-menu py-filters-menu date_filter-multiple" name="states[]" multiple="multiple">
+<option value="today">Today</option>
+<option value="this_week">This Week</option>
+<option value="this_month">This Month</option>
+<option value="this_quarter">This Quarter</option>
+<option value="this_financial_year">This Year</option>
+<option value="yesterday">Yesterday</option>
+<option value="last_week">Last Week</option>
+<option value="last_month">Last Month</option>
+<option value="last_quarter">Last Quarter</option>
+<option value="last_financial_year">Last Year</option>
+</select>
+</div>
+<div class="py-search-type">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Account Type:
+</a>
+<select class="dropdown-menu py-filters-menu type-multiple" name="states[]" multiple="multiple">
+<option value="receivable">Receivable Accounts Only</option>
+<option value="payable">Payable Accounts Only</option>
+</select>
+</div>
+<div class="py-search-reconciled-filter">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Reconciled:
+</a>
+<select class="dropdown-menu py-filters-menu reconciled-multiple" name="states[]" multiple="multiple">
+<option value="reconciled">Reconciled</option>
+<option value="unreconciled">Unreconciled</option>
+</select>
+</div>
+<div class="py-search-journals">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Journals:
+</a>
+<select class="dropdown-menu py-filters-menu journal-multiple" name="states[]" multiple="multiple">
+<b role="menuitem" class="dropdown-item-text"><t t-esc="filter_data.company_name"/></b>
+<div role="separator" class="dropdown-divider"></div>
+<t t-foreach="filter_data.journals_list" t-as="journal">
+<option t-attf-value="{{journal[0]}}"><t t-esc="journal[1]"/></option>
+</t>
+</select>
+</div>
+<div class="py-search-accounts">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Accounts:
+</a>
+<select class="dropdown-menu py-filters-menu account-multiple" name="states[]" multiple="multiple">
+<t t-foreach="filter_data.accounts_list" t-as="account">
+<option t-attf-value="{{account[0]}}"><t t-esc="account[1]"/></option>
+</t>
+</select>
+</div>
+<div class="py-search-partners">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-users"></span>
+Partners:
+</a>
+<select class="dropdown-menu py-filters-menu partner-multiple" name="states[]" multiple="multiple">
+<t t-foreach="filter_data.partners_list" t-as="partner">
+<option t-attf-value="{{partner[0]}}"><t t-esc="partner[1]"/></option>
+</t>
+</select>
+</div>
+<div class="py-search-partner-tags">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-filter"></span>
+Partner Tag:
+</a>
+<select class="dropdown-menu py-filters-menu partner-tag-multiple" name="states[]" multiple="multiple">
+<t t-foreach="filter_data.category_list" t-as="category">
+<option t-attf-value="{{category[0]}}"><t t-esc="category[1]"/></option>
+</t>
+</select>
+</div>
+<div class="py-search-extra">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-filter"></span>
+Options:
+</a>
+<select class="dropdown-menu py-filters-menu extra-multiple" name="states[]" multiple="multiple">
+<option value="include_details">Include Details</option>
+<option value="initial_balance">Initial Balance</option>
+<option value="bal_not_zero">With Balance not Zero</option>
+<option value="balance_less_than_zero">With Balance &lt; Zero</option>
+<option value="balance_greater_than_zero">With Balance &gt; Zero</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</t>
+<t t-name="DynamicPlMain">
+<div class="py-main-container">
+<div class="py-filter-container">
+<div class="py-control-panel">
+</div>
+</div>
+<div class="py-data-container">
+<div class="py-data-container-orig">
+</div>
+<div id="loader">
+<div id="top"></div>
+<div id="bottom"></div>
+<div id="line"></div>
+</div>
+</div>
+</div>
+</t>
+<t t-name="DataSectionTb">
+<div>
+<table id="data-lines" class="system-data-table-tb" cellspacing="0" width="100%">
+<thead>
+<tr>
+<th colspan="1"></th>
+<th colspan="3"><span>Initial Balance</span></th>
+<th colspan="3"><span><t t-esc="filter_data['date_from']"/> to <t t-esc="filter_data['date_to']"/></span></th>
+<th colspan="3"><span>Ending Balance</span></th>
+</tr>
+<tr>
+<th>Account</th>
+<th class="amt-head">Debit</th>
+<th class="amt-head">Credit</th>
+<th class="amt-head">Balance</th>
+<th class="amt-head">Debit</th>
+<th class="amt-head">Credit</th>
+<th class="amt-head">Balance</th>
+<th class="amt-head">Debit</th>
+<th class="amt-head">Credit</th>
+<th class="amt-head">Balance</th>
+</tr>
+</thead>
+<tbody>
+<t t-if="!filter_data['show_hierarchy']">
+<t t-foreach="account_data" t-as="account">
+<tr class="py-mline" data-toggle="collapse" t-attf-data-id=".a{{account_data[account]['id']}}">
+<td class="bld">
+<div class="dropdown">
+<a data-toggle="dropdown" href="#">
+<span data-id="17">
+<t t-esc="account_data[account]['code']"/> -
+<t t-esc="account_data[account]['name']"/>
+</span>
+<i class="fa fa-caret-down" role="img" aria-label="Unfolded" title="Unfolded"></i>
+</a>
+<span data-id="17"></span>
+<ul class="dropdown-menu" role="menu">
+<t t-if="account_data[account]['id']">
+<li role="presentation">
+<a role="menuitem" class="view-source" tabindex="-1"
+action="open_document" t-att-data-account-id="account_data[account]['id']">
+View General Ledger
+</a>
+</li>
+</t>
+</ul>
+</div>
+</td>
+<td class="amt">
+<t t-raw="account_data[account]['initial_debit']"/>
+</td>
+<td class="amt">
+<t t-raw="account_data[account]['initial_credit']"/>
+</td>
+<td class="amt bld">
+<t t-raw="account_data[account]['initial_balance']"/>
+</td>
+<td class="amt">
+<t t-raw="account_data[account]['debit']"/>
+</td>
+<td class="amt">
+<t t-raw="account_data[account]['credit']"/>
+</td>
+<td class="amt bld">
+<t t-raw="account_data[account]['balance']"/>
+</td>
+<td class="amt">
+<t t-raw="account_data[account]['ending_debit']"/>
+</td>
+<td class="amt">
+<t t-raw="account_data[account]['ending_credit']"/>
+</td>
+<td class="amt bld">
+<t t-raw="account_data[account]['ending_balance']"/>
+</td>
+</tr>
+</t>
+</t>
+<t t-if="filter_data['show_hierarchy']">
+<t t-foreach="account_data" t-as="account">
+<t t-if="account['len'] == 1">
+<t t-set="style" t-value="'border: 0px; border-bottom: 2px solid #aaa'"/>
+</t>
+<t t-if="account['len'] == 2">
+<t t-set="style" t-value="'border: 0px; border-bottom: 1px solid #bbb'"/>
+</t>
+<t t-if="account['len'] == 3">
+<t t-set="style" t-value="'border: 0px !important;'"/>
+</t>
+<t t-if="account['len'] == 4">
+<t t-set="style" t-value="'border: 0px !important'"/>
+</t>
+<tr class="py-mline" t-att-style="style">
+<td class="bld">
+<div class="dropdown">
+<a data-toggle="dropdown" href="#">
+<span data-id="17">
+<t t-foreach="account['indent_list']" t-as="i">
+<span>&amp;nbsp;</span>
+<span>&amp;nbsp;</span>
+</t>
+<t t-if="account['dummy']">
+<t t-esc="account['code']"/>
+</t>
+<t t-else="">
+<t t-esc="account['code']"/>
+-
+<t t-esc="account['name']"/>
+</t>
+</span>
+<t t-if="!account['dummy']">
+<i class="fa fa-caret-down" role="img" aria-label="Unfolded" title="Unfolded"></i>
+</t>
+</a>
+<span data-id="17"></span>
+<ul class="dropdown-menu" role="menu">
+<t t-if="account['id']">
+<li role="presentation">
+<a role="menuitem" class="view-source" tabindex="-1"
+action="open_document" t-att-data-account-id="account['id']">
+View General Ledger
+</a>
+</li>
+</t>
+</ul>
+</div>
+</td>
+<td class="amt">
+<t t-raw="account['initial_debit']"/>
+</td>
+<td class="amt">
+<t t-raw="account['initial_credit']"/>
+</td>
+<td class="amt bld">
+<t t-raw="account['initial_balance']"/>
+</td>
+<td class="amt">
+<t t-raw="account['debit']"/>
+</td>
+<td class="amt">
+<t t-raw="account['credit']"/>
+</td>
+<td class="amt bld">
+<t t-raw="account['balance']"/>
+</td>
+<td class="amt">
+<t t-raw="account['ending_debit']"/>
+</td>
+<td class="amt">
+<t t-raw="account['ending_credit']"/>
+</td>
+<td class="amt bld">
+<t t-raw="account['ending_balance']"/>
+</td>
+</tr>
+</t>
+</t>
+<t t-if="filter_data['strict_range']">
+<t t-foreach="retained" t-as="account">
+<tr class="py-mline" data-toggle="collapse" t-attf-data-id=".a{{retained[account]['id']}}">
+<td class="bld"><t t-esc="retained[account]['name']"/></td>
+<td class="amt">
+<t t-raw="retained[account]['initial_debit']"/>
+</td>
+<td class="amt">
+<t t-raw="retained[account]['initial_credit']"/>
+</td>
+<td class="amt bld">
+<t t-raw="retained[account]['initial_balance']"/>
+</td>
+<td class="amt">
+<t t-raw="retained[account]['debit']"/>
+</td>
+<td class="amt">
+<t t-raw="retained[account]['credit']"/>
+</td>
+<td class="amt bld">
+<t t-raw="retained[account]['balance']"/>
+</td>
+<td class="amt">
+<t t-raw="retained[account]['ending_debit']"/>
+</td>
+<td class="amt">
+<t t-raw="retained[account]['ending_credit']"/>
+</td>
+<td class="amt bld">
+<t t-raw="retained[account]['ending_balance']"/>
+</td>
+</tr>
+</t>
+</t>
+<t t-foreach="subtotal" t-as="account">
+<tr class="py-mline" data-toggle="collapse" t-attf-data-id=".a{{subtotal[account]['id']}}">
+<td class="bld"><t t-esc="subtotal[account]['name']"/></td>
+<td class="amt">
+<t t-raw="subtotal[account]['initial_debit']"/>
+</td>
+<td class="amt">
+<t t-raw="subtotal[account]['initial_credit']"/>
+</td>
+<td class="amt bld">
+<t t-raw="subtotal[account]['initial_balance']"/>
+</td>
+<td class="amt">
+<t t-raw="subtotal[account]['debit']"/>
+</td>
+<td class="amt">
+<t t-raw="subtotal[account]['credit']"/>
+</td>
+<td class="amt bld">
+<t t-raw="subtotal[account]['balance']"/>
+</td>
+<td class="amt">
+<t t-raw="subtotal[account]['ending_debit']"/>
+</td>
+<td class="amt">
+<t t-raw="subtotal[account]['ending_credit']"/>
+</td>
+<td class="amt bld">
+<t t-raw="subtotal[account]['ending_balance']"/>
+</td>
+</tr>
+</t>
+</tbody>
+</table>
+</div>
+</t>
+<t t-name="FilterSectionTb">
+<div class="py-control-div">
+<ol class="py-breadcrumb"><li>Trial Balance</li></ol>
+</div>
+<div class="py-control-div">
+<div class="py-cntrl-left">
+<div class="py-ctrl-buttons">
+<button type="button" class="btn py-btn-primary" id="pdf" action="print_pdf" style="position: relative;">Print (Pdf)</button>
+<button type="button" class="btn py-btn-primary" id="xlsx" action="print_xlsx" style="position: relative;">Export (XLSX)</button>
+</div>
+</div>
+<div class="py_cntrl_right">
+<div class="py-search-buttons">
+<button type="button" id="filter_apply_button" class="btn py-btn-secondary" action="apply_filter" style="position: relative;">Apply</button>
+<div class="py-search-btn-date">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+<span class="fa fa-calendar" title="Dates" role="img" aria-label="Dates"></span>
+Custom
+</a>
+<div class="dropdown-menu py-filters-menu" role="menu">
+<div class="o_foldable_menu o_closed_menu o_account_report_search" data-filter="custom_filter_date">
+<label class="custom-date" for="date_from">Start Date :</label>
+<div class="form-group custom-date">
+<div class="o_datepicker" aria-atomic="true" id="datepicker10" data-target-input="nearest">
+<input type="text" id="date_from"></input>
+<span class="o_datepicker_button"></span>
+</div>
+</div>
+<label class="custom-date" for="date_to">End Date :</label>
+<div class="form-group custom-date">
+<div class="o_datepicker" aria-atomic="true" id="datepicker11" data-target-input="nearest">
+<input type="text" id="date_to"></input>
+<span class="o_datepicker_button"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="py-search-date-filter">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Date Range:
+</a>
+<select class="dropdown-menu py-filters-menu date_filter-multiple" name="states[]" multiple="multiple">
+<option value="today">Today</option>
+<option value="this_week">This Week</option>
+<option value="this_month">This Month</option>
+<option value="this_quarter">This Quarter</option>
+<option value="this_financial_year">This Year</option>
+<option value="yesterday">Yesterday</option>
+<option value="last_week">Last Week</option>
+<option value="last_month">Last Month</option>
+<option value="last_quarter">Last Quarter</option>
+<option value="last_financial_year">Last Year</option>
+</select>
+</div>
+<div class="py-search-journals">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Journals:
+</a>
+<select class="dropdown-menu py-filters-menu journal-multiple" name="states[]" multiple="multiple">
+<b role="menuitem" class="dropdown-item-text"><t t-esc="filter_data.company_name"/></b>
+<div role="separator" class="dropdown-divider"></div>
+<t t-foreach="filter_data.journals_list" t-as="journal">
+<option t-attf-value="{{journal[0]}}"><t t-esc="journal[1]"/></option>
+</t>
+</select>
+</div>
+<div class="py-search-analytics">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-book"></span>
+Analytic:
+</a>
+<select class="dropdown-menu py-filters-menu analytic-multiple" name="states[]" multiple="multiple">
+<t t-foreach="filter_data.analytics_list" t-as="analytic">
+<option t-attf-value="{{analytic[0]}}"><t t-esc="analytic[1]"/></option>
+</t>
+</select>
+</div>
+<div class="py-search-extra">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-filter"></span>
+Options:
+</a>
+<select class="dropdown-menu py-filters-menu extra-multiple" name="states[]" multiple="multiple">
+<option value="bal_not_zero">With Balance not Zero</option>
+<option value="show_hierarchy">Show hierarchy</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</t>
+<t t-name="DynamicTbMain">
+<div class="py-main-container">
+<div class="py-filter-container">
+<div class="py-control-panel">
+</div>
+</div>
+<div class="py-data-container">
+</div>
+</div>
+</t>
+</templates>

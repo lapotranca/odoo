@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_res_company_form" model="ir.ui.view">
+            <field name="name">res.company.form.inherit</field>
+            <field name="model">res.company</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+
+                 <xpath expr="//notebook/page[1]" position="inside">
+                     <group string="Dynamic Reports">
+                         <group>
+                             <field name="strict_range" groups="base.group_system" invisible="1"/>
+                             <field name="date_range" groups="base.group_system"/>
+                             <field name="financial_year" groups="base.group_system"/>
+                         </group>
+                         <group col="6">
+                                <label for="bucket_5" string="Ageing Bucket" groups="base.group_system"/>
+                                <field name="bucket_1" class="oe_inline" nolabel="1" groups="base.group_system"/>
+                                <field name="bucket_2" class="oe_inline" nolabel="1" groups="base.group_system"/>
+                                <field name="bucket_3" class="oe_inline" nolabel="1" groups="base.group_system"/>
+                                <field name="bucket_4" class="oe_inline" nolabel="1" groups="base.group_system"/>
+                                <field name="bucket_5" class="oe_inline" nolabel="1" groups="base.group_system"/>
+                         </group>
+                     </group>
+                 </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_res_currency_specific_form">
+            <field name="name">res.currency.form.inherit</field>
+            <field name="inherit_id" ref="base.view_currency_form"/>
+            <field name="model">res.currency</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='active']" position="after">
+                    <field name="excel_format"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_account" model="ir.ui.view">
+            <field name="name">Account Inherit</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='user_type_id']" position="after">
+                        <field name="cash_flow_category"
+                               options="{'no_create_edit': True,'no_create': True, 'no_quick_create': True}"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</odoo>
