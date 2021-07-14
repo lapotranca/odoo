@@ -17,6 +17,14 @@ class account_move_line(models.Model):
     group_ediat_account_posted = fields.Boolean(compute='as_get_edit_account')
     state = fields.Selection(related="move_id.state")
 
+    def write(self, vals):
+        if any(key in vals for key in ('tax_ids', 'tax_line_ids')):
+            if self.move_id.state == 'posted':
+                vals.pop('tax_ids')
+        result = super(account_move_line, self).write(vals)
+        return result
+
+
     @api.onchange('regiones_id')
     def compute_regiones(self):
         for rec in self:
