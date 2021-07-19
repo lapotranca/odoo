@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <template id="nc_kardex_productos_label">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="obj">
+                   <t t-call="web.internal_layout">
+                       
+                       <div class="page">
+                               <h3><strong>             Kardex Report For Products</strong></h3>
+                               <!--primer bloque  -->
+                               <div class="row" style="width:300px;">
+                                   <div class="col-xs-4"  style="width:300px;">                                        
+                                     <strong>Product: </strong><span t-field="obj.product"/>
+                                       
+                                    </div>
+                                   
+                                    <div class="col-xs-4" style="width:300px;">                                        
+                                     <!-- <strong>Cantidad Inicial: </strong><span t-field="obj.cantidad_inicial"/> -->
+                                     <strong>Date From: </strong><span t-field="obj.date_from"/>
+                                    </div>
+
+                                     <div class="col-xs-4" style="width:300px;">
+                                     <strong>Qtini: </strong><span t-field="obj.cantidad_inicial"/>                                        
+                                     <!-- <strong>Cantidad Final: </strong><span t-field="obj.catnidad_final"/> -->
+                                       
+                                    </div>
+
+                               </div> 
+                              <!--/primer bloque  -->
+                               <!--segundo bloque  -->
+                               <div class="row" style="width:300px;">
+                                   <div class="col-xs-4" style="width:300px;">
+                                      <strong>Location: </strong><span t-field="obj.ubicacion"/>
+                                      <!-- <strong>Fecha Inicial: </strong><span t-field="obj.date_from"/> -->
+                                     
+                                    </div>
+                                    <div class="col-xs-4" style="width:300px;">
+                                     <strong>Date to: </strong><span t-field="obj.date_to"/>                                        
+                                     <!-- <strong>Cantidad Final: </strong><span t-field="obj.catnidad_final"/> -->
+                                       
+                                    </div>
+                                    <div class="col-xs-4" style="width:300px;">
+                                      <strong>Final Quantity: </strong><span t-field="obj.cantidad_final"/>
+                                       
+                                    </div>
+                               </div>
+                                <!--/segundo bloque  -->
+                                <!--tercer bloque  -->
+                               <div class="row" style="width:300px;">
+                                    <div class="col-xs-4" style="width:300px;">
+                                      <strong>Company: </strong><span t-field="obj.company"/>
+                                       
+                                    </div>
+                                    <div class="col-xs-4" style="width:300px;">                                        
+                                     <strong>Currency: </strong><span t-field="obj.currency_id"/>
+                                       
+                                    </div>
+                                    <div class="col-xs-4" style="width:300px;">                                        
+                                     <strong>Cost: </strong><span t-field="obj.costo_promedio"/>
+                                       
+                                    </div>
+                                    
+                                    
+                               </div>
+                               <!--/tercer bloque  -->
+                              
+                                <table class="table table-condensed">
+                                  <thead>
+                                    <tr>
+                                      <th class="text-center"><strong>Date</strong></th>
+                                      
+                                      <th class="text-center"><strong>U.In</strong></th>                                   
+                                      <th class="text-center"><strong>U.Out</strong></th>
+                                      <th class="text-center"><strong>U.Balance</strong></th>
+                                      <th class="text-center"><strong>Cost.Uni</strong></th>
+                                      <th class="text-center"><strong>V.In</strong></th>
+                                      <th class="text-center"><strong>V.Out</strong></th>
+                                      <th class="text-center"><strong>V.Balance</strong></th>
+                                      <th class="text-center"><strong>Cost Aver</strong></th>
+                                      <th class="text-center"><strong>Origin</strong></th>
+                                      <th class="text-center"><strong>Ref.</strong></th>
+                                      <th class="text-center"><strong>Invoice</strong></th>
+                                   </tr>
+                                 </thead>
+
+                                 <tbody>
+                                    <tr t-foreach="obj.obj_kardex" t-as="line">
+                                      <td class="text-center">
+                                        <span t-field="line.date"/>
+                                      </td>  
+                                     
+                                      <td class="text-center">
+                                        <span t-field="line.u_entrada"/>
+                                      </td>  
+                                      <td class="text-center">
+                                        <span t-field="line.u_salida"/>
+                                      </td>  
+                                      <td class="text-center">
+                                        <span t-field="line.u_saldo"/>
+                                      </td>  
+                                      <td class="text-center">
+                                        <span t-field="line.costo_unit"/>
+                                      </td>  
+                                      <td class="text-center">
+                                        <span t-field="line.v_entrada"/>
+                                      </td>  
+                                      <td class="text-center">
+                                        <span t-field="line.v_salida"/>
+                                      </td>  
+                                      <td class="text-center">
+                                        <span t-field="line.v_saldo"/>
+                                      </td>  
+                                      <td class="text-center">
+                                        <span t-field="line.costo_prom"/>
+                                      </td>                                         
+                                      <td class="text-center">
+                                        <span t-field="line.origin"/>
+                                      </td> 
+                                      <td class="text-center">
+                                        <span t-field="line.picking_id"/>
+                                      </td> 
+                                      <td class="text-center">
+                                        <span t-field="line.account_invoice"/>
+                                      </td> 
+                                      
+                                      <td class="text-center">
+                                        <span t-field="line.inventario"/>
+                                      </td> 
+
+
+
+                                    </tr>
+                                 </tbody>                                 
+                                   
+                                </table>
+                                    
+                       </div>
+                      
+                   </t>
+               </t>
+          </t>
+        </template>
+
+        <report
+            string="Report Kardex"
+            id="nc_kardex_productos_mov"
+            model="kardex.productos.mov"
+            report_type="qweb-pdf"
+            name="nc_kardex_productos.nc_kardex_productos_label"
+            file="nc_kardex_productos.nc_kardex_productos_label"
+         />
+
+    </data>
+</odoo>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+   <record id="view_kardex_productos_mov_form" model="ir.ui.view">
+        <field name="name">kardex.productos.mov.form</field>
+        <field name="model">kardex.productos.mov</field>
+        <field name="arch" type="xml">
+            <form string="Report Options">
+                <group name="filters">
+                    <group string='General Data' style="width:300px;" >
+                     
+                        <field name="product" style="width:300px;"/>
+                        <field name="company" style="width:250px;" />
+                        <field name="aplica" widget='radio'/>
+                        <field name="ubicacion" attrs="{'invisible': [('aplica', '=', 'todas')]}"/>
+                         
+                             <!-- <field name="company" attrs="{'invisible': [('aplica', '=', 'todas')]}"/> -->
+                        <field name="date_from" style="width:200px;"/>
+                        <field name="date_to" style="width:200px;"/>
+                        <!-- <field name="revisio"/> -->
+                        
+                         <field name="file_name"/>	                	
+                         <field name="excel_binary"  filename="file_name"/>
+                            
+                    </group>
+                   
+                      <group string='Initial Data'  style="width:300px;">                     
+                      
+                       <field name="cantidad_inicial"/>
+                       <field name="costo_promedio_inicial"/>
+                       <field name="costo_total_inicial"/>                 
+                    
+                        
+                       </group>
+                       <group string='Data Final' style="width:300px;" >                   
+                      
+                     
+                        <field name="cantidad_final"/>
+                        <field name="costo_promedio"/>
+                        <field name="costo_total"/>
+                    
+                        <field name="currency_id"/>
+                        
+                   
+                        
+                         </group>
+                    
+                    
+                </group>
+                <footer>
+                    <button name="buscar_producto" string="Search" type="object" default_focus="1" class="oe_highlight"/>
+                    <!-- o
+                    <button name="borra_datos" string="Limpiar tabla" type="object" default_focus="1" class="oe_highlight"/>
+                      o
+                    <button name="exportar_excel" string="Exportar a excel" type="object" default_focus="1" class="oe_highlight"/>
+                    -->
+                </footer>
+                <notebook>
+                        <page string="Pagina del Kardex">
+                            <field name="obj_kardex"  readonly="1" >
+                                <tree string="Kardex Line" editable="bottom " >
+                                    <field name="date"/>                                 
+                                    <field name="concepto"/>
+                                    
+                                    <field name="u_entrada"/>
+                                    <field name="u_salida"/>
+                                    <field name="u_saldo"/>
+                                    <field name="costo_unit"/>
+                                    <field name="v_entrada"/>
+                                    <field name="v_salida"/>
+                                    <field name="v_saldo"/>
+                                    <!-- <field name="costo_prom"/> -->
+                                    <!-- <field name="state"/> -->
+                                    <field name="origin"/>                                    
+                                    <field name="picking_id"/>                                  
+                                    <field name="account_invoice"/>
+                                    <field name="inventario"/>
+
+                                </tree>
+                            </field>
+                            
+                        </page>
+                    </notebook>
+
+
+
+
+            </form>
+        </field>
+    </record>
+
+     <record id="action_kardex_productos_mov_tree_view" model="ir.ui.view">
+            <field name="name">kardex.productos.mov</field>
+            <field name="model">kardex.productos.mov</field>
+            <field name="arch" type="xml">
+                <tree>
+                    
+					<field name="product"/>
+                    <field name="ubicacion"/>
+							
+                </tree>
+            </field>
+   </record>
+
+	
+    <record id="action_kardex_productos_mov" model="ir.actions.act_window">
+        <field name="name">KARDEX - MOVE FOR PRODUCT</field>
+        <field name="res_model">kardex.productos.mov</field>
+         <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+        
+        
+    </record>
+
+     <menuitem name="Inventory Report"  id="menu_kardex_productos_mov"
+       parent="stock.menu_stock_root" />  
+
+    <menuitem name="Kardex Inventory Products"  action="action_kardex_productos_mov" 
+    id="menu_Kardex"   parent="menu_kardex_productos_mov" />
+  
+   
+</odoo>
