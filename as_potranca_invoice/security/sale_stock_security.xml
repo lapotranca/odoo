@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="group_route_so_lines" model="res.groups">
+            <field name="name">Mostrar Stock en venta</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+              <record id="group_stock_fisico" model="res.groups">
+            <field name="name">Stock fisico Actual en detalle de Venta</field>
+            <field name="category_id" ref="base.module_category_hidden" />
+        </record>
+        <record id="group_stock_purchase_price" model="res.groups">
+            <field name="name">Mostrar Costo en lineas de Ventas</field>
+            <field name="category_id" ref="base.module_category_hidden" />
+        </record>
+        <record id="group_stock_virtual" model="res.groups">
+            <field name="name">Stock fisico Previsto en detalle de Venta</field>
+            <field name="category_id" ref="base.module_category_hidden" />
+        </record>
+
+</odoo>

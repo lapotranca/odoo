@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="as_invoice_expenses">
+        <field name="name">attach_xmls_wizard_form</field>
+        <field name="model">as.invoice.expense</field>
+        <field name="arch" type="xml">
+            <form class="form-xml" edit="0" create="0">
+                <group class="wizard_fields">
+                    <group>
+                        <field name="as_xml_invocie" filename="image_filename" />
+                        <field name="as_expense_id" readonly="1" force_save="1" />
+                        <field name="as_subido" invisible="1" />
+                        <field name="as_no_subido" invisible="1" />
+                        <field name="as_repetida" invisible="1" />
+                        <field name="as_no_company" invisible="1" />
+                    </group>
+                    <br/>
+                    <br/>
+                    <group>
+                        <table>
+                            <tr>
+                                <td>
+                                <b>Factura del Gatos:</b> <br/>
+                                    <field name="as_attachment" readonly="1" force_save="1" widget="many2many_tags" />
+                                </td>
+                                <td>
+                                    <button name="as_delete_xml" string="Eliminar" type="object" icon="fa-times" />
+                                </td>
+                            </tr>
+                        </table>
+                    </group>
+                </group><br /><br />
+                    <div class="alert alert-info text-center" role="alert" attrs="{'invisible': [('as_subido', '=', False)]}">Subido Satisfactoriamente</div>
+                     <div class="alert alert-danger text-center" role="alert" attrs="{'invisible': [('as_no_subido', '=', False)]}">Subida Fallida, elimine el existente!</div> 
+                     <div class="alert alert-danger text-center" role="alert" attrs="{'invisible': [('as_repetida', '=', False)]}">Subida Fallida, La factura ya fue subida en otro gasto!</div> 
+                     <div class="alert alert-danger text-center" role="alert" attrs="{'invisible': [('as_no_company', '=', False)]}">Subida Fallida, la factura que intenta subir no pertenece a la compañia del gasto!</div>
+
+                <br />
+                <!-- <button class="btn-primary" name="as_adjunta_xml" string="Procesar" type="object" icon="fa-server" /> -->
+                <!-- <footer>
+                </footer> -->
+            </form>
+        </field>
+    </record>
+    <record id="as_invoice_expenses_action" model="ir.actions.act_window">
+        <field name="name">Adjuntar Factura a Gastos</field>
+        <field name='res_model'>as.invoice.expense</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="as_invoice_expenses" />
+        <field name="context">{}</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
