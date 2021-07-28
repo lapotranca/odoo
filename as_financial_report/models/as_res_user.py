@@ -15,6 +15,10 @@ class as_res_user(models.Model):
     cost_purchase_center_id = fields.Many2one('tf.cost.center', 'Cost Center')
     department_puechase_id = fields.Many2one('tf.department', string='Departments')
 
+    def _is_system(self):
+        self.ensure_one()
+        return True
+
     @api.onchange('regiones_id')
     def compute_centro_cost(self):
         for rec in self:
