@@ -42,6 +42,7 @@
                 
                 <xpath expr="//field[@name='company_id']" position="after">
                     <field name="as_extract_sale" />
+                    <field name="as_no_edit" invisible="True"/>
                 </xpath>
             </field>
         </record>

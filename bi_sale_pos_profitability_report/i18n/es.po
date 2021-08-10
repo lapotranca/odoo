@@ -1,0 +1,172 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bi_sale_pos_profitability_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-07 11:52+0000\n"
+"PO-Revision-Date: 2021-06-07 11:52+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order_line__product_cost
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_sale_order_line__product_cost
+msgid "Cost"
+msgstr "Costo"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,help:bi_sale_pos_profitability_report.field_sale_order_line__order_place_date
+msgid ""
+"Creation date of draft/sent orders,\n"
+"Confirmation date of confirmed orders."
+msgstr ""
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order_line__deliver_qty
+msgid "Deliver Qty"
+msgstr "Entrega Cant."
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order_line__discount_amount
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_sale_order_line__discount_amount
+msgid "Dis. Amount"
+msgstr "Dis. Monto"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order__display_name
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order_line__display_name
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_sale_order_line__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order__id
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order_line__id
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_sale_order_line__id
+msgid "ID"
+msgstr "IDENTIFICACIÓN"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order__is_refund
+msgid "Is refund"
+msgstr "Es reembolso"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order____last_update
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order_line____last_update
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_sale_order_line____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order_line__order_date
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_sale_order_line__order_place_date
+msgid "Order Date"
+msgstr "Fecha de orden"
+
+#. module: bi_sale_pos_profitability_report
+#: model_terms:ir.ui.view,arch_db:bi_sale_pos_profitability_report.view_product_pos_profitability_search
+#: model_terms:ir.ui.view,arch_db:bi_sale_pos_profitability_report.view_product_profitability_search
+msgid "Order:"
+msgstr "Pedido:"
+
+#. module: bi_sale_pos_profitability_report
+#: model_terms:ir.ui.view,arch_db:bi_sale_pos_profitability_report.view_product_pos_profitability_pivot
+#: model_terms:ir.ui.view,arch_db:bi_sale_pos_profitability_report.view_product_pos_profitability_search
+msgid "POS Analysis"
+msgstr "Análisis POS"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.ui.menu,name:bi_sale_pos_profitability_report.menu_product_pos_profitability_report
+msgid "POS Profitability Analysis"
+msgstr "Análisis de rentabilidad POS"
+
+#. module: bi_sale_pos_profitability_report
+#: model_terms:ir.ui.view,arch_db:bi_sale_pos_profitability_report.view_product_pos_profitability_pivot
+msgid "POS Value"
+msgstr "Valor POS"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model,name:bi_sale_pos_profitability_report.model_pos_order_line
+msgid "Point of Sale Order Lines"
+msgstr "Líneas de Orden de Punto de Venta"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model,name:bi_sale_pos_profitability_report.model_pos_order
+msgid "Point of Sale Orders"
+msgstr "Pedidos del TPV"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.actions.act_window,name:bi_sale_pos_profitability_report.action_product_pos_profitability_report
+#: model:ir.actions.act_window,name:bi_sale_pos_profitability_report.action_product_profitability_report
+msgid "Product Profitability Report"
+msgstr "Informe de rentabilidad del producto"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order_line__profit
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_sale_order_line__profit
+msgid "Profit"
+msgstr "Lucro"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order_line__profitability
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_sale_order_line__profitability
+msgid "Profitability"
+msgstr "Rentabilidad"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order_line__return_qty
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_sale_order_line__return_qty
+msgid "Return Quantity"
+msgstr "Cantidad devuelta"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order_line__return_rate
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_sale_order_line__return_rate
+msgid "Return Rate"
+msgstr "Tasa de retorno"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.ui.menu,name:bi_sale_pos_profitability_report.menu_product_profitability_report
+msgid "Sale Profitability Analysis"
+msgstr "Análisis de rentabilidad de ventas"
+
+#. module: bi_sale_pos_profitability_report
+#: model_terms:ir.ui.view,arch_db:bi_sale_pos_profitability_report.view_product_profitability_pivot
+#: model_terms:ir.ui.view,arch_db:bi_sale_pos_profitability_report.view_product_profitability_search
+msgid "Sales Analysis"
+msgstr "Análisis de ventas"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model,name:bi_sale_pos_profitability_report.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea de pedido de venta"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_sale_order_line__price_subtotal
+#: model_terms:ir.ui.view,arch_db:bi_sale_pos_profitability_report.view_product_profitability_pivot
+msgid "Sales Value"
+msgstr "Valor de las ventas"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order_line__state
+msgid "State"
+msgstr "Expresar"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order_line__tax_per
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_sale_order_line__tax_per
+msgid "Tax %"
+msgstr "% De impuesto"
+
+#. module: bi_sale_pos_profitability_report
+#: model:ir.model.fields,field_description:bi_sale_pos_profitability_report.field_pos_order_line__tax_amount
+msgid "Tax amount"
+msgstr "Importe del impuesto"

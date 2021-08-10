@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_pos_order_is_refund_form" model="ir.ui.view">
+        <field name="name">pos.order.is.refund.view.inherit</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"></field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_order']" position="before">
+                <field name="is_refund" invisible="0"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_product_pos_profitability_pivot" model="ir.ui.view">
+        <field name="name">product.profitability.report.pivot</field>
+        <field name="model">pos.order.line</field>
+        <field name="arch" type="xml">
+            <pivot string="POS Analysis" disable_linking="True">
+                <field name="product_id" type="row"/>
+                <field name="deliver_qty" type="measure"/>
+                <field name="return_qty"  type="measure"/>
+                <field name="return_rate"  type="measure"/>
+                <field name="price_subtotal" string="POS Value" type="measure"/>
+                <field name="product_cost"  type="measure"/>
+                <field name="profit"  type="measure"/>
+                <field name="profitability"  type="measure"/>
+                <field name="discount_amount" type="measure"/>
+                <field name="discount" type="measure"/>
+                <field name="tax_amount" type="measure"/>
+                <field name="tax_per" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_product_pos_profitability_search" model="ir.ui.view">
+        <field name="name">product.profitability.report.search</field>
+        <field name="model">pos.order.line</field>
+        <field name="arch" type="xml">
+            <search string="POS Analysis">
+                <filter string="Order:" name="Date" context="{'group_by' : 'order_date'}"
+                     domain="[('order_id.state','not in',('draft', 'cancel', 'paid'))]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_product_pos_profitability_report" model="ir.actions.act_window">
+        <field name="name">Product Profitability Report</field>
+        <field name="res_model">pos.order.line</field>
+        <field name="view_mode">pivot</field>
+        <field name="view_id"></field>
+    </record>
+
+    <menuitem action="action_product_pos_profitability_report"
+        id="menu_product_pos_profitability_report"
+        name="POS Profitability Analysis"
+        parent="point_of_sale.menu_point_rep"
+        sequence="5"
+    />
+    
+</odoo>

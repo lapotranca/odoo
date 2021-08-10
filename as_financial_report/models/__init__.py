@@ -7,3 +7,4 @@ from . import as_sale_order
 from . import as_stock_landed_cost
 from . import as_product_template
 from . import as_stock_move
+from . import as_report_invoice

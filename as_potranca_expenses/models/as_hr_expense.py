@@ -111,8 +111,9 @@ class as_hr_expenses(models.Model):
         return node[0] if node else None
 
     def action_submit_expenses(self):
-        if self.product_id.as_expense_xml and self.attachment_number <=0:
-            raise UserError(_("Para continuar debe adjuntar el XML de la Factura!"))
+        for gasto in self:
+            if gasto.product_id.as_expense_xml and gasto.attachment_number <=0:
+                raise UserError(_("Para continuar debe adjuntar el XML de la Factura!"))
         if any(expense.state != 'draft' or expense.sheet_id for expense in self):
             raise UserError(_("You cannot report twice the same line!"))
         if len(self.mapped('employee_id')) != 1:
