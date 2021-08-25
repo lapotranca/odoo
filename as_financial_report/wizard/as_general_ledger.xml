@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="as_view_report_financial" model="ir.ui.view">
+            <field name="name">ins.general.ledger.form</field>
+            <field name="model">ins.general.ledger</field>
+            <field name="inherit_id" ref="account_dynamic_reports.ins_general_ledger_wizard" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='initial_balance']" position="after">
+                    <field name="as_account_start" />
+                    <field name="as_account_end" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

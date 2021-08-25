@@ -8,3 +8,5 @@ from . import as_stock_landed_cost
 from . import as_product_template
 from . import as_stock_move
 from . import as_report_invoice
+from . import as_account_aged_partner_balance
+from . import as_financial_report

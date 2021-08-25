@@ -2,7 +2,7 @@
 
 {
     'name': 'TI AMERICAS Pivote Financiero',
-    'version': '1.2.3',
+    'version': '1.2.5',
     'author': 'TI AMERICAS',
     'website': 'http://www.tiamericas.com/',
     'summary': 'Pivote Financiero',
@@ -10,7 +10,7 @@
             Pivote Financiero
     """,
     'category': 'Accounting/Accounting',
-    'depends': ['account','skit_financial_form','hr','purchase','sale','analytic','hr_expense','sale_enterprise'],
+    'depends': ['account','hr','purchase','sale','analytic','hr_expense','sale_enterprise','account_reports','account_dynamic_reports','skit_financial_form'],
     'data': [
             'views/report_wizard.xml',
             'views/account_menus.xml',
@@ -24,6 +24,7 @@
             'views/as_product_template.xml',
             'views/as_stock_move_line.xml',
             'views/as_config_settings.xml',
+            'wizard/as_general_ledger.xml',
             'report/as_report_sale_pivot.xml',
             'security/ir.model.access.csv',
             'security/as_group_view.xml',

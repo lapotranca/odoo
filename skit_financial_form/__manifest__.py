@@ -2,7 +2,7 @@
 
 {
     'name': 'TI AMERICAS Aux Reporting',
-    'version': '1.3',
+    'version': '1.0.1',
     'summary': 'Modulo auxiliar para reportes.',
     'author': 'TI AMERICAS',
     'website': 'http://www.tiamericas.com/',

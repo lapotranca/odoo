@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="as_header_report">
+        <div t-attf-class="o_company_#{o.company_id.id}_layout" t-att-style="report_header_style">
+            <div class="o_background_header">
+                <div class="float-right">
+                    <h3 class="mt0 text-right" t-field="o.company_id.report_header" />
+                </div>
+                <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" class="float-left"
+                    alt="Logo" />
+                <div class="float-left company_address">
+                    <div>
+                        <strong t-field="o.company_id.partner_id.name" />
+                    </div>
+                    <span t-field="o.company_id.partner_id"
+                        t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: true}" />
+                    <!--<div><h7>Num. de Factura: </h7><span  t-field="o.name"/></div>-->
+                </div>
+                <div class="clearfix mb8" />
+            </div>
+        </div>
+        <div t-attf-class="o_company_#{o.company_id.id}_layout article" t-att-data-oe-model="o and o._name"
+            t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout" />
+            <t t-raw="0" />
+        </div>
+    </template>
+
+    <template id="as_header_report_not">
+
+        <h2 style="color:#3c922d;">
+            <span t-if="o.type == 'out_invoice' and o.state == 'posted'">Factura </span>
+            <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Factura Borrador</span>
+            <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Factura Cancelada</span>
+            <span t-if="o.type == 'out_refund'">Nota de Credito</span>
+            <span t-if="o.type == 'in_refund'">Nota de Debito</span>
+            <span t-if="o.type == 'in_invoice'">Factura de Proveedor</span>
+            <span t-if="o.name != '/'" t-field="o.name" />
+        </h2>
+        <t t-if="o.l10n_mx_edi_cfdi_uuid">
+            <!--New global variables-->
+            <t t-set="xml" t-value="o.l10n_mx_edi_get_xml_etree()" />
+            <t t-set="tfd" t-value="o.l10n_mx_edi_get_tfd_etree(xml)" />
+            <t t-set="tfd_original_string" t-value="o._get_l10n_mx_edi_cadena()" />
+            <t t-set="external" t-value="o.l10n_mx_edi_get_et_etree(xml)" />
+        </t>
+        <div id="informations" class="row mt32 mb32">
+            <div class="col-auto mw-100 mb-2" t-if="o.invoice_date" name="invoice_date">
+                <strong>Fecha Factura:</strong>
+                <p class="m-0" t-field="o.invoice_date" />
+            </div>
+            <div class="col-auto mw-100 mb-2"
+                t-if="o.invoice_date_due and o.type == 'out_invoice' and o.state == 'posted'" name="due_date">
+                <strong>Fecha de Vencimiento:</strong>
+                <p class="m-0" t-field="o.invoice_date_due" />
+            </div>
+            <div class="col-auto mw-100 mb-2" t-if="o.invoice_origin" name="origin">
+                <strong>Origen:</strong>
+                <p class="m-0" t-field="o.invoice_origin" />
+            </div>
+            <div class="col-auto mw-100 mb-2" t-if="o.partner_id.ref" name="customer_code">
+                <strong>Codigo Cliente:</strong>
+                <p class="m-0" t-field="o.partner_id.ref" />
+            </div>
+            <t t-set="original_o_grid_layout" t-value="o_grid_layout" />
+            <t t-set="o_grid_layout" t-value="'col-auto mw-100 mb-2'" />
+            <t t-if="o.l10n_mx_edi_cfdi_uuid">
+                <t t-if="xml.Receptor.get('UsoCFDI', False)">
+                    <t t-set="usage" t-value="xml.Receptor.get('UsoCFDI')" />
+                    <div name="usage" t-att-class="o_grid_layout">
+                        <strong>Uso:</strong>
+                        <p class="m-0"><span t-esc="usage" /> - <span t-field="o.l10n_mx_edi_usage" /></p>
+                    </div>
+                </t>
+                <t t-if="o.l10n_mx_edi_payment_method_id">
+                    <div t-att-class="o_grid_layout">
+                        <strong>Forma de Pago:</strong>
+                        <p class="m-0"
+                            t-esc="' - '.join([o.l10n_mx_edi_payment_method_id.code, o.l10n_mx_edi_payment_method_id.name])" />
+                    </div>
+                </t>
+                <div t-att-class="o_grid_layout">
+                    <strong>Metodo de Pago:</strong>
+                    <p class="m-0" t-esc="xml.get('formaDePago', xml.get('MetodoPago'))" />
+                </div>
+                <div t-att-class="o_grid_layout" t-if="xml.get('NumCtaPago')">
+                    <strong>Cuenta de Banco:</strong>
+                    <p class="m-0" t-esc="xml.get('NumCtaPago')" />
+                </div>
+            </t>
+            <t t-set="o_grid_layout" t-value="original_o_grid_layout" />
+            <div class="col-auto mw-100 mb-2" t-if="o.ref" name="reference">
+                <strong>Referencia:</strong>
+                <p class="m-0" t-field="o.ref" />
+            </div>
+        </div>
+
+
+    </template>
+
+
+    <template id="as_report_invoice_report" inherit_id="account.report_invoice_document">
+        <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
+            <attribute name="t-call">web.basic_layout</attribute>
+        </xpath>
+        <xpath expr="//div[@class='page']" position="attributes">
+            <attribute name="style">font-size:13px;</attribute>
+        </xpath>
+        <xpath expr="//h2[1]" position="replace">
+            <h2>
+            </h2>
+        </xpath>
+        <xpath expr="//div[@id='informations']" position="replace">
+            <div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+             <br/>
+            <br/>
+            <br/>
+            <br/>
+             <br/>
+            </div><br/><br/><br/><br/>
+        </xpath>
+        <xpath expr="//div[@class='page']" position="before">
+            <div class="header">
+                <div class="first-page">
+                    <t t-call="as_potranca_invoice.as_header_report" />
+                </div>
+                <t t-call="as_potranca_invoice.as_header_report_not" />
+
+            </div>
+        </xpath>
+
+    </template>
+
+
+</odoo>

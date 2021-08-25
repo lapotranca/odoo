@@ -63,6 +63,3 @@ class account_financial_report(models.Model):
         ('6', 'Smallest Text'),
         ], 'Financial Report Style', default=0,
         help="You can set up here the format you want this record to be displayed. If you leave the automatic formatting, it will be computed based on the financial reports hierarchy (auto-computed field 'level').")
-    cost_center_id = fields.Many2one('tf.cost.center', 'Cost Center')
-    department_id = fields.Many2one('tf.department', string='Departments')
-    initial_balance = fields.Float('Initial Balance')
