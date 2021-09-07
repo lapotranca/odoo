@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name' : "Ahorasoft POTRANCA customizaciones",
-    'version' : "1.1.1",
+    'version' : "1.1.2",
     'author'  : "Ahorasoft",
     'description': """
 Customizaciones para POTRANCA
@@ -10,7 +10,7 @@ Customizaciones para POTRANCA
 Custom module for POTRANCA
     """,
     'category' : "Sale",
-    'depends' : ["base","stock","hr_expense","as_financial_report","account","report_qweb_element_page_visibility"],
+    'depends' : ["base","stock","hr_expense","as_financial_report","account","report_qweb_element_page_visibility",'l10n_mx_edi'],
     'website': 'http://www.ahorasoft.com',
     'data' : [
         # 'security/ir.model.access.csv',
