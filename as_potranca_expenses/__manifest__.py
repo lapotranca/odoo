@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name' : "Ahorasoft POTRANCA customizaciones",
-    'version' : "1.1.1",
+    'version' : "1.1.4",
     'author'  : "Ahorasoft",
     'description': """
 Customizaciones para POTRANCA

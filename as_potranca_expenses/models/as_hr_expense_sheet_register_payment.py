@@ -4,7 +4,9 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from werkzeug import url_encode
-
+from collections import defaultdict
+from itertools import groupby
+from operator import itemgetter
 
 class ASHrExpenseSheetRegisterPaymentWizard(models.TransientModel):
     _inherit = "hr.expense.sheet.register.payment.wizard"
@@ -19,6 +21,7 @@ class ASHrExpenseSheetRegisterPaymentWizard(models.TransientModel):
         return result
 
     def expense_post_payment(self):
+        lines_ids = []
         self.ensure_one()
         company = self.company_id
         self = self.with_context(force_company=company.id, company_id=company.id)
@@ -106,11 +109,75 @@ class ASHrExpenseSheetRegisterPaymentWizard(models.TransientModel):
         account_move_lines_to_reconcile = self.env['account.move.line']
         for line in payment.move_line_ids + expense_sheet.account_move_id.line_ids:
             if line.account_id.internal_type == 'payable' and not line.reconciled:
+                line.move_id.as_conciliacion = True
                 account_move_lines_to_reconcile |= line
-        account_move_lines_to_reconcile.reconcile()
-        move_traza = self.env['account.move'].search([('ref','=',move_payment.name)])
+        lines = account_move_lines_to_reconcile.as_reconcile()
+        self._create_tax_basis_move(lines,move_payment.ref,expense_sheet)
+        move_traza = self.env['account.move'].search(['|',('ref','=',move_payment.name),('ref','=',expense_sheet.account_move_id.name)])
         for movet in move_traza:
-            movet.ref = move_payment.ref
+            diario = self.env.user.company_id.tax_cash_basis_journal_id
+            if movet.journal_id == diario:
+                movet.ref = move_payment.ref +  diario.name
 
 
         return {'type': 'ir.actions.act_window_close'}
+
+
+    def _create_tax_basis_move(self,lines,glosa,expense_sheet):
+        # Check if company_journal for cash basis is set if not, raise exception
+        if not self.env.user.company_id.tax_cash_basis_journal_id:
+            raise UserError(_('There is no tax cash basis journal defined '
+                              'for this company: "%s" \nConfigure it in Accounting/Configuration/Settings') %
+                            (self.company_id.name))
+        tax_cash_basis_rec_id = False
+        cont = 0
+        line_dict = []
+        tax_group = []
+        tax_extras = []
+        if len(lines) > 0:
+            for item in lines[0]:
+                if 'tax_cash_basis_rec_id' in item:
+                    tax_cash_basis_rec_id = item.pop('tax_cash_basis_rec_id')
+                if 'tax_ids' in item:
+                    tax_extras.append(item)
+                else:
+                    line_dict.append(item)
+            
+            lines.pop(0)
+            for line in lines:
+                for items in line:
+                    for new_dict in line_dict:
+                        if new_dict['account_id'] == items['account_id'] and new_dict['partner_id'] == items['partner_id'] and not 'tax_ids' in items:
+                            if items['debit'] > 0:
+                                new_dict['debit'] = new_dict['debit'] + items['debit']
+                            if items['credit'] > 0:
+                                new_dict['credit'] = new_dict['credit'] + items['credit']
+                    if 'tax_ids' in items:
+                        for new_tax in tax_extras:
+                            if 'tax_ids' in new_tax:
+                                if new_tax['account_id'] == items['account_id'] and new_tax['partner_id'] == items['partner_id'] and  new_tax['tax_ids'] == items['tax_ids']:
+                                    if items['debit'] > 0:
+                                        new_tax['debit'] = new_tax['debit'] + items['debit']
+                                    if items['credit'] > 0:
+                                        new_tax['credit'] = new_tax['credit'] + items['credit']
+        lines_format = []
+        if line_dict != []:     
+            for line in line_dict:
+                lines_format.append((0, 0,line))
+            for tax in tax_extras:
+                lines_format.append((0, 0,tax))
+            move_vals = {
+                'type': 'entry',
+                'journal_id': self.env.user.company_id.tax_cash_basis_journal_id.id,
+                'tax_cash_basis_rec_id': tax_cash_basis_rec_id,
+                'ref': glosa,
+                'line_ids': lines_format,
+            }
+            result = self.env['account.move'].create(move_vals)
+            for line in result.line_ids:
+                if line.name == 'tax':
+                    line.name = str(expense_sheet.employee_id.name)+': '+ str(expense_sheet.name)
+            result.post()
+            return result
+        else:
+            return False
