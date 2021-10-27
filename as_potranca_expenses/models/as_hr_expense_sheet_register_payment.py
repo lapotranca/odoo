@@ -7,6 +7,7 @@ from werkzeug import url_encode
 from collections import defaultdict
 from itertools import groupby
 from operator import itemgetter
+import itertools
 
 class ASHrExpenseSheetRegisterPaymentWizard(models.TransientModel):
     _inherit = "hr.expense.sheet.register.payment.wizard"
@@ -135,6 +136,7 @@ class ASHrExpenseSheetRegisterPaymentWizard(models.TransientModel):
         tax_group = []
         tax_extras = []
         if len(lines) > 0:
+            line_dict.append(lines[0][0])
             for item in lines[0]:
                 if 'tax_cash_basis_rec_id' in item:
                     tax_cash_basis_rec_id = item.pop('tax_cash_basis_rec_id')
@@ -142,24 +144,41 @@ class ASHrExpenseSheetRegisterPaymentWizard(models.TransientModel):
                     tax_extras.append(item)
                 else:
                     line_dict.append(item)
+            line_dict = [{'account_id': v[0],'partner_id':v[1],'name': '','debit': 0.0,'credit': 0.0,'analytic_account_id': False,'analytic_tag_ids': [],'tax_exigible': True,'amount_currency': 0.0,'currency_id': False,'journal_id': 6} for v, d1 in itertools.groupby(sorted(line_dict, key=itemgetter('account_id','partner_id')), key=itemgetter('account_id','partner_id'))]
+            tax_extras = [{'account_id': v[0],'partner_id':v[1],'tax_ids':v[2],'tag_ids':v[3],'name': 'tax','journal_id': False,'tax_exigible': True,'currency_id': False,'tax_repartition_line_id': False,'tax_base_amount': 0.0,'debit': 0.0,'credit': 0.0,'amount_currency': 0.0} for v, d1 in itertools.groupby(sorted(tax_extras, key=itemgetter('account_id','partner_id','tax_ids','tag_ids')), key=itemgetter('account_id','partner_id','tax_ids','tag_ids'))]
             
-            lines.pop(0)
             for line in lines:
                 for items in line:
                     for new_dict in line_dict:
-                        if new_dict['account_id'] == items['account_id'] and new_dict['partner_id'] == items['partner_id'] and not 'tax_ids' in items:
-                            if items['debit'] > 0:
-                                new_dict['debit'] = new_dict['debit'] + items['debit']
-                            if items['credit'] > 0:
-                                new_dict['credit'] = new_dict['credit'] + items['credit']
+                        if new_dict['account_id'] == items['account_id'] and new_dict['partner_id'] == items['partner_id']:
+                            new_dict['name'] = items['name']
+                            new_dict['debit'] += items['debit']
+                            new_dict['credit'] += items['credit']
+                            new_dict['account_id'] = items['account_id']
+                            new_dict['analytic_account_id'] = items['analytic_account_id']
+                            new_dict['analytic_tag_ids'] = items['analytic_tag_ids']
+                            new_dict['tax_exigible'] = items['tax_exigible']
+                            new_dict['amount_currency'] = items['amount_currency']
+                            new_dict['currency_id'] = items['currency_id']
+                            new_dict['partner_id'] = items['partner_id']
+                            new_dict['journal_id'] = items['journal_id']
+
+
                     if 'tax_ids' in items:
                         for new_tax in tax_extras:
-                            if 'tax_ids' in new_tax:
-                                if new_tax['account_id'] == items['account_id'] and new_tax['partner_id'] == items['partner_id'] and  new_tax['tax_ids'] == items['tax_ids']:
-                                    if items['debit'] > 0:
-                                        new_tax['debit'] = new_tax['debit'] + items['debit']
-                                    if items['credit'] > 0:
-                                        new_tax['credit'] = new_tax['credit'] + items['credit']
+                            if new_tax['account_id'] == items['account_id'] and new_tax['partner_id'] == items['partner_id'] and  new_tax['tax_ids'] == items['tax_ids'] and  new_tax['tag_ids'] == items['tag_ids']:
+                                new_tax['debit'] += items['debit']
+                                new_tax['credit'] += items['credit']
+                                new_tax['name'] = items['name']
+                                new_tax['account_id'] = items['account_id']
+                                new_tax['tax_exigible'] = items['tax_exigible']
+                                new_tax['tax_ids'] = items['tax_ids']
+                                new_tax['tag_ids'] = items['tag_ids']
+                                new_tax['currency_id'] = items['currency_id']
+                                new_tax['partner_id'] = items['partner_id']
+                                new_tax['amount_currency'] = items['amount_currency']
+
+                                        
         lines_format = []
         if line_dict != []:     
             for line in line_dict:
@@ -168,7 +187,7 @@ class ASHrExpenseSheetRegisterPaymentWizard(models.TransientModel):
                 lines_format.append((0, 0,tax))
             move_vals = {
                 'type': 'entry',
-                'journal_id': self.env.user.company_id.tax_cash_basis_journal_id.id,
+                'journal_id': expense_sheet.company_id.tax_cash_basis_journal_id.id,
                 'tax_cash_basis_rec_id': tax_cash_basis_rec_id,
                 'ref': glosa,
                 'line_ids': lines_format,
