@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mt_payment_invoices_zip" model="mail.message.subtype">
+        <field name="name">Invoices XML ZIP related to payment</field>
+        <field name="res_model">account.payment</field>
+        <field name="default" eval="False"/>
+        <field name="description">Invoices XML ZIP related to payment</field>
+    </record>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="invoice_tree_uuid" model="ir.ui.view">
+        <field name="name">account.move.tree.inherit.uuid</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_date']" position="after">
+                <field name="l10n_mx_edi_cfdi_uuid"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
